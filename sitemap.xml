@@ -2,17 +2,17 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <sitemap>
-        <loc>http://yoursite-url/post-sitemap.xml</loc>
+        <loc>http://jingxuan.li/post-sitemap.xml</loc>
         <lastmod>2018-03-07T04:32:42.496Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/page-sitemap.xml</loc>
+        <loc>http://jingxuan.li/page-sitemap.xml</loc>
         <lastmod>2018-03-07T10:54:44.465Z</lastmod>
     </sitemap>
 
     <sitemap>
-        <loc>http://yoursite-url/tag-sitemap.xml</loc>
+        <loc>http://jingxuan.li/tag-sitemap.xml</loc>
         <lastmod>2018-03-07T04:32:42.496Z</lastmod>
     </sitemap>
 
