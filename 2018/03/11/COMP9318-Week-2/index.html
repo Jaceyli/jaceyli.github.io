@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          用Cloudflare为自定义域名的Github Pages添加SSL - jingxuan
+          COMP9318 Week 2 - jingxuan
         
     </title>
 
-    <link rel="canonical" href="http://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/">
+    <link rel="canonical" href="http://jingxuan.li/2018/03/11/COMP9318-Week-2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,16 +86,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Github" title="Github">Github</a>
+                              <a class="tag" href="/tags/#Data Warehousing and Data Mining" title="Data Warehousing and Data Mining">Data Warehousing and Data Mining</a>
                             
-                              <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
                             
                         </div>
-                        <h1>用Cloudflare为自定义域名的Github Pages添加SSL</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>COMP9318 Week 2</h1>
+                        <h2 class="subheading">Data Warehousing and Data Mining</h2>
                         <span class="meta">
                             Posted by Jingxuan on
-                            2018-03-10
+                            2018-03-11
                         </span>
                     </div>
                 
@@ -212,44 +212,147 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="why-https">Why Https?</span></h1>
-<hr>
+                <blockquote>
+<p>本周主要内容：</p>
 <ul>
-<li>http协议传输的数据都是未加密的。比如你访问某网站，在经过如路由器、宽带接入商等中间环节时，搜索的关键字、账号密码等都是可见的，因此使用http协议传输隐私信息是不安全的。为了保证这些隐私数据能加密传输，于是设计了ssl协议用于对http协议传输的数据进行加密，从而就诞生了https。</li>
-<li>简单来说，https协议是由ssl+ http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全性高。可以这样理解，网站的服务器产生一对密钥，公钥给用户用来加密，加密后发给服务端，服务端用自己的私钥解密后得到数据。这样即使中间环节劫持到内容也会因没有密钥无法破解。</li>
-<li>在这个环节中，为了验证服务器是不是你所要访问的真实的服务器，就需要第三方来检验，这个第三方就叫CA(Certificate Authority，是数字证书认证中心的简称，作为独立的第三方，其职能是核实身份，保证获得证书的是被授权者本人而不是其他冒充机构)。ssl证书就是由第三方CA机构来颁发的。</li>
+<li>Data Warehouse定义</li>
+<li>OLAP介绍</li>
+<li>Data Cube介绍</li>
 </ul>
-<h1><span id="why-cloudflare">Why CloudFlare?</span></h1>
+</blockquote>
+<h1><span id="data-warehouses">Data Warehouses</span></h1>
 <hr>
-<p>首先，Github Pages并不支持自定义域名添加SSL证书，为此我还浪费了一个namecheap的SSL证书(；′⌒`)。所以之前都是”裸奔”的状态，直到我遇到了Cloudflare。</p>
-<h2><span id="cloudflare有什么优势呢">CloudFlare有什么优势呢？</span></h2>
+<h2><span id="why-data-warehouses">Why Data Warehouses?</span></h2>
+<p>Data Analysis Problems:</p>
 <ul>
-<li>免费</li>
-<li>CloudFlare 提供一种被他们称之为 Universal SSL 的服务，可以让任意 HTTP 站点支持 HTTPS。它的原理是当访客使用 HTTPS 访问站点的时候，从访客到 CloudFlare 这段是加密的，然后从 CloudFlare 到站点这段是明文的。虽然不是全程加密，但是也能很大程度上解决中间人，如果从 CloudFlare 到站点的信道相对可靠的话</li>
+<li>The same data found in many different systems</li>
+<li>Heterogeneous（各种各样的） sources</li>
+<li>Data is suited for operational systems: Do not support analysis across business functions</li>
+<li>Data quality is bad: Missing data, imprecise data, different use of systems</li>
+<li>Data are “volatile”(易失的)</li>
 </ul>
-<h2><span id="所以我们牺牲了什么">所以我们牺牲了什么？</span></h2>
+<p>So, the solution is data warehouses.</p>
+<h2><span id="what-are-data-warehouses">What are Data Warehouses?</span></h2>
+<p>Defined in many different ways, but not rigorously.</p>
+<blockquote>
+<p>“A data warehouse is a <strong>subject-oriented</strong>, <strong>integrated</strong>, <strong>time-variant</strong>, and <strong>nonvolatile</strong> collection of data in support of management’s decision-making process.”   --W. H. Inmon</p>
+</blockquote>
+<h3><span id="subject-oriented面向主题的">Subject-oriented（面向主题的）</span></h3>
 <ul>
-<li>我们必须修改域名的DNS服务器为Cloudflare提供的地址才能使用这项服务</li>
-<li>无法进行coding+github双线部署，除非你使用Cloudflare的收费服务</li>
+<li>Organized around major subjects, such as customer,product, sales.</li>
+<li>Focusing on the modeling and analysis of data for decision makers, not on daily operations or transaction processing.</li>
+<li>Provide a simpleand conciseview around particular subject issues by excluding data that are not useful in the decision support process.</li>
 </ul>
-<h1><span id="如何使用cloudflare">如何使用CloudFlare?</span></h1>
+<p>数据仓库关注决策者的数据建模与分析，而不是构造组织结构的日常操作与事务处理。因此，数据仓库排除对于决策无用的数据，提供指定主题的简明视图。</p>
+<h3><span id="integrated集成的">Integrated（集成的）</span></h3>
+<ul>
+<li>Constructed by integrating multiple, heterogeneous data sources: relational databases, flat files, on-line transaction records</li>
+<li>Data cleaning and data integration techniques are applied.</li>
+</ul>
+<p>通常，构造数据仓库是将多个不同类型的数据源集成在一起，使用数据清理，数据集成技术，确保命名约定、编码结构、属性度量的一致性。</p>
+<h3><span id="time-variant时变的">Time-variant（时变的）</span></h3>
+<ul>
+<li>The time horizon for the data warehouse is significantly longer than that of operational systems. It provides information from a<br>
+historical perspective(e.g., past 5-10 years).</li>
+<li>Every key structure in the data warehouse contains an element of time, explicitly(显式) or implicitly（隐式）. But the key of operational data may or may not contain “time element”.</li>
+</ul>
+<h3><span id="non-volatile非易失的">Non-volatile（非易失的）</span></h3>
+<ul>
+<li>
+<p>A <strong>physically separate store</strong> of data transformed from the operational environment.</p>
+</li>
+<li>
+<p>Operational <strong>update of data does not occur</strong> in the data warehouse environment.</p>
+<p>Does not require transaction processing, recovery, and concurrency control mechanisms.</p>
+<p>Requires only two operations in data accessing:</p>
+<ul>
+<li><strong>Initial loading of data</strong></li>
+<li><strong>Access of data</strong></li>
+</ul>
+</li>
+</ul>
+<h2><span id="data-warehouse-architecture">Data Warehouse Architecture</span></h2>
+<p><img src="1.png" alt="Data Warehouse Architecture"></p>
+<ul>
+<li>外部数据通过Extract, Transform, Load, Refresh这些步骤，将数据进行clean , match, aggregate， 然后放入Data Warehouse。</li>
+<li>DW已经是所有subject的data一个统一体，我们还可以进行细分，将Data Warehouse分成若干个Data Marts，这些Marts都是针对于specific subject的。在DW中，那我们用OLAP分析处理这些数据呢</li>
+<li>经过OLAP的分析处理后，我们还可以用这些已经比较直观的数据再次进行analysis, query, data Mining 来获取更加深层次的隐藏的信息。</li>
+</ul>
+<h2><span id="why-separate-data-warehouse">Why Separate Data Warehouse?</span></h2>
+<p>为什么不直接在这种数据库上进行联机分析处理，而是另外花费时间和资源去构造一个分离的数据仓库呢？</p>
+<ul>
+<li>
+<p>High performance for both systems</p>
+<ul>
+<li>DBMS — tuned for OLTP: access methods, indexing, concurrency<br>
+control, recovery</li>
+<li>Warehouse — tuned for OLAP: complex OLAP queries, multidimensional view, consolidation.</li>
+</ul>
+</li>
+<li>
+<p>Different functions and different data:</p>
+<ul>
+<li><strong>missing data</strong>: Decision support requires historical data which operational DBs do not typically maintain</li>
+<li><strong>data consolidation</strong>: DS requires consolidation (aggregation, summarization) of data from heterogeneous sources</li>
+<li><strong>data quality</strong>: different sources typically use inconsistent data representations, codes and formats which have to be reconciled</li>
+</ul>
+</li>
+</ul>
+<h1><span id="olap">OLAP</span></h1>
 <hr>
-<h2><span id="step-1-注册账号添加网站">Step 1: 注册账号，添加网站</span></h2>
-<h2><span id="step-2-前往域名所在的网站更改dns服务器">Step 2: 前往域名所在的网站，更改DNS服务器：</span></h2>
-<p><img src="pic1.png" alt="以Namecheap为例"></p>
-<p>改好以后，大概等个十几分钟Status变成Active的状态，表示已经修改成功：<br>
-<img src="pic2.png" alt=""></p>
-<h2><span id="step-3-设置ssl">Step 3: 设置SSL</span></h2>
-<p>在rypto菜单下状态设置为Flexible，，否则是不允许 CDN 通过 HTTP连接服务器的，配上以后浏览器才不会提示不安全：</p>
-<p><img src="pic3.png" alt=""><br>
-待Status变为Active Certificate就说明已经完成认证，大概要等1个多小时吧。</p>
-<h2><span id="step-4添加重定向规则">Step 4：添加重定向规则</span></h2>
-<p>在Page Rule菜单下，添加如下两条：</p>
-<p><img src="pic4.png" alt=""></p>
-<p><img src="pic5.png" alt=""></p>
-<p>OK! 大功告成！小绿锁就出现了(＾－＾)</p>
-<p><img src="pic6.png" alt=""></p>
-<p>如果是黄色叹号，查看下控制台的报错，可能是引入了一些第三方资源。</p>
+<h2><span id="what-is-olap">What is OLAP?</span></h2>
+<p>Data warehouses provide on-line analytical processing (OLAP) tools for the interactive analysis of multidimensional data of varied granularities（各种粒度的多维数据分析）, which facilitates effective data generalization and data mining. Many other data mining functions, such as association, classification, prediction, and clustering, can be integrated with OLAP operations to enhance interactive mining of knowledge at multiple levels of abstraction. Hence, the data warehouse has become an increasingly important platform for data analysis and on-line analytical processing and will provide an effective platform for data mining.</p>
+<ul>
+<li>OLTP (on-line transaction processing)
+<ul>
+<li>Major task of traditional relational DBMS</li>
+<li>Day-to-day operations: purchasing, inventory, banking, manufacturing, payroll, registration, accounting, etc.</li>
+</ul>
+</li>
+<li>OLAP (on-line analytical processing)
+<ul>
+<li>Major task of data warehouse system</li>
+<li>Data analysis and decision making</li>
+</ul>
+</li>
+</ul>
+<h2><span id="oltp-vs-olap">OLTP vs. OLAP</span></h2>
+<p><img src="2.png" alt=""></p>
+<h1><span id="the-multidimensional-model">The Multidimensional Model</span></h1>
+<hr>
+<h2><span id="what-is-the-multidimensional-model">What is the Multidimensional Model?</span></h2>
+<p>A data warehouse is based on a multidimensional data model which views data in the form of a <strong>data cube</strong>. A data cube allows data to be modeled and viewed in multiple dimensions. It is defined by <strong>dimensions</strong> and <strong>facts</strong>.</p>
+<p>Key concepts:</p>
+<ul>
+<li>Facts: the subject it models; Facts are numerical measures.</li>
+<li>Measure: A data cube measure is a numerical function that can be evaluated at each point in the data cube space. A measure value is computed for a given point by aggregating the data corresponding to the respective dimension-value pairs defining the given point.</li>
+<li>Dimensions: context of the measure（Dimensions are the perspectives or entities with respect to which an organization wants to keep records</li>
+<li>Hierarchies: Provide contexts of different granularities (aka. grains), a tree of dimension values</li>
+</ul>
+<p>举例说明：<br>
+<img src="3.png" alt="example1"><br>
+在这个cube中，它的dimensions其实是product，location，time，那么为什么我们看到的图的三个维度分别是product，month，city呢？因为每个dimension是分hierarchy的（就如这里的city，如果我们使用OLAP工具进行操作的话，它可以roll-up到sate，也可以drill-down到stor)。因此，我们需要给每个dimension一个类似于总称的东西。</p>
+<p><img src="4.png" alt="example2"><br>
+蓝色区域表示所有product的汇总。<br>
+第一个小cube（箭头指的那个）表示所有product一月份在纽约的销售总量。</p>
+<p>所以，我们可以得到以下汇总图：<br>
+<img src="5.png" alt=""><br>
+<img src="6.png" alt=""></p>
+<h2><span id="olap-operations">OLAP Operations</span></h2>
+<p>All operations are closed under the multidimensional model, i.e., <strong>both input and output of an operation is a cube</strong>. So that they can be composed.</p>
+<h3><span id="roll-up">Roll-up</span></h3>
+<p>Roll-up: move up the hierarchy 聚集数据</p>
+<h3><span id="drill-down">Drill-down</span></h3>
+<p>Drill-down: move down the hierarchy 展开详细数据<br>
+<img src="7.png" alt=""></p>
+<h3><span id="slice-and-dice">Slice and Dice</span></h3>
+<p>Slice: a selection on one dimension of the given cube, resulting in a subcube.<br>
+<img src="8.png" alt=""><br>
+Dice：defines a subcube by performing a selection on two or more dimensions.<br>
+<img src="9.png" alt=""></p>
+<h3><span id="pivoting">Pivoting</span></h3>
+<p>Pivoting: aggregate on selected dimensions, usually 2 dims (cross- tabulation)<br>
+<img src="10.png" alt=""></p>
 
                 
 
@@ -257,13 +360,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/03/11/COMP9318-Week-2/" data-toggle="tooltip" data-placement="top" title="COMP9318 Week 2">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/03/08/我的博客是如何搭建的——github-page-hexo-绑定域名/" data-toggle="tooltip" data-placement="top" title="我的博客是如何搭建的——github page + hexo + 绑定域名">Next Post &rarr;</a>
+                            <a href="/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/" data-toggle="tooltip" data-placement="top" title="用Cloudflare为自定义域名的Github Pages添加SSL">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -278,7 +377,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Https?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Why CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">CloudFlare有什么优势呢？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以我们牺牲了什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何使用CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Step 1: 注册账号，添加网站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Step 2: 前往域名所在的网站，更改DNS服务器：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Step 3: 设置SSL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Step 4：添加重定向规则</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Data Warehouses</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Data Warehouses?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">What are Data Warehouses?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Subject-oriented（面向主题的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Integrated（集成的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">Time-variant（时变的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Non-volatile（非易失的）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Data Warehouse Architecture</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Why Separate Data Warehouse?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">OLAP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">What is OLAP?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">OLTP vs. OLAP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">The Multidimensional Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">What is the Multidimensional Model?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">OLAP Operations</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Roll-up</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Drill-down</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Slice and Dice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">Pivoting</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -298,9 +397,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Github" title="Github">Github</a>
+                          <a class="tag" href="/tags/#Data Warehousing and Data Mining" title="Data Warehousing and Data Mining">Data Warehousing and Data Mining</a>
                         
-                          <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                          <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
                         
                     </div>
                 </section>
