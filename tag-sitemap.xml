@@ -23,15 +23,29 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/Data-Warehousing-and-Data-Mining/</loc>
-        <lastmod>2018-03-11T06:36:08.273Z</lastmod>
+        <loc>http://jingxuan.li/tags/COMP9318/</loc>
+        <lastmod>2018-03-12T04:00:13.765Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-03-11T06:36:08.273Z</lastmod>
+        <loc>http://jingxuan.li/tags/Data-Warehousing-and-Data-Mining/</loc>
+        <lastmod>2018-03-12T04:00:13.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9313/</loc>
+        <lastmod>2018-03-12T04:55:49.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Big-Data-Management/</loc>
+        <lastmod>2018-03-12T04:55:49.685Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

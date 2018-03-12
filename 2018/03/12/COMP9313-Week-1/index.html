@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          COMP9318 Week 2 - jingxuan
+          COMP9313 Week 1 - jingxuan
         
     </title>
 
-    <link rel="canonical" href="http://jingxuan.li/2018/03/11/COMP9318-Week-2/">
+    <link rel="canonical" href="http://jingxuan.li/2018/03/12/COMP9313-Week-1/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,16 +86,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                              <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
                             
-                              <a class="tag" href="/tags/#Data Warehousing and Data Mining" title="Data Warehousing and Data Mining">Data Warehousing and Data Mining</a>
+                              <a class="tag" href="/tags/#Big Data Management" title="Big Data Management">Big Data Management</a>
                             
                         </div>
-                        <h1>COMP9318 Week 2</h1>
-                        <h2 class="subheading">Data Warehousing and Data Mining</h2>
+                        <h1>COMP9313 Week 1</h1>
+                        <h2 class="subheading">Big Data Management</h2>
                         <span class="meta">
                             Posted by Jingxuan on
-                            2018-03-11
+                            2018-03-12
                         </span>
                     </div>
                 
@@ -215,144 +215,183 @@
                 <blockquote>
 <p>本周主要内容：</p>
 <ul>
-<li>Data Warehouse定义</li>
-<li>OLAP介绍</li>
-<li>Data Cube介绍</li>
+<li>What is big data?</li>
+<li>Big data characteristics</li>
+<li>Introduction to big data tools</li>
 </ul>
 </blockquote>
-<h1><span id="data-warehouses">Data Warehouses</span></h1>
+<h1><span id="what-is-big-data">What is Big Data?</span></h1>
 <hr>
-<h2><span id="why-data-warehouses">Why Data Warehouses?</span></h2>
-<p>Data Analysis Problems:</p>
+<p>**No standard definition! **<br>
+Here are from Wikipedia:</p>
 <ul>
-<li>The same data found in many different systems</li>
-<li>Heterogeneous（各种各样的） sources</li>
-<li>Data is suited for operational systems: Do not support analysis across business functions</li>
-<li>Data quality is bad: Missing data, imprecise data, different use of systems</li>
-<li>Data are “volatile”(易失的)</li>
+<li>Big data is a term for data sets that are so voluminous or complex that traditional data processing application software are inadequate(不足的) to deal with them.</li>
+<li>Challenges include <strong>capture, storage, analysis, data curation（综合处理）, search, sharing, transfer, visualization, querying, updating and information privacy</strong>.</li>
+<li>The term “big data” often refers simply to the use of predictive analytics, user behaviour analytics, or certain other advanced data analytics methods that extract value from data, and seldom to a particular size of data set</li>
+<li>Analysis of data sets can find new correlations to “spot business trends, prevent diseases, combat crime and so on.”</li>
 </ul>
-<p>So, the solution is data warehouses.</p>
-<h2><span id="what-are-data-warehouses">What are Data Warehouses?</span></h2>
-<p>Defined in many different ways, but not rigorously.</p>
-<blockquote>
-<p>“A data warehouse is a <strong>subject-oriented</strong>, <strong>integrated</strong>, <strong>time-variant</strong>, and <strong>nonvolatile</strong> collection of data in support of management’s decision-making process.”   --W. H. Inmon</p>
-</blockquote>
-<h3><span id="subject-oriented面向主题的">Subject-oriented（面向主题的）</span></h3>
-<ul>
-<li>Organized around major subjects, such as customer,product, sales.</li>
-<li>Focusing on the modeling and analysis of data for decision makers, not on daily operations or transaction processing.</li>
-<li>Provide a simpleand conciseview around particular subject issues by excluding data that are not useful in the decision support process.</li>
-</ul>
-<p>数据仓库关注决策者的数据建模与分析，而不是构造组织结构的日常操作与事务处理。因此，数据仓库排除对于决策无用的数据，提供指定主题的简明视图。</p>
-<h3><span id="integrated集成的">Integrated（集成的）</span></h3>
-<ul>
-<li>Constructed by integrating multiple, heterogeneous data sources: relational databases, flat files, on-line transaction records</li>
-<li>Data cleaning and data integration techniques are applied.</li>
-</ul>
-<p>通常，构造数据仓库是将多个不同类型的数据源集成在一起，使用数据清理，数据集成技术，确保命名约定、编码结构、属性度量的一致性。</p>
-<h3><span id="time-variant时变的">Time-variant（时变的）</span></h3>
-<ul>
-<li>The time horizon for the data warehouse is significantly longer than that of operational systems. It provides information from a<br>
-historical perspective(e.g., past 5-10 years).</li>
-<li>Every key structure in the data warehouse contains an element of time, explicitly(显式) or implicitly（隐式）. But the key of operational data may or may not contain “time element”.</li>
-</ul>
-<h3><span id="non-volatile非易失的">Non-volatile（非易失的）</span></h3>
-<ul>
-<li>
-<p>A <strong>physically separate store</strong> of data transformed from the operational environment.</p>
-</li>
-<li>
-<p>Operational <strong>update of data does not occur</strong> in the data warehouse environment.</p>
-<p>Does not require transaction processing, recovery, and concurrency control mechanisms.</p>
-<p>Requires only two operations in data accessing:</p>
-<ul>
-<li><strong>Initial loading of data</strong></li>
-<li><strong>Access of data</strong></li>
-</ul>
-</li>
-</ul>
-<h2><span id="data-warehouse-architecture">Data Warehouse Architecture</span></h2>
-<p><img src="1.png" alt="Data Warehouse Architecture"></p>
-<ul>
-<li>外部数据通过Extract, Transform, Load, Refresh这些步骤，将数据进行clean , match, aggregate， 然后放入Data Warehouse。</li>
-<li>DW已经是所有subject的data一个统一体，我们还可以进行细分，将Data Warehouse分成若干个Data Marts，这些Marts都是针对于specific subject的。在DW中，那我们用OLAP分析处理这些数据呢</li>
-<li>经过OLAP的分析处理后，我们还可以用这些已经比较直观的数据再次进行analysis, query, data Mining 来获取更加深层次的隐藏的信息。</li>
-</ul>
-<h2><span id="why-separate-data-warehouse">Why Separate Data Warehouse?</span></h2>
-<p>为什么不直接在这种数据库上进行联机分析处理，而是另外花费时间和资源去构造一个分离的数据仓库呢？</p>
-<ul>
-<li>
-<p>High performance for both systems</p>
-<ul>
-<li>DBMS — tuned for OLTP: access methods, indexing, concurrency<br>
-control, recovery</li>
-<li>Warehouse — tuned for OLAP: complex OLAP queries, multidimensional view, consolidation.</li>
-</ul>
-</li>
-<li>
-<p>Different functions and different data:</p>
-<ul>
-<li><strong>missing data</strong>: Decision support requires historical data which operational DBs do not typically maintain</li>
-<li><strong>data consolidation</strong>: DS requires consolidation (aggregation, summarization) of data from heterogeneous sources</li>
-<li><strong>data quality</strong>: different sources typically use inconsistent data representations, codes and formats which have to be reconciled</li>
-</ul>
-</li>
-</ul>
-<h1><span id="olap">OLAP</span></h1>
+<h1><span id="big-data-characteristics">Big Data Characteristics</span></h1>
 <hr>
-<h2><span id="what-is-olap">What is OLAP?</span></h2>
-<p>Data warehouses provide on-line analytical processing (OLAP) tools for the interactive analysis of multidimensional data of varied granularities（各种粒度的多维数据分析）, which facilitates effective data generalization and data mining. Many other data mining functions, such as association, classification, prediction, and clustering, can be integrated with OLAP operations to enhance interactive mining of knowledge at multiple levels of abstraction. Hence, the data warehouse has become an increasingly important platform for data analysis and on-line analytical processing and will provide an effective platform for data mining.</p>
+<h2><span id="3v">3V</span></h2>
 <ul>
-<li>OLTP (on-line transaction processing)
+<li>Volume:
 <ul>
-<li>Major task of traditional relational DBMS</li>
-<li>Day-to-day operations: purchasing, inventory, banking, manufacturing, payroll, registration, accounting, etc.</li>
+<li>Growth 40% per year</li>
+<li>increasing exponentially（指数的)</li>
 </ul>
 </li>
-<li>OLAP (on-line analytical processing)
+<li>Velocity(Speed):
 <ul>
-<li>Major task of data warehouse system</li>
-<li>Data analysis and decision making</li>
+<li>Data is being generated fast and need to be processed fast</li>
+<li>Online Data Analytics</li>
+<li>Late decisions -&gt; missing opportunities</li>
+</ul>
+</li>
+<li>Variety</li>
+</ul>
+<h2><span id="6v">6V</span></h2>
+<ul>
+<li>
+<p>Volume:</p>
+<p>In a big data environment, the amounts of data collected and processed are much larger than those stored in typical relational databases.</p>
+</li>
+<li>
+<p>Variety:</p>
+<p>Big data consists of a rich variety of data types.</p>
+</li>
+<li>
+<p>Velocity:</p>
+<p>Big data arrives to the organization at high speeds and from<br>
+multiple sources simultaneously.</p>
+</li>
+<li>
+<p>Veracity:</p>
+<p><strong>Data quality</strong> issues are particularly challenging in a big data context.</p>
+</li>
+<li>
+<p>Visibility/Visualization:</p>
+<p>After big data being processed, we need a way of presenting the data in a manner that’s readable and accessible.</p>
+<ul>
+<li>Visibility: the state of being able to see or be seen is implied.</li>
+<li>Visualization: Making all that vast amount of data comprehensible in a manner that is easy to understand and read.</li>
+</ul>
+</li>
+<li>
+<p>Value:</p>
+<p>Ultimately, big data is meaningless if it does not provide value toward some meaningful goal.</p>
+</li>
+</ul>
+<h1><span id="introduction-to-big-data-tools">Introduction to big data tools</span></h1>
+<hr>
+<h2><span id="hadoop">Hadoop</span></h2>
+<h3><span id="what-is-hadoop">What is Hadoop?</span></h3>
+<ul>
+<li>
+<p>Open-source data storage and processing platform</p>
+</li>
+<li>
+<p>Massively scalable, automatically parallelizable</p>
+<p>Based on work from Google:</p>
+<ul>
+<li>Google: GFS + MapReduce + BigTable (Not open)</li>
+<li><strong>Hadoop: HDFS + Hadoop MapReduce + HBase</strong> (opensource)</li>
+</ul>
+</li>
+<li>
+<p>Hadoop offers:</p>
+<ul>
+<li>Redundant, Fault-tolerant data storage</li>
+<li>Parallel computation framework</li>
+<li>Job coordination</li>
 </ul>
 </li>
 </ul>
-<h2><span id="oltp-vs-olap">OLTP vs. OLAP</span></h2>
+<p>So we do not need to worry about:</p>
+<ul>
+<li>Where file is located?</li>
+<li>How to handle failures &amp; data lost?</li>
+<li>How to dividencomputation?</li>
+<li>How to program for scaling?</li>
+</ul>
+<h3><span id="why-use-hadoop">Why use Hadoop?</span></h3>
+<ul>
+<li>
+<p>Cheaper: Scales to Petabytes or more easily</p>
+</li>
+<li>
+<p>Faster: Parallel data processing</p>
+</li>
+<li>
+<p>Better: Suited for particular types of big data problems</p>
+</li>
+</ul>
+<h3><span id="hadoop-distribution">Hadoop distribution</span></h3>
+<ul>
+<li>Data storage (HDFS)
+<ul>
+<li>Runs on commodity hardware (usually Linux)</li>
+<li>Horizontally scalable</li>
+</ul>
+</li>
+<li>Processing (MapReduce)
+<ul>
+<li>Parallelized (scalable) processing</li>
+<li>Fault Tolerant</li>
+</ul>
+</li>
+<li>Other Tools / Frameworks
+<ul>
+<li>Data Access: HBase, Hive, Pig, Mahout</li>
+<li>Tools: Hue, Sqoop</li>
+<li>Monitoring: Greenplum, Cloudera</li>
+</ul>
+</li>
+</ul>
+<p><strong>HDFS</strong>（Hadoop Distributed File System）：<br>
+Hadoop分布式文件系统(HDFS)被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点。但同时，它和其他的分布式文件系统的区别也是很明显的。HDFS是一个高度容错性的系统，适合部署在廉价的机器上。HDFS能提供高吞吐量的数据访问，非常适合大规模数据集上的应用。HDFS放宽了一部分POSIX约束，来实现流式读取文件系统数据的目的。HDFS在最开始是作为Apache Nutch搜索引擎项目的基础架构而开发的。HDFS是Apache Hadoop Core项目的一部分。</p>
+<p><strong>MapReduce</strong>：<br>
+Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应用程序能够运行在由上千个商用机器组成的大型集群上，并以一种可靠容错的方式并行处理上T级别的数据集。<br>
+一个Map/Reduce 作业（job） 通常会把输入的数据集切分为若干独立的数据块，由 map任务（task）以完全并行的方式处理它们。框架会对map的输出先进行排序， 然后把结果输入给reduce任务。通常作业的输入和输出都会被存储在文件系统中。 整个框架负责任务的调度和监控，以及重新执行已经失败的任务。<br>
+通常，Map/Reduce框架和分布式文件系统是运行在一组相同的节点上的，也就是说，计算节点和存储节点通常在一起。这种配置允许框架在那些已经存好数据的节点上高效地调度任务，这可以使整个集群的网络带宽被非常高效地利用）</p>
+<p><img src="1.png" alt=""></p>
+<h3><span id="hadoop-10-vs-hadoop-20">Hadoop 1.0 vs. Hadoop 2.0</span></h3>
 <p><img src="2.png" alt=""></p>
-<h1><span id="the-multidimensional-model">The Multidimensional Model</span></h1>
-<hr>
-<h2><span id="what-is-the-multidimensional-model">What is the Multidimensional Model?</span></h2>
-<p>A data warehouse is based on a multidimensional data model which views data in the form of a <strong>data cube</strong>. A data cube allows data to be modeled and viewed in multiple dimensions. It is defined by <strong>dimensions</strong> and <strong>facts</strong>.</p>
-<p>Key concepts:</p>
+<h3><span id="rdbms-vs-hadoop">RDBMS vs. Hadoop</span></h3>
+<p><img src="3.png" alt=""></p>
+<h3><span id="mapreduce">MapReduce</span></h3>
+<p>Typical big data problem:</p>
 <ul>
-<li>Facts: the subject it models; Facts are numerical measures.</li>
-<li>Measure: A data cube measure is a numerical function that can be evaluated at each point in the data cube space. A measure value is computed for a given point by aggregating the data corresponding to the respective dimension-value pairs defining the given point.</li>
-<li>Dimensions: context of the measure（Dimensions are the perspectives or entities with respect to which an organization wants to keep records</li>
-<li>Hierarchies: Provide contexts of different granularities (aka. grains), a tree of dimension values</li>
+<li>Iterate over a large number of records</li>
+<li>Extract something of interest from each</li>
+<li>Shuffle and sort intermediate results</li>
+<li>Aggregate intermediate results</li>
+<li>Generate final output</li>
 </ul>
-<p>举例说明：<br>
-<img src="3.png" alt="example1"><br>
-在这个cube中，它的dimensions其实是product，location，time，那么为什么我们看到的图的三个维度分别是product，month，city呢？因为每个dimension是分hierarchy的（就如这里的city，如果我们使用OLAP工具进行操作的话，它可以roll-up到sate，也可以drill-down到stor)。因此，我们需要给每个dimension一个类似于总称的东西。</p>
-<p><img src="4.png" alt="example2"><br>
-蓝色区域表示所有product的汇总。<br>
-第一个小cube（箭头指的那个）表示所有product一月份在纽约的销售总量。</p>
-<p>所以，我们可以得到以下汇总图：<br>
-<img src="5.png" alt=""><br>
-<img src="6.png" alt=""></p>
-<h2><span id="olap-operations">OLAP Operations</span></h2>
-<p>All operations are closed under the multidimensional model, i.e., <strong>both input and output of an operation is a cube</strong>. So that they can be composed.</p>
-<h3><span id="roll-up">Roll-up</span></h3>
-<p>Roll-up: move up the hierarchy 聚集数据</p>
-<h3><span id="drill-down">Drill-down</span></h3>
-<p>Drill-down: move down the hierarchy 展开详细数据<br>
-<img src="7.png" alt=""></p>
-<h3><span id="slice-and-dice">Slice and Dice</span></h3>
-<p>Slice: a selection on one dimension of the given cube, resulting in a subcube.<br>
-<img src="8.png" alt=""><br>
-Dice：defines a subcube by performing a selection on two or more dimensions.<br>
-<img src="9.png" alt=""></p>
-<h3><span id="pivoting">Pivoting</span></h3>
-<p>Pivoting: aggregate on selected dimensions, usually 2 dims (cross- tabulation)<br>
-<img src="10.png" alt=""></p>
+<p>Programmers specify two functions:</p>
+<ul>
+<li><strong>map</strong> (k1, v1) → [&lt;k2, v2&gt;]</li>
+<li><strong>reduce</strong> (k2, [v2]) → [&lt;k3, v3&gt;]</li>
+</ul>
+<p>Example: WordCount<br>
+<img src="4.png" alt=""></p>
+<h2><span id="spark">Spark</span></h2>
+<ul>
+<li>Open-source engine for large-scale data processing
+<ul>
+<li>Supports generalized dataflows</li>
+<li>Written in Scala, with bindings in Java and Python</li>
+</ul>
+</li>
+<li>Fast and expressive cluster computing system interoperable with Apache Hadoop</li>
+</ul>
+<p><strong>Spark is not</strong></p>
+<ul>
+<li>a modified version of Hadoop</li>
+<li>dependent on Hadoop because it has its own cluster management</li>
+<li>Spark uses Hadoop for storage purpose only</li>
+</ul>
+<h2><span id="aws">AWS</span></h2>
+<p>AWS(Amazon Web Services) is a subsidiary of <a href="http://Amazon.com" target="_blank" rel="noopener">Amazon.com</a>, which offers a suite of cloud computing services that make up an on-demand computing platform.</p>
 
                 
 
@@ -360,13 +399,9 @@ Dice：defines a subcube by performing a selection on two or more dimensions.<br
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/03/12/COMP9313-Week-1/" data-toggle="tooltip" data-placement="top" title="COMP9313 Week 1">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/" data-toggle="tooltip" data-placement="top" title="用Cloudflare为自定义域名的Github Pages添加SSL">Next Post &rarr;</a>
+                            <a href="/2018/03/11/COMP9318-Week-2/" data-toggle="tooltip" data-placement="top" title="COMP9318 Week 2">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -381,7 +416,7 @@ Dice：defines a subcube by performing a selection on two or more dimensions.<br
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Data Warehouses</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Data Warehouses?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">What are Data Warehouses?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Subject-oriented（面向主题的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Integrated（集成的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">Time-variant（时变的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Non-volatile（非易失的）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Data Warehouse Architecture</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Why Separate Data Warehouse?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">OLAP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">What is OLAP?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">OLTP vs. OLAP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">The Multidimensional Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">What is the Multidimensional Model?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">OLAP Operations</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Roll-up</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Drill-down</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Slice and Dice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">Pivoting</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">What is Big Data?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Big Data Characteristics</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">3V</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">6V</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Introduction to big data tools</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Hadoop</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">What is Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">Why use Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">Hadoop distribution</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.4.</span> <span class="toc-nav-text">Hadoop 1.0 vs. Hadoop 2.0</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.5.</span> <span class="toc-nav-text">RDBMS vs. Hadoop</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.6.</span> <span class="toc-nav-text">MapReduce</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Spark</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">AWS</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -401,9 +436,9 @@ Dice：defines a subcube by performing a selection on two or more dimensions.<br
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                          <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
                         
-                          <a class="tag" href="/tags/#Data Warehousing and Data Mining" title="Data Warehousing and Data Mining">Data Warehousing and Data Mining</a>
+                          <a class="tag" href="/tags/#Big Data Management" title="Big Data Management">Big Data Management</a>
                         
                     </div>
                 </section>
