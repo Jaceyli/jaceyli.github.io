@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          用Cloudflare为自定义域名的Github Pages添加SSL - jingxuan
+          COMP9313 Week 2 MapReduce I - jingxuan
         
     </title>
 
-    <link rel="canonical" href="http://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/">
+    <link rel="canonical" href="http://jingxuan.li/2018/03/12/COMP9313-Week-2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -87,16 +87,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Github" title="Github">Github</a>
+                              <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
                             
-                              <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                              <a class="tag" href="/tags/#Big Data Management" title="Big Data Management">Big Data Management</a>
                             
                         </div>
-                        <h1>用Cloudflare为自定义域名的Github Pages添加SSL</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>COMP9313 Week 2 MapReduce I</h1>
+                        <h2 class="subheading">Big Data Management</h2>
                         <span class="meta">
                             Posted by Jingxuan on
-                            2018-03-10
+                            2018-03-12
                         </span>
                     </div>
                 
@@ -213,44 +213,116 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="why-https">Why Https?</span></h1>
+                <h1><span id="how-it-works">How it works?</span></h1>
 <hr>
+<h2><span id="the-idea-of-mapreduce">The Idea of MapReduce</span></h2>
+<p><strong>Key idea: provide a functional abstraction for these two operations</strong></p>
 <ul>
-<li>http协议传输的数据都是未加密的。比如你访问某网站，在经过如路由器、宽带接入商等中间环节时，搜索的关键字、账号密码等都是可见的，因此使用http协议传输隐私信息是不安全的。为了保证这些隐私数据能加密传输，于是设计了ssl协议用于对http协议传输的数据进行加密，从而就诞生了https。</li>
-<li>简单来说，https协议是由ssl+ http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全性高。可以这样理解，网站的服务器产生一对密钥，公钥给用户用来加密，加密后发给服务端，服务端用自己的私钥解密后得到数据。这样即使中间环节劫持到内容也会因没有密钥无法破解。</li>
-<li>在这个环节中，为了验证服务器是不是你所要访问的真实的服务器，就需要第三方来检验，这个第三方就叫CA(Certificate Authority，是数字证书认证中心的简称，作为独立的第三方，其职能是核实身份，保证获得证书的是被授权者本人而不是其他冒充机构)。ssl证书就是由第三方CA机构来颁发的。</li>
+<li>
+<p>Map as a <strong>transformation</strong> over a dataset:</p>
+<ul>
+<li>This transformation is specified by the function f</li>
+<li>Each functional application happens in <strong>isolation</strong></li>
+<li>The application of f to each element of a dataset can be parallelized in a straightforward manner</li>
 </ul>
-<h1><span id="why-cloudflare">Why CloudFlare?</span></h1>
+</li>
+<li>
+<p>Reduce as an <strong>aggregation(聚集) operation</strong>:</p>
+<ul>
+<li>The aggregation is defined by the function g</li>
+<li>Data locality: elements in the list must be “brought together”</li>
+<li>If we can <strong>group</strong> elements of the list, also the reduce phase can<br>
+proceed in parallel</li>
+</ul>
+</li>
+</ul>
+<h2><span id="data-structures-in-mapreduce">Data Structures in MapReduce</span></h2>
+<ul>
+<li>
+<p><strong>Key-value pairs</strong> are the basic data structure in MapReduce</p>
+<ul>
+<li>Keys and values can be: integers, float, strings, raw bytes</li>
+<li>They can also be arbitrary data structures</li>
+</ul>
+</li>
+<li>
+<p>The design of MapReduce algorithms involves:</p>
+<ul>
+<li>Imposing the key-value structure on arbitrary datasets<br>
+4 E.g.: for a collection of Web pages, input keys may be URLs and values may be the HTML content</li>
+<li>In some algorithms, input keys are not used (e.g., wordcount), in others they uniquely identify a record</li>
+<li>Keys can be combined in complex ways to design various algorithms</li>
+</ul>
+</li>
+</ul>
+<h2><span id="map-and-reduce-functions">Map and Reduce Functions</span></h2>
+<p>Programmers specify two functions:</p>
+<p><strong>map</strong>: (k1, v1) → list [&lt;k2, v2&gt;]</p>
+<ul>
+<li>Map transforms the input into key-value pairs to process</li>
+</ul>
+<p><strong>reduce</strong>: (k2, list [v2]) → [&lt;k3, v3&gt;]</p>
+<ul>
+<li>
+<p>Reduce aggregates the list of values for each key</p>
+</li>
+<li>
+<p>All values with the same key are sent to the same reducer</p>
+</li>
+<li>
+<p>list [&lt;k2, v2&gt;] will be grouped according to key k2 as (k2, list [v2])</p>
+</li>
+</ul>
+<p>A Brief View of MapReduce：<br>
+<img src="1.png" alt=""></p>
+<p><strong>Shuffle</strong>:<br>
+Input to the Reducer is the sorted output of the mappers. In this phase the framework fetches the relevant partition of the output of all the mappers, via HTTP.</p>
+<p><strong>Sort</strong>:<br>
+The framework groups Reducer inputs by keys (since different<br>
+Mappers may have output the same key) in this stage.</p>
+<p>Hadoop framework handles the Shuffle and Sort step :<br>
+<img src="2.png" alt=""></p>
+<p><strong>Combiners</strong>:<br>
+Combiners are a general mechanism to reduce the amount of<br>
+intermediate data, thus saving network time, like “mini-reduces”</p>
+<ul>
+<li>The use of combiners must be thought carefully
+<ul>
+<li>Optional in Hadoop: the correctness of the algorithm **cannot depend on **computation (or even execution) of the combiners</li>
+<li>A combiner <strong>operates on each map output key</strong>. It must have the <strong>same output key-value types</strong> as the Mapper class.</li>
+<li>A combiner can produce summary information from a large dataset because it replaces the original Map output</li>
+</ul>
+</li>
+<li>Works only if reduce function is commutative and associative
+<ul>
+<li>In general, reducer and combiner <strong>are not interchangeable</strong></li>
+</ul>
+</li>
+</ul>
+<p>For example: Combiners in wordcount:<br>
+<img src="5.png" alt=""></p>
+<blockquote>
+<p>In this example, Reducer and Combiner do the same thing<br>
+, <strong>BUT most cases are not!</strong> So, you need to write an extra combiner class.</p>
+</blockquote>
+<p><strong>Partitioner</strong>:<br>
+Partitioner controls the partitioning of the keys of the intermediate map-outputs.</p>
+<ul>
+<li>The key (or a subset of the key) is used to derive the partition, typically by a hash function.</li>
+<li>The total number of partitions is the same as the number of reduce tasks for the job.</li>
+</ul>
+<p>例如：reducer需要相同的key为一组</p>
+<h2><span id="hadoop-mapreduce-brief-data-flow">Hadoop MapReduce Brief Data Flow</span></h2>
+<ol>
+<li>Mappers read from HDFS</li>
+<li>Map output is partitioned by key and sent to Reducers</li>
+<li>Reducers sort input by key</li>
+<li>Reduce output is written to HDFS<br>
+Intermediate results are stored on local FS of Map and Reduce workers</li>
+</ol>
+<p><img src="3.png" alt=""></p>
+<h1><span id="write-your-own-wordcount-in-java">Write Your Own WordCount in Java?</span></h1>
 <hr>
-<p>首先，Github Pages并不支持自定义域名添加SSL证书，为此我还浪费了一个namecheap的SSL证书(；′⌒`)。所以之前都是”裸奔”的状态，直到我遇到了Cloudflare。</p>
-<h2><span id="cloudflare有什么优势呢">CloudFlare有什么优势呢？</span></h2>
-<ul>
-<li>免费</li>
-<li>CloudFlare 提供一种被他们称之为 Universal SSL 的服务，可以让任意 HTTP 站点支持 HTTPS。它的原理是当访客使用 HTTPS 访问站点的时候，从访客到 CloudFlare 这段是加密的，然后从 CloudFlare 到站点这段是明文的。虽然不是全程加密，但是也能很大程度上解决中间人，如果从 CloudFlare 到站点的信道相对可靠的话</li>
-</ul>
-<h2><span id="所以我们牺牲了什么">所以我们牺牲了什么？</span></h2>
-<ul>
-<li>我们必须修改域名的DNS服务器为Cloudflare提供的地址才能使用这项服务</li>
-<li>无法进行coding+github双线部署，除非你使用Cloudflare的收费服务</li>
-</ul>
-<h1><span id="如何使用cloudflare">如何使用CloudFlare?</span></h1>
-<hr>
-<h2><span id="step-1-注册账号添加网站">Step 1: 注册账号，添加网站</span></h2>
-<h2><span id="step-2-前往域名所在的网站更改dns服务器">Step 2: 前往域名所在的网站，更改DNS服务器：</span></h2>
-<p><img src="pic1.png" alt="以Namecheap为例"></p>
-<p>改好以后，大概等个十几分钟Status变成Active的状态，表示已经修改成功：<br>
-<img src="pic2.png" alt=""></p>
-<h2><span id="step-3-设置ssl">Step 3: 设置SSL</span></h2>
-<p>在rypto菜单下状态设置为Flexible，否则是不允许 CDN 通过 HTTP连接服务器的，配上以后浏览器才不会提示不安全：</p>
-<p><img src="pic3.png" alt=""><br>
-待Status变为Active Certificate就说明已经完成认证，大概要等1个多小时吧。</p>
-<h2><span id="step-4添加重定向规则">Step 4：添加重定向规则</span></h2>
-<p>在Page Rule菜单下，添加如下两条：</p>
-<p><img src="pic4.png" alt=""></p>
-<p><img src="pic5.png" alt=""></p>
-<p>OK! 大功告成！小绿锁就出现了(＾－＾)</p>
-<p><img src="pic6.png" alt=""></p>
-<p>如果是黄色叹号，查看下控制台的报错，可能是引入了一些第三方资源。</p>
 
                 
 
@@ -258,13 +330,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/03/11/COMP9318-Week-2/" data-toggle="tooltip" data-placement="top" title="COMP9318 Week 2">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/03/08/我的博客是如何搭建的——github-page-hexo-绑定域名/" data-toggle="tooltip" data-placement="top" title="我的博客是如何搭建的——github page + hexo + 绑定域名">Next Post &rarr;</a>
+                            <a href="/2018/03/12/COMP9313-Week-1/" data-toggle="tooltip" data-placement="top" title="COMP9313 Week 1 Introduction to Big Data">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -279,7 +347,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Https?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Why CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">CloudFlare有什么优势呢？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以我们牺牲了什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何使用CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Step 1: 注册账号，添加网站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Step 2: 前往域名所在的网站，更改DNS服务器：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Step 3: 设置SSL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Step 4：添加重定向规则</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">How it works?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">The Idea of MapReduce</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Data Structures in MapReduce</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Map and Reduce Functions</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Hadoop MapReduce Brief Data Flow</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Write Your Own WordCount in Java?</span></a></li></ol>
         
         </div>
       </aside>
@@ -299,9 +367,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Github" title="Github">Github</a>
+                          <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
                         
-                          <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                          <a class="tag" href="/tags/#Big Data Management" title="Big Data Management">Big Data Management</a>
                         
                     </div>
                 </section>
