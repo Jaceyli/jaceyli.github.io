@@ -7,24 +7,8 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/2018/03/10/%E7%94%A8Cloudflare%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84Github-Pages%E6%B7%BB%E5%8A%A0SSL/</loc>
-        <lastmod>2018-03-14T05:35:39.040Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
-        <lastmod>2018-03-13T09:52:48.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
-        <lastmod>2018-03-13T08:01:05.938Z</lastmod>
+        <loc>http://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
+        <lastmod>2018-03-18T10:05:13.151Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -32,7 +16,31 @@
 
     <url>
         <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
-        <lastmod>2018-03-12T07:22:51.143Z</lastmod>
+        <lastmod>2018-03-18T09:22:16.825Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
+        <lastmod>2018-03-18T09:21:03.070Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
+        <lastmod>2018-03-18T09:20:50.611Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/10/%E7%94%A8Cloudflare%E4%B8%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E7%9A%84Github-Pages%E6%B7%BB%E5%8A%A0SSL/</loc>
+        <lastmod>2018-03-14T05:35:39.040Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

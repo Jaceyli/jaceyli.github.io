@@ -9,34 +9,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-03-12T07:22:51.143Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Data-Warehousing-and-Data-Mining/</loc>
-        <lastmod>2018-03-12T07:22:51.143Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/COMP9313/</loc>
-        <lastmod>2018-03-13T09:52:48.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Big-Data-Management/</loc>
-        <lastmod>2018-03-13T09:52:48.810Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Github/</loc>
         <lastmod>2018-03-14T05:35:39.040Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -46,6 +18,48 @@
     <url>
         <loc>http://jingxuan.li/tags/Cloudflare/</loc>
         <lastmod>2018-03-14T05:35:39.040Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9313/</loc>
+        <lastmod>2018-03-18T09:21:03.070Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9318/</loc>
+        <lastmod>2018-03-18T09:22:16.825Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Data-Mining/</loc>
+        <lastmod>2018-03-18T09:22:16.825Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Big-Data/</loc>
+        <lastmod>2018-03-18T10:05:13.151Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Hadoop/</loc>
+        <lastmod>2018-03-18T10:05:13.151Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Maven/</loc>
+        <lastmod>2018-03-18T10:05:13.151Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
