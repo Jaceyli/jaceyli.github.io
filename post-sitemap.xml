@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
+        <lastmod>2018-03-19T06:29:11.886Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
         <lastmod>2018-03-18T10:16:17.783Z</lastmod>
         <changefreq>weekly</changefreq>

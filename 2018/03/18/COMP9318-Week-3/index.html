@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          COMP9318 Week 3 - jingxuan
+        
+    </title>
+
+    <link rel="canonical" href="http://jingxuan.li/2018/03/18/COMP9318-Week-3/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                            
+                              <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                            
+                        </div>
+                        <h1>COMP9318 Week 3</h1>
+                        <h2 class="subheading">Data Warehousing and Data Mining</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-03-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>本周主要内容：</p>
+<ul>
+<li>Logical Model</li>
+<li>Query Language</li>
+<li>Physical Model and Query Processing Technologies</li>
+<li>Materialized Cuboids and Efficient Computing Cuboids</li>
+</ul>
+</blockquote>
+<h1><span id="the-logical-model">The Logical Model</span></h1>
+<hr>
+<p>Two main approaches:</p>
+<ul>
+<li><strong>Using relational DB technology</strong>:
+<ul>
+<li>Star schema</li>
+<li>Snowflake schema</li>
+<li>Fact constellation</li>
+</ul>
+</li>
+<li>Using multidimensional technology:
+<ul>
+<li>Just as multidimensional data cube</li>
+</ul>
+</li>
+</ul>
+<p>首先解释维度建模两个基本概念，一个是事实表（Fact Table），一个是维度表（Dimension Table）</p>
+<p><strong>Fact Table</strong><br>
+事实表一般由两部分组成，维度（Dimension）和度量（Measurement）。</p>
+<p>事实表可以通俗的理解为「什么人在什么时间做了什么事」的事实记录或者场景上下文，拥有最大的数据量，它是业务流程的核心体现。比如订单的场景(table第一行)：</p>
+<blockquote>
+<p>产品76Ha在商店S136卖了10个，共计40刀，时间xxx</p>
+</blockquote>
+<p><img src="1.png" alt=""><br>
+Fact table:<br>
+<img src="2.png" alt=""></p>
+<p><strong>Dimension Table</strong><br>
+维度表用于对事实表的补充说明，描述和还原事实发生时的场景。<br>
+这个例子我们用了三个维度：产品，时间，地址。<br>
+<img src="3.png" alt=""><br>
+对于每一个维度而言，都有若干个属性来描述，比如产品有名称，类别，品牌，颜色等信息。这些维度的属性就是之后数据统计的依据，比如我们可以统计不同类别，不同品牌，不同颜色在订单中的差异，从向用户制定更精细的营销策略。</p>
+<h2><span id="star-schema">Star schema</span></h2>
+<p>The most common modeling paradigm is the star schema, in which the data warehouse contains:</p>
+<ul>
+<li>a large central table (fact table) containing the bulk of the data, with no redundancy</li>
+<li>a set of smaller attendant tables (dimension tables), one for each dimension.<br>
+The schema graph resembles a starburst, with the dimension tables displayed in a radial pattern around the central fact table.</li>
+</ul>
+<p><strong>A fact table in the middle connected to a set of dimension tables.</strong></p>
+<p>For example:<br>
+<img src="4.png" alt="star schema"><br>
+其实这里的star schema是由universal schema经过normalization转化而来，具体有：</p>
+<ul>
+<li>Each dimension is represented by a dimension-table
+<ul>
+<li>LOCATION (location_key, store, street_address, city, state, country, region)</li>
+<li>dimension tables are not normalized</li>
+</ul>
+</li>
+<li>Transactions are described through a fact-table
+<ul>
+<li>each tuple consists of a pointer to each of the dimension-tables (foreign-key) and a list of measures (units_sold; amount)</li>
+</ul>
+</li>
+</ul>
+<p>Star schema 优点：<br>
+Facts and dimensions are clearly depicted</p>
+<ul>
+<li>dimension tables are relatively static, data is loaded (append mostly) into fact table(s)</li>
+<li>easy to comprehend (and write queries)</li>
+</ul>
+<h2><span id="snowflake-schema">Snowflake schema</span></h2>
+<p>A refinement of star schema where some dimensional hierarchy is <strong>normalized</strong> into a set of smaller dimension tables, forming a shape similar to snowflake</p>
+<blockquote>
+<p><strong>Normalization</strong>：Database normalization, or simply normalization, is the process of restructuring a relational database in accordance with a series of so-called normal forms in order to <strong>reduce data redundancy and improve data integrity</strong>. Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).(RDMS的1NF-&gt;2NF-&gt;3NF等等的转换)</p>
+</blockquote>
+<h3><span id="star-schema-vs-snowflake-schema">Star schema V.S. Snowflake schema:</span></h3>
+<ul>
+<li>Star schema:<br>
+<img src="5.png" alt=""></li>
+<li>Snowflake schema:<br>
+<img src="6.png" alt=""></li>
+</ul>
+<p>由此可知，Snowflake schema只要经过Denormalization就可以变回Star schema.</p>
+<p>在关系型数据库三范式（3NF）设计中，我们极力避免数据的冗余，达到数据的高度一致性。但在数据仓库中，这样的设计并不是最佳实践，因为与巨大的fact table相比，dimension table本身很小，所以减少冗余节省的空间忽略，而且执行查询需要更多的连接操作，Snowflake的结构性能会降低。<br>
+所以在维度建模中，<strong>维度表一般采取反范式的设计</strong>，在一张维度表中扁平化的存储维度的属性，尽量避免使用外键。也就是说Snowflake在实际中用的更多。</p>
+<h2><span id="fact-constellation">Fact constellation</span></h2>
+<p>Multiple fact tables share dimension tables, viewed as a collection of stars,<br>
+therefore called <strong>galaxy schema</strong> or fact constellation.</p>
+<p>For example:<br>
+<img src="7.png" alt=""></p>
+<h1><span id="query-language">Query Language</span></h1>
+<ul>
+<li>Two approaches:
+<ul>
+<li>Using relational DB technology: SQL (with extensions such as <strong>CUBE/PIVOT/UNPIVOT</strong>)</li>
+<li>Using multidimensional technology: <strong>MDX</strong></li>
+</ul>
+</li>
+</ul>
+<p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br>
+<img src="8.png" alt=""></p>
+<h1><span id="physicalmodel-query-processing-techniques">PhysicalModel + Query Processing Techniques</span></h1>
+<p>Data Warehouse architecture分为3层：</p>
+<ol>
+<li>最底层，Data Warehouse Server</li>
+<li>中间层，OLAP Server</li>
+<li>最高层，Front-end Tools</li>
+</ol>
+<p><img src="9.png" alt=""></p>
+<ul>
+<li><strong>OLAP Server</strong> Two main approaches:
+<ul>
+<li>Using relational DB technology: ROLAP</li>
+<li>Using multidimensional technology: MOLAP</li>
+</ul>
+</li>
+<li>Hybrid: HOLAP
+<ul>
+<li>Base cuboid: ROLAP</li>
+<li>Other cuboids: MOLAP</li>
+</ul>
+</li>
+</ul>
+<p><strong>Relational OLAP (ROLAP) servers</strong>: These are the intermediate servers that stand in between a relational back-end server and client front-end tools. They use a relational or extended-relational DBMS to store and manage warehouse data, and OLAP middleware to support missing pieces. ROLAP servers include optimization for each DBMS back end, implementation of aggregation navigation logic, and additional tools and services. ROLAP technology tends to have greater scalability than MOLAP technology. The DSS server of Microstrategy, for example, adopts the ROLAP approach.</p>
+<p><strong>Multidimensional OLAP (MOLAP) servers</strong>: These servers support multidimensional views of data through array-based multidimensional storage engines. They map multidimensional views directly to data cube array structures. The advantage of using a data136 Chapter 3 Data Warehouse and OLAP Technology: An Overview cube is that it allows fast indexing to precomputed summarized data. Notice that with multidimensional data stores, the storage utilization may be low if the data set is sparse. In such cases, sparse matrix compression techniques should be explored (Chapter 4). Many MOLAP servers adopt a two-level storage representation to handle dense and sparse data sets: denser subcubes are identified and stored as array structures, whereas sparse subcubes employ compression technology for efficient storage utilization.</p>
+<p><strong>Hybrid OLAP (HOLAP) servers</strong>: The hybrid OLAP approach combines ROLAP and MOLAP technology, benefiting from the greater scalability of ROLAP and the faster computation of MOLAP. For example, a HOLAP server may allow large volumes of detail data to be stored in a relational database, while aggregations are kept in a separate MOLAP store. The Microsoft SQL Server 2000 supports a hybrid OLAP server.</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/18/Hadoop-IntelliJ-IDEA结合Maven本地运行和调试MapReduce程序/" data-toggle="tooltip" data-placement="top" title="Hadoop: IntelliJ IDEA结合Maven本地运行和调试MapReduce程序">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">PhysicalModel + Query Processing Techniques</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <br><br>
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                        
+                          <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+</body>
+
+</html>
