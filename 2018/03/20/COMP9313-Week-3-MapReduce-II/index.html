@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          COMP9313 Week 3 MapReduce II - jingxuan
+        
+    </title>
+
+    <link rel="canonical" href="http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
+                            
+                              <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                            
+                        </div>
+                        <h1>COMP9313 Week 3 MapReduce II</h1>
+                        <h2 class="subheading">MapReduce Algorithm Design Patterns</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-03-20
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><strong>Combiner Function</strong></p>
+<ul>
+<li><strong>To minimize the data transferred between map and reduce tasks</strong></li>
+<li>Combiner function is <strong>run on the map output</strong></li>
+<li>Both input and output data types must be <strong>consistent with</strong>（保持一致） the output of mapper (or input of reducer)</li>
+<li>But Hadoop do not guarantee how many times it will call combiner function for a particular map output record
+<ul>
+<li>It is just optimization</li>
+<li>The number of calling (even zero) does not affect the output of<br>
+Reducers</li>
+</ul>
+</li>
+<li><font color="#FF6347">Applicable on problems that are commutative and associative</font>
+<ul>
+<li>Commutative（交换率）: max(a, b) = max(b, a)</li>
+<li>Associative（结合律）: max (max(a, b), c) = max(a, max(b, c))</li>
+</ul>
+</li>
+</ul>
+<h1><span id="design-pattern-1-in-mapper-combining">Design Pattern 1: In-mapper Combining</span></h1>
+<hr>
+<h2><span id="importance-of-local-aggregation">Importance of Local Aggregation</span></h2>
+<ul>
+<li>Ideal scaling characteristics:
+<ul>
+<li>Twice the data, twice the running time</li>
+<li>Twice the resources, half the running time</li>
+</ul>
+</li>
+<li>Why can’t we achieve this?
+<ul>
+<li><strong>Data synchronization requires communication</strong></li>
+<li><strong>Communication kills performance</strong></li>
+</ul>
+</li>
+<li>How to avoid communication?
+<ul>
+<li>Reduce intermediate data via <strong>local aggregation</strong></li>
+<li>in-mapper combining can help!</li>
+</ul>
+</li>
+</ul>
+<h2><span id="example-1-wordcount">Example 1: WordCount</span></h2>
+<p>WordCount Baseline:<br>
+<img src="1.png" alt=""></p>
+<h3><span id="version-1">Version 1</span></h3>
+<p><img src="2.png" alt=""></p>
+<p>这种方法，每执行一次map就new一个Hashmap，将一个document下所有term t都sum到 H{t} 中，然后EMIT(term t, count H{t})。</p>
+<p><strong>This mapper use more space to reduce time cost.</strong></p>
+<ul>
+<li>Are combiners still needed?<br>
+Yes, one hashmap is applied to one document, and it need to aggregate.</li>
+</ul>
+<p>但是由于在combiner中aggregate效率还是不高，所以我们继续改进为in-mapper combining</p>
+<h3><span id="version-2-in-mapper-combining">Version 2: in-mapper combining</span></h3>
+<p><img src="3.png" alt=""></p>
+<p>这种方法，先new一个总的Hashmap，通过不断的读入documents来不断的将term t的数量sum到这个总的Hashmap的H{t}中。</p>
+<h2><span id="example-2-computing-the-mean">Example 2: Computing the Mean</span></h2>
+<h3><span id="version-1">Version 1</span></h3>
+<p><img src="4.png" alt=""></p>
+<p><font color="#FF6347"><strong>! incorrect</strong></font></p>
+<ul>
+<li>Why can’t we use reducer as combiner?<br>
+Mean(1, 2, 3, 4, 5) != Mean(Mean(1, 2), Mean(3, 4, 5)) <strong>不满于结合律</strong></li>
+</ul>
+<h3><span id="version-2">Version 2</span></h3>
+<p><img src="6.png" alt=""></p>
+<p><font color="#FF6347"><strong>! incorrect</strong></font></p>
+<ul>
+<li>Why doesn’t this work?<br>
+Combiners must have the same input and output type, <strong>consistent with the input of reducers (output of mappers)</strong></li>
+</ul>
+<h3><span id="version-3">Version 3</span></h3>
+<p><img src="5.png" alt=""></p>
+<p>这个方法是对的，但是有combiner还是不那么高效，可以将其转化为更高效的in-mapper combining</p>
+<h3><span id="version-4-in-mapper-combining">Version 4 : in-mapper combining</span></h3>
+<p><img src="7.png" alt=""></p>
+<h2><span id="how-to-implement-in-mapper-combiner-in-mapreduce">How to Implement In-mapper Combiner in MapReduce?</span></h2>
+<ul>
+<li>Lifecycle: setup -&gt; map -&gt; cleanup
+<ul>
+<li>setup(): called once at the beginning of the task</li>
+<li>map(): do the map</li>
+<li>cleanup(): called once at the end of the task.</li>
+<li>We do not invoke these functions</li>
+</ul>
+</li>
+<li>In-mapper Combining:
+<ul>
+<li>Use setup() to <strong>initialize the state preserving data structure</strong></li>
+<li>Use clearnup() to <strong>emit the final key-value pairs</strong></li>
+</ul>
+</li>
+</ul>
+<h2><span id="summary">Summary</span></h2>
+<ul>
+<li>“In-mapper combining”
+<ul>
+<li>Fold the functionality of the combiner into the mapper by preserving state across multiple map calls</li>
+</ul>
+</li>
+<li>Advantages
+<ul>
+<li>Speed</li>
+<li>faster than actual combiners(因为in-mapper combining是完全在memory中进行的, no I/O cost)</li>
+</ul>
+</li>
+<li>Disadvantages
+<ul>
+<li>Explicit memory management required（need for space, 数据量过大的时候，还是需要用combiner）</li>
+<li>Potential for order-dependent bugs</li>
+</ul>
+</li>
+</ul>
+<h1><span id="design-pattern-2-pairs-vs-stripes">Design Pattern 2: Pairs vs Stripes</span></h1>
+<hr>
+<h2><span id="term-co-occurrence-matrix">Term co-occurrence matrix</span></h2>
+<ul>
+<li>Term co-occurrence matrix for a text collection
+<ul>
+<li>M = N x N matrix (N = vocabulary size)</li>
+<li>Mij: number of times i and j co-occur in some context (for concreteness, let’s say context = sentence)</li>
+<li>specific instance of a large counting problem
+<ul>
+<li>A large event space (number of terms)</li>
+<li>A large number of observations (the collection itself)</li>
+<li>Goal: keep track of interesting statistics about the events</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Basic approach
+<ul>
+<li>Mappers generate partial counts</li>
+<li>Reducers aggregate partial counts</li>
+</ul>
+</li>
+</ul>
+<h2><span id="pairs">Pairs</span></h2>
+<ul>
+<li>Each mapper takes a sentence
+<ul>
+<li>Generate all co-occurring term pairs</li>
+<li>For all pairs, emit (a, b) → count</li>
+</ul>
+</li>
+<li>Reducers sum up counts associated with these pairs</li>
+<li>Use combiners!</li>
+</ul>
+<p><img src="8.png" alt=""></p>
+<ul>
+<li>
+<p>Advantages</p>
+<ul>
+<li>Easy to implement, easy to understand</li>
+</ul>
+</li>
+<li>
+<p>Disadvantages</p>
+<ul>
+<li>Lots of pairs to sort and shuffle around (upper bound?)</li>
+<li>Not many opportunities for combiners to work</li>
+</ul>
+</li>
+</ul>
+<h2><span id="stripes">Stripes</span></h2>
+<ul>
+<li>
+<p>Idea: group together pairs into an associative array<br>
+(a, b) → 1 ,    (a, c) → 2 ,   (a, d) → 5 ,  (a, f) → 2<br>
+generate: a → { b: 1, c: 2, d: 5, e: 3, f: 2 } (a, e) → 3</p>
+</li>
+<li>
+<p>Each mapper takes a sentence:</p>
+<ul>
+<li>Generate all co-occurring term pairs</li>
+<li>For each term, emit a → { b: countb, c: countc, d: countd … }</li>
+</ul>
+</li>
+<li>
+<p>Reducers perform element-wise sum of associative arrays<br>
+<img src="9.png" alt=""></p>
+</li>
+</ul>
+<p><img src="10.png" alt=""></p>
+<ul>
+<li>
+<p>Advantages</p>
+<ul>
+<li>Far less sorting and shuffling of key-value pairs</li>
+<li>Can make better use of combiners</li>
+</ul>
+</li>
+<li>
+<p>Disadvantages</p>
+<ul>
+<li>More difficult to implement</li>
+<li>Underlying object more heavyweight</li>
+<li>Fundamental limitation in terms of size of event space (Stripe H may be huge)</li>
+</ul>
+</li>
+</ul>
+<h2><span id="pairs-vs-stripes">Pairs vs. Stripes</span></h2>
+<p><img src="11.png" alt=""></p>
+<ul>
+<li>
+<p>The pairs approach</p>
+<ul>
+<li>Keep track of <strong>each term co-occurrence separately</strong></li>
+<li>Generates <strong>a large number of key-value pairs</strong> (also intermediate)</li>
+<li>The benefit from combiners is limited, as it is less likely for a mapper to process multiple occurrences of a word</li>
+</ul>
+</li>
+<li>
+<p>The stripe approach</p>
+<ul>
+<li>Keep track of <strong>all terms that co-occur with the same term</strong></li>
+<li>Generates <strong>fewer and shorted intermediate keys</strong></li>
+<li>The framework has less sorting to do</li>
+<li>Greatly benefits from combiners, as the key space is the vocabulary</li>
+<li><strong>More efficient, but may suffer from memory problem</strong></li>
+</ul>
+</li>
+<li>
+<p>These two design patterns are broadly useful and frequently observed<br>
+in a variety of applications</p>
+<ul>
+<li>Text processing, data mining, and bioinformatics</li>
+</ul>
+</li>
+</ul>
+<h2><span id="how-to-implement-pairs-and-stripes-in-mapreduce">How to Implement “Pairs” and “Stripes” in MapReduce?</span></h2>
+<ul>
+<li>Process of turning structured objects into a byte stream for <strong>transmission over a network</strong> or for <strong>writing to persistent storage</strong></li>
+<li>Deserialization is the reverse process of serialization</li>
+<li>Requirements
+<ul>
+<li>Compact: to make efficient use of storage space</li>
+<li>Fast: the overhead in reading and writing of data is minimal</li>
+<li>Extensible: we can transparently read data written in an older format</li>
+<li>Interoperable（能共同操作的）: we can read or write persistent data using different language</li>
+</ul>
+</li>
+</ul>
+<h3><span id="writable-interface">Writable Interface</span></h3>
+<p>Writable is a serializable object which implements a simple, efficient, serialization protocol</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Writable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(DataOutput out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">readFields</span><span class="params">(DataInput in)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>All values must implement interface Writable</li>
+<li>All keys must implement interface WritableComparable</li>
+<li>context.write(WritableComparable, Writable)
+<ul>
+<li>You cannot use java primitives here!!</li>
+</ul>
+</li>
+</ul>
+<h4><span id="stripes-implementation">Stripes Implementation</span></h4>
+<ul>
+<li>Astripekey-valuepaira→{b:1,c:2,d:5,e:3,f:2}:
+<ul>
+<li>Key: the term a</li>
+<li>Value:thestripe{b:1,c:2,d:5,e:3,f:2}
+<ul>
+<li>In Java, easy, use map (hashmap)</li>
+<li>How to represent this stripe in MapReduce?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MapWritable: the wrapper of Java map in MapReduce
+<ul>
+<li>put(Writable key, Writable value)</li>
+<li>get(Object key)</li>
+<li>containsKey(Object key)</li>
+<li>containsValue(Object value)</li>
+<li>entrySet()  returns Set&lt;Map.Entry&lt;Writable,Writable&gt;&gt;, used for iteration</li>
+</ul>
+</li>
+</ul>
+<h4><span id="pairs-implementation">Pairs Implementation</span></h4>
+<ul>
+<li>Key-value pair (a, b) → count
+<ul>
+<li>Value: count</li>
+<li>Key: (a, b)
+<ul>
+<li>In Java, easy, implement a pair class</li>
+<li>How to store the key in MapReduce?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>You must customize your own key, which must implement interface WritableComparable!</li>
+</ul>
+<h1><span id="design-pattern-3-order-inversion">Design Pattern 3: Order Inversion</span></h1>
+<hr>
+<h2><span id="computing-relative-frequencies">Computing Relative Frequencies</span></h2>
+<ul>
+<li>“Relative” Co-occurrence matrix construction
+<ul>
+<li>we take into consideration the fact that some words appear more frequently than others
+<ul>
+<li>Word wi may co-occur frequently with word wj simply because one of the two is very common</li>
+</ul>
+</li>
+<li>We need to convert absolute counts to relative frequencies f(wj|wi)
+<ul>
+<li>What proportion of the time does wj appear in the context of wi?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="12.png" alt=""></p>
+<ul>
+<li>N(·,·) is the number of times a co-occurring word pair is observed</li>
+<li>The denominator is called the marginal</li>
+</ul>
+<h2><span id="stripes">Stripes</span></h2>
+<p>In the reducer, the counts of all words that co-occur with the conditioning variable (wi) are available in the associative array. Hence, the sum of all those counts gives the marginal.</p>
+<p>a→ {b1:3,b2 :12,b3 :7,b4 :1,…}<br>
+f(b1|a) = 3 / (3 + 12 + 7 + 1 + …)</p>
+<p><strong>Problems:</strong><br>
+Memory，因为所有的stripes的活动都得在内存中进行</p>
+<h2><span id="pairs">Pairs</span></h2>
+<p>Reducer直接接收pairs然后进行词频统计，然而这里有个问题，就是分母必须是在扫描了所有的(wi, *)后才能得到，不然无法进行词频计算</p>
+<h3><span id="solution-1">Solution 1:</span></h3>
+<p>Fortunately, as for the mapper, also the reducer can preserve state across multiple keys</p>
+<ul>
+<li>We can buffer in memory all the words that co-occur with wi and their counts</li>
+<li>This is basically building the associative array in the stripes method<br>
+这个方法在mapper传来的pairs没有被sort的时候，需要对其先按照(wi, * )的方式进行sort，然后才是(wi, wj)的sort，然而在sort的过程中（即sort(wi, )），我们遍历了所有(wi,)对，所以分母就知道了。（所有的一切都是在memory中进行）<br>
+这里还有个问题就是，reducer1可能索取了(wi, wj)，reducer2可能索取了(wi, wq)，这就会产生词频统计不正确的现象（因为分母错误了），所以我们需要自己设定<strong>partitioner</strong>来使一个reducer来请求(wi, * )的单词对。这里的partitioner是基于采用hash value的方式，因为hash值是具有身份鉴别功能，所以只需要(wi, * )中的wi的hash value相同，就会被同一个reducer fetch。</li>
+</ul>
+<p><img src="13.png" alt=""></p>
+<h3><span id="solution-2-order-inversion">Solution 2: Order Inversion</span></h3>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/18/COMP9318-Week-3/" data-toggle="tooltip" data-placement="top" title="COMP9318 Week 3">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 1: In-mapper Combining</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Importance of Local Aggregation</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Example 1: WordCount</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Version 2: in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Example 2: Computing the Mean</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">Version 2</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">Version 3</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">Version 4 : in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">How to Implement In-mapper Combiner in MapReduce?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Summary</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Design Pattern 2: Pairs vs Stripes</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Term co-occurrence matrix</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Pairs</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Pairs vs. Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">How to Implement “Pairs” and “Stripes” in MapReduce?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">Writable Interface</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.1.1.</span> <span class="toc-nav-text">Stripes Implementation</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.1.2.</span> <span class="toc-nav-text">Pairs Implementation</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Design Pattern 3: Order Inversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Computing Relative Frequencies</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Pairs</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.1.</span> <span class="toc-nav-text">Solution 1:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.2.</span> <span class="toc-nav-text">Solution 2: Order Inversion</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <br><br>
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
+                        
+                          <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+</body>
+
+</html>

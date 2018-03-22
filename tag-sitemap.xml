@@ -23,20 +23,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/COMP9313/</loc>
-        <lastmod>2018-03-18T10:15:24.526Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Big-Data/</loc>
-        <lastmod>2018-03-18T10:16:17.783Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Hadoop/</loc>
         <lastmod>2018-03-18T10:16:17.783Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -52,14 +38,28 @@
 
     <url>
         <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-03-19T06:29:11.886Z</lastmod>
+        <lastmod>2018-03-19T06:30:45.525Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Data-Mining/</loc>
-        <lastmod>2018-03-19T06:29:11.886Z</lastmod>
+        <lastmod>2018-03-19T06:30:45.525Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9313/</loc>
+        <lastmod>2018-03-20T07:19:08.371Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Big-Data/</loc>
+        <lastmod>2018-03-20T07:19:08.371Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
