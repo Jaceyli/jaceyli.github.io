@@ -2,20 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://jingxuan.li/tags/Hexo/</loc>
-        <lastmod>2018-03-09T10:13:54.578Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Github/</loc>
-        <lastmod>2018-03-14T05:35:39.040Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Cloudflare/</loc>
         <lastmod>2018-03-14T05:35:39.040Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,15 +37,29 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/tags/Hexo/</loc>
+        <lastmod>2018-03-29T07:30:39.078Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Github/</loc>
+        <lastmod>2018-03-29T07:30:39.078Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/tags/COMP9313/</loc>
-        <lastmod>2018-03-20T07:19:08.371Z</lastmod>
+        <lastmod>2018-03-29T07:41:14.606Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Big-Data/</loc>
-        <lastmod>2018-03-20T07:19:08.371Z</lastmod>
+        <lastmod>2018-03-29T07:41:14.606Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

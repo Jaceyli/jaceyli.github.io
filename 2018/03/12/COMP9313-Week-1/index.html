@@ -15,7 +15,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          COMP9313 Week 1 Introduction to Big Data - jingxuan
+          COMP9313 Week 1 Introduction to Big Data - Jingxuan&#39;s blog
         
     </title>
 
@@ -150,13 +150,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -164,11 +157,18 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
                         
                     
                     
@@ -231,7 +231,7 @@
 <li>Introduction to big data tools</li>
 </ul>
 </blockquote>
-<h1><span id="what-is-big-data">What is Big Data?</span></h1>
+<h1 id="what-is-big-data">What is Big Data?</h1>
 <hr>
 <p><strong>No standard definition!</strong></p>
 <p>Here are from Wikipedia:</p>
@@ -241,9 +241,9 @@
 <li>The term “big data” often refers simply to the use of predictive analytics, user behaviour analytics, or certain other advanced data analytics methods that extract value from data, and seldom to a particular size of data set</li>
 <li>Analysis of data sets can find new correlations to “spot business trends, prevent diseases, combat crime and so on.”</li>
 </ul>
-<h1><span id="big-data-characteristics">Big Data Characteristics</span></h1>
+<h1 id="big-data-characteristics">Big Data Characteristics</h1>
 <hr>
-<h2><span id="3v">3V</span></h2>
+<h2 id="3v">3V</h2>
 <ul>
 <li>Volume:
 <ul>
@@ -260,7 +260,7 @@
 </li>
 <li>Variety</li>
 </ul>
-<h2><span id="6v">6V</span></h2>
+<h2 id="6v">6V</h2>
 <ul>
 <li>
 <p>Volume:</p>
@@ -292,10 +292,10 @@ multiple sources simultaneously.</p>
 <p>Ultimately, big data is meaningless if it does not provide value toward some meaningful goal.</p>
 </li>
 </ul>
-<h1><span id="introduction-to-big-data-tools">Introduction to big data tools</span></h1>
+<h1 id="introduction-to-big-data-tools">Introduction to big data tools</h1>
 <hr>
-<h2><span id="hadoop">Hadoop</span></h2>
-<h3><span id="what-is-hadoop">What is Hadoop?</span></h3>
+<h2 id="hadoop">Hadoop</h2>
+<h3 id="what-is-hadoop">What is Hadoop?</h3>
 <ul>
 <li>
 <p>Open-source data storage and processing platform</p>
@@ -324,7 +324,7 @@ multiple sources simultaneously.</p>
 <li>How to dividencomputation?</li>
 <li>How to program for scaling?</li>
 </ul>
-<h3><span id="why-use-hadoop">Why use Hadoop?</span></h3>
+<h3 id="why-use-hadoop">Why use Hadoop?</h3>
 <ul>
 <li>
 <p>Cheaper: Scales to Petabytes or more easily</p>
@@ -336,7 +336,7 @@ multiple sources simultaneously.</p>
 <p>Better: Suited for particular types of big data problems</p>
 </li>
 </ul>
-<h3><span id="hadoop-distribution">Hadoop distribution</span></h3>
+<h3 id="hadoop-distribution">Hadoop distribution</h3>
 <ul>
 <li>Data storage (HDFS)
 <ul>
@@ -365,11 +365,11 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
 一个Map/Reduce 作业（job） 通常会把输入的数据集切分为若干独立的数据块，由 map任务（task）以完全并行的方式处理它们。框架会对map的输出先进行排序， 然后把结果输入给reduce任务。通常作业的输入和输出都会被存储在文件系统中。 整个框架负责任务的调度和监控，以及重新执行已经失败的任务。<br>
 通常，Map/Reduce框架和分布式文件系统是运行在一组相同的节点上的，也就是说，计算节点和存储节点通常在一起。这种配置允许框架在那些已经存好数据的节点上高效地调度任务，这可以使整个集群的网络带宽被非常高效地利用）</p>
 <p><img src="1.png" alt=""></p>
-<h3><span id="hadoop-10-vs-hadoop-20">Hadoop 1.0 vs. Hadoop 2.0</span></h3>
+<h3 id="hadoop-1-0-vs-hadoop-2-0">Hadoop 1.0 vs. Hadoop 2.0</h3>
 <p><img src="2.png" alt=""></p>
-<h3><span id="rdbms-vs-hadoop">RDBMS vs. Hadoop</span></h3>
+<h3 id="rdbms-vs-hadoop">RDBMS vs. Hadoop</h3>
 <p><img src="3.png" alt=""></p>
-<h3><span id="mapreduce">MapReduce</span></h3>
+<h3 id="mapreduce">MapReduce</h3>
 <p>Typical big data problem:</p>
 <ul>
 <li>Iterate over a large number of records</li>
@@ -385,7 +385,7 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
 </ul>
 <p>Example: WordCount<br>
 <img src="4.png" alt=""></p>
-<h2><span id="spark">Spark</span></h2>
+<h2 id="spark">Spark</h2>
 <ul>
 <li>Open-source engine for large-scale data processing
 <ul>
@@ -401,7 +401,7 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
 <li>dependent on Hadoop because it has its own cluster management</li>
 <li>Spark uses Hadoop for storage purpose only</li>
 </ul>
-<h2><span id="aws">AWS</span></h2>
+<h2 id="aws">AWS</h2>
 <p>AWS(Amazon Web Services) is a subsidiary of <a href="http://Amazon.com" target="_blank" rel="noopener">Amazon.com</a>, which offers a suite of cloud computing services that make up an on-demand computing platform.</p>
 
                 
@@ -431,7 +431,7 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">What is Big Data?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Big Data Characteristics</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">3V</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">6V</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Introduction to big data tools</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Hadoop</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">What is Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">Why use Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">Hadoop distribution</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.4.</span> <span class="toc-nav-text">Hadoop 1.0 vs. Hadoop 2.0</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.5.</span> <span class="toc-nav-text">RDBMS vs. Hadoop</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.6.</span> <span class="toc-nav-text">MapReduce</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Spark</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">AWS</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#what-is-big-data"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">What is Big Data?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#big-data-characteristics"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Big Data Characteristics</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3v"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">3V</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#6v"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">6V</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#introduction-to-big-data-tools"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Introduction to big data tools</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#hadoop"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Hadoop</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#what-is-hadoop"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">What is Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#why-use-hadoop"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">Why use Hadoop?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hadoop-distribution"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">Hadoop distribution</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hadoop-1-0-vs-hadoop-2-0"><span class="toc-nav-number">3.1.4.</span> <span class="toc-nav-text">Hadoop 1.0 vs. Hadoop 2.0</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#rdbms-vs-hadoop"><span class="toc-nav-number">3.1.5.</span> <span class="toc-nav-text">RDBMS vs. Hadoop</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#mapreduce"><span class="toc-nav-number">3.1.6.</span> <span class="toc-nav-text">MapReduce</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#spark"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Spark</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#aws"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">AWS</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -451,9 +451,9 @@ Hadoop Map/Reduce是一个使用简易的软件框架，基于它写出来的应
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
+                          <a class="tag" href="COMP9313tags/#COMP9313" title="COMP9313">COMP9313</a>
                         
-                          <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                          <a class="tag" href="Big Datatags/#Big Data" title="Big Data">Big Data</a>
                         
                     </div>
                 </section>

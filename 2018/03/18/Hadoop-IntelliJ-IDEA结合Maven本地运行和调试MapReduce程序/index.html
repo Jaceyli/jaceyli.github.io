@@ -15,7 +15,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Hadoop: IntelliJ IDEA结合Maven本地运行和调试MapReduce程序 - jingxuan
+          Hadoop: IntelliJ IDEA结合Maven本地运行和调试MapReduce程序 - Jingxuan&#39;s blog
         
     </title>
 
@@ -152,13 +152,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -166,11 +159,18 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
                         
                     
                     
@@ -234,7 +234,7 @@
 <li><strong>不需要安装任何模式的Hadoop</strong></li>
 </ul>
 </blockquote>
-<h1><span id="简介">简介</span></h1>
+<h1 id="简介">简介</h1>
 <hr>
 <p>Hadoop可以运行在三种模式下：</p>
 <ol>
@@ -259,13 +259,13 @@
 </ul>
 </li>
 </ul>
-<h2><span id="maven">Maven</span></h2>
+<h2 id="maven">Maven</h2>
 <p>Maven是一个项目管理工具，我们这里主要用到的是它的依赖管理系统。通常我们在开发Hadoop MapReduce程序时，首先要下载对应版本的镜像，然后加载镜像中的JAR依赖包，开始编写代码。这个步骤说起来容易但经常会碰到错综复杂的依赖关系，而利用Maven就能轻松解决这个问题。只需要在Maven配置文件中指定Hadoop依赖包名字和版本号，Maven就能自动搞定这些依赖，你只需要专心写代码就好了。</p>
-<h2><span id="intellij-idea">IntelliJ IDEA</span></h2>
+<h2 id="intellij-idea">IntelliJ IDEA</h2>
 <p>于Eclipse相比，内置Maven支持，操作简单，用起来比Eclipse顺手多了。</p>
-<h1><span id="以wordcount为例">以WordCount为例</span></h1>
+<h1 id="以wordcount为例">以WordCount为例</h1>
 <hr>
-<h2><span id="新建项目">新建项目</span></h2>
+<h2 id="新建项目">新建项目</h2>
 <p>在Intellij中点击File-&gt;New-&gt;Project，在弹出的对话框中选择Maven，JDK选择1.8，点击Next。<br>
 <img src="1.png" alt=""></p>
 <p>接下来填写Maven的GroupId和ArtifactId，随便填，点击Next。<br>
@@ -274,7 +274,7 @@
 <img src="3.png" alt=""></p>
 <p>这样就新建好了一个空的项目，然后打开Intellij的Preference偏好设置，定位到Build, Execution, Deployment-&gt;Compiler-&gt;Java Compiler，将WordCount的Target bytecode version修改为1.8。<br>
 <img src="4.png" alt=""></p>
-<h2><span id="配置依赖">配置依赖</span></h2>
+<h2 id="配置依赖">配置依赖</h2>
 <p>修改pom.xml：</p>
 <ol>
 <li>添加源</li>
@@ -286,19 +286,19 @@
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.7.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>修改pom.xml完成后，Intellij会提示Maven projects need to be Imported，点击Import Changes以更新依赖</p>
-<h2><span id="wordcount">WordCount</span></h2>
+<h2 id="wordcount">WordCount</h2>
 <p>在src-&gt;main-&gt;java下新建一个WordCount类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.StringTokenizer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.IntWritable;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.io.Text;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Job;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Mapper;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.Reducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.input.FileInputFormat;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordCount</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TokenizerMapper</span></span></span><br><span class="line"><span class="class">            <span class="keyword">extends</span> <span class="title">Mapper</span>&lt;<span class="title">Object</span>, <span class="title">Text</span>, <span class="title">Text</span>, <span class="title">IntWritable</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> IntWritable one = <span class="keyword">new</span> IntWritable(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">private</span> Text word = <span class="keyword">new</span> Text();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">map</span><span class="params">(Object key, Text value, Context context</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">            StringTokenizer itr = <span class="keyword">new</span> StringTokenizer(value.toString());</span><br><span class="line">            <span class="keyword">while</span> (itr.hasMoreTokens()) &#123;</span><br><span class="line">                word.set(itr.nextToken());</span><br><span class="line">                context.write(word, one);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntSumReducer</span></span></span><br><span class="line"><span class="class">            <span class="keyword">extends</span> <span class="title">Reducer</span>&lt;<span class="title">Text</span>, <span class="title">IntWritable</span>, <span class="title">Text</span>, <span class="title">IntWritable</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> IntWritable result = <span class="keyword">new</span> IntWritable();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reduce</span><span class="params">(Text key, Iterable&lt;IntWritable&gt; values,</span></span></span><br><span class="line"><span class="function"><span class="params">                           Context context</span></span></span><br><span class="line"><span class="function"><span class="params">        )</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (IntWritable val : values) &#123;</span><br><span class="line">                sum += val.get();</span><br><span class="line">            &#125;</span><br><span class="line">            result.set(sum);</span><br><span class="line">            context.write(key, result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String![] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Configuration conf = <span class="keyword">new</span> Configuration();</span><br><span class="line">        Job job = Job.getInstance(conf, <span class="string">"word count"</span>);</span><br><span class="line">        job.setJarByClass(WordCount.class);</span><br><span class="line">        job.setMapperClass(TokenizerMapper.class);</span><br><span class="line">        job.setCombinerClass(IntSumReducer.class);</span><br><span class="line">        job.setReducerClass(IntSumReducer.class);</span><br><span class="line">        job.setOutputKeyClass(Text.class);</span><br><span class="line">        job.setOutputValueClass(IntWritable.class);</span><br><span class="line">        FileInputFormat.addInputPath(job, <span class="keyword">new</span> Path(args[<span class="number">0</span>]));</span><br><span class="line">        FileOutputFormat.setOutputPath(job, <span class="keyword">new</span> Path(args[<span class="number">1</span>]));</span><br><span class="line">        System.exit(job.waitForCompletion(<span class="keyword">true</span>) ? <span class="number">0</span> : <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2><span id="配置输入文件">配置输入文件</span></h2>
+<h2 id="配置输入文件">配置输入文件</h2>
 <p>这里在WordCount下（src同级目录）新建一个文件夹input，并添加一个或多个文本文件到input中。<br>
 <img src="5.png" alt=""></p>
 <p>点击File-&gt;Project Structure，在弹出来的对话框中选择Modules项，点击Sources选项卡，将Language level调整为7。（如果你用到版本控制的话，可以在这里将input文件夹标记为Excluded。）<br>
 <img src="6.png" alt=""></p>
-<h2><span id="配置运行参数">配置运行参数</span></h2>
+<h2 id="配置运行参数">配置运行参数</h2>
 <p>这里我们需要配置此程序运行时的Main class，以及WordCount需要的输入输出路径。</p>
 <p>在Intellij菜单栏中选择Run-&gt;Edit Configurations，在弹出来的对话框中点击+，新建一个Application配置。配置Main class为WordCount（可以点击右边的…选择），Program arguments为input/ out/，即输入路径为刚才创建的input文件夹，输出为out。<br>
 <img src="7.png" alt=""></p>
-<h2><span id="运行">运行</span></h2>
+<h2 id="运行">运行</h2>
 <p>上述配置完成后，点击菜单栏Run-&gt;Run 'WordCount’即开始运行此MapReduce程序，Intellij下方会显示Hadoop的运行输出。待程序运行完毕后，Intellij左上方会出现新的文件夹out，其中的part-r-00000就是运行的结果了！</p>
 <p>file1：Hello World Bye World</p>
 <p>file2： Hello Hadoop Goodbye Hadoop</p>
@@ -332,7 +332,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">简介</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Maven</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">IntelliJ IDEA</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">以WordCount为例</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">新建项目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">配置依赖</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">WordCount</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">配置输入文件</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">配置运行参数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">运行</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#简介"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">简介</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#maven"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Maven</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#intellij-idea"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">IntelliJ IDEA</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#以wordcount为例"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">以WordCount为例</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#新建项目"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">新建项目</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#配置依赖"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">配置依赖</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#wordcount"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">WordCount</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#配置输入文件"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">配置输入文件</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#配置运行参数"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">配置运行参数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#运行"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">运行</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -352,11 +352,11 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
+                          <a class="tag" href="Big Datatags/#Big Data" title="Big Data">Big Data</a>
                         
-                          <a class="tag" href="/tags/#Hadoop" title="Hadoop">Hadoop</a>
+                          <a class="tag" href="Hadooptags/#Hadoop" title="Hadoop">Hadoop</a>
                         
-                          <a class="tag" href="/tags/#Maven" title="Maven">Maven</a>
+                          <a class="tag" href="Maventags/#Maven" title="Maven">Maven</a>
                         
                     </div>
                 </section>
