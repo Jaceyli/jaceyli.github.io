@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -325,7 +325,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 </ul>
 <p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br>
 <img src="8.png" alt=""></p>
-<h1 id="physicalmodel-query-processing-techniques">PhysicalModel + Query Processing Techniques</h1>
+<h1 id="physical-model">Physical Model</h1>
 <p>Data Warehouse architecture分为3层：</p>
 <ol>
 <li>最底层，Data Warehouse Server</li>
@@ -350,6 +350,18 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 <p><strong>Relational OLAP (ROLAP) servers</strong>: These are the intermediate servers that stand in between a relational back-end server and client front-end tools. They use a relational or extended-relational DBMS to store and manage warehouse data, and OLAP middleware to support missing pieces. ROLAP servers include optimization for each DBMS back end, implementation of aggregation navigation logic, and additional tools and services. ROLAP technology tends to have greater scalability than MOLAP technology. The DSS server of Microstrategy, for example, adopts the ROLAP approach.</p>
 <p><strong>Multidimensional OLAP (MOLAP) servers</strong>: These servers support multidimensional views of data through array-based multidimensional storage engines. They map multidimensional views directly to data cube array structures. The advantage of using a data136 Chapter 3 Data Warehouse and OLAP Technology: An Overview cube is that it allows fast indexing to precomputed summarized data. Notice that with multidimensional data stores, the storage utilization may be low if the data set is sparse. In such cases, sparse matrix compression techniques should be explored (Chapter 4). Many MOLAP servers adopt a two-level storage representation to handle dense and sparse data sets: denser subcubes are identified and stored as array structures, whereas sparse subcubes employ compression technology for efficient storage utilization.</p>
 <p><strong>Hybrid OLAP (HOLAP) servers</strong>: The hybrid OLAP approach combines ROLAP and MOLAP technology, benefiting from the greater scalability of ROLAP and the faster computation of MOLAP. For example, a HOLAP server may allow large volumes of detail data to be stored in a relational database, while aggregations are kept in a separate MOLAP store. The Microsoft SQL Server 2000 supports a hybrid OLAP server.</p>
+<p>HOLAP example:<br>
+<img src="media/15226558213076.jpg" alt=""></p>
+<p>We use the relational technology to store the base cuboid. The base cuboid is the fact table of star schema. While the aggregations below the base cuboid we use the multidimensional technology.</p>
+<h1 id="query-processing-techniques">Query Processing Techniques</h1>
+<h2 id="selection-on-low-cardinality-attributes-bitmap-index">Selection on low-cardinality attributes: Bitmap Index</h2>
+<p>BI on dimension tables</p>
+<ul>
+<li>Index on an attribute (column) with low distinct values</li>
+<li>Each distinct values, v, is associated with a n-bit vector (n = #rows)</li>
+<li>Multiple BIs can be efficiently combined to enable optimised scan of the table</li>
+</ul>
+<p><img src="media/15226569165731.jpg" alt=""></p>
 
                 
 
@@ -378,7 +390,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#the-logical-model"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#star-schema"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#snowflake-schema"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#star-schema-v-s-snowflake-schema"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fact-constellation"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-language"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#physicalmodel-query-processing-techniques"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">PhysicalModel + Query Processing Techniques</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#the-logical-model"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#star-schema"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#snowflake-schema"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#star-schema-v-s-snowflake-schema"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fact-constellation"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-language"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#physical-model"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Physical Model</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing-techniques"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Query Processing Techniques</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#selection-on-low-cardinality-attributes-bitmap-index"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Selection on low-cardinality attributes: Bitmap Index</span></a></li></ol></li></ol>
         
         </div>
       </aside>
