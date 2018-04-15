@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          COMP9318 Week 3 - Jingxuan&#39;s blog
+          COMP9313 Week 4 MapReduce III - Jingxuan&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="http://jingxuan.li/2018/03/18/COMP9318-Week-3/">
+    <link rel="canonical" href="http://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -97,16 +97,16 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                              <a class="tag" href="/tags/#COMP9313" title="COMP9313">COMP9313</a>
                             
-                              <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                              <a class="tag" href="/tags/#Big Data" title="Big Data">Big Data</a>
                             
                         </div>
-                        <h1>COMP9318 Week 3</h1>
-                        <h2 class="subheading">Data Warehousing and Data Mining</h2>
+                        <h1>COMP9313 Week 4 MapReduce III</h1>
+                        <h2 class="subheading">MapReduce Algorithm Design Patterns</h2>
                         <span class="meta">
                             Posted by Jingxuan on
-                            2018-03-18
+                            2018-04-14
                         </span>
                     </div>
                 
@@ -224,144 +224,45 @@
                 post-container">
 
                 <blockquote>
-<p>本周主要内容：</p>
+<p>本周主要内容:</p>
 <ul>
-<li>Logical Model</li>
-<li>Query Language</li>
-<li>Physical Model and Query Processing Technologies</li>
-<li>Materialized Cuboids and Efficient Computing Cuboids</li>
+<li>Design Pattern 4: Value-to-key Conversion</li>
+<li>Miscellaneous</li>
 </ul>
 </blockquote>
-<h1 id="the-logical-model">The Logical Model</h1>
+<h1 id="design-pattern-4-value-to-key-conversion">Design Pattern 4: Value-to-key Conversion</h1>
 <hr>
-<p>Two main approaches:</p>
+<h2 id="secondary-sort">Secondary Sort</h2>
+<p>如何将mapper output的(Key, list(value))中的value进行排序？<br>
+例如：<br>
+<img src="media/15236916599468.jpg" alt=""></p>
 <ul>
-<li><strong>Using relational DB technology</strong>:
-<ul>
-<li>Star schema</li>
-<li>Snowflake schema</li>
-<li>Fact constellation</li>
+<li>m -&gt; (t1, r80521)<br>
+m作为key，hadoop会自动排序，但是问题是t也需要排序，如果不排序，在reducer中就要buffer</li>
 </ul>
-</li>
-<li>Using multidimensional technology:
-<ul>
-<li>Just as multidimensional data cube</li>
-</ul>
-</li>
-</ul>
-<p>首先解释维度建模两个基本概念，一个是事实表（Fact Table），一个是维度表（Dimension Table）</p>
-<p><strong>Fact Table</strong><br>
-事实表一般由两部分组成，维度（Dimension）和度量（Measurement）。</p>
-<p>事实表可以通俗的理解为「什么人在什么时间做了什么事」的事实记录或者场景上下文，拥有最大的数据量，它是业务流程的核心体现。比如订单的场景(table第一行)：</p>
-<blockquote>
-<p>产品76Ha在商店S136卖了10个，共计40刀，时间xxx</p>
-</blockquote>
-<p><img src="1.png" alt=""><br>
-Fact table:<br>
-<img src="2.png" alt=""></p>
-<p><strong>Dimension Table</strong><br>
-维度表用于对事实表的补充说明，描述和还原事实发生时的场景。<br>
-这个例子我们用了三个维度：产品，时间，地址。<br>
-<img src="3.png" alt=""><br>
-对于每一个维度而言，都有若干个属性来描述，比如产品有名称，类别，品牌，颜色等信息。这些维度的属性就是之后数据统计的依据，比如我们可以统计不同类别，不同品牌，不同颜色在订单中的差异，从向用户制定更精细的营销策略。</p>
-<h2 id="star-schema">Star schema</h2>
-<p>The most common modeling paradigm is the star schema, in which the data warehouse contains:</p>
-<ul>
-<li>a large central table (fact table) containing the bulk of the data, with no redundancy</li>
-<li>a set of smaller attendant tables (dimension tables), one for each dimension.<br>
-The schema graph resembles a starburst, with the dimension tables displayed in a radial pattern around the central fact table.</li>
-</ul>
-<p><strong>A fact table in the middle connected to a set of dimension tables.</strong></p>
+<p>如果我们不考虑buffer values in memory 的话，就要用Value-to-key Conversion解决这个问题。</p>
+<p>“Value-to-key conversion” design pattern:<br>
+<strong>form composite intermediate key, (m1, t1)</strong>:The mapper emits (m1, t1) -&gt; r80521<br>
+All pairs associated with the same sensor are shuffled to the same reducer (use partitioner)</p>
+<h2 id="how-to-implement-secondary-sort-in-mapreduce">How to Implement Secondary Sort in MapReduce?</h2>
 <p>For example:<br>
-<img src="4.png" alt="star schema"><br>
-其实这里的star schema是由universal schema经过normalization转化而来，具体有：</p>
+Consider the temperature data from a scientific experiment. Columns are year, month, day, and daily temperature, respectively:</p>
+<p><img src="media/15237801560526.jpg" alt=""><br>
+Use the Value-to-Key Conversion design pattern:<br>
+form a composite intermediate key,(K, V), where V is the secondary key. K is called a natural key.<br>
+K: year-month, V: temperature data.</p>
+<p><img src="media/15237804094228.jpg" alt=""></p>
+<p><strong>Customize The Composite Key:</strong></p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateTemperaturePair</span></span></span><br><span class="line"><span class="class"><span class="keyword">implements</span> <span class="title">Writable</span>, <span class="title">WritableComparable</span>&lt;<span class="title">DateTemperaturePair</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Text yearMonth = <span class="keyword">new</span> Text(); <span class="comment">// natural key</span></span><br><span class="line">    <span class="keyword">private</span> IntWritable temperature = <span class="keyword">new</span> IntWritable(); <span class="comment">// secondary key ......</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * This comparator controls the sort order of the keys.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(DateTemperaturePair pair)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> compareValue = <span class="keyword">this</span>.yearMonth.compareTo(pair.getYearMonth()); </span><br><span class="line">        <span class="keyword">if</span> (compareValue == <span class="number">0</span>) &#123;</span><br><span class="line">        compareValue = temperature.compareTo(pair.getTemperature()); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> compareValue; <span class="comment">// sort ascending </span></span><br><span class="line">    &#125;</span><br><span class="line">    ...... </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Customize The Partitioner:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateTemperaturePartitioner</span></span></span><br><span class="line"><span class="class"><span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">DateTemperaturePair</span>, <span class="title">Text</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(DateTemperaturePair pair, Text text, <span class="keyword">int</span> numberOfPartitions)</span> </span>&#123; </span><br><span class="line">    <span class="comment">// make sure that partitions are non-negative</span></span><br><span class="line">    <span class="keyword">return</span> Math.abs(pair.getYearMonth().hashCode() % numberOfPartitions); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Grouping Comparator:</strong></p>
 <ul>
-<li>Each dimension is represented by a dimension-table
-<ul>
-<li>LOCATION (location_key, store, street_address, city, state, country, region)</li>
-<li>dimension tables are not normalized</li>
+<li>Controls which keys are grouped together for a single call to Reducer.reduce() function.</li>
 </ul>
-</li>
-<li>Transactions are described through a fact-table
-<ul>
-<li>each tuple consists of a pointer to each of the dimension-tables (foreign-key) and a list of measures (units_sold; amount)</li>
-</ul>
-</li>
-</ul>
-<p>Star schema 优点：<br>
-Facts and dimensions are clearly depicted</p>
-<ul>
-<li>dimension tables are relatively static, data is loaded (append mostly) into fact table(s)</li>
-<li>easy to comprehend (and write queries)</li>
-</ul>
-<h2 id="snowflake-schema">Snowflake schema</h2>
-<p>A refinement of star schema where some dimensional hierarchy is <strong>normalized</strong> into a set of smaller dimension tables, forming a shape similar to snowflake</p>
-<blockquote>
-<p><strong>Normalization</strong>：Database normalization, or simply normalization, is the process of restructuring a relational database in accordance with a series of so-called normal forms in order to <strong>reduce data redundancy and improve data integrity</strong>. Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).(RDMS的1NF-&gt;2NF-&gt;3NF等等的转换)</p>
-</blockquote>
-<h3 id="star-schema-v-s-snowflake-schema">Star schema V.S. Snowflake schema:</h3>
-<ul>
-<li>Star schema:<br>
-<img src="5.png" alt=""></li>
-<li>Snowflake schema:<br>
-<img src="6.png" alt=""></li>
-</ul>
-<p>由此可知，Snowflake schema只要经过Denormalization就可以变回Star schema.</p>
-<p>在关系型数据库三范式（3NF）设计中，我们极力避免数据的冗余，达到数据的高度一致性。但在数据仓库中，这样的设计并不是最佳实践，因为与巨大的fact table相比，dimension table本身很小，所以减少冗余节省的空间忽略，而且执行查询需要更多的连接操作，Snowflake的结构性能会降低。<br>
-所以在维度建模中，<strong>维度表一般采取反范式的设计</strong>，在一张维度表中扁平化的存储维度的属性，尽量避免使用外键。也就是说Snowflake在实际中用的更多。</p>
-<h2 id="fact-constellation">Fact constellation</h2>
-<p>Multiple fact tables share dimension tables, viewed as a collection of stars,<br>
-therefore called <strong>galaxy schema</strong> or fact constellation.</p>
-<p>For example:<br>
-<img src="7.png" alt=""></p>
-<h1 id="query-language">Query Language</h1>
-<ul>
-<li>Two approaches:
-<ul>
-<li>Using relational DB technology: SQL (with extensions such as <strong>CUBE/PIVOT/UNPIVOT</strong>)</li>
-<li>Using multidimensional technology: <strong>MDX</strong></li>
-</ul>
-</li>
-</ul>
-<p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br>
-<img src="8.png" alt=""></p>
-<h1 id="physical-model">Physical Model</h1>
-<p>Data Warehouse architecture分为3层：</p>
-<ol>
-<li>最底层，Data Warehouse Server</li>
-<li>中间层，OLAP Server</li>
-<li>最高层，Front-end Tools</li>
-</ol>
-<p><img src="9.png" alt=""></p>
-<ul>
-<li><strong>OLAP Server</strong> Two main approaches:
-<ul>
-<li>Using relational DB technology: ROLAP</li>
-<li>Using multidimensional technology: MOLAP</li>
-</ul>
-</li>
-<li>Hybrid: HOLAP
-<ul>
-<li>Base cuboid: ROLAP</li>
-<li>Other cuboids: MOLAP</li>
-</ul>
-</li>
-</ul>
-<p><strong>Relational OLAP (ROLAP) servers</strong>: These are the intermediate servers that stand in between a relational back-end server and client front-end tools. They use a relational or extended-relational DBMS to store and manage warehouse data, and OLAP middleware to support missing pieces. ROLAP servers include optimization for each DBMS back end, implementation of aggregation navigation logic, and additional tools and services. ROLAP technology tends to have greater scalability than MOLAP technology. The DSS server of Microstrategy, for example, adopts the ROLAP approach.</p>
-<p><strong>Multidimensional OLAP (MOLAP) servers</strong>: These servers support multidimensional views of data through array-based multidimensional storage engines. They map multidimensional views directly to data cube array structures. The advantage of using a data136 Chapter 3 Data Warehouse and OLAP Technology: An Overview cube is that it allows fast indexing to precomputed summarized data. Notice that with multidimensional data stores, the storage utilization may be low if the data set is sparse. In such cases, sparse matrix compression techniques should be explored (Chapter 4). Many MOLAP servers adopt a two-level storage representation to handle dense and sparse data sets: denser subcubes are identified and stored as array structures, whereas sparse subcubes employ compression technology for efficient storage utilization.</p>
-<p><strong>Hybrid OLAP (HOLAP) servers</strong>: The hybrid OLAP approach combines ROLAP and MOLAP technology, benefiting from the greater scalability of ROLAP and the faster computation of MOLAP. For example, a HOLAP server may allow large volumes of detail data to be stored in a relational database, while aggregations are kept in a separate MOLAP store. The Microsoft SQL Server 2000 supports a hybrid OLAP server.</p>
-<p>HOLAP example:<br>
-<img src="media/15226558213076.jpg" alt=""></p>
-<p>We use the relational technology to store the base cuboid. The base cuboid is the fact table of star schema. While the aggregations below the base cuboid we use the multidimensional technology.</p>
-<h1 id="query-processing-techniques">Query Processing Techniques</h1>
-<h2 id="selection-on-low-cardinality-attributes-bitmap-index">Selection on low-cardinality attributes: Bitmap Index</h2>
-<p>BI on dimension tables</p>
-<ul>
-<li>Index on an attribute (column) with low distinct values</li>
-<li>Each distinct values, v, is associated with a n-bit vector (n = #rows)</li>
-<li>Multiple BIs can be efficiently combined to enable optimised scan of the table</li>
-</ul>
-<p><img src="media/15226569165731.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DateTemperatureGroupingComparator</span> <span class="keyword">extends</span> <span class="title">WritableComparator</span> </span>&#123; </span><br><span class="line">    ......</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="title">DateTemperatureGroupingComparator</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(DateTemperaturePair.class, <span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">/* This comparator controls which keys are grouped together into a single call to the</span></span><br><span class="line"><span class="comment">      reduce() method */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(WritableComparable wc1, WritableComparable wc2)</span> </span>&#123;</span><br><span class="line">        DateTemperaturePair pair = (DateTemperaturePair) wc1; </span><br><span class="line">        DateTemperaturePair pair2 = (DateTemperaturePair) wc2; </span><br><span class="line">        <span class="keyword">return</span> pair.getYearMonth().compareTo(pair2.getYearMonth());</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Configure the grouping comparator using Job object:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job.setGroupingComparatorClass(DateTemperatureGroupingComparator.class);</span><br></pre></td></tr></table></figure>
 
                 
 
@@ -369,13 +270,9 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/03/20/COMP9313-Week-3-MapReduce-II/" data-toggle="tooltip" data-placement="top" title="COMP9313 Week 3 MapReduce II">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/03/18/Hadoop-IntelliJ-IDEA结合Maven本地运行和调试MapReduce程序/" data-toggle="tooltip" data-placement="top" title="Hadoop: IntelliJ IDEA结合Maven本地运行和调试MapReduce程序">Next Post &rarr;</a>
+                            <a href="/2018/03/20/COMP9313-Week-3-MapReduce-II/" data-toggle="tooltip" data-placement="top" title="COMP9313 Week 3 MapReduce II">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -390,7 +287,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#the-logical-model"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#star-schema"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#snowflake-schema"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#star-schema-v-s-snowflake-schema"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fact-constellation"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-language"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#physical-model"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Physical Model</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing-techniques"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Query Processing Techniques</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#selection-on-low-cardinality-attributes-bitmap-index"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Selection on low-cardinality attributes: Bitmap Index</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#design-pattern-4-value-to-key-conversion"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 4: Value-to-key Conversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#secondary-sort"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Secondary Sort</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-implement-secondary-sort-in-mapreduce"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">How to Implement Secondary Sort in MapReduce?</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -410,9 +307,9 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="COMP9318tags/#COMP9318" title="COMP9318">COMP9318</a>
+                          <a class="tag" href="COMP9313tags/#COMP9313" title="COMP9313">COMP9313</a>
                         
-                          <a class="tag" href="Data Miningtags/#Data Mining" title="Data Mining">Data Mining</a>
+                          <a class="tag" href="Big Datatags/#Big Data" title="Big Data">Big Data</a>
                         
                     </div>
                 </section>
