@@ -7,6 +7,22 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/05/28/IntelliJ-IDEA%E7%BB%93%E5%90%88SBT%E5%88%9B%E5%BB%BAScala%E9%A1%B9%E7%9B%AE/</loc>
+        <lastmod>2018-05-28T03:35:07.946Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/05/05/COMP9318-Support-Vector-Machine/</loc>
+        <lastmod>2018-05-21T07:49:00.640Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
         <lastmod>2018-04-15T23:55:30.025Z</lastmod>
         <changefreq>weekly</changefreq>

@@ -37,13 +37,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-04-02T10:30:06.763Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Data-Mining/</loc>
         <lastmod>2018-04-02T10:30:06.763Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -60,6 +53,41 @@
     <url>
         <loc>http://jingxuan.li/tags/Big-Data/</loc>
         <lastmod>2018-04-15T23:55:30.025Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9318/</loc>
+        <lastmod>2018-05-21T07:49:00.640Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/SVM/</loc>
+        <lastmod>2018-05-21T07:49:00.640Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Scala/</loc>
+        <lastmod>2018-05-28T03:35:07.946Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/SBT/</loc>
+        <lastmod>2018-05-28T03:35:07.946Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Spark/</loc>
+        <lastmod>2018-05-28T03:35:07.946Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
