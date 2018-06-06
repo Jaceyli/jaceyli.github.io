@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Data Preprocessing and Data Cleaning - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                            
+                              <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                            
+                        </div>
+                        <h1>Data Preprocessing and Data Cleaning</h1>
+                        <h2 class="subheading">COMP9318 Week 5-6</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-05-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>本周主要内容：</p>
+<ul>
+<li>Data cleaning</li>
+<li>Data integration</li>
+<li>Data transformation</li>
+<li>Data reduction</li>
+<li>Data discretization (离散化)</li>
+<li>Data type conversion</li>
+</ul>
+</blockquote>
+<h1 id="why-data-preprocessing">Why Data Preprocessing?</h1>
+<hr>
+<p>Data is the real world is <strong>dirty</strong></p>
+<ul>
+<li><strong>incomplete</strong>: lacking attribute values, lacking certain attributes of interest, or containing only aggregate data.
+<ul>
+<li>E.g.,occupation=&quot;&quot;</li>
+</ul>
+</li>
+<li><strong>noisy</strong>: containing errors or outliers.
+<ul>
+<li>E.g.,e.g., Salary=&quot;-10&quot;</li>
+</ul>
+</li>
+<li><strong>inconsistent（不一致）</strong>: containing discrepancies(差异) in codes or names
+<ul>
+<li>E.g., Age=“42” Birthday=“03/07/1997”（Functional dependency violation）</li>
+<li>E.g., Was rating “1,2,3”, now rating “A, B, C”</li>
+<li>E.g., discrepancy between duplicate records</li>
+</ul>
+</li>
+</ul>
+<h2 id="why-is-data-dirty">Why Is Data Dirty?</h2>
+<ul>
+<li><strong>Incomplete data</strong> comes from
+<ul>
+<li>n/a data value when collected</li>
+<li>different consideration between the time when the data was collected and when it is analyzed</li>
+<li>human/hardware/software problems</li>
+</ul>
+</li>
+<li><strong>Noisy data</strong> comes from the process of data
+<ul>
+<li>collection</li>
+<li>entry</li>
+<li>transmission</li>
+</ul>
+</li>
+<li><strong>Inconsistent data</strong> comes from
+<ul>
+<li>Different data sources</li>
+<li>Functional dependency violation 函数依赖冲突</li>
+</ul>
+</li>
+</ul>
+<h2 id="why-is-data-preprocessing-important">Why Is Data Preprocessing Important?</h2>
+<ul>
+<li>No quality data, no quality mining results!
+<ul>
+<li>Quality decisions must be based on quality data
+<ul>
+<li>E.g., duplicate or missing data may cause incorrect or even misleading statistics.</li>
+</ul>
+</li>
+<li>Data warehouse needs consistent integration of quality data</li>
+</ul>
+</li>
+<li>Data extraction, cleaning, and transformation comprises the <strong>majority</strong> of the work of building a data warehouse.   — Bill Inmon</li>
+<li>Also a critical step for data mining.</li>
+</ul>
+<h1 id="data-cleaning">Data cleaning</h1>
+<hr>
+<p>Data cleaning tasks:</p>
+<ul>
+<li>Fill in missing values  &lt;—— <strong>“incomplete”</strong></li>
+<li>Identify outliers and smooth out noisy data  &lt;—— <strong>“noisy”</strong></li>
+<li>Correct inconsistent data  &lt;—— <strong>“inconsistent”</strong></li>
+<li>Resolve <strong>redundancy</strong> caused by data integration</li>
+</ul>
+<h2 id="missing-data">Missing Data</h2>
+<ul>
+<li>Data is <strong>not always available</strong>
+<ul>
+<li>E.g., Many tuples have no recorded value for several attributes, such as customer income in sales data</li>
+</ul>
+</li>
+<li>Missing data may be due to
+<ul>
+<li>equipment malfunction(机器故障)</li>
+<li>inconsistent with other recorded data and thus deleted.(Functional dependency violation)</li>
+<li>data not entered due to misunderstanding</li>
+<li>certain data may not be considered important at the time of entry</li>
+<li>not register history or changes of the data</li>
+</ul>
+</li>
+<li><strong>Missing data may need to be inferred(推测).</strong>
+<ul>
+<li>Many algorithms need a value for all attributes</li>
+<li>Tuples with missing values may have different true values</li>
+</ul>
+</li>
+</ul>
+<h3 id="how-to-handle-missing-data">How to Handle Missing Data?</h3>
+<ul>
+<li>Ignore the tuple: usually done when class label is missing</li>
+<li>Fill in the missing value manually. 一般情况下，费时费力，不可行</li>
+<li>Fill in it <strong>automatically</strong> with
+<ul>
+<li>a global constant: E.g., “unknown”, ∞. 数据挖掘程序可能误以为是new class，所以也推荐这么做</li>
+<li>the attribute mean</li>
+<li>the attribute mean for all samples belonging to the same class. – Smarter
+<ul>
+<li>E.g., The salary number of a student is missing, it is more reasonable to use the mean salary of all students instead of all the people to fill in.</li>
+</ul>
+</li>
+<li><strong>the most probable value: inference-based such as Bayesian formula or decision tree</strong> 利用机器学习理论来科学推断缺省值</li>
+</ul>
+</li>
+</ul>
+<h1 id="noisy-data">Noisy Data</h1>
+<hr>
+<ul>
+<li>Noise: random error or variance in a measured variable</li>
+<li>Incorrect attribute values may due to
+<ul>
+<li>faulty data collection instruments</li>
+<li>data entry problems</li>
+<li>data transmission problems</li>
+<li>technology limitation</li>
+<li>inconsistency in naming convention</li>
+</ul>
+</li>
+<li>Other data problems which requires data cleaning
+<ul>
+<li>duplicate records</li>
+<li>incomplete data</li>
+<li>inconsistent data</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-to-handle-noisy-data">How to Handle Noisy Data?</h2>
+<ul>
+<li>Binning method: 通过考察”邻居“来平滑存储数据的值
+<ul>
+<li>first sort data and partition into(equi-depth) bins</li>
+<li>then one can <strong>smooth by bin means, median, and boundaries</strong>, etc.</li>
+</ul>
+</li>
+<li>Clustering（聚类）:将相似的值组织成群，在聚类集合之外的就是outliers
+<ul>
+<li>detect and remove outliers</li>
+</ul>
+</li>
+<li>Combined computer and human inspection
+<ul>
+<li>detect suspicious values and check by human(E.g., deal with possible outliers)</li>
+</ul>
+</li>
+<li>Regression (回归)
+<ul>
+<li>Smooth by fitting the data into regression functions</li>
+</ul>
+</li>
+</ul>
+<h1 id="data-integration">Data integration</h1>
+<hr>
+<ul>
+<li>
+<p>Data integration:<br>
+combines data from multiple sources into a coherent store</p>
+</li>
+<li>
+<p>Schema integration</p>
+<ul>
+<li>integrate metadata from different sources</li>
+<li>Entity identification problem. E.g., A.cust-id ≡ B.cust-#</li>
+</ul>
+<p>针对RDBMS同种数据可能采用不同命名方式，通过correlation analysis来对不同schema的相类似的table部分进行检测，来确定是否为相同的数据。</p>
+<p>E.g., different forms</p>
+<ul>
+<li>Datasource1:<br>
+Book(bid, title, isbn)<br>
+Author(aid, fname, lname, birthdate) n  Writes(bid, aid, order)</li>
+<li>Datasource2:<br>
+Book(isbn, title, year, author1, author2, …,<br>
+author10)</li>
+<li>Datasource3:<br>
+Author(name, bornInYear, description, book1, book2, …, book5)</li>
+</ul>
+</li>
+</ul>
+<h2 id="handling-redundancy-in-data-integration">Handling Redundancy in Data Integration</h2>
+<ul>
+<li>Redundant data occur often when <strong>integration of multiple databases</strong>
+<ul>
+<li>The same attribute may have different names in different databases</li>
+<li>One attribute may be a “derived” attribute in another table. E.g., annual revenue</li>
+</ul>
+</li>
+<li>Redundant data may be able to be detected by <strong>correlational(相关的) analysis</strong><br>
+E.g., age and income</li>
+<li>Careful integration of the data from multiple sources may help reduce/avoid redundancies and inconsistencies and improve mining speed and quality</li>
+</ul>
+<h1 id="data-transformation">Data Transformation</h1>
+<hr>
+<ul>
+<li>Smoothing: remove noise from data</li>
+<li>Aggregation: summarization, data cube construction</li>
+<li>Generalizaiton: concept hierarchy climbing</li>
+<li>Normalization: scaled to fall within a small, specified range 将数据按比例缩放，使之落入一个小的特定区间
+<ul>
+<li>min-max normalizaiton</li>
+<li>z-score normalization</li>
+<li>normalizaiton by decimal scaling</li>
+</ul>
+</li>
+<li>Attribute/feature construction
+<ul>
+<li>New attributes constructed from the given ones</li>
+</ul>
+</li>
+</ul>
+<h1 id="data-reduction">Data Reduction</h1>
+<hr>
+<p>Data reduction:<br>
+Obtain a reduced representation of the data set that is much smaller in volume but yet produce the same (or almost the same) analytical results</p>
+<h2 id="data-reduction-strategies">Data Reduction Strategies</h2>
+<ul>
+<li>Dimensionality reduction—remove unimportant attributes</li>
+<li>Data Compression</li>
+<li>Numerosity reduction—fit data into models</li>
+<li>Discretization and concept hierarchy generation</li>
+</ul>
+<h3 id="dimensionality-reduction">Dimensionality reduction</h3>
+<p>Goal: Reduce dimensionality of the data, yet sill maintain the meaningfulness of the data.</p>
+<ul>
+<li>Dimensionality reduction methods:
+<ul>
+<li>Feature selection: choose a subset of the features</li>
+<li>Feature extraction: create new features by combining new ones</li>
+</ul>
+</li>
+</ul>
+<p><em>略 slides27-38 Feature selection and reductio e.g., PCA, Random Projection, t-SNE</em></p>
+<h1 id="conversion-of-data-types">Conversion of data types</h1>
+<hr>
+<ul>
+<li>Three types of simple attributes:
+<ul>
+<li>Nominal/categorical — values from an unordered set<br>
+E.g.,Profession: clerk, driver, teacher, …</li>
+<li>Ordinal — values from an ordered set<br>
+E.g., WAM: HD, D, CR, PASS, FAIL</li>
+<li>Continuous — real numbers, including Boolean values</li>
+</ul>
+</li>
+<li>Other types:
+<ul>
+<li>Array</li>
+<li>String</li>
+<li>Objects</li>
+</ul>
+</li>
+</ul>
+<p>Here we focus on:</p>
+<ul>
+<li>Continuous values -&gt; discrete values
+<ul>
+<li>Removes noise</li>
+<li>Some ML methods only work with discrete valued features</li>
+<li>Reduce the number of distinct values on features, which may<br>
+improve the performance of some ML models</li>
+<li>Reduce data size</li>
+</ul>
+</li>
+<li>Discrete values -&gt; continuous values
+<ul>
+<li>Smooth the distribution</li>
+<li>Reconstruct probability density distribution from samples, which helps generalization</li>
+</ul>
+</li>
+</ul>
+<h2 id="discretization">Discretization</h2>
+<ul>
+<li>
+<p>Discretization:<br>
+Reduce the number of values for a given continuous attribute by dividing the range of the attribute into intervals. Interval labels can then be used to replace actual data values.</p>
+</li>
+<li>
+<p>Methods:</p>
+<ul>
+<li>Binning/Histogram analysis</li>
+<li>Clustering analysis</li>
+<li>Entropy-based discretization</li>
+</ul>
+</li>
+</ul>
+<h3 id="binning">Binning</h3>
+<ul>
+<li><strong>Equal-width</strong>(distance) partitioning
+<ul>
+<li>Divides the range into N intervals of <strong>equal size</strong></li>
+<li>if A and B are the lowest and highest values of the attribute, the width of intervals will be: W = (B - A) / N</li>
+<li>The most straightforward, but outliers may dominate presentation<br>
+E.g., A=0, B=100, 99.9%的数据都在0-20，这样20-100的bin中都没有数据</li>
+<li>Skewed data is not handled well</li>
+</ul>
+</li>
+<li><strong>Equal-depth</strong>(frequency) partitioning
+<ul>
+<li>Divides the range into N intervals, <strong>each containing approximately same number of samples</strong></li>
+<li>Good data scaling</li>
+<li>Managing categorical attributes can be tricky.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>For ML models and statistics models, every model is wrong, but some models are useful.</li>
+<li>Each model has a different model bias and shows a specific view of data.</li>
+</ul>
+</blockquote>
+<h4 id="optimal-binning-problems">Optimal Binning Problems</h4>
+<ul>
+<li>After binning, the educated guess or the smoothed value is E(xi), where xi are all the values in the same bin.</li>
+<li>SSE = sum of squared errors  差值的平方和</li>
+</ul>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+<p>$$cost(bin) = SSE([x_{1}, …, x_{m}]) =\sum_{X=1}^{m}(x_{i}– E(x_{i}))^{2}$$</p>
+<p>E.g., [1,3,8]  avg(1,3,8) = 4,then SSE = (4-1)^2 + (4-3)^2 + (4-8)^2</p>
+<ul>
+<li>
+<p>cost of B bins = sum(cost(bin1),…, cost(binb))</p>
+</li>
+<li>
+<p>Problem: find the B-1 bin boundaries such that the cost of the resulting bins is minimized</p>
+<ul>
+<li>Alg( {x1, …, xn}, B )</li>
+<li>Optimal Binning: Solve the problem optimally in<br>
+O(B* n2) time and O(n2) space.</li>
+<li>MaxDiff: Solve the problem heuristically(启发式地) in O(n*log(n)) time and O(n) space.</li>
+<li>Note: both algorithms do not sort input data n  Send in sorted({x1, …, xn}) if necessary</li>
+</ul>
+</li>
+</ul>
+<h4 id="recursive-formulation">Recursive Formulation</h4>
+<p><img src="1.png" alt=""></p>
+<p><a href="https://github.com/DBWangGroupUNSW/COMP9318/blob/master/L4%20-%20Optimal%20Histogram.ipynb" target="_blank" rel="noopener">Optimal Histogram code on github</a><br>
+Problem: For this recursive solution, it is not efficient for large scale of data.</p>
+<ul>
+<li>
+<p>Problem Caused by Overlapping Sub-problems<br>
+Consider of calculating Fibonacci function</p>
+<ul>
+<li>fib(0) = 0</li>
+<li>fib(1) = 1</li>
+<li>fib(n) = fib(n-1) + fib(n-2), for n &gt; 1<br>
+<img src="2.png" alt=""></li>
+</ul>
+</li>
+<li>
+<p>Solution 1: Trade space for time<br>
+Remember solutions of all the sub-problems<br>
+Obvious, it is not necessary.<br>
+<br></p>
+</li>
+<li>
+<p>Solution 2: <strong>Dynamic Programming</strong></p>
+<ul>
+<li>Ensure all needed recursive calls are already computed<br>
+and memorized -&gt; good schedule of computation<br>
+E.g.,用f(0)和f(1)算完f(2)之后，f(0)和f(1)就可以删了</li>
+<li>reused space to store previous recursive call results<br>
+<strong>We need to make sure all the sub-problems has been calculated and stored</strong><br>
+<img src="4.png" alt=""><br>
+S： S3 means suffix of XXX starts at position 3<br>
+E.g., [1,2,3,4,5,6], S3:[3,4,5,6]<br>
+<img src="5.png" alt=""></li>
+</ul>
+</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/05/05/COMP9318-Support-Vector-Machine/" data-toggle="tooltip" data-placement="top" title="COMP9318 Support Vector Machine">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/14/COMP9313-Week-4-MapReduce-III/" data-toggle="tooltip" data-placement="top" title="MapReduce III">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-data-preprocessing"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Data Preprocessing?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-dirty"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Is Data Dirty?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-preprocessing-important"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Why Is Data Preprocessing Important?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-cleaning"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Data cleaning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#missing-data"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Missing Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#how-to-handle-missing-data"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">How to Handle Missing Data?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#noisy-data"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Noisy Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-handle-noisy-data"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">How to Handle Noisy Data?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-integration"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Data integration</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#handling-redundancy-in-data-integration"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Handling Redundancy in Data Integration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-transformation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Data Transformation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-reduction"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#data-reduction-strategies"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Data Reduction Strategies</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dimensionality-reduction"><span class="toc-nav-number">6.1.1.</span> <span class="toc-nav-text">Dimensionality reduction</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#conversion-of-data-types"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Conversion of data types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discretization"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Discretization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binning"><span class="toc-nav-number">7.1.1.</span> <span class="toc-nav-text">Binning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#optimal-binning-problems"><span class="toc-nav-number">7.1.1.1.</span> <span class="toc-nav-text">Optimal Binning Problems</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#recursive-formulation"><span class="toc-nav-number">7.1.1.2.</span> <span class="toc-nav-text">Recursive Formulation</span></a></li></ol></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <br><br>
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="COMP9318tags/#COMP9318" title="COMP9318">COMP9318</a>
+                        
+                          <a class="tag" href="Data Miningtags/#Data Mining" title="Data Mining">Data Mining</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+</body>
+
+</html>
