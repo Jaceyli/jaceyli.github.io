@@ -7,6 +7,54 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
+        <lastmod>2018-06-06T00:51:13.390Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
+        <lastmod>2018-06-06T00:51:09.533Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
+        <lastmod>2018-06-06T00:49:50.931Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
+        <lastmod>2018-06-06T00:49:35.020Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
+        <lastmod>2018-06-06T00:46:10.215Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
+        <lastmod>2018-06-06T00:46:01.027Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/05/28/Spark-%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</loc>
         <lastmod>2018-05-28T10:16:39.238Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -31,30 +79,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
-        <lastmod>2018-04-15T23:55:30.025Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
-        <lastmod>2018-04-15T23:54:59.072Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
-        <lastmod>2018-04-02T10:30:06.763Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/2018/03/08/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84%E2%80%94%E2%80%94github-page-hexo-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</loc>
         <lastmod>2018-03-29T07:30:39.078Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -65,30 +89,6 @@
     <url>
         <loc>http://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
         <lastmod>2018-03-18T10:16:17.783Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
-        <lastmod>2018-03-18T10:15:24.526Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
-        <lastmod>2018-03-18T09:22:16.825Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
-        <lastmod>2018-03-18T09:21:03.070Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
