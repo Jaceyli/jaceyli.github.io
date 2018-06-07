@@ -149,9 +149,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -162,6 +159,9 @@
                         <li>
                             <a href="/archive/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -549,10 +549,9 @@ E.g., A=0, B=100, 99.9%的数据都在0-20，这样20-100的bin中都没有数�
 <h4 id="optimal-binning-problems">Optimal Binning Problems</h4>
 <ul>
 <li>After binning, the educated guess or the smoothed value is E(xi), where xi are all the values in the same bin.</li>
-<li>SSE = sum of squared errors  差值的平方和</li>
+<li>SSE = sum of squared errors  差值的平方和<br>
+<img src="6.png" alt=""></li>
 </ul>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-<p>$$cost(bin) = SSE([x_{1}, …, x_{m}]) =\sum_{X=1}^{m}(x_{i}– E(x_{i}))^{2}$$</p>
 <p>E.g., [1,3,8]  avg(1,3,8) = 4,then SSE = (4-1)^2 + (4-3)^2 + (4-8)^2</p>
 <ul>
 <li>
@@ -590,8 +589,10 @@ Remember solutions of all the sub-problems<br>
 Obvious, it is not necessary.<br>
 <br></p>
 </li>
-<li>
-<p>Solution 2: <strong>Dynamic Programming</strong></p>
+</ul>
+<h4 id="dynamic-programming">Dynamic Programming</h4>
+<ul>
+<li>Solution 2: Dynamic Programming
 <ul>
 <li>Ensure all needed recursive calls are already computed<br>
 and memorized -&gt; good schedule of computation<br>
@@ -601,7 +602,96 @@ E.g.,用f(0)和f(1)算完f(2)之后，f(0)和f(1)就可以删了</li>
 <img src="4.png" alt=""><br>
 S： S3 means suffix of XXX starts at position 3<br>
 E.g., [1,2,3,4,5,6], S3:[3,4,5,6]<br>
-<img src="5.png" alt=""></li>
+<img src="5.png" alt=""><br>
+<strong>Complexity</strong><br>
+E.g.,There are O(nB) cells in table, and each cell need O(n) calculations. So, the overall complexity of the DP algorithm is O(n^2 * B) running time!<br>
+<img src="7.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h4 id="maxdiff">MaxDiff</h4>
+<ul>
+<li>Solution 3: MaxDiff
+<ul>
+<li>use the top-(B - 1) <strong>max “gaps”</strong> in the data as the bin/bucket boundary<br>
+<img src="8.png" alt=""><br>
+(n - 1) location -&gt; candidate cut<br>
+这个算法比较常用，因为只遍历一次算gap，然后排序，cost基本就是排序的cost，一般是O(n*logn),可能更少</li>
+</ul>
+</li>
+</ul>
+<h3 id="discretization-via-clustering">Discretization via Clustering</h3>
+<ul>
+<li>we can consider multiple attributes together, but typically NP-hard to find optimal solutions.<br>
+E.g., an example where univariate discretization does not work well<br>
+<img src="9.png" alt=""></li>
+</ul>
+<h3 id="supervised-discretization-methods">Supervised Discretization Methods</h3>
+<blockquote>
+<ul>
+<li>In supervised learning, the output datasets are provided which are used to train the machine and get the desired outputs whereas in unsupervised learning no datasets are provided, instead the data is clustered into different classes.</li>
+<li>Supervised methods usually works well.</li>
+</ul>
+</blockquote>
+<h4 id="entropy-熵-measures-uncertainty">Entropy(熵) measures uncertainty</h4>
+<p>Entropy measures <strong>how random(chaos) the system is.</strong></p>
+<ul>
+<li>
+<p>Consider drawing a random sample from S:</p>
+<ul>
+<li>If Ent(S) = 0: there is little uncertainty. E.g., 100 balls, all white</li>
+<li>If Ent(S) = log(m): there is much uncertainty. E.g., 100 balls, 50 black and 50 white</li>
+</ul>
+</li>
+<li>
+<p>Entropy After Splitting</p>
+<ul>
+<li>E.g., S 100 balls:  B 70, W 30<br>
+subset:  S1: 72 balls (B 69, W3); S2: 28 balls (B 1, W 27)<br>
+S1中拿到黑球的概率非常大,S2拿到白球概率非常大</li>
+<li>After splitting, the uncertainty in each subset is decrease.<br>
+<img src="10.png" alt=""><br>
+E.g., we can want to put these square and triangle into 2 bins.<br>
+we will choose T2, cause the uncertainty is less.<br>
+<img src="11.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="discrete-values-continuous-values">Discrete values -&gt; continuous values</h2>
+<ul>
+<li>After repeating the experiments(e.g.,measuring customers arriving 3-4pm), we observed the following random variable xi (e.g., #customers):
+<ul>
+<li>xi =2,3,3,3,3,1,5</li>
+<li>What’s the probability to see x = 3 in a new<br>
+experiment? What about x = 4?</li>
+</ul>
+</li>
+<li>Naive estimation
+<ul>
+<li>P(x=3) = 4 / 7</li>
+<li>P(x=4) = 0 / 7 Make no sense!<br>
+x, P-chart <strong>not very smooth</strong></li>
+</ul>
+</li>
+<li>Assume x follows the Poisson distribution（松柏分布）&lt;—— global model
+<ul>
+<li>MLE estimation of<br>
+<img src="12.png" alt=""><br>
+choose the most likely λ</li>
+<li>MAP estimation with a <strong>prior</strong> (typically Gamma)<br>
+<em>naive bayes 还会讲这两个模型</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="kde">KDE</h3>
+<ul>
+<li>Kernel density estimation(KDE)
+<ul>
+<li>Let {xi} i=1:n be n i.i.d. sample of an unknown</li>
+<li>We can estimate f(x) as<br>
+<img src="13.png" alt=""></li>
+<li>K(z) controls the weight given to f(xi) to influence f(x), may think K(x, xi) as measuring their similarity</li>
+<li>h is the bandwidth parameter we need to choose</li>
 </ul>
 </li>
 </ul>
@@ -633,7 +723,7 @@ E.g., [1,2,3,4,5,6], S3:[3,4,5,6]<br>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-data-preprocessing"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Data Preprocessing?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-dirty"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Is Data Dirty?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-preprocessing-important"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Why Is Data Preprocessing Important?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-cleaning"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Data cleaning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#missing-data"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Missing Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#how-to-handle-missing-data"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">How to Handle Missing Data?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#noisy-data"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Noisy Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-handle-noisy-data"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">How to Handle Noisy Data?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-integration"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Data integration</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#handling-redundancy-in-data-integration"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Handling Redundancy in Data Integration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-transformation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Data Transformation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-reduction"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#data-reduction-strategies"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Data Reduction Strategies</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dimensionality-reduction"><span class="toc-nav-number">6.1.1.</span> <span class="toc-nav-text">Dimensionality reduction</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#conversion-of-data-types"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Conversion of data types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discretization"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Discretization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binning"><span class="toc-nav-number">7.1.1.</span> <span class="toc-nav-text">Binning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#optimal-binning-problems"><span class="toc-nav-number">7.1.1.1.</span> <span class="toc-nav-text">Optimal Binning Problems</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#recursive-formulation"><span class="toc-nav-number">7.1.1.2.</span> <span class="toc-nav-text">Recursive Formulation</span></a></li></ol></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-data-preprocessing"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Data Preprocessing?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-dirty"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Is Data Dirty?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-preprocessing-important"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Why Is Data Preprocessing Important?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-cleaning"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Data cleaning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#missing-data"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Missing Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#how-to-handle-missing-data"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">How to Handle Missing Data?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#noisy-data"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Noisy Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-handle-noisy-data"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">How to Handle Noisy Data?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-integration"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Data integration</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#handling-redundancy-in-data-integration"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Handling Redundancy in Data Integration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-transformation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Data Transformation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-reduction"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#data-reduction-strategies"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Data Reduction Strategies</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dimensionality-reduction"><span class="toc-nav-number">6.1.1.</span> <span class="toc-nav-text">Dimensionality reduction</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#conversion-of-data-types"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Conversion of data types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discretization"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Discretization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binning"><span class="toc-nav-number">7.1.1.</span> <span class="toc-nav-text">Binning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#optimal-binning-problems"><span class="toc-nav-number">7.1.1.1.</span> <span class="toc-nav-text">Optimal Binning Problems</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#recursive-formulation"><span class="toc-nav-number">7.1.1.2.</span> <span class="toc-nav-text">Recursive Formulation</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#dynamic-programming"><span class="toc-nav-number">7.1.1.3.</span> <span class="toc-nav-text">Dynamic Programming</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#maxdiff"><span class="toc-nav-number">7.1.1.4.</span> <span class="toc-nav-text">MaxDiff</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#discretization-via-clustering"><span class="toc-nav-number">7.1.2.</span> <span class="toc-nav-text">Discretization via Clustering</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#supervised-discretization-methods"><span class="toc-nav-number">7.1.3.</span> <span class="toc-nav-text">Supervised Discretization Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#entropy-熵-measures-uncertainty"><span class="toc-nav-number">7.1.3.1.</span> <span class="toc-nav-text">Entropy(熵) measures uncertainty</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discrete-values-continuous-values"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">Discrete values -&gt; continuous values</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kde"><span class="toc-nav-number">7.2.1.</span> <span class="toc-nav-text">KDE</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
