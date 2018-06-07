@@ -149,6 +149,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -159,9 +162,6 @@
                         <li>
                             <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -234,7 +234,7 @@
 <li>Data type conversion</li>
 </ul>
 </blockquote>
-<h1 id="why-data-preprocessing">Why Data Preprocessing?</h1>
+<h1><span id="why-data-preprocessing">Why Data Preprocessing?</span></h1>
 <hr>
 <p>Data is the real world is <strong>dirty</strong></p>
 <ul>
@@ -256,7 +256,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="why-is-data-dirty">Why Is Data Dirty?</h2>
+<h2><span id="why-is-data-dirty">Why Is Data Dirty?</span></h2>
 <ul>
 <li><strong>Incomplete data</strong> comes from
 <ul>
@@ -279,7 +279,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="why-is-data-preprocessing-important">Why Is Data Preprocessing Important?</h2>
+<h2><span id="why-is-data-preprocessing-important">Why Is Data Preprocessing Important?</span></h2>
 <ul>
 <li>No quality data, no quality mining results!
 <ul>
@@ -294,7 +294,7 @@
 <li>Data extraction, cleaning, and transformation comprises the <strong>majority</strong> of the work of building a data warehouse.   — Bill Inmon</li>
 <li>Also a critical step for data mining.</li>
 </ul>
-<h1 id="data-cleaning">Data cleaning</h1>
+<h1><span id="data-cleaning">Data cleaning</span></h1>
 <hr>
 <p>Data cleaning tasks:</p>
 <ul>
@@ -303,7 +303,7 @@
 <li>Correct inconsistent data  &lt;—— <strong>“inconsistent”</strong></li>
 <li>Resolve <strong>redundancy</strong> caused by data integration</li>
 </ul>
-<h2 id="missing-data">Missing Data</h2>
+<h2><span id="missing-data">Missing Data</span></h2>
 <ul>
 <li>Data is <strong>not always available</strong>
 <ul>
@@ -326,7 +326,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="how-to-handle-missing-data">How to Handle Missing Data?</h3>
+<h3><span id="how-to-handle-missing-data">How to Handle Missing Data?</span></h3>
 <ul>
 <li>Ignore the tuple: usually done when class label is missing</li>
 <li>Fill in the missing value manually. 一般情况下，费时费力，不可行</li>
@@ -343,7 +343,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="noisy-data">Noisy Data</h1>
+<h1><span id="noisy-data">Noisy Data</span></h1>
 <hr>
 <ul>
 <li>Noise: random error or variance in a measured variable</li>
@@ -364,7 +364,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="how-to-handle-noisy-data">How to Handle Noisy Data?</h2>
+<h2><span id="how-to-handle-noisy-data">How to Handle Noisy Data?</span></h2>
 <ul>
 <li>Binning method: 通过考察”邻居“来平滑存储数据的值
 <ul>
@@ -388,7 +388,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="data-integration">Data integration</h1>
+<h1><span id="data-integration">Data integration</span></h1>
 <hr>
 <ul>
 <li>
@@ -415,7 +415,7 @@ Author(name, bornInYear, description, book1, book2, …, book5)</li>
 </ul>
 </li>
 </ul>
-<h2 id="handling-redundancy-in-data-integration">Handling Redundancy in Data Integration</h2>
+<h2><span id="handling-redundancy-in-data-integration">Handling Redundancy in Data Integration</span></h2>
 <ul>
 <li>Redundant data occur often when <strong>integration of multiple databases</strong>
 <ul>
@@ -427,7 +427,7 @@ Author(name, bornInYear, description, book1, book2, …, book5)</li>
 E.g., age and income</li>
 <li>Careful integration of the data from multiple sources may help reduce/avoid redundancies and inconsistencies and improve mining speed and quality</li>
 </ul>
-<h1 id="data-transformation">Data Transformation</h1>
+<h1><span id="data-transformation">Data Transformation</span></h1>
 <hr>
 <ul>
 <li>Smoothing: remove noise from data</li>
@@ -446,18 +446,18 @@ E.g., age and income</li>
 </ul>
 </li>
 </ul>
-<h1 id="data-reduction">Data Reduction</h1>
+<h1><span id="data-reduction">Data Reduction</span></h1>
 <hr>
 <p>Data reduction:<br>
 Obtain a reduced representation of the data set that is much smaller in volume but yet produce the same (or almost the same) analytical results</p>
-<h2 id="data-reduction-strategies">Data Reduction Strategies</h2>
+<h2><span id="data-reduction-strategies">Data Reduction Strategies</span></h2>
 <ul>
 <li>Dimensionality reduction—remove unimportant attributes</li>
 <li>Data Compression</li>
 <li>Numerosity reduction—fit data into models</li>
 <li>Discretization and concept hierarchy generation</li>
 </ul>
-<h3 id="dimensionality-reduction">Dimensionality reduction</h3>
+<h3><span id="dimensionality-reduction">Dimensionality reduction</span></h3>
 <p>Goal: Reduce dimensionality of the data, yet sill maintain the meaningfulness of the data.</p>
 <ul>
 <li>Dimensionality reduction methods:
@@ -468,7 +468,7 @@ Obtain a reduced representation of the data set that is much smaller in volume b
 </li>
 </ul>
 <p><em>略 slides27-38 Feature selection and reductio e.g., PCA, Random Projection, t-SNE</em></p>
-<h1 id="conversion-of-data-types">Conversion of data types</h1>
+<h1><span id="conversion-of-data-types">Conversion of data types</span></h1>
 <hr>
 <ul>
 <li>Three types of simple attributes:
@@ -506,7 +506,7 @@ improve the performance of some ML models</li>
 </ul>
 </li>
 </ul>
-<h2 id="discretization">Discretization</h2>
+<h2><span id="discretization">Discretization</span></h2>
 <ul>
 <li>
 <p>Discretization:<br>
@@ -521,7 +521,7 @@ Reduce the number of values for a given continuous attribute by dividing the ran
 </ul>
 </li>
 </ul>
-<h3 id="binning">Binning</h3>
+<h3><span id="binning">Binning</span></h3>
 <ul>
 <li><strong>Equal-width</strong>(distance) partitioning
 <ul>
@@ -546,7 +546,7 @@ E.g., A=0, B=100, 99.9%的数据都在0-20，这样20-100的bin中都没有数�
 <li>Each model has a different model bias and shows a specific view of data.</li>
 </ul>
 </blockquote>
-<h4 id="optimal-binning-problems">Optimal Binning Problems</h4>
+<h4><span id="optimal-binning-problems">Optimal Binning Problems</span></h4>
 <ul>
 <li>After binning, the educated guess or the smoothed value is E(xi), where xi are all the values in the same bin.</li>
 <li>SSE = sum of squared errors  差值的平方和<br>
@@ -568,7 +568,7 @@ O(B* n2) time and O(n2) space.</li>
 </ul>
 </li>
 </ul>
-<h4 id="recursive-formulation">Recursive Formulation</h4>
+<h4><span id="recursive-formulation">Recursive Formulation</span></h4>
 <p><img src="1.png" alt=""></p>
 <p><a href="https://github.com/DBWangGroupUNSW/COMP9318/blob/master/L4%20-%20Optimal%20Histogram.ipynb" target="_blank" rel="noopener">Optimal Histogram code on github</a><br>
 Problem: For this recursive solution, it is not efficient for large scale of data.</p>
@@ -590,7 +590,7 @@ Obvious, it is not necessary.<br>
 <br></p>
 </li>
 </ul>
-<h4 id="dynamic-programming">Dynamic Programming</h4>
+<h4><span id="dynamic-programming">Dynamic Programming</span></h4>
 <ul>
 <li>Solution 2: Dynamic Programming
 <ul>
@@ -609,7 +609,7 @@ E.g.,There are O(nB) cells in table, and each cell need O(n) calculations. So, t
 </ul>
 </li>
 </ul>
-<h4 id="maxdiff">MaxDiff</h4>
+<h4><span id="maxdiff">MaxDiff</span></h4>
 <ul>
 <li>Solution 3: MaxDiff
 <ul>
@@ -620,20 +620,20 @@ E.g.,There are O(nB) cells in table, and each cell need O(n) calculations. So, t
 </ul>
 </li>
 </ul>
-<h3 id="discretization-via-clustering">Discretization via Clustering</h3>
+<h3><span id="discretization-via-clustering">Discretization via Clustering</span></h3>
 <ul>
 <li>we can consider multiple attributes together, but typically NP-hard to find optimal solutions.<br>
 E.g., an example where univariate discretization does not work well<br>
 <img src="9.png" alt=""></li>
 </ul>
-<h3 id="supervised-discretization-methods">Supervised Discretization Methods</h3>
+<h3><span id="supervised-discretization-methods">Supervised Discretization Methods</span></h3>
 <blockquote>
 <ul>
 <li>In supervised learning, the output datasets are provided which are used to train the machine and get the desired outputs whereas in unsupervised learning no datasets are provided, instead the data is clustered into different classes.</li>
 <li>Supervised methods usually works well.</li>
 </ul>
 </blockquote>
-<h4 id="entropy-熵-measures-uncertainty">Entropy(熵) measures uncertainty</h4>
+<h4><span id="entropy熵-measures-uncertainty">Entropy(熵) measures uncertainty</span></h4>
 <p>Entropy measures <strong>how random(chaos) the system is.</strong></p>
 <ul>
 <li>
@@ -657,7 +657,7 @@ we will choose T2, cause the uncertainty is less.<br>
 </ul>
 </li>
 </ul>
-<h2 id="discrete-values-continuous-values">Discrete values -&gt; continuous values</h2>
+<h2><span id="discrete-values-gt-continuous-values">Discrete values -&gt; continuous values</span></h2>
 <ul>
 <li>After repeating the experiments(e.g.,measuring customers arriving 3-4pm), we observed the following random variable xi (e.g., #customers):
 <ul>
@@ -683,7 +683,7 @@ choose the most likely λ</li>
 </ul>
 </li>
 </ul>
-<h3 id="kde">KDE</h3>
+<h3><span id="kde">KDE</span></h3>
 <ul>
 <li>Kernel density estimation(KDE)
 <ul>
@@ -723,7 +723,7 @@ choose the most likely λ</li>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-data-preprocessing"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Data Preprocessing?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-dirty"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Is Data Dirty?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-is-data-preprocessing-important"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Why Is Data Preprocessing Important?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-cleaning"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Data cleaning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#missing-data"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Missing Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#how-to-handle-missing-data"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">How to Handle Missing Data?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#noisy-data"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Noisy Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-handle-noisy-data"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">How to Handle Noisy Data?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-integration"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Data integration</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#handling-redundancy-in-data-integration"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Handling Redundancy in Data Integration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-transformation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Data Transformation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-reduction"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#data-reduction-strategies"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Data Reduction Strategies</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dimensionality-reduction"><span class="toc-nav-number">6.1.1.</span> <span class="toc-nav-text">Dimensionality reduction</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#conversion-of-data-types"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Conversion of data types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discretization"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Discretization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binning"><span class="toc-nav-number">7.1.1.</span> <span class="toc-nav-text">Binning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#optimal-binning-problems"><span class="toc-nav-number">7.1.1.1.</span> <span class="toc-nav-text">Optimal Binning Problems</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#recursive-formulation"><span class="toc-nav-number">7.1.1.2.</span> <span class="toc-nav-text">Recursive Formulation</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#dynamic-programming"><span class="toc-nav-number">7.1.1.3.</span> <span class="toc-nav-text">Dynamic Programming</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#maxdiff"><span class="toc-nav-number">7.1.1.4.</span> <span class="toc-nav-text">MaxDiff</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#discretization-via-clustering"><span class="toc-nav-number">7.1.2.</span> <span class="toc-nav-text">Discretization via Clustering</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#supervised-discretization-methods"><span class="toc-nav-number">7.1.3.</span> <span class="toc-nav-text">Supervised Discretization Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#entropy-熵-measures-uncertainty"><span class="toc-nav-number">7.1.3.1.</span> <span class="toc-nav-text">Entropy(熵) measures uncertainty</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#discrete-values-continuous-values"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">Discrete values -&gt; continuous values</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kde"><span class="toc-nav-number">7.2.1.</span> <span class="toc-nav-text">KDE</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Data Preprocessing?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Is Data Dirty?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Why Is Data Preprocessing Important?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Data cleaning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Missing Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">How to Handle Missing Data?</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Noisy Data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">How to Handle Noisy Data?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Data integration</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Handling Redundancy in Data Integration</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Data Transformation</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Data Reduction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Data Reduction Strategies</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.1.1.</span> <span class="toc-nav-text">Dimensionality reduction</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Conversion of data types</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">Discretization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.1.</span> <span class="toc-nav-text">Binning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.1.1.</span> <span class="toc-nav-text">Optimal Binning Problems</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.1.2.</span> <span class="toc-nav-text">Recursive Formulation</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.1.3.</span> <span class="toc-nav-text">Dynamic Programming</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.1.4.</span> <span class="toc-nav-text">MaxDiff</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.2.</span> <span class="toc-nav-text">Discretization via Clustering</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.3.</span> <span class="toc-nav-text">Supervised Discretization Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.1.3.1.</span> <span class="toc-nav-text">Entropy(熵) measures uncertainty</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">Discrete values -&gt; continuous values</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.2.1.</span> <span class="toc-nav-text">KDE</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -759,6 +759,24 @@ choose the most likely λ</li>
 </article>
 
 
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "lijingxuan";
+    var disqus_identifier = "http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/";
+    var disqus_url = "http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
 
 

@@ -149,6 +149,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -159,9 +162,6 @@
                         <li>
                             <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -232,7 +232,7 @@
 <li>Materialized Cuboids and Efficient Computing Cuboids</li>
 </ul>
 </blockquote>
-<h1 id="the-logical-model">The Logical Model</h1>
+<h1><span id="the-logical-model">The Logical Model</span></h1>
 <hr>
 <p>Two main approaches:</p>
 <ul>
@@ -264,7 +264,7 @@ Fact table:<br>
 这个例子我们用了三个维度：产品，时间，地址。<br>
 <img src="3.png" alt=""><br>
 对于每一个维度而言，都有若干个属性来描述，比如产品有名称，类别，品牌，颜色等信息。这些维度的属性就是之后数据统计的依据，比如我们可以统计不同类别，不同品牌，不同颜色在订单中的差异，从向用户制定更精细的营销策略。</p>
-<h2 id="star-schema">Star schema</h2>
+<h2><span id="star-schema">Star schema</span></h2>
 <p>The most common modeling paradigm is the star schema, in which the data warehouse contains:</p>
 <ul>
 <li>a large central table (fact table) containing the bulk of the data, with no redundancy</li>
@@ -294,12 +294,12 @@ Facts and dimensions are clearly depicted</p>
 <li>dimension tables are relatively static, data is loaded (append mostly) into fact table(s)</li>
 <li>easy to comprehend (and write queries)</li>
 </ul>
-<h2 id="snowflake-schema">Snowflake schema</h2>
+<h2><span id="snowflake-schema">Snowflake schema</span></h2>
 <p>A refinement of star schema where some dimensional hierarchy is <strong>normalized</strong> into a set of smaller dimension tables, forming a shape similar to snowflake</p>
 <blockquote>
 <p><strong>Normalization</strong>：Database normalization, or simply normalization, is the process of restructuring a relational database in accordance with a series of so-called normal forms in order to <strong>reduce data redundancy and improve data integrity</strong>. Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).(RDMS的1NF-&gt;2NF-&gt;3NF等等的转换)</p>
 </blockquote>
-<h3 id="star-schema-v-s-snowflake-schema">Star schema V.S. Snowflake schema:</h3>
+<h3><span id="star-schema-vs-snowflake-schema">Star schema V.S. Snowflake schema:</span></h3>
 <ul>
 <li>Star schema:<br>
 <img src="5.png" alt=""></li>
@@ -309,12 +309,12 @@ Facts and dimensions are clearly depicted</p>
 <p>由此可知，Snowflake schema只要经过Denormalization就可以变回Star schema.</p>
 <p>在关系型数据库三范式（3NF）设计中，我们极力避免数据的冗余，达到数据的高度一致性。但在数据仓库中，这样的设计并不是最佳实践，因为与巨大的fact table相比，dimension table本身很小，所以减少冗余节省的空间忽略，而且执行查询需要更多的连接操作，Snowflake的结构性能会降低。<br>
 所以在维度建模中，<strong>维度表一般采取反范式的设计</strong>，在一张维度表中扁平化的存储维度的属性，尽量避免使用外键。也就是说Snowflake在实际中用的更多。</p>
-<h2 id="fact-constellation">Fact constellation</h2>
+<h2><span id="fact-constellation">Fact constellation</span></h2>
 <p>Multiple fact tables share dimension tables, viewed as a collection of stars,<br>
 therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 <p>For example:<br>
 <img src="7.png" alt=""></p>
-<h1 id="query-language">Query Language</h1>
+<h1><span id="query-language">Query Language</span></h1>
 <ul>
 <li>Two approaches:
 <ul>
@@ -325,7 +325,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 </ul>
 <p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br>
 <img src="8.png" alt=""></p>
-<h1 id="physical-model">Physical Model</h1>
+<h1><span id="physical-model">Physical Model</span></h1>
 <p>Data Warehouse architecture分为3层：</p>
 <ol>
 <li>最底层，Data Warehouse Server</li>
@@ -353,8 +353,8 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 <p>HOLAP example:<br>
 <img src="media/15226558213076.jpg" alt=""></p>
 <p>We use the relational technology to store the base cuboid. The base cuboid is the fact table of star schema. While the aggregations below the base cuboid we use the multidimensional technology.</p>
-<h1 id="query-processing-techniques">Query Processing Techniques</h1>
-<h2 id="selection-on-low-cardinality-attributes-bitmap-index">Selection on low-cardinality attributes: Bitmap Index</h2>
+<h1><span id="query-processing-techniques">Query Processing Techniques</span></h1>
+<h2><span id="selection-on-low-cardinality-attributes-bitmap-index">Selection on low-cardinality attributes: Bitmap Index</span></h2>
 <p>BI on dimension tables</p>
 <ul>
 <li>Index on an attribute (column) with low distinct values</li>
@@ -390,7 +390,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#the-logical-model"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#star-schema"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#snowflake-schema"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#star-schema-v-s-snowflake-schema"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fact-constellation"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-language"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#physical-model"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Physical Model</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing-techniques"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Query Processing Techniques</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#selection-on-low-cardinality-attributes-bitmap-index"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Selection on low-cardinality attributes: Bitmap Index</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">The Logical Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Star schema</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Snowflake schema</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Star schema V.S. Snowflake schema:</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Fact constellation</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Query Language</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Physical Model</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Query Processing Techniques</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Selection on low-cardinality attributes: Bitmap Index</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -426,6 +426,24 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 </article>
 
 
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "lijingxuan";
+    var disqus_identifier = "http://jingxuan.li/2018/03/18/COMP9318-Week-3/";
+    var disqus_url = "http://jingxuan.li/2018/03/18/COMP9318-Week-3/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
 
 

@@ -149,6 +149,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -159,9 +162,6 @@
                         <li>
                             <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -223,38 +223,38 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="why-https">Why Https?</h1>
+                <h1><span id="why-https">Why Https?</span></h1>
 <hr>
 <ul>
 <li>http协议传输的数据都是未加密的。比如你访问某网站，在经过如路由器、宽带接入商等中间环节时，搜索的关键字、账号密码等都是可见的，因此使用http协议传输隐私信息是不安全的。为了保证这些隐私数据能加密传输，于是设计了ssl协议用于对http协议传输的数据进行加密，从而就诞生了https。</li>
 <li>简单来说，https协议是由ssl+ http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全性高。可以这样理解，网站的服务器产生一对密钥，公钥给用户用来加密，加密后发给服务端，服务端用自己的私钥解密后得到数据。这样即使中间环节劫持到内容也会因没有密钥无法破解。</li>
 <li>在这个环节中，为了验证服务器是不是你所要访问的真实的服务器，就需要第三方来检验，这个第三方就叫CA(Certificate Authority，是数字证书认证中心的简称，作为独立的第三方，其职能是核实身份，保证获得证书的是被授权者本人而不是其他冒充机构)。ssl证书就是由第三方CA机构来颁发的。</li>
 </ul>
-<h1 id="why-cloudflare">Why CloudFlare?</h1>
+<h1><span id="why-cloudflare">Why CloudFlare?</span></h1>
 <hr>
 <p>首先，Github Pages并不支持自定义域名添加SSL证书，为此我还浪费了一个namecheap的SSL证书(；′⌒`)。所以之前都是”裸奔”的状态，直到我遇到了Cloudflare。</p>
-<h2 id="cloudflare有什么优势呢？">CloudFlare有什么优势呢？</h2>
+<h2><span id="cloudflare有什么优势呢">CloudFlare有什么优势呢？</span></h2>
 <ul>
 <li>免费</li>
 <li>CloudFlare 提供一种被他们称之为 Universal SSL 的服务，可以让任意 HTTP 站点支持 HTTPS。它的原理是当访客使用 HTTPS 访问站点的时候，从访客到 CloudFlare 这段是加密的，然后从 CloudFlare 到站点这段是明文的。虽然不是全程加密，但是也能很大程度上解决中间人，如果从 CloudFlare 到站点的信道相对可靠的话</li>
 </ul>
-<h2 id="所以我们牺牲了什么？">所以我们牺牲了什么？</h2>
+<h2><span id="所以我们牺牲了什么">所以我们牺牲了什么？</span></h2>
 <ul>
 <li>我们必须修改域名的DNS服务器为Cloudflare提供的地址才能使用这项服务</li>
 <li>无法进行coding+github双线部署，除非你使用Cloudflare的收费服务</li>
 </ul>
-<h1 id="如何使用cloudflare">如何使用CloudFlare?</h1>
+<h1><span id="如何使用cloudflare">如何使用CloudFlare?</span></h1>
 <hr>
-<h2 id="step-1-注册账号-添加网站">Step 1: 注册账号，添加网站</h2>
-<h2 id="step-2-前往域名所在的网站-更改dns服务器：">Step 2: 前往域名所在的网站，更改DNS服务器：</h2>
+<h2><span id="step-1-注册账号添加网站">Step 1: 注册账号，添加网站</span></h2>
+<h2><span id="step-2-前往域名所在的网站更改dns服务器">Step 2: 前往域名所在的网站，更改DNS服务器：</span></h2>
 <p><img src="pic1.png" alt="以Namecheap为例"></p>
 <p>改好以后，大概等个十几分钟Status变成Active的状态，表示已经修改成功：<br>
 <img src="pic2.png" alt=""></p>
-<h2 id="step-3-设置ssl">Step 3: 设置SSL</h2>
+<h2><span id="step-3-设置ssl">Step 3: 设置SSL</span></h2>
 <p>在rypto菜单下状态设置为Flexible，否则是不允许 CDN 通过 HTTP连接服务器的，配上以后浏览器才不会提示不安全：</p>
 <p><img src="pic3.png" alt=""><br>
 待Status变为Active Certificate就说明已经完成认证，大概要等1个多小时吧。</p>
-<h2 id="step-4：添加重定向规则">Step 4：添加重定向规则</h2>
+<h2><span id="step-4添加重定向规则">Step 4：添加重定向规则</span></h2>
 <p>在Page Rule菜单下，添加如下两条：</p>
 <p><img src="pic4.png" alt=""></p>
 <p><img src="pic5.png" alt=""></p>
@@ -289,7 +289,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-https"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Https?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-cloudflare"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Why CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cloudflare有什么优势呢？"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">CloudFlare有什么优势呢？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#所以我们牺牲了什么？"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以我们牺牲了什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#如何使用cloudflare"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何使用CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-1-注册账号-添加网站"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Step 1: 注册账号，添加网站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-2-前往域名所在的网站-更改dns服务器："><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Step 2: 前往域名所在的网站，更改DNS服务器：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-3-设置ssl"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Step 3: 设置SSL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-4：添加重定向规则"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Step 4：添加重定向规则</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Https?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Why CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">CloudFlare有什么优势呢？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以我们牺牲了什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何使用CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Step 1: 注册账号，添加网站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Step 2: 前往域名所在的网站，更改DNS服务器：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Step 3: 设置SSL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Step 4：添加重定向规则</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -325,6 +325,24 @@
 </article>
 
 
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "lijingxuan";
+    var disqus_identifier = "http://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/";
+    var disqus_url = "http://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
 
 
 
