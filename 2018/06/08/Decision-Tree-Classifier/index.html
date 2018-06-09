@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Decision Tree Classifier - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                            
+                              <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                            
+                              <a class="tag" href="/tags/#Classification" title="Classification">Classification</a>
+                            
+                        </div>
+                        <h1>Decision Tree Classifier</h1>
+                        <h2 class="subheading">COMP9318 Week 7</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-06-08
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>本周主要内容：</p>
+<ul>
+<li>Derive rules from the decision tree</li>
+<li>The ID3 algorithm</li>
+<li>The CART algorithm</li>
+<li>Decision tree pruning</li>
+</ul>
+</blockquote>
+<h1><span id="a-decision-tree-example">A Decision Tree Example</span></h1>
+<hr>
+<p><img src="1.png" alt=""></p>
+<p><img src="2.png" alt=""></p>
+<h2><span id="extracting-classification-rules-from-trees">Extracting Classification Rules from Trees</span></h2>
+<ul>
+<li>represent the knowledge in the form of <strong>IF-THEN</strong> rules</li>
+<li>One rule is created for each path from the root to leaf
+<ul>
+<li>Each attribute-value pair along a path forms a conjunction</li>
+<li>The leaf node holds the class prediction<br>
+E.g.,<br>
+<strong>IF</strong> age = “&lt;=30” <strong>AND</strong> student = “no” <strong>THEN</strong> buys_computer = “no”</li>
+</ul>
+</li>
+</ul>
+<h1><span id="algorithm-for-decision-tree-induction">Algorithm for Decision Tree Induction</span></h1>
+<hr>
+<ul>
+<li>
+<p>Basic algorithm</p>
+<ul>
+<li>Input: Attributes are categorical (if continuous-valued, they are discretized in advance)</li>
+<li>Overview: Tree is constructed in a <strong>top-down recursive divide-and-conquer manner</strong></li>
+</ul>
+</li>
+<li>
+<p>Three conditions for stopping partitioning (i.e.,boundary conditions)</p>
+<ul>
+<li>There are no samples left, OR</li>
+<li>All samples for a given node belong to the same class, OR</li>
+<li>There are <strong>no remaining attributes</strong> for further partitioning (majority voting is employed for classifying the leaf) &lt;—— only for id3, not cart</li>
+</ul>
+</li>
+</ul>
+<h2><span id="attribute-selection-measure">Attribute Selection Measure</span></h2>
+<h3><span id="information-gainid3-c45">Information Gain(ID3 / C4.5):</span></h3>
+<ul>
+<li>select the attribute with the <strong>highest information gain</strong><br>
+<img src="3.png" alt=""><br>
+For the example above, we use the information gain as the criteria, and splitting the age into 3 partitions because it is always better than 2 partitions, as 3 partitions got smaller entropy. So, <strong>we should always spilt partitions as many as we can.</strong><br>
+<br></li>
+<li>Information Gain Computation
+<ul>
+<li>why we choose age to split not other attributes?<br>
+Let’s compute the information gain for all attribute:<br>
+class s1: buy_computer = “yes”, s2:&quot;no&quot;<br>
+<img src="4.png" alt=""><br>
+The entropy for age:<br>
+<img src="5.png" alt=""><br>
+5/14*I(2,3) means “age&lt;=30” has 5 out of 14 samples, with 2 yes and 3 no.<br>
+Hence, Gain(age) = I ( p, n) - E(age) = 0.246<br>
+Similarly,<br>
+Gain(income) = 0.029<br>
+Gain(student) = 0.151<br>
+Gain(credit _ rating) = 0.048<br>
+So, we choose age to spilt is most reasonable.</li>
+</ul>
+</li>
+</ul>
+<h3><span id="gini-indexcart">Gini index(CART)</span></h3>
+<ul>
+<li>CART stand for Classification And Regression Tree</li>
+<li>Gini index (CART, IBM IntelligentMiner)
+<ul>
+<li>All attributes are assumed <strong>continuous-valued</strong></li>
+<li>Assume there exist several possible split values for each attribute</li>
+<li>May need other tools, such as clustering, to get the possible split values</li>
+<li>Can be modified for categorical attributes</li>
+</ul>
+</li>
+<li>Induces <strong>binary split =&gt; binary decision trees</strong></li>
+<li>If a data set T contains examples from n classes, gini index, gini(T) is defined as<br>
+<img src="6.png" alt=""><br>
+where pj is the relative frequency of class j in T.<br>
+<strong>Gini index measures the probability to make mistake</strong></li>
+<li>If a data set T is split into two subsets T1 and T2 with sizes N1 and N2 respectively, the gini index of the split data contains examples from n classes, the gini index gini(T) is defined as<br>
+<img src="7.png" alt=""></li>
+<li>The attribute provides the smallest ginisplit(T) is chosen to split the node (<strong>need to enumerate all possible splitting points for each attribute</strong>).</li>
+</ul>
+<h4><span id="case-i-numerical-attributes">Case I: Numerical Attributes</span></h4>
+<p><img src="8.png" alt=""></p>
+<h4><span id="case-ii-categorical-attributes">Case II: Categorical Attributes</span></h4>
+<p><img src="9.png" alt=""></p>
+<h3><span id="id3-vs-cart">ID3 vs. CART</span></h3>
+<ul>
+<li>ID3是多叉树</li>
+<li>CART是二叉树，且每个非叶子节点都有两个孩子</li>
+</ul>
+<h1><span id="overfitting">Overfitting</span></h1>
+<hr>
+<ul>
+<li>Overfitting: An induced tree may overfit the training data
+<ul>
+<li>Too many branches, some may reflect anomalies(反常) due to noise or outliers</li>
+<li>Poor accuracy for unseen samples<br>
+<img src="10.png" alt=""></li>
+</ul>
+</li>
+<li>Overfitting: <strong>model too complex -&gt; training error keep decreasing, but testing error increases</strong></li>
+<li>Underfitting : model too simple -&gt;both training and testing has large errors.</li>
+</ul>
+<p>Overfitting examples in Regression &amp; Classification:<br>
+<img src="11.png" alt=""></p>
+<h2><span id="avoid-overfitting">Avoid Overfitting</span></h2>
+<ul>
+<li>Prepruning: Halt tree construction early – do not split a node if this would result in the goodness measure falling below a threshold
+<ul>
+<li>Difficult to choose an appropriate threshold</li>
+</ul>
+</li>
+<li>Postpruning: Remove branches from a “fully grown” tree – get a sequence of progressively(逐渐地) pruned trees
+<ul>
+<li>Use a set of data different from the training data to decide which is the “best pruned tree”</li>
+</ul>
+</li>
+</ul>
+<h3><span id="pruning-methods">Pruning Methods</span></h3>
+<ul>
+<li>Use a separate <strong>validation set</strong></li>
+<li>Estimation of generalization/test errors</li>
+<li>Use all the data for training
+<ul>
+<li>but apply a <strong>statistical test</strong> (e.g., chi-square) to estimate whether expanding or pruning a node may improve the entire distribution</li>
+</ul>
+</li>
+<li>Use minimum description length (MDL) principle
+<ul>
+<li>halting growth of the tree when the encoding is minimized</li>
+</ul>
+</li>
+</ul>
+<h4><span id="pessimistic-post-pruning">Pessimistic Post-pruning</span></h4>
+<ul>
+<li>Observed on the training data
+<ul>
+<li>e(t): #errors on a leaf node t of the tree T</li>
+<li>e(T)=∑ e(t)</li>
+</ul>
+</li>
+<li>What’s the <strong>generalization errors</strong>(i.e.,errors on testing data) on T?
+<ul>
+<li>Use pessimistic estimates</li>
+<li>e(t)= e(t)+0.5</li>
+<li>E(T) = e(T) + 0.5N, where N is the number of leaf nodes in T</li>
+</ul>
+</li>
+<li>What’s the generalization errors on root(T) only?
+<ul>
+<li>E’ (root(T)) = e(T) + 0.5</li>
+</ul>
+</li>
+<li>Post-pruning from bottom-up
+<ul>
+<li>If generalization error reduces after pruning, replace sub-tree by a leaf node</li>
+<li>Use majority voting to decide the class label<br>
+<br><br>
+Example<br>
+<img src="12.png" alt=""><br>
+The pessimistic error before splitting is 10.5 out of 30 smaller than after splitting 11 out of 30.<br>
+So, we pruned the subtree at A, then left A as leaf node and marked as “Yes”.</li>
+</ul>
+</li>
+</ul>
+<h1><span id="enhancements-to-basic-decision-tree-induction">Enhancements to basic decision tree induction</span></h1>
+<ul>
+<li>Allow for continuous-valued attributes
+<ul>
+<li>Dynamically define new discrete-valued attributes that partition the continuous attribute value into a discrete set of intervals, one-hot encoding, or specialized DT learning algorithms</li>
+</ul>
+</li>
+<li>Handle missing attribute values
+<ul>
+<li>Assign the most common value of the attribute n</li>
+<li>Assign probability to each of the possible values</li>
+</ul>
+</li>
+<li>Attribute construction
+<ul>
+<li>Create new attributes based on existing ones that are<br>
+sparsely represented</li>
+<li>This reduces fragmentation, repetition, and replication</li>
+</ul>
+</li>
+</ul>
+<h1><span id="classification-in-large-databases">Classification in Large Databases</span></h1>
+<ul>
+<li>Classification—a classical problem extensively studied by statisticians and machine learning researchers</li>
+<li>Scalability: Classifying data sets with millions of examples and hundreds of attributes with reasonable speed</li>
+<li>Why decision tree induction in data mining?
+<ul>
+<li>relatively faster learning speed (than other classification<br>
+methods)</li>
+<li>convertible to simple and easy to understand classification rules</li>
+<li>can use SQL queries for accessing databases</li>
+<li>comparable classification accuracy with other methods</li>
+</ul>
+</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/06/08/Bayesian-Classifiers/" data-toggle="tooltip" data-placement="top" title="Bayesian Classifiers">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/28/Spark-资源汇总/" data-toggle="tooltip" data-placement="top" title="Spark 学习资源汇总">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">A Decision Tree Example</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Extracting Classification Rules from Trees</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Algorithm for Decision Tree Induction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Attribute Selection Measure</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Information Gain(ID3 / C4.5):</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Gini index(CART)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.1.</span> <span class="toc-nav-text">Case I: Numerical Attributes</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.2.</span> <span class="toc-nav-text">Case II: Categorical Attributes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">ID3 vs. CART</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Avoid Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">Pruning Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.1.</span> <span class="toc-nav-text">Pessimistic Post-pruning</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Enhancements to basic decision tree induction</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Classification in Large Databases</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                        
+                          <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                        
+                          <a class="tag" href="/tags/#Classification" title="Classification">Classification</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/";
+    var disqus_url = "http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+
+</html>

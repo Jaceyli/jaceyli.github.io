@@ -7,8 +7,24 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/06/08/Bayesian-Classifiers/</loc>
+        <lastmod>2018-06-08T12:56:03.148Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
+        <lastmod>2018-06-08T12:48:58.063Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
-        <lastmod>2018-06-08T01:43:37.868Z</lastmod>
+        <lastmod>2018-06-08T05:03:52.890Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
