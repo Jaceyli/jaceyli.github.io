@@ -151,6 +151,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -161,15 +165,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -239,7 +239,7 @@ table{
     max-width:70%!important;
 }
 </style>
-<h1><span id="why-bayesian-classification">Why Bayesian Classification?</span></h1>
+<h1 id="why-bayesian-classification">Why Bayesian Classification?</h1>
 <hr>
 <blockquote>
 <ul>
@@ -261,7 +261,7 @@ table{
 <li><strong>Probabilistic prediction</strong>: Predict multiple hypotheses, weighted by their probabilities</li>
 <li>Standard: Even when Bayesian methods are computationally intractable(难对付的), they can provide a standard of optimal decision making against which other methods can be measured</li>
 </ul>
-<h1><span id="bayesian-theorem">Bayesian Theorem</span></h1>
+<h1 id="bayesian-theorem">Bayesian Theorem</h1>
 <hr>
 <ul>
 <li>Let X be a data sample whose class label is <strong>unknown</strong></li>
@@ -280,7 +280,7 @@ evidence: P(X)</li>
 <li>MAP(<strong>maximum posteriori</strong>后期) hypothesis<br>
 <img src="2.png" alt=""></li>
 </ul>
-<h2><span id="naïve-bayes-classifier">Naïve Bayes Classifier</span></h2>
+<h2 id="naïve-bayes-classifier">Naïve Bayes Classifier</h2>
 <ul>
 <li>Assumption: attributes are <strong>conditionally independent</strong>:<br>
 <img src="3.png" alt=""></li>
@@ -309,7 +309,7 @@ P(buys_computer=“no”) = 5/14<br><br>
 P(X|buys_computer=“yes”) * P(buys_computer=“yes”)=0.028 P(X|buys_computer=“no”) * P(buys_computer=“no”)=0.007<br>
 <strong>So, X belongs to class “buys_computer=yes”</strong></li>
 </ul>
-<h2><span id="smoothing">Smoothing</span></h2>
+<h2 id="smoothing">Smoothing</h2>
 <ul>
 <li>
 <p>Pr[X<sub>i</sub> = v<sub>j</sub> | C<sub>k</sub>] could still be 0, <strong>if not observed in the training data</strong></p>
@@ -371,13 +371,13 @@ P(credit_rating=“fair” | buys_computer=“no”)= (2 +1) / (5 +2) = 0.429<br
 </tbody>
 </table>
 <p><strong>不是只有probability=0的+1，所有的都+1</strong></p>
-<h2><span id="how-to-handle-numeric-values">How to Handle Numeric Values</span></h2>
+<h2 id="how-to-handle-numeric-values">How to Handle Numeric Values</h2>
 <ul>
 <li>Need to model the distribution of Pr[X<sub>i</sub> | C<sub>k</sub>]</li>
 <li>Method 1: Gaussian Naïve Bayes<img src="7.png" alt=""></li>
 <li>Method 2: Use binning to discretize the feature values</li>
 </ul>
-<h1><span id="text-classification">Text Classification</span></h1>
+<h1 id="text-classification">Text Classification</h1>
 <p>Naïve Bayes has been widely used in text classificiation (aka., text categorization)</p>
 <ul>
 <li>Document Classification<br>
@@ -398,7 +398,7 @@ e.g.,“link spam”,“not link spam”</li>
 </ul>
 </li>
 </ul>
-<h2><span id="basic-method">Basic Method</span></h2>
+<h2 id="basic-method">Basic Method</h2>
 <ul>
 <li>Attributes are text positions, values are words.<br>
 <img src="12.png" alt=""></li>
@@ -410,7 +410,7 @@ positions of the words
 </ul>
 </li>
 </ul>
-<h3><span id="learning">Learning</span></h3>
+<h3 id="learning">Learning</h3>
 <ul>
 <li>From training corpus, extract V = Vocabulary</li>
 <li>Calculate required P(c<sub>j</sub>) and P(x<sub>k</sub>| c<sub>j</sub>) terms
@@ -432,12 +432,12 @@ positions of the words
 </ul>
 </li>
 </ul>
-<h3><span id="classifying">Classifying</span></h3>
+<h3 id="classifying">Classifying</h3>
 <ul>
 <li>positions &lt;- all word positions in current document which contain tokens found in Vocabulary</li>
 <li>Return c<sub>NB</sub>, where<img src="12.png" alt=""></li>
 </ul>
-<h3><span id="time-complexity">Time Complexity</span></h3>
+<h3 id="time-complexity">Time Complexity</h3>
 <ul>
 <li>
 <p><strong>Training Time</strong>: O(|D|L<sub>d</sub> + |C||V|))<br>
@@ -456,14 +456,14 @@ where Lt is the average length of a test document.</p>
 </ul>
 </li>
 </ul>
-<h2><span id="multinomial多项式-model">Multinomial(多项式)  Model</span></h2>
+<h2 id="multinomial多项式-model">Multinomial(多项式)  Model</h2>
 <blockquote>
 <p>sklearn.naive_bayes.MultinomialNB</p>
 </blockquote>
 <ul>
 <li>Based on a statistical language model, turns out to be the <strong>bag of words</strong> model if using unigrams(一元)</li>
 </ul>
-<h3><span id="underflow-prevention-log-space">Underflow Prevention: log space</span></h3>
+<h3 id="underflow-prevention-log-space">Underflow Prevention: log space</h3>
 <ul>
 <li><strong>Multiplying lots of probabilities, which are between 0 and 1 by definition, can result in floating-point underflow.</strong></li>
 <li>Since log(xy) = log(x) + log(y), it is better to perform all computations by summing logs of probabilities rather than multiplying probabilities.</li>
@@ -471,7 +471,7 @@ where Lt is the average length of a test document.</p>
 <img src="13.png" alt=""></li>
 <li>Note that model is now just max of sum of weights…</li>
 </ul>
-<h3><span id="unigram-and-higher-order-language-models-in-information-retrieval">Unigram and higher-order Language models in Information Retrieval</span></h3>
+<h3 id="unigram-and-higher-order-language-models-in-information-retrieval">Unigram and higher-order Language models in Information Retrieval</h3>
 <ul>
 <li>
 <p>P(“abcd”)= P(a) * P(b | a) * P(c | a b) * P(d | a b c)</p>
@@ -531,7 +531,7 @@ E.g. “to be or not to be”</li>
 </table>
 </li>
 </ul>
-<h2><span id="bernoulli伯努利-model">Bernoulli(伯努利) Model</span></h2>
+<h2 id="bernoulli伯努利-model">Bernoulli(伯努利) Model</h2>
 <blockquote>
 <p>sklearn.naive_bayes.BernoulliNB<br>
 View a text as a <strong>set of tokens</strong>, a boolean vector in {0, 1}<sup>|V|</sup>, where V is the vocabulary.</p>
@@ -572,8 +572,8 @@ E.g.,“a b c d”, “d e b”</li>
 </tr>
 </tbody>
 </table>
-<h2><span id="two-models-compare">Two Models Compare</span></h2>
-<h3><span id="naïve-bayes-assumption">Naïve Bayes assumption</span></h3>
+<h2 id="two-models-compare">Two Models Compare</h2>
+<h3 id="naïve-bayes-assumption">Naïve Bayes assumption</h3>
 <ul>
 <li>Multinomial Naïve Bayes
 <ul>
@@ -611,7 +611,7 @@ E.g., “to be or not to be” = “to to be be or not”</li>
 </ul>
 </li>
 </ul>
-<h3><span id="parameter-estimation">Parameter estimation</span></h3>
+<h3 id="parameter-estimation">Parameter estimation</h3>
 <ul>
 <li>Multinomial model:<br>
 P(X<sub>i</sub> = w|c<sub>j</sub>)= fraction of times in which word w appears across all documents of topic c<sub>j</sub><br>
@@ -619,9 +619,9 @@ P(X<sub>i</sub> = w|c<sub>j</sub>)= fraction of times in which word w appears ac
 <li>Multivariate Bernoulli model:<br>
 P(X<sub>w</sub> = t|c<sub>j</sub>)= fraction of documents of topic c<sub>j</sub> in which word w appears</li>
 </ul>
-<h3><span id="classification">Classification</span></h3>
+<h3 id="classification">Classification</h3>
 <p>Multinomial model is almost always more effective in text applications!</p>
-<h3><span id="feature-selection">Feature selection</span></h3>
+<h3 id="feature-selection">Feature selection</h3>
 <ul>
 <li>Multinomial model:
 <ul>
@@ -632,7 +632,7 @@ P(X<sub>w</sub> = t|c<sub>j</sub>)= fraction of documents of topic c<sub>j</sub>
 <li>Multivariate Bernoulli model:<br>
 In general feature selection is necessary for multivariate Bernoulli NB. Otherwise you suffer from noise, multi-counting.</li>
 </ul>
-<h2><span id="naïve-bayesian-classifier-comments">Naïve Bayesian Classifier: Comments</span></h2>
+<h2 id="naïve-bayesian-classifier-comments">Naïve Bayesian Classifier: Comments</h2>
 <ul>
 <li>Advantages:
 <ul>
@@ -695,7 +695,7 @@ Symptoms: fever, cough etc., Disease: lung cancer, diabetes etc</li>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Bayesian Classification?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Bayesian Theorem</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Naïve Bayes Classifier</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Smoothing</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">How to Handle Numeric Values</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Text Classification</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Basic Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">Learning</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">Classifying</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">Time Complexity</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Multinomial(多项式)  Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Underflow Prevention: log space</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Unigram and higher-order Language models in Information Retrieval</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Bernoulli(伯努利) Model</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Two Models Compare</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.1.</span> <span class="toc-nav-text">Naïve Bayes assumption</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.2.</span> <span class="toc-nav-text">Parameter estimation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.3.</span> <span class="toc-nav-text">Classification</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.4.</span> <span class="toc-nav-text">Feature selection</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">Naïve Bayesian Classifier: Comments</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-bayesian-classification"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Bayesian Classification?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#bayesian-theorem"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Bayesian Theorem</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#naïve-bayes-classifier"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Naïve Bayes Classifier</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#smoothing"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Smoothing</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-handle-numeric-values"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">How to Handle Numeric Values</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#text-classification"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Text Classification</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#basic-method"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Basic Method</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#learning"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">Learning</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#classifying"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">Classifying</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#time-complexity"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">Time Complexity</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#multinomial多项式-model"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Multinomial(多项式)  Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#underflow-prevention-log-space"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Underflow Prevention: log space</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#unigram-and-higher-order-language-models-in-information-retrieval"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Unigram and higher-order Language models in Information Retrieval</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#bernoulli伯努利-model"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Bernoulli(伯努利) Model</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#two-models-compare"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Two Models Compare</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#naïve-bayes-assumption"><span class="toc-nav-number">3.4.1.</span> <span class="toc-nav-text">Naïve Bayes assumption</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#parameter-estimation"><span class="toc-nav-number">3.4.2.</span> <span class="toc-nav-text">Parameter estimation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#classification"><span class="toc-nav-number">3.4.3.</span> <span class="toc-nav-text">Classification</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#feature-selection"><span class="toc-nav-number">3.4.4.</span> <span class="toc-nav-text">Feature selection</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#naïve-bayesian-classifier-comments"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">Naïve Bayesian Classifier: Comments</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -946,7 +946,24 @@ Symptoms: fever, cough etc., Disease: lung cancer, diabetes etc</li>
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

@@ -97,9 +97,9 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
-                            
                               <a class="tag" href="/tags/#Scala" title="Scala">Scala</a>
+                            
+                              <a class="tag" href="/tags/#Spark" title="Spark">Spark</a>
                             
                         </div>
                         <h1>Spark 学习资源汇总</h1>
@@ -149,6 +149,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -159,15 +163,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -223,13 +223,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="导读">导读</span></h1>
+                <h1 id="导读">导读</h1>
 <ul>
 <li><a href="https://www.zhihu.com/question/27974418/answer/38965760" target="_blank" rel="noopener">大数据技术生态介绍</a></li>
 <li><a href="http://spark.apache.org/powered-by.html" target="_blank" rel="noopener">Powerd by Spark</a></li>
 <li><a href="https://www.zhihu.com/question/26568496/answer/41608400" target="_blank" rel="noopener">Hadoop VS Spark</a></li>
 </ul>
-<h1><span id="scala">Scala</span></h1>
+<h1 id="scala">Scala</h1>
 <ul>
 <li><a href="https://www.scala-lang.org/api/current/" target="_blank" rel="noopener">Scala API 文档</a></li>
 <li><a href="https://docs.scala-lang.org/tour/tour-of-scala.html" target="_blank" rel="noopener">Tour Of Scala</a>. Scala 官网的短教程</li>
@@ -238,7 +238,7 @@
 <li><a href="http://hongjiang.info/scala/" target="_blank" rel="noopener">Scala Blog</a></li>
 <li>Book: <a href="http://ccfit.nsu.ru/~den/Scala/programming_in_scala_2nd.pdf" target="_blank" rel="noopener">Programming in Scala</a></li>
 </ul>
-<h1><span id="rdd">RDD</span></h1>
+<h1 id="rdd">RDD</h1>
 <ul>
 <li><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html" target="_blank" rel="noopener">RDD programming Guide</a></li>
 </ul>
@@ -285,7 +285,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">导读</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Scala</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">RDD</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#导读"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">导读</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#scala"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Scala</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#rdd"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">RDD</span></a></li></ol>
         
         </div>
       </aside>
@@ -305,9 +305,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="Sparktags/#Spark" title="Spark">Spark</a>
-                        
                           <a class="tag" href="Scalatags/#Scala" title="Scala">Scala</a>
+                        
+                          <a class="tag" href="Sparktags/#Spark" title="Spark">Spark</a>
                         
                     </div>
                 </section>
@@ -534,7 +534,24 @@
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

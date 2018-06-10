@@ -149,6 +149,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -159,15 +163,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -235,9 +235,9 @@ img{
 <li>Miscellaneous</li>
 </ul>
 </blockquote>
-<h1><span id="design-pattern-4-value-to-key-conversion">Design Pattern 4: Value-to-key Conversion</span></h1>
+<h1 id="design-pattern-4-value-to-key-conversion">Design Pattern 4: Value-to-key Conversion</h1>
 <hr>
-<h2><span id="secondary-sort">Secondary Sort</span></h2>
+<h2 id="secondary-sort">Secondary Sort</h2>
 <p>如何将mapper output的(Key, list(value))中的value进行排序？<br>
 例如：<br>
 <img src="media/15236916599468.jpg" alt=""></p>
@@ -249,7 +249,7 @@ m作为key，hadoop会自动排序，但是问题是t也需要排序，如果不
 <p>“Value-to-key conversion” design pattern:<br>
 <strong>form composite intermediate key, (m1, t1)</strong>:The mapper emits (m1, t1) -&gt; r80521<br>
 All pairs associated with the same sensor are shuffled to the same reducer (use partitioner)</p>
-<h2><span id="how-to-implement-secondary-sort-in-mapreduce">How to Implement Secondary Sort in MapReduce?</span></h2>
+<h2 id="how-to-implement-secondary-sort-in-mapreduce">How to Implement Secondary Sort in MapReduce?</h2>
 <p>For example:<br>
 Consider the temperature data from a scientific experiment. Columns are year, month, day, and daily temperature, respectively:</p>
 <p><img src="media/15237801560526.jpg" alt=""><br>
@@ -311,7 +311,7 @@ K: year-month, V: temperature data.</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 4: Value-to-key Conversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Secondary Sort</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">How to Implement Secondary Sort in MapReduce?</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#design-pattern-4-value-to-key-conversion"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 4: Value-to-key Conversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#secondary-sort"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Secondary Sort</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-implement-secondary-sort-in-mapreduce"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">How to Implement Secondary Sort in MapReduce?</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -560,7 +560,24 @@ K: year-month, V: temperature data.</p>
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

@@ -149,6 +149,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -159,15 +163,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -236,9 +236,9 @@ img{
 <li>Data Cube介绍</li>
 </ul>
 </blockquote>
-<h1><span id="data-warehouses">Data Warehouses</span></h1>
+<h1 id="data-warehouses">Data Warehouses</h1>
 <hr>
-<h2><span id="why-data-warehouses">Why Data Warehouses?</span></h2>
+<h2 id="why-data-warehouses">Why Data Warehouses?</h2>
 <p>Data Analysis Problems:</p>
 <ul>
 <li>The same data found in many different systems</li>
@@ -248,31 +248,31 @@ img{
 <li>Data are “volatile”(易失的)</li>
 </ul>
 <p>So, the solution is data warehouses.</p>
-<h2><span id="what-are-data-warehouses">What are Data Warehouses?</span></h2>
+<h2 id="what-are-data-warehouses">What are Data Warehouses?</h2>
 <p>Defined in many different ways, but not rigorously.</p>
 <blockquote>
 <p>“A data warehouse is a <strong>subject-oriented</strong>, <strong>integrated</strong>, <strong>time-variant</strong>, and <strong>nonvolatile</strong> collection of data in support of management’s decision-making process.”   --W. H. Inmon</p>
 </blockquote>
-<h3><span id="subject-oriented面向主题的">Subject-oriented（面向主题的）</span></h3>
+<h3 id="subject-oriented面向主题的">Subject-oriented（面向主题的）</h3>
 <ul>
 <li>Organized around major subjects, such as customer,product, sales.</li>
 <li>Focusing on the modeling and analysis of data for decision makers, not on daily operations or transaction processing.</li>
 <li>Provide a simpleand conciseview around particular subject issues by excluding data that are not useful in the decision support process.</li>
 </ul>
 <p>数据仓库关注决策者的数据建模与分析，而不是构造组织结构的日常操作与事务处理。因此，数据仓库排除对于决策无用的数据，提供指定主题的简明视图。</p>
-<h3><span id="integrated集成的">Integrated（集成的）</span></h3>
+<h3 id="integrated集成的">Integrated（集成的）</h3>
 <ul>
 <li>Constructed by integrating multiple, heterogeneous data sources: relational databases, flat files, on-line transaction records</li>
 <li>Data cleaning and data integration techniques are applied.</li>
 </ul>
 <p>通常，构造数据仓库是将多个不同类型的数据源集成在一起，使用数据清理，数据集成技术，确保命名约定、编码结构、属性度量的一致性。</p>
-<h3><span id="time-variant时变的">Time-variant（时变的）</span></h3>
+<h3 id="time-variant时变的">Time-variant（时变的）</h3>
 <ul>
 <li>The time horizon for the data warehouse is significantly longer than that of operational systems. It provides information from a<br>
 historical perspective(e.g., past 5-10 years).</li>
 <li>Every key structure in the data warehouse contains an element of time, explicitly(显式) or implicitly（隐式）. But the key of operational data may or may not contain “time element”.</li>
 </ul>
-<h3><span id="non-volatile非易失的">Non-volatile（非易失的）</span></h3>
+<h3 id="non-volatile非易失的">Non-volatile（非易失的）</h3>
 <ul>
 <li>
 <p>A <strong>physically separate store</strong> of data transformed from the operational environment.</p>
@@ -287,14 +287,14 @@ historical perspective(e.g., past 5-10 years).</li>
 </ul>
 </li>
 </ul>
-<h2><span id="data-warehouse-architecture">Data Warehouse Architecture</span></h2>
+<h2 id="data-warehouse-architecture">Data Warehouse Architecture</h2>
 <p><img src="1.png" alt="Data Warehouse Architecture"></p>
 <ul>
 <li>外部数据通过Extract, Transform, Load, Refresh这些步骤，将数据进行clean , match, aggregate， 然后放入Data Warehouse。</li>
 <li>DW已经是所有subject的data一个统一体，我们还可以进行细分，将Data Warehouse分成若干个Data Marts，这些Marts都是针对于specific subject的。在DW中，那我们用OLAP分析处理这些数据呢</li>
 <li>经过OLAP的分析处理后，我们还可以用这些已经比较直观的数据再次进行analysis, query, data Mining 来获取更加深层次的隐藏的信息。</li>
 </ul>
-<h2><span id="why-separate-data-warehouse">Why Separate Data Warehouse?</span></h2>
+<h2 id="why-separate-data-warehouse">Why Separate Data Warehouse?</h2>
 <p>为什么不直接在这种数据库上进行联机分析处理，而是另外花费时间和资源去构造一个分离的数据仓库呢？</p>
 <ul>
 <li>
@@ -314,9 +314,9 @@ control, recovery</li>
 </ul>
 </li>
 </ul>
-<h1><span id="olap">OLAP</span></h1>
+<h1 id="olap">OLAP</h1>
 <hr>
-<h2><span id="what-is-olap">What is OLAP?</span></h2>
+<h2 id="what-is-olap">What is OLAP?</h2>
 <p>Data warehouses provide on-line analytical processing (OLAP) tools for the interactive analysis of multidimensional data of varied granularities（各种粒度的多维数据分析）, which facilitates effective data generalization and data mining. Many other data mining functions, such as association, classification, prediction, and clustering, can be integrated with OLAP operations to enhance interactive mining of knowledge at multiple levels of abstraction. Hence, the data warehouse has become an increasingly important platform for data analysis and on-line analytical processing and will provide an effective platform for data mining.</p>
 <ul>
 <li>OLTP (on-line transaction processing)
@@ -332,11 +332,11 @@ control, recovery</li>
 </ul>
 </li>
 </ul>
-<h2><span id="oltp-vs-olap">OLTP vs. OLAP</span></h2>
+<h2 id="oltp-vs-olap">OLTP vs. OLAP</h2>
 <p><img src="2.png" alt=""></p>
-<h1><span id="the-multidimensional-model">The Multidimensional Model</span></h1>
+<h1 id="the-multidimensional-model">The Multidimensional Model</h1>
 <hr>
-<h2><span id="what-is-the-multidimensional-model">What is the Multidimensional Model?</span></h2>
+<h2 id="what-is-the-multidimensional-model">What is the Multidimensional Model?</h2>
 <p>A data warehouse is based on a multidimensional data model which views data in the form of a <strong>data cube</strong>. A data cube allows data to be modeled and viewed in multiple dimensions. It is defined by <strong>dimensions</strong> and <strong>facts</strong>.</p>
 <p>Key concepts:</p>
 <ul>
@@ -354,19 +354,19 @@ control, recovery</li>
 <p>所以，我们可以得到以下汇总图：<br>
 <img src="5.png" alt=""><br>
 <img src="6.png" alt=""></p>
-<h2><span id="olap-operations">OLAP Operations</span></h2>
+<h2 id="olap-operations">OLAP Operations</h2>
 <p>All operations are closed under the multidimensional model, i.e., <strong>both input and output of an operation is a cube</strong>. So that they can be composed.</p>
-<h3><span id="roll-up">Roll-up</span></h3>
+<h3 id="roll-up">Roll-up</h3>
 <p>Roll-up: move up the hierarchy 聚集数据</p>
-<h3><span id="drill-down">Drill-down</span></h3>
+<h3 id="drill-down">Drill-down</h3>
 <p>Drill-down: move down the hierarchy 展开详细数据<br>
 <img src="7.png" alt=""></p>
-<h3><span id="slice-and-dice">Slice and Dice</span></h3>
+<h3 id="slice-and-dice">Slice and Dice</h3>
 <p>Slice: a selection on one dimension of the given cube, resulting in a subcube.<br>
 <img src="8.png" alt=""><br>
 Dice：defines a subcube by performing a selection on two or more dimensions.<br>
 <img src="9.png" alt=""></p>
-<h3><span id="pivoting">Pivoting</span></h3>
+<h3 id="pivoting">Pivoting</h3>
 <p>Pivoting: aggregate on selected dimensions, usually 2 dims (cross- tabulation)<br>
 <img src="10.png" alt=""></p>
 
@@ -412,7 +412,7 @@ Dice：defines a subcube by performing a selection on two or more dimensions.<br
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Data Warehouses</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Data Warehouses?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">What are Data Warehouses?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Subject-oriented（面向主题的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Integrated（集成的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">Time-variant（时变的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Non-volatile（非易失的）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Data Warehouse Architecture</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Why Separate Data Warehouse?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">OLAP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">What is OLAP?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">OLTP vs. OLAP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">The Multidimensional Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">What is the Multidimensional Model?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">OLAP Operations</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Roll-up</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Drill-down</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Slice and Dice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">Pivoting</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#data-warehouses"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Data Warehouses</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-data-warehouses"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why Data Warehouses?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#what-are-data-warehouses"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">What are Data Warehouses?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#subject-oriented面向主题的"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Subject-oriented（面向主题的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#integrated集成的"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Integrated（集成的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#time-variant时变的"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">Time-variant（时变的）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#non-volatile非易失的"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">Non-volatile（非易失的）</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#data-warehouse-architecture"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Data Warehouse Architecture</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-separate-data-warehouse"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Why Separate Data Warehouse?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#olap"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">OLAP</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#what-is-olap"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">What is OLAP?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#oltp-vs-olap"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">OLTP vs. OLAP</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#the-multidimensional-model"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">The Multidimensional Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#what-is-the-multidimensional-model"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">What is the Multidimensional Model?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#olap-operations"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">OLAP Operations</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#roll-up"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Roll-up</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#drill-down"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">Drill-down</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#slice-and-dice"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">Slice and Dice</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#pivoting"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">Pivoting</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -661,7 +661,24 @@ Dice：defines a subcube by performing a selection on two or more dimensions.<br
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

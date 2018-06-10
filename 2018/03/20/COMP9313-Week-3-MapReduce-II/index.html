@@ -149,6 +149,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -159,15 +163,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -255,9 +255,9 @@ Reducers</li>
 </ul>
 </li>
 </ul>
-<h1><span id="design-pattern-1-in-mapper-combining">Design Pattern 1: In-mapper Combining</span></h1>
+<h1 id="design-pattern-1-in-mapper-combining">Design Pattern 1: In-mapper Combining</h1>
 <hr>
-<h2><span id="importance-of-local-aggregation">Importance of Local Aggregation</span></h2>
+<h2 id="importance-of-local-aggregation">Importance of Local Aggregation</h2>
 <ul>
 <li>Ideal scaling characteristics:
 <ul>
@@ -278,10 +278,10 @@ Reducers</li>
 </ul>
 </li>
 </ul>
-<h2><span id="example-1-wordcount">Example 1: WordCount</span></h2>
+<h2 id="example-1-wordcount">Example 1: WordCount</h2>
 <p>WordCount Baseline:<br>
 <img src="1.png" alt=""></p>
-<h3><span id="version-1">Version 1</span></h3>
+<h3 id="version-1">Version 1</h3>
 <p><img src="2.png" alt=""></p>
 <p>这种方法，每执行一次map就new一个Hashmap，将一个document下所有term t都sum到 H{t} 中，然后EMIT(term t, count H{t})。</p>
 <p><strong>This mapper use more space to reduce time cost.</strong></p>
@@ -290,30 +290,30 @@ Reducers</li>
 Yes, one hashmap is applied to one document, and it need to aggregate.</li>
 </ul>
 <p>但是由于在combiner中aggregate效率还是不高，所以我们继续改进为in-mapper combining</p>
-<h3><span id="version-2-in-mapper-combining">Version 2: in-mapper combining</span></h3>
+<h3 id="version-2-in-mapper-combining">Version 2: in-mapper combining</h3>
 <p><img src="3.png" alt=""></p>
 <p>这种方法，先new一个总的Hashmap，通过不断的读入documents来不断的将term t的数量sum到这个总的Hashmap的H{t}中。</p>
-<h2><span id="example-2-computing-the-mean">Example 2: Computing the Mean</span></h2>
-<h3><span id="version-1">Version 1</span></h3>
+<h2 id="example-2-computing-the-mean">Example 2: Computing the Mean</h2>
+<h3 id="version-1">Version 1</h3>
 <p><img src="4.png" alt=""></p>
 <p><font color="#FF6347"><strong>! WRONG</strong></font></p>
 <ul>
 <li>Why can’t we use reducer as combiner?<br>
 Mean(1, 2, 3, 4, 5) != Mean(Mean(1, 2), Mean(3, 4, 5)) <strong>不满于结合律</strong></li>
 </ul>
-<h3><span id="version-2">Version 2</span></h3>
+<h3 id="version-2">Version 2</h3>
 <p><img src="6.png" alt=""></p>
 <p><font color="#FF6347"><strong>! WRONG</strong></font></p>
 <ul>
 <li>Why doesn’t this work?<br>
 Combiners must have the same input and output type, <strong>consistent with the input of reducers (output of mappers)</strong></li>
 </ul>
-<h3><span id="version-3">Version 3</span></h3>
+<h3 id="version-3">Version 3</h3>
 <p><img src="5.png" alt=""></p>
 <p>这个方法是对的，但是有combiner还是不那么高效，可以将其转化为更高效的in-mapper combining</p>
-<h3><span id="version-4-in-mapper-combining">Version 4 : in-mapper combining</span></h3>
+<h3 id="version-4-in-mapper-combining">Version 4 : in-mapper combining</h3>
 <p><img src="7.png" alt=""></p>
-<h2><span id="how-to-implement-in-mapper-combiner-in-mapreduce">How to Implement In-mapper Combiner in MapReduce?</span></h2>
+<h2 id="how-to-implement-in-mapper-combiner-in-mapreduce">How to Implement In-mapper Combiner in MapReduce?</h2>
 <ul>
 <li>Lifecycle: setup -&gt; map -&gt; cleanup
 <ul>
@@ -330,7 +330,7 @@ Combiners must have the same input and output type, <strong>consistent with the 
 </ul>
 </li>
 </ul>
-<h2><span id="summary">Summary</span></h2>
+<h2 id="summary">Summary</h2>
 <ul>
 <li>“In-mapper combining”
 <ul>
@@ -350,9 +350,9 @@ Combiners must have the same input and output type, <strong>consistent with the 
 </ul>
 </li>
 </ul>
-<h1><span id="design-pattern-2-pairs-vs-stripes">Design Pattern 2: Pairs vs Stripes</span></h1>
+<h1 id="design-pattern-2-pairs-vs-stripes">Design Pattern 2: Pairs vs Stripes</h1>
 <hr>
-<h2><span id="term-co-occurrence-matrix">Term co-occurrence matrix</span></h2>
+<h2 id="term-co-occurrence-matrix">Term co-occurrence matrix</h2>
 <ul>
 <li>Term co-occurrence matrix for a text collection
 <ul>
@@ -374,7 +374,7 @@ Combiners must have the same input and output type, <strong>consistent with the 
 </ul>
 </li>
 </ul>
-<h2><span id="pairs">Pairs</span></h2>
+<h2 id="pairs">Pairs</h2>
 <ul>
 <li>Each mapper takes a sentence
 <ul>
@@ -401,7 +401,7 @@ Combiners must have the same input and output type, <strong>consistent with the 
 </ul>
 </li>
 </ul>
-<h2><span id="stripes">Stripes</span></h2>
+<h2 id="stripes">Stripes</h2>
 <ul>
 <li>
 <p>Idea: group together pairs into an associative array<br>
@@ -438,7 +438,7 @@ generate: a → { b: 1, c: 2, d: 5, e: 3, f: 2 } (a, e) → 3</p>
 </ul>
 </li>
 </ul>
-<h2><span id="pairs-vs-stripes">Pairs vs. Stripes</span></h2>
+<h2 id="pairs-vs-stripes">Pairs vs. Stripes</h2>
 <p><img src="11.png" alt=""></p>
 <ul>
 <li>
@@ -467,7 +467,7 @@ in a variety of applications</p>
 </ul>
 </li>
 </ul>
-<h2><span id="how-to-implement-pairs-and-stripes-in-mapreduce">How to Implement “Pairs” and “Stripes” in MapReduce?</span></h2>
+<h2 id="how-to-implement-pairs-and-stripes-in-mapreduce">How to Implement “Pairs” and “Stripes” in MapReduce?</h2>
 <ul>
 <li>Process of turning structured objects into a byte stream for <strong>transmission over a network</strong> or for <strong>writing to persistent storage</strong></li>
 <li>Deserialization is the reverse process of serialization</li>
@@ -480,7 +480,7 @@ in a variety of applications</p>
 </ul>
 </li>
 </ul>
-<h3><span id="writable-interface">Writable Interface</span></h3>
+<h3 id="writable-interface">Writable Interface</h3>
 <p>Writable is a serializable object which implements a simple, efficient, serialization protocol</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Writable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(DataOutput out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">readFields</span><span class="params">(DataInput in)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
@@ -492,7 +492,7 @@ in a variety of applications</p>
 </ul>
 </li>
 </ul>
-<h3><span id="stripes-implementation">Stripes Implementation</span></h3>
+<h3 id="stripes-implementation">Stripes Implementation</h3>
 <ul>
 <li>A stripe key-value pair a → {b:1,c:2,d:5,e:3,f:2}:
 <ul>
@@ -515,7 +515,7 @@ in a variety of applications</p>
 </ul>
 </li>
 </ul>
-<h3><span id="pairs-implementation">Pairs Implementation</span></h3>
+<h3 id="pairs-implementation">Pairs Implementation</h3>
 <ul>
 <li>Key-value pair (a, b) → count
 <ul>
@@ -530,9 +530,9 @@ in a variety of applications</p>
 </li>
 <li>You must customize your own key, which must implement interface WritableComparable!</li>
 </ul>
-<h1><span id="design-pattern-3-order-inversion">Design Pattern 3: Order Inversion</span></h1>
+<h1 id="design-pattern-3-order-inversion">Design Pattern 3: Order Inversion</h1>
 <hr>
-<h2><span id="computing-relative-frequencies">Computing Relative Frequencies</span></h2>
+<h2 id="computing-relative-frequencies">Computing Relative Frequencies</h2>
 <ul>
 <li>“Relative” Co-occurrence matrix construction
 <ul>
@@ -554,19 +554,19 @@ in a variety of applications</p>
 <li>N(·,·) is the number of times a co-occurring word pair is observed</li>
 <li>The denominator is called the marginal</li>
 </ul>
-<h2><span id="fwjwi-stripes">f(wj|wi): “Stripes”</span></h2>
+<h2 id="fwjwi-stripes">f(wj|wi): “Stripes”</h2>
 <p>In the reducer, the counts of all words that co-occur with the conditioning variable (wi) are available in the associative array. Hence, the sum of all those counts gives the marginal.</p>
 <p>a→ {b1:3,b2 :12,b3 :7,b4 :1,…}<br>
 f(b1|a) = 3 / (3 + 12 + 7 + 1 + …)</p>
 <p><strong>Problems:</strong><br>
 Memory:所有的stripes的计算在内存中进行</p>
-<h2><span id="fwjwi-pairs">f(wj|wi): “Pairs”</span></h2>
+<h2 id="fwjwi-pairs">f(wj|wi): “Pairs”</h2>
 <ul>
 <li>The reducer receives the pair (wi, wj) and the count<br>
 <strong>Problems:</strong><br>
 It is not possible to compute f(wj|wi) ,cause the marginal(边缘) cannot be computed until you got all counts</li>
 </ul>
-<h3><span id="solution-1">Solution 1</span></h3>
+<h3 id="solution-1">Solution 1</h3>
 <p>Fortunately, as for the mapper, also the reducer can preserve state across multiple keys</p>
 <ul>
 <li>We can buffer in memory all the words that co-occur with wi and their counts</li>
@@ -585,7 +585,7 @@ So we must <strong>define an appropriate partitioner to make sure all pairs with
 这里还有个问题就是，reducer1可能索取了(wi, wj)，reducer2可能索取了(wi, wq)，这就会产生词频统计不正确的现象（因为分母错误了），所以我们需要自己设定**partitioner**来使一个reducer来请求(wi, * )的单词对。这里的partitioner是基于采用hash value的方式，因为hash值是具有身份鉴别功能，所以只需要(wi, * )中的wi的hash value相同，就会被同一个reducer fetch。
 -->
 <p><strong>Still suffer from the memory problem!</strong></p>
-<h3><span id="solution-2-order-inversion">Solution 2: <strong>Order Inversion</strong></span></h3>
+<h3 id="solution-2-order-inversion">Solution 2: <strong>Order Inversion</strong></h3>
 <p>我们先将计算好的marginal先传给reducer（pair(wi, *), all_count），再将各个单词对及其出现次数(pair(wi, wu), count)传输给reducer进行词频计算（即 frequency_of_(wi, wu) = count/all_count）。</p>
 <ul>
 <li>The mapper:
@@ -622,7 +622,7 @@ stored</strong></li>
 </ul>
 </li>
 </ul>
-<h2><span id="how-to-implement-order-inversion-in-mapreduce">How to Implement Order Inversion in MapReduce?</span></h2>
+<h2 id="how-to-implement-order-inversion-in-mapreduce">How to Implement Order Inversion in MapReduce?</h2>
 <p>Implement a Custom partitioner</p>
 <ul>
 <li>You need to implement a “pair” class first as the key data type</li>
@@ -686,7 +686,7 @@ stored</strong></li>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 1: In-mapper Combining</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Importance of Local Aggregation</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Example 1: WordCount</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Version 2: in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Example 2: Computing the Mean</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">Version 2</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">Version 3</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">Version 4 : in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">How to Implement In-mapper Combiner in MapReduce?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Summary</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Design Pattern 2: Pairs vs Stripes</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Term co-occurrence matrix</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Pairs</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Pairs vs. Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">How to Implement “Pairs” and “Stripes” in MapReduce?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">Writable Interface</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">Stripes Implementation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.5.3.</span> <span class="toc-nav-text">Pairs Implementation</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Design Pattern 3: Order Inversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Computing Relative Frequencies</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">f(wj|wi): “Stripes”</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">f(wj|wi): “Pairs”</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.1.</span> <span class="toc-nav-text">Solution 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.2.</span> <span class="toc-nav-text">Solution 2: Order Inversion</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">How to Implement Order Inversion in MapReduce?</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#design-pattern-1-in-mapper-combining"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Design Pattern 1: In-mapper Combining</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#importance-of-local-aggregation"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Importance of Local Aggregation</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#example-1-wordcount"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Example 1: WordCount</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-1"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-2-in-mapper-combining"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">Version 2: in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#example-2-computing-the-mean"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Example 2: Computing the Mean</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-1"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">Version 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-2"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">Version 2</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-3"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">Version 3</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#version-4-in-mapper-combining"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">Version 4 : in-mapper combining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-implement-in-mapper-combiner-in-mapreduce"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">How to Implement In-mapper Combiner in MapReduce?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#summary"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Summary</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#design-pattern-2-pairs-vs-stripes"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Design Pattern 2: Pairs vs Stripes</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#term-co-occurrence-matrix"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Term co-occurrence matrix</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pairs"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Pairs</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#stripes"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pairs-vs-stripes"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Pairs vs. Stripes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-implement-pairs-and-stripes-in-mapreduce"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">How to Implement “Pairs” and “Stripes” in MapReduce?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#writable-interface"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">Writable Interface</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#stripes-implementation"><span class="toc-nav-number">2.5.2.</span> <span class="toc-nav-text">Stripes Implementation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#pairs-implementation"><span class="toc-nav-number">2.5.3.</span> <span class="toc-nav-text">Pairs Implementation</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#design-pattern-3-order-inversion"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Design Pattern 3: Order Inversion</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#computing-relative-frequencies"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Computing Relative Frequencies</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fwjwi-stripes"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">f(wj|wi): “Stripes”</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#fwjwi-pairs"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">f(wj|wi): “Pairs”</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#solution-1"><span class="toc-nav-number">3.3.1.</span> <span class="toc-nav-text">Solution 1</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#solution-2-order-inversion"><span class="toc-nav-number">3.3.2.</span> <span class="toc-nav-text">Solution 2: Order Inversion</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-implement-order-inversion-in-mapreduce"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">How to Implement Order Inversion in MapReduce?</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -935,7 +935,24 @@ stored</strong></li>
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

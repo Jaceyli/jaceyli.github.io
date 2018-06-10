@@ -151,6 +151,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -161,15 +165,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -234,11 +234,11 @@
 <li>Decision tree pruning</li>
 </ul>
 </blockquote>
-<h1><span id="a-decision-tree-example">A Decision Tree Example</span></h1>
+<h1 id="a-decision-tree-example">A Decision Tree Example</h1>
 <hr>
 <p><img src="1.png" alt=""></p>
 <p><img src="2.png" alt=""></p>
-<h2><span id="extracting-classification-rules-from-trees">Extracting Classification Rules from Trees</span></h2>
+<h2 id="extracting-classification-rules-from-trees">Extracting Classification Rules from Trees</h2>
 <ul>
 <li>represent the knowledge in the form of <strong>IF-THEN</strong> rules</li>
 <li>One rule is created for each path from the root to leaf
@@ -250,7 +250,7 @@ E.g.,<br>
 </ul>
 </li>
 </ul>
-<h1><span id="algorithm-for-decision-tree-induction">Algorithm for Decision Tree Induction</span></h1>
+<h1 id="algorithm-for-decision-tree-induction">Algorithm for Decision Tree Induction</h1>
 <hr>
 <ul>
 <li>
@@ -269,8 +269,8 @@ E.g.,<br>
 </ul>
 </li>
 </ul>
-<h2><span id="attribute-selection-measure">Attribute Selection Measure</span></h2>
-<h3><span id="information-gainid3-c45">Information Gain(ID3 / C4.5):</span></h3>
+<h2 id="attribute-selection-measure">Attribute Selection Measure</h2>
+<h3 id="information-gainid3-c45">Information Gain(ID3 / C4.5):</h3>
 <ul>
 <li>select the attribute with the <strong>highest information gain</strong><br>
 <img src="3.png" alt=""><br>
@@ -294,7 +294,7 @@ So, we choose age to spilt is most reasonable.</li>
 </ul>
 </li>
 </ul>
-<h3><span id="gini-indexcart">Gini index(CART)</span></h3>
+<h3 id="gini-indexcart">Gini index(CART)</h3>
 <ul>
 <li>CART stand for Classification And Regression Tree</li>
 <li>Gini index (CART, IBM IntelligentMiner)
@@ -314,16 +314,16 @@ where pj is the relative frequency of class j in T.<br>
 <img src="7.png" alt=""></li>
 <li>The attribute provides the smallest ginisplit(T) is chosen to split the node (<strong>need to enumerate all possible splitting points for each attribute</strong>).</li>
 </ul>
-<h4><span id="case-i-numerical-attributes">Case I: Numerical Attributes</span></h4>
+<h4 id="case-i-numerical-attributes">Case I: Numerical Attributes</h4>
 <p><img src="8.png" alt=""></p>
-<h4><span id="case-ii-categorical-attributes">Case II: Categorical Attributes</span></h4>
+<h4 id="case-ii-categorical-attributes">Case II: Categorical Attributes</h4>
 <p><img src="9.png" alt=""></p>
-<h3><span id="id3-vs-cart">ID3 vs. CART</span></h3>
+<h3 id="id3-vs-cart">ID3 vs. CART</h3>
 <ul>
 <li>ID3是多叉树</li>
 <li>CART是二叉树，且每个非叶子节点都有两个孩子</li>
 </ul>
-<h1><span id="overfitting">Overfitting</span></h1>
+<h1 id="overfitting">Overfitting</h1>
 <hr>
 <ul>
 <li>Overfitting: An induced tree may overfit the training data
@@ -338,7 +338,7 @@ where pj is the relative frequency of class j in T.<br>
 </ul>
 <p>Overfitting examples in Regression &amp; Classification:<br>
 <img src="11.png" alt=""></p>
-<h2><span id="avoid-overfitting">Avoid Overfitting</span></h2>
+<h2 id="avoid-overfitting">Avoid Overfitting</h2>
 <ul>
 <li>Prepruning: Halt tree construction early – do not split a node if this would result in the goodness measure falling below a threshold
 <ul>
@@ -351,7 +351,7 @@ where pj is the relative frequency of class j in T.<br>
 </ul>
 </li>
 </ul>
-<h3><span id="pruning-methods">Pruning Methods</span></h3>
+<h3 id="pruning-methods">Pruning Methods</h3>
 <ul>
 <li>Use a separate <strong>validation set</strong></li>
 <li>Estimation of generalization/test errors</li>
@@ -366,7 +366,7 @@ where pj is the relative frequency of class j in T.<br>
 </ul>
 </li>
 </ul>
-<h4><span id="pessimistic-post-pruning">Pessimistic Post-pruning</span></h4>
+<h4 id="pessimistic-post-pruning">Pessimistic Post-pruning</h4>
 <ul>
 <li>Observed on the training data
 <ul>
@@ -398,7 +398,7 @@ So, we pruned the subtree at A, then left A as leaf node and marked as “Yes”
 </ul>
 </li>
 </ul>
-<h1><span id="enhancements-to-basic-decision-tree-induction">Enhancements to basic decision tree induction</span></h1>
+<h1 id="enhancements-to-basic-decision-tree-induction">Enhancements to basic decision tree induction</h1>
 <ul>
 <li>Allow for continuous-valued attributes
 <ul>
@@ -419,7 +419,7 @@ sparsely represented</li>
 </ul>
 </li>
 </ul>
-<h1><span id="classification-in-large-databases">Classification in Large Databases</span></h1>
+<h1 id="classification-in-large-databases">Classification in Large Databases</h1>
 <ul>
 <li>Classification—a classical problem extensively studied by statisticians and machine learning researchers</li>
 <li>Scalability: Classifying data sets with millions of examples and hundreds of attributes with reasonable speed</li>
@@ -476,7 +476,7 @@ methods)</li>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">A Decision Tree Example</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Extracting Classification Rules from Trees</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Algorithm for Decision Tree Induction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Attribute Selection Measure</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Information Gain(ID3 / C4.5):</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Gini index(CART)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.1.</span> <span class="toc-nav-text">Case I: Numerical Attributes</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.2.2.</span> <span class="toc-nav-text">Case II: Categorical Attributes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">ID3 vs. CART</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Avoid Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">Pruning Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.1.1.</span> <span class="toc-nav-text">Pessimistic Post-pruning</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Enhancements to basic decision tree induction</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Classification in Large Databases</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#a-decision-tree-example"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">A Decision Tree Example</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#extracting-classification-rules-from-trees"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Extracting Classification Rules from Trees</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#algorithm-for-decision-tree-induction"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Algorithm for Decision Tree Induction</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#attribute-selection-measure"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Attribute Selection Measure</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#information-gainid3-c45"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Information Gain(ID3 / C4.5):</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gini-indexcart"><span class="toc-nav-number">2.1.2.</span> <span class="toc-nav-text">Gini index(CART)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#case-i-numerical-attributes"><span class="toc-nav-number">2.1.2.1.</span> <span class="toc-nav-text">Case I: Numerical Attributes</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#case-ii-categorical-attributes"><span class="toc-nav-number">2.1.2.2.</span> <span class="toc-nav-text">Case II: Categorical Attributes</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#id3-vs-cart"><span class="toc-nav-number">2.1.3.</span> <span class="toc-nav-text">ID3 vs. CART</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#overfitting"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#avoid-overfitting"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Avoid Overfitting</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#pruning-methods"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">Pruning Methods</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#pessimistic-post-pruning"><span class="toc-nav-number">3.1.1.1.</span> <span class="toc-nav-text">Pessimistic Post-pruning</span></a></li></ol></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#enhancements-to-basic-decision-tree-induction"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Enhancements to basic decision tree induction</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#classification-in-large-databases"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">Classification in Large Databases</span></a></li></ol>
         
         </div>
       </aside>
@@ -727,7 +727,24 @@ methods)</li>
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>

@@ -97,9 +97,9 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
-                            
                               <a class="tag" href="/tags/#Github" title="Github">Github</a>
+                            
+                              <a class="tag" href="/tags/#Hexo" title="Hexo">Hexo</a>
                             
                         </div>
                         <h1>我的博客是如何搭建的——github page + hexo + 绑定域名</h1>
@@ -149,6 +149,10 @@
                     
 
                         
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
                     
 
                         
@@ -159,15 +163,11 @@
                     
 
                         
-                        <li>
-                            <a href="/tags/">Tags</a>
-                        </li>
-                        
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -226,19 +226,19 @@
                 <blockquote>
 <p>ps：mac系统，需要安装node.js和git</p>
 </blockquote>
-<h1><span id="github-pages">Github Pages</span></h1>
+<h1 id="github-pages">Github Pages</h1>
 <hr>
 <p>首先，要有一个github账户，创建一个仓库，命名为:username.github.io.<br>
 注意<strong>username必须和github用户名一致啊！</strong>(之前创建的不是一样的，就一直404…)<br>
 详细步骤可以看<a href="https://pages.github.com" target="_blank" rel="noopener">官方网站</a></p>
-<h1><span id="hexo">Hexo</span></h1>
+<h1 id="hexo">Hexo</h1>
 <hr>
 <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章</p>
-<h2><span id="安装">安装</span></h2>
+<h2 id="安装">安装</h2>
 <p><strong>参考官网教程：</strong><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo官网</a>，<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo中文教程</a></p>
 <p>已经装好node.js和git的前提下，直接用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure>
-<h2><span id="建站">建站</span></h2>
+<h2 id="建站">建站</h2>
 <p>创建hexo文件夹，进入路径后初始化：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init</span></span><br></pre></td></tr></table></figure>
 <p>安装依赖包：</p>
@@ -249,7 +249,7 @@
 <p>接下来配置与Github pages进行关联，打开_config.yml文件，在最下面添加如下配置信息：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">deploy:</span></span><br><span class="line"><span class="string">type:</span> git</span><br><span class="line"><span class="string">repo:</span> <span class="string">https:</span><span class="comment">//github.com/username/username.github.io.git</span></span><br><span class="line"><span class="string">branch:</span> master</span><br></pre></td></tr></table></figure>
 <p>repo字段的值替换成你的github pages提交代码的git地址。</p>
-<h2><span id="部署">部署</span></h2>
+<h2 id="部署">部署</h2>
 <p>首先需要明白所谓部署到github的原理。</p>
 <ul>
 <li>
@@ -276,10 +276,10 @@
 <p>$ hexo new “postName” 新建文章</p>
 <p>$ hexo clean 清除缓存，**强烈建议每次执行命令前先清理缓存，每次部署前先删除</p>
 </blockquote>
-<h2><span id="主题">主题</span></h2>
+<h2 id="主题">主题</h2>
 <p>恭喜你已经有了自己的Blog了，但是很丑，对不对？… 所以需要换一个主题，如果没有合适的选择，可以看看：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">知乎：有哪些好看的 Hexo 主题？</a>。当然<a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">Hexo theme官网</a>上也有很多不错的选择。</p>
 <p>每个不同的主题会需要不同的配置，主题配置文件在主题目录下的_config.yml。</p>
-<h1><span id="域名绑定">域名绑定</span></h1>
+<h1 id="域名绑定">域名绑定</h1>
 <hr>
 <ul>
 <li>购买域名。我是在namecheap买的，比较便宜。</li>
@@ -288,7 +288,7 @@
 <li>下一步注册DNSpod，然后添加域名，添加记录即可。添加域名填写你的域名即可，不用添加http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github pages的地址）</li>
 </ul>
 <p>那么现在把你本地的Hexo生成一下在提交到Github pages上吧（生成和提交简写命令hexo d -g），然后打开你的浏览器输入你购买的域名尝试吧。（刚配置的dns可以能要一段时间才能生效）</p>
-<h1><span id="写在最后">写在最后</span></h1>
+<h1 id="写在最后">写在最后</h1>
 <hr>
 <p>搭建博客还是很简单的，重点是要坚持写啊~</p>
 
@@ -330,7 +330,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Github Pages</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Hexo</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">建站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">部署</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">主题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">域名绑定</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">写在最后</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#github-pages"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Github Pages</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#hexo"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Hexo</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#安装"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#建站"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">建站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#部署"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">部署</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#主题"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">主题</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#域名绑定"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">域名绑定</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#写在最后"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">写在最后</span></a></li></ol>
         
         </div>
       </aside>
@@ -350,9 +350,9 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="Hexotags/#Hexo" title="Hexo">Hexo</a>
-                        
                           <a class="tag" href="Githubtags/#Github" title="Github">Github</a>
+                        
+                          <a class="tag" href="Hexotags/#Hexo" title="Hexo">Hexo</a>
                         
                     </div>
                 </section>
@@ -579,7 +579,24 @@
 
 	<a id="rocket" href="#top" class=""></a>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
-    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 </body>
