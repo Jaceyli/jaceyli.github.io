@@ -160,14 +160,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -223,7 +223,12 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
+                <style>
+img{
+    max-width: 80%!important
+}
+</style>
+<blockquote>
 <p>本周主要内容：</p>
 <ul>
 <li>Logical Model</li>
@@ -351,7 +356,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 <p><strong>Multidimensional OLAP (MOLAP) servers</strong>: These servers support multidimensional views of data through array-based multidimensional storage engines. They map multidimensional views directly to data cube array structures. The advantage of using a data136 Chapter 3 Data Warehouse and OLAP Technology: An Overview cube is that it allows fast indexing to precomputed summarized data. Notice that with multidimensional data stores, the storage utilization may be low if the data set is sparse. In such cases, sparse matrix compression techniques should be explored (Chapter 4). Many MOLAP servers adopt a two-level storage representation to handle dense and sparse data sets: denser subcubes are identified and stored as array structures, whereas sparse subcubes employ compression technology for efficient storage utilization.</p>
 <p><strong>Hybrid OLAP (HOLAP) servers</strong>: The hybrid OLAP approach combines ROLAP and MOLAP technology, benefiting from the greater scalability of ROLAP and the faster computation of MOLAP. For example, a HOLAP server may allow large volumes of detail data to be stored in a relational database, while aggregations are kept in a separate MOLAP store. The Microsoft SQL Server 2000 supports a hybrid OLAP server.</p>
 <p>HOLAP example:<br>
-<img src="media/15226558213076.jpg" alt=""></p>
+<img src="14.jpg" alt=""></p>
 <p>We use the relational technology to store the base cuboid. The base cuboid is the fact table of star schema. While the aggregations below the base cuboid we use the multidimensional technology.</p>
 <h1><span id="query-processing-techniques">Query Processing Techniques</span></h1>
 <h2><span id="selection-on-low-cardinality-attributes-bitmap-index">Selection on low-cardinality attributes: Bitmap Index</span></h2>
@@ -361,7 +366,7 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
 <li>Each distinct values, v, is associated with a n-bit vector (n = #rows)</li>
 <li>Multiple BIs can be efficiently combined to enable optimised scan of the table</li>
 </ul>
-<p><img src="media/15226569165731.jpg" alt=""></p>
+<p><img src="15.jpg" alt=""></p>
 
                 
 
@@ -425,9 +430,9 @@ therefore called <strong>galaxy schema</strong> or fact constellation.</p>
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                          <a class="tag" href="COMP9318tags/#COMP9318" title="COMP9318">COMP9318</a>
                         
-                          <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                          <a class="tag" href="Data Miningtags/#Data Mining" title="Data Mining">Data Mining</a>
                         
                     </div>
                 </section>
