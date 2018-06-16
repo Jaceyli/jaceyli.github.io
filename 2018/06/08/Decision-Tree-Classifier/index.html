@@ -151,6 +151,9 @@
                     
 
                         
+                    
+
+                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -161,9 +164,6 @@
                         <li>
                             <a href="/archive/">Archives</a>
                         </li>
-                        
-                    
-
                         
                     
 
@@ -238,6 +238,7 @@
 <hr>
 <p><img src="1.png" alt=""></p>
 <p><img src="2.png" alt=""></p>
+<p>下面介绍如何选择attribute to split</p>
 <h2 id="extracting-classification-rules-from-trees">Extracting Classification Rules from Trees</h2>
 <ul>
 <li>represent the knowledge in the form of <strong>IF-THEN</strong> rules</li>
@@ -253,15 +254,14 @@ E.g.,<br>
 <h1 id="algorithm-for-decision-tree-induction">Algorithm for Decision Tree Induction</h1>
 <hr>
 <ul>
-<li>
-<p>Basic algorithm</p>
+<li>Basic algorithm
 <ul>
 <li>Input: Attributes are categorical (if continuous-valued, they are discretized in advance)</li>
-<li>Overview: Tree is constructed in a <strong>top-down recursive divide-and-conquer manner</strong></li>
+<li>Overview: Tree is constructed in a <strong>top-down recursive divide-and-conquer manner</strong><br>
+<strong>使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果</strong></li>
 </ul>
 </li>
-<li>
-<p>Three conditions for stopping partitioning (i.e.,boundary conditions)</p>
+<li>Three conditions for stopping partitioning (i.e.,boundary conditions)
 <ul>
 <li>There are no samples left, OR</li>
 <li>All samples for a given node belong to the same class, OR</li>
@@ -272,11 +272,14 @@ E.g.,<br>
 <h2 id="attribute-selection-measure">Attribute Selection Measure</h2>
 <h3 id="information-gainid3-c45">Information Gain(ID3 / C4.5):</h3>
 <ul>
-<li>select the attribute with the <strong>highest information gain</strong><br>
+<li>
+<p>select the attribute with the <strong>highest information gain</strong><br>
 <img src="3.png" alt=""><br>
 For the example above, we use the information gain as the criteria, and splitting the age into 3 partitions because it is always better than 2 partitions, as 3 partitions got smaller entropy. So, <strong>we should always spilt partitions as many as we can.</strong><br>
-<br></li>
-<li>Information Gain Computation
+<br></p>
+</li>
+<li>
+<p>Information Gain Computation</p>
 <ul>
 <li>why we choose age to split not other attributes?<br>
 Let’s compute the information gain for all attribute:<br>
@@ -292,6 +295,10 @@ Gain(student) = 0.151<br>
 Gain(credit _ rating) = 0.048<br>
 So, we choose age to spilt is most reasonable.</li>
 </ul>
+<p>先根据age分，得到三个分支，然后根据每个分支的information gain再选择attribute split。</p>
+<p><strong>注意:</strong><br>
+在一棵决策树上也许会存在一部分节点，它们具有多种可能的结果值，但是又无法再进一步拆分。例如:把第一行数据buys_computer改为yes，在age&lt;30, student = 'No’的情况下就是多种结果。<br>
+<img src="13.png" alt=""></p>
 </li>
 </ul>
 <h3 id="gini-indexcart">Gini index(CART)</h3>

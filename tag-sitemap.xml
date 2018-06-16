@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/Github/</loc>
-        <lastmod>2018-03-29T07:30:39.078Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Hexo/</loc>
         <lastmod>2018-03-29T07:30:39.078Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -37,8 +30,8 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/SVM/</loc>
-        <lastmod>2018-05-21T07:49:00.640Z</lastmod>
+        <loc>http://jingxuan.li/tags/Github/</loc>
+        <lastmod>2018-03-29T07:30:39.078Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -79,22 +72,43 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/tags/Classification/</loc>
+        <lastmod>2018-06-15T07:59:05.260Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/SVM/</loc>
+        <lastmod>2018-06-15T08:10:01.891Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Clustering/</loc>
+        <lastmod>2018-06-16T09:46:27.683Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-06-10T10:53:18.926Z</lastmod>
+        <lastmod>2018-06-16T10:17:10.381Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Data-Mining/</loc>
-        <lastmod>2018-06-10T10:53:18.926Z</lastmod>
+        <lastmod>2018-06-16T10:17:10.381Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/Classification/</loc>
-        <lastmod>2018-06-10T10:53:18.926Z</lastmod>
+        <loc>http://jingxuan.li/tags/Association-Rule/</loc>
+        <lastmod>2018-06-16T10:17:10.381Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

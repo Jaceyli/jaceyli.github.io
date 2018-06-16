@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Clustering - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jingxuan.li/2018/05/05/COMP9318-Clustering/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP9318" title="COMP9318">COMP9318</a>
+                            
+                              <a class="tag" href="/tags/#Data Mining" title="Data Mining">Data Mining</a>
+                            
+                              <a class="tag" href="/tags/#Clustering" title="Clustering">Clustering</a>
+                            
+                        </div>
+                        <h1>Clustering</h1>
+                        <h2 class="subheading">COMP9318 Week 9-10</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-05-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <style>
+img{
+max-width:80%!important 
+}
+</style>
+<blockquote>
+<p>本周主要内容：</p>
+<ul>
+<li>What is Cluster Analysis?</li>
+<li>Types of Data in Cluster Analysis</li>
+<li>A Categorization of Major Clustering Methods
+<ul>
+<li>Partitioning MethodsSpectral clustering</li>
+<li>Hierarchical Methods</li>
+<li>Spectral clustering</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="what-is-cluster-analysis">What is Cluster Analysis?</h1>
+<hr>
+<ul>
+<li>
+<p>Cluster: a collection of data objects</p>
+<ul>
+<li>Similar to one another within the same cluster</li>
+<li>Dissimilar to the objects in other clusters</li>
+</ul>
+</li>
+<li>
+<p>Cluster analysis</p>
+<ul>
+<li>Grouping a set of data objects into clusters</li>
+</ul>
+</li>
+<li>
+<p>Clustering belongs to <strong>unsupervised classification</strong>: no predefined classes</p>
+</li>
+<li>
+<p>Typical applications</p>
+<ul>
+<li>As a <strong>stand-alone tool</strong> to get insight into data<br>
+distribution</li>
+<li>As a <strong>preprocessing step</strong> for other algorithms. E.g., K-means algorithm is widely used for preprocessing</li>
+</ul>
+</li>
+</ul>
+<h2 id="general-applications-of-clustering">General Applications of Clustering:</h2>
+<ul>
+<li>Pattern Recognition n Spatial Data Analysis
+<ul>
+<li>create thematic maps in GIS by clustering feature spaces</li>
+<li>detect spatial clusters and explain them in spatial data mining</li>
+</ul>
+</li>
+<li>Image Processing</li>
+<li>Economic Science (especially market research)</li>
+<li>WWW
+<ul>
+<li>Document classification</li>
+<li>Cluster Weblog data to discover groups of similar<br>
+access patterns</li>
+</ul>
+</li>
+</ul>
+<h2 id="requirements-of-clustering-in-data-mining">Requirements of Clustering in Data Mining</h2>
+<ul>
+<li><strong>Scalability</strong><br>
+对于大数据来说这非常重要，例如，k-means虽然有很多缺点，但是它很常用就是因为它快，并且running time可控，随时停下都会有结果。</li>
+<li>Ability to deal with different types of attributes</li>
+<li>Discovery of clusters with arbitrary shape</li>
+<li>Minimal requirements for domain knowledge to determine input parameters</li>
+<li>Able to deal with noise and outliers</li>
+<li>Insensitive to order of input records</li>
+<li>High dimensionality</li>
+<li>Incorporation of user-specified constraints n Interpretability and usability</li>
+</ul>
+<h1 id="preliminaries">Preliminaries</h1>
+<hr>
+<h2 id="typical-inputs">Typical Inputs</h2>
+<ul>
+<li>Data matrix: N objects, each represented by a m- dimensional feature vector<br>
+<img src="1.png" alt=""></li>
+<li>Dissimilarity(针对于distance) matrix or similarity matrix
+<ul>
+<li>A square matrix giving distances between all pairs of objects.</li>
+<li>If similarity functions are used -&gt; similarity matrix<br>
+<img src="2.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="types-of-data">Types of data</h2>
+<h3 id="interval-valued-variables">Interval-valued variables</h3>
+<ul>
+<li>
+<p>Standardize data<br>
+<img src="3.png" alt=""></p>
+</li>
+<li>
+<p>Using mean absolute deviation is more <strong>robust</strong> than using standard deviation</p>
+</li>
+<li>
+<p>Similarity and Dissimilarity Between Objects:</p>
+<ul>
+<li>Distances are normally used to measure the similarity or dissimilarity between two data objects</li>
+<li><strong>Minkowski distance, or the Lp norm of difference vector</strong>(a popular choice)<br>
+<img src="4.png" alt="">
+<ul>
+<li>Special cases:
+<ul>
+<li>if p = 1, d is the Manhattan distance</li>
+<li>if p = 2, d is the Euclidean distance</li>
+<li>if p = ∞, <img src="5.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Mahalanobis distance</li>
+<li>Jaccard(交集大小/并集大小), Dice, cosine similarity, Pearson correlation coefficient</li>
+<li>Metric distance</li>
+</ul>
+</li>
+<li>
+<p>common to all distance functions:</p>
+<ul>
+<li>d(i,j) ≥ 0 -&gt; positiveness</li>
+<li>d(i,i) = 0 -&gt; reflexivity 到自己的距离为0</li>
+<li>d(i,j) = d(j,i) -&gt; symmetry 对称</li>
+<li>d(i,j) ≤ d(i,k) + d(k,j)  -&gt; triangular inequality三角形法则: 两边之和大于第三边</li>
+</ul>
+</li>
+</ul>
+<h3 id="binary-variables">Binary Variables</h3>
+<blockquote>
+<ul>
+<li>Symmetric: if both of its state are <strong>equally variable</strong>, that is, there is no preference on which outcome should be coded as 1.</li>
+<li>Asymmetric: if the outcome of its state are <strong>not equally important</strong>, such as positive or negative outcomes of a disease test.</li>
+</ul>
+</blockquote>
+<ul>
+<li>A contingency table for binary data<br>
+<img src="6.png" alt=""><br>
+feature vector table:<br>
+<img src="7.png" alt=""></li>
+<li>Simple matching coefficient (invariant, if the binary variable is symmetric):</li>
+</ul>
+<p><img src="8.png" alt=""><br>
+E.g., in this case = 4 / 8</p>
+<ul>
+<li>Jaccard coefficient (noninvariant if the binary variable is<br>
+asymmetric):<br>
+<img src="9.png" alt=""><br>
+E.g., in this case = 4 / 5</li>
+<li>feature vector &lt;=&gt; set:<br>
+E.g. ABCDEFGH分别对应上面的feature<br>
+i : {B,D,G}, j : {E,G,H}<br>
+Jaccard coefficient = 1 - 1/5 = 4/5</li>
+</ul>
+<p>Another Example:<br>
+<img src="10.png" alt=""></p>
+<h3 id="nominal-variables">Nominal Variables</h3>
+<ul>
+<li>A generalization of the binary variable in that it can take more than 2 states, e.g., red, yellow, blue, green</li>
+<li>Method 1: Simple matching<br>
+m: # of matches, p: total # of variables<br>
+<img src="11.png" alt=""></li>
+<li>Method 2: One-hot encoding
+<ul>
+<li>creating a new binary variable for each of the M nominal states</li>
+</ul>
+</li>
+</ul>
+<h3 id="ordinal顺序的-variables">Ordinal(顺序的) Variables</h3>
+<ul>
+<li>An ordinal variable can be discrete or continuous</li>
+<li>Order is important, e.g., rank</li>
+<li>Can be treated like interval-scaled
+<ul>
+<li>replace X<sub>if</sub> by their rank</li>
+<li>map the range of each variable onto [0, 1] by replacing i-th object in the f-th variable by <img src="12.png" alt=""></li>
+<li>compute the dissimilarity using method for interval-scaled variables</li>
+</ul>
+</li>
+</ul>
+<h3 id="ratio-scaled-variables">Ratio-Scaled Variables</h3>
+<ul>
+<li>Ratio-scaled variable: a positive measurement on a nonlinear scale, approximately at exponential scale, such as Ae<sup>Bt</sup> or Ae<sup>-Bt</sup></li>
+<li>methods:
+<ul>
+<li>apply logarithmic transformation: y<sub>if</sub> = log(x<sub>if</sub>)</li>
+<li>treat them as continuous ordinal data treat their rank as interval-scaled</li>
+</ul>
+</li>
+</ul>
+<h1 id="major-clustering-approaches">Major Clustering Approaches</h1>
+<hr>
+<ul>
+<li><strong>Partitioning algorithms</strong>: Construct various partitions and then evaluate them by some criterion</li>
+<li><strong>Hierarchy algorithms</strong>: Create a hierarchical decomposition of the set of data (or objects) using some criterion</li>
+<li><strong>Graph-based algorithms</strong>: Spectral clustering</li>
+<li>Density-based: based on connectivity and density functions</li>
+<li>Grid-based: based on a multiple-level granularity structure</li>
+<li>Model-based: A model is hypothesized for each of the clusters and the idea is to find the best fit of that model to each other</li>
+</ul>
+<h2 id="partitioning-algorithms">Partitioning Algorithms</h2>
+<ul>
+<li>Partitioning method: Construct a “good” partition of a database of n objects into a set of k clusters
+<ul>
+<li>Input: a n x m data matrix</li>
+</ul>
+</li>
+<li>How to measure the “goodness” of a given partitioning<br>
+scheme? <strong>COST</strong>
+<ul>
+<li>Cost of a cluster<img src="13.png" alt=""><br>
+Cost表示cluster中每个x到center的距离，Cost越小越好
+<ul>
+<li>L2 distance used</li>
+<li>How to choose the center of a cluster?
+<ul>
+<li>Centroid (i.e., Avg) of X<sub>j</sub> -&gt; <strong>Minimizes cost</strong>(C<sub>i</sub> )</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cost of k clusters: sum of cost(Ci)</li>
+</ul>
+</li>
+<li>Global optimal: exhaustively enumerate all partitions</li>
+<li>Heuristic methods: k‐means and k‐medoids algorithms</li>
+</ul>
+<h3 id="k-means">K-Means</h3>
+<p><strong>Lloyds Algorithm:</strong></p>
+<ul>
+<li>Initialize k centers <strong>randomly</strong></li>
+<li>While stopping condition is not met
+<ul>
+<li>Assign each object to the cluster with the nearest center</li>
+<li>Compute the new center for each cluster.</li>
+</ul>
+</li>
+<li>Stop when no more new assignment<br>
+Example<br>
+<img src="14.png" alt=""><br>
+<strong>Special Matrix Factorization</strong>(因数分解)</li>
+<li>X<sup>n*d</sup> ≈  U<sup>n*d</sup> * V<sup>n*d</sup></li>
+<li>Loss function: || X - UV ||<sub>F</sub><sup>2</sup></li>
+<li>Constraints: Row of U must be a one-hot encoding.( 0 or 1 )<br>
+<img src="15.png" alt=""><br>
+<strong>Expectation Maximization Alogrithm</strong></li>
+<li>Finding the best U and V simutaneously is hard, but</li>
+<li>Expectation step:
+<ul>
+<li>Given V, find the best U</li>
+</ul>
+</li>
+<li>Maximization step:
+<ul>
+<li>Given U, find the best V</li>
+</ul>
+</li>
+<li>Iterate until converging at a local minimum.<br>
+<img src="16.png" alt=""></li>
+</ul>
+<h4 id="comments">Comments</h4>
+<ul>
+<li>Comment:
+<ul>
+<li>Often terminates at a local optimum. The global optimum may be found using techniques such as: deterministic annealing and genetic algorithms</li>
+<li>No guarantee on the quality. Use k-means++.</li>
+</ul>
+</li>
+<li>Strength: Relatively efficient: O(tkn), where n is # objects, k is # clusters, and t is # iterations. Normally, k, t &lt;&lt; n.
+<ul>
+<li>Comparing: PAM:O(k(n-k)2),CLARA:O(ks2+k(n-k))</li>
+</ul>
+</li>
+<li>Weakness:
+<ul>
+<li>Applicable only when mean is defined, then what about categorical data?</li>
+<li>Need to <strong>specify k</strong>, the number of clusters, in advance</li>
+<li>Unable to handle <strong>noisy data and outliers</strong> -&gt; need data cleaning</li>
+<li>Not suitable to discover clusters with <strong>non-convex shapes</strong>(凹状)</li>
+</ul>
+</li>
+</ul>
+<h3 id="k-means">K-Means++</h3>
+<ul>
+<li>A simple initialization routine that guarantees to find a solution that is O(log k) competitive to the optimal k-means solution.</li>
+<li>Algorithm:</li>
+</ul>
+<ol>
+<li>Find first center uniformly at random</li>
+<li>For each data point x, compute D(x) as the distance to its nearest center</li>
+<li>Randomly sample one point as the new center, with probabilities proportional to D<sup>2</sup>(x)</li>
+<li>Goto 2 if less than k centers</li>
+<li>Run the normal k-means with the k centers<br>
+随机选择center，计算其他点到center的距离的平方，大的是center的概率就高</li>
+</ol>
+<h3 id="k-medoidspam">K-Medoids(PAM)</h3>
+<ul>
+<li>K-Medoids: Each cluster is represented by one of the objects in the cluster</li>
+<li>Use real object to represent the cluster
+<ul>
+<li>Select k representative objects arbitrarily</li>
+<li>For each pair of non-selected object h and selected<br>
+object i, calculate the total swapping cost TC<sub>ih</sub></li>
+<li>For each pair of i and h,<br>
+*If TC<sub>ih</sub> &lt;0,i is replaced by h
+<ul>
+<li>Then assign each non-selected object to the most<br>
+similar representative object</li>
+</ul>
+</li>
+<li>repeat steps 2-3 until there is no change</li>
+</ul>
+</li>
+<li>PAM is more robust than k-means in the presence of noise and outliers because a medoid is less influenced by outliers or other extreme values than a mean</li>
+<li>PAM works efficiently for small data sets but does not scale well for large data sets.</li>
+<li>O(k(n-k)<sub>2</sub>) for each iteration, where n is # of data, k is # of clusters</li>
+</ul>
+<h2 id="hierarchy-algorithms">Hierarchy algorithms</h2>
+<ul>
+<li>Produces a set of nested clusters organized as a hierarchical tree</li>
+<li>Can be visualized as a dendrogram(系统树图)
+<ul>
+<li>A tree like diagram that records the sequences of merges or splits</li>
+<li>A clustering of the data objects is obtained by cutting the dendrogram at the desired level, then each connected component forms a cluster.<br>
+<img src="17.png" alt=""></li>
+</ul>
+</li>
+<li>Two main types of hierarchical clustering</li>
+<li><strong>Agglomerative</strong>:
+<ul>
+<li>Start with the points as individual clusters</li>
+<li>At each step, <strong>merge the closest pair of clusters</strong> until only one cluster (or k clusters) left</li>
+</ul>
+</li>
+<li>Divisive:
+<ul>
+<li>Start with one, all-inclusive cluster</li>
+<li>At each step, split a cluster until each cluster contains a point (or there are k clusters)</li>
+</ul>
+</li>
+<li>Traditional hierarchical algorithms use a similarity or distance matrix
+<ul>
+<li>Merge or split one cluster at a time</li>
+</ul>
+</li>
+</ul>
+<h3 id="agglomerative-clustering-algorithm">Agglomerative Clustering Algorithm</h3>
+<ul>
+<li>
+<p>Compute the proximity matrix (i.e., matrix of pair-wise distances)</p>
+</li>
+<li>
+<p>Let each data point be a cluster</p>
+</li>
+<li>
+<p>Repeat</p>
+<ul>
+<li>Merge the two clusters</li>
+<li>Update the proximity matrix</li>
+</ul>
+</li>
+<li>
+<p>Until only a single cluster remains<br></p>
+</li>
+<li>
+<p><strong>Key Operation</strong> : compute the proximity of two clusters &lt;- different from that of two points</p>
+<ul>
+<li>Different approaches to defining the distance between clusters distinguish the different algorithms</li>
+</ul>
+</li>
+<li>
+<p>How to Define Inter-Cluster Distance:</p>
+<ul>
+<li>MIN</li>
+<li>MAX</li>
+<li>Centroid-based</li>
+<li>Group Average</li>
+<li>Other methods driven by an objective</li>
+</ul>
+</li>
+</ul>
+<h4 id="cluster-similarity-min-or-single-linklink">Cluster Similarity: MIN or Single Link/LINK</h4>
+<p><strong>MIN: Min distance = Max similarity</strong></p>
+<ul>
+<li>Similarity of two clusters is based on the two most similar (closest) points in the different clusters</li>
+<li><strong>sim(Ci, Cj) = max(sim(px, py))</strong><br>
+Ci,Cj 合并以后, 其他cluster与其的相似度 = 与原Ci，Cj相似大的那个相似度<br>
+<img src="18.png" alt=""></li>
+<li>Strength : can handle non-elliptical(不是椭圆的) shapes</li>
+<li>Limitations: Sensitive to noise and outliers</li>
+</ul>
+<h4 id="cluster-similarity-max-or-complete-link-clink">Cluster Similarity: MAX or Complete Link (CLINK)</h4>
+<p><strong>MAX: Max distance = Min similarity</strong></p>
+<ul>
+<li>Similarity of two clusters is based on the two least similar (most distant) points in the different clusters</li>
+<li><strong>sim(Ci, Cj) = min(sim(px, py))</strong><br>
+<img src="19.png" alt=""></li>
+<li>Strength : Less susceptible to noise and outliers</li>
+<li>Limitations:
+<ul>
+<li>Tends to break large clusters</li>
+<li>Biased towards globular clusters</li>
+</ul>
+</li>
+</ul>
+<h4 id="cluster-similarity-group-average">Cluster Similarity: Group Average</h4>
+<ul>
+<li>GAAC (Group Average Agglomerative Clustering)</li>
+<li>Similarity of two clusters is the average of pair-wise similarity between points in the two clusters.<br>
+<img src="21.png" alt=""></li>
+<li><strong>sim(Ci, Cj) = avg(sim(pi, pj))</strong><br>
+<img src="19.png" alt=""></li>
+<li>Strengths: Less susceptible to noise and outliers</li>
+<li>Limitations: Biased towards globular clusters</li>
+</ul>
+<h2 id="spectral-clustering">Spectral clustering</h2>
+<p><a href="https://www.cs.cmu.edu/~aarti/Class/10701/readings/Luxburg06_TR.pdf" target="_blank" rel="noopener">A Tutorial on Spectral Clustering (CMU)</a><br>
+谱聚类要做的事情就是完成对图的分割，它想要找到最好的分割方式，来将图分割开来。</p>
+<ul>
+<li>A — adjacency matrix
+<ul>
+<li>Let A is the adjacency matrix of a “normal” (unweighted) undirected graph G.</li>
+<li>An edge between vi and vj is modelled as (i, j) and (j, i), i.e., Aij=Aji=1.</li>
+<li>Aii= 0</li>
+</ul>
+</li>
+<li>D — degree matrix
+<ul>
+<li>D = diag(d1, . . . dn)</li>
+<li>Dii = di &gt; 0, Dij = 0, j ≠ i</li>
+</ul>
+</li>
+<li>L — Laplacian matrix
+<ul>
+<li><strong>L = D - A</strong><br>
+<img src="22.png" alt=""><br>
+证明过程:<img src="23.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<p>x<sup>T</sup>Lx: f(all of the cut edges weighted)<br>
+<img src="24.png" alt=""></p>
+<ul>
+<li><strong>One edge which 2 nodes have the same value should be in one cluster, and does not contribute to the cut value!</strong></li>
+<li><strong>Cut edges: Edges which nodes have different values</strong><br>
+在这个例子中x<sup>T</sup>Lx = node2-4的cut value + node3-5的cut value = 4 + 4 = 8</li>
+</ul>
+<h3 id="min-cut">Min cut</h3>
+<ul>
+<li>Biased towards cutting small sets of isolated nodes.<br>
+<img src="25.png" alt=""><br>
+<img src="28.png" alt=""><br>
+如图，min-cut可能很偏，得到的不是balanced cluster</li>
+</ul>
+<h3 id="normalized-cut">Normalized cut</h3>
+<p><img src="26.png" alt=""><br>
+<img src="27.png" alt=""></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/05/28/IntelliJ-IDEA结合SBT创建Scala项目/" data-toggle="tooltip" data-placement="top" title="IntelliJ IDEA结合SBT创建Scala项目">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/05/05/COMP9318-Support-Vector-Machine/" data-toggle="tooltip" data-placement="top" title="Support Vector Machine">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#what-is-cluster-analysis"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">What is Cluster Analysis?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#general-applications-of-clustering"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">General Applications of Clustering:</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#requirements-of-clustering-in-data-mining"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Requirements of Clustering in Data Mining</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#preliminaries"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Preliminaries</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#typical-inputs"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Typical Inputs</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#types-of-data"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Types of data</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#interval-valued-variables"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Interval-valued variables</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binary-variables"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Binary Variables</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#nominal-variables"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">Nominal Variables</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ordinal顺序的-variables"><span class="toc-nav-number">2.2.4.</span> <span class="toc-nav-text">Ordinal(顺序的) Variables</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ratio-scaled-variables"><span class="toc-nav-number">2.2.5.</span> <span class="toc-nav-text">Ratio-Scaled Variables</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#major-clustering-approaches"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Major Clustering Approaches</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#partitioning-algorithms"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Partitioning Algorithms</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#k-means"><span class="toc-nav-number">3.1.1.</span> <span class="toc-nav-text">K-Means</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#comments"><span class="toc-nav-number">3.1.1.1.</span> <span class="toc-nav-text">Comments</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#k-means"><span class="toc-nav-number">3.1.2.</span> <span class="toc-nav-text">K-Means++</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#k-medoidspam"><span class="toc-nav-number">3.1.3.</span> <span class="toc-nav-text">K-Medoids(PAM)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#hierarchy-algorithms"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Hierarchy algorithms</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#agglomerative-clustering-algorithm"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">Agglomerative Clustering Algorithm</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cluster-similarity-min-or-single-linklink"><span class="toc-nav-number">3.2.1.1.</span> <span class="toc-nav-text">Cluster Similarity: MIN or Single Link/LINK</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cluster-similarity-max-or-complete-link-clink"><span class="toc-nav-number">3.2.1.2.</span> <span class="toc-nav-text">Cluster Similarity: MAX or Complete Link (CLINK)</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#cluster-similarity-group-average"><span class="toc-nav-number">3.2.1.3.</span> <span class="toc-nav-text">Cluster Similarity: Group Average</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#spectral-clustering"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Spectral clustering</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#min-cut"><span class="toc-nav-number">3.3.1.</span> <span class="toc-nav-text">Min cut</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#normalized-cut"><span class="toc-nav-number">3.3.2.</span> <span class="toc-nav-text">Normalized cut</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="COMP9318tags/#COMP9318" title="COMP9318">COMP9318</a>
+                        
+                          <a class="tag" href="Data Miningtags/#Data Mining" title="Data Mining">Data Mining</a>
+                        
+                          <a class="tag" href="Clusteringtags/#Clustering" title="Clustering">Clustering</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "http://jingxuan.li/2018/05/05/COMP9318-Clustering/";
+    var disqus_url = "http://jingxuan.li/2018/05/05/COMP9318-Clustering/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span id="busuanzi_container_site_pv">
+                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+</body>
+
+</html>
