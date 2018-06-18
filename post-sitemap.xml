@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
+        <lastmod>2018-06-18T07:17:22.615Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
         <lastmod>2018-06-18T06:08:11.855Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -89,14 +97,6 @@
     <url>
         <loc>http://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
         <lastmod>2018-06-08T05:03:52.890Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
-        <lastmod>2018-06-07T07:40:07.319Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
