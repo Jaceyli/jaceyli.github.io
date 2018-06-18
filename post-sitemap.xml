@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
+        <lastmod>2018-06-18T06:08:11.855Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
         <lastmod>2018-06-17T05:26:58.528Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,14 +33,6 @@
     <url>
         <loc>http://jingxuan.li/2018/05/05/COMP9318-Support-Vector-Machine/</loc>
         <lastmod>2018-06-15T08:10:01.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/06/13/COMP-9321-Data-Services-Engineering-Review/</loc>
-        <lastmod>2018-06-15T08:00:42.173Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -81,14 +81,6 @@
     <url>
         <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
         <lastmod>2018-06-09T07:58:51.899Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
-        <lastmod>2018-06-09T07:56:40.765Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
