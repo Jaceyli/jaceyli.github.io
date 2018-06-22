@@ -7,48 +7,8 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
-        <lastmod>2018-06-18T07:17:22.615Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
-        <lastmod>2018-06-18T06:08:11.855Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
-        <lastmod>2018-06-17T05:26:58.528Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/2018/06/15/Association-Rule-Mining/</loc>
-        <lastmod>2018-06-16T10:17:10.381Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/05/05/COMP9318-Support-Vector-Machine/</loc>
-        <lastmod>2018-06-15T08:10:01.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
-        <lastmod>2018-06-15T07:59:05.260Z</lastmod>
+        <lastmod>2018-06-22T00:36:59.340Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -56,39 +16,15 @@
 
     <url>
         <loc>http://jingxuan.li/2018/06/08/Bayesian-Classifiers/</loc>
-        <lastmod>2018-06-12T02:51:17.825Z</lastmod>
+        <lastmod>2018-06-22T00:36:54.967Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
-        <lastmod>2018-06-09T08:00:52.281Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
-        <lastmod>2018-06-09T08:00:28.626Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
-        <lastmod>2018-06-09T07:59:38.249Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
-        <lastmod>2018-06-09T07:58:51.899Z</lastmod>
+        <loc>http://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
+        <lastmod>2018-06-22T00:36:49.958Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -96,7 +32,39 @@
 
     <url>
         <loc>http://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
-        <lastmod>2018-06-08T05:03:52.890Z</lastmod>
+        <lastmod>2018-06-22T00:36:41.134Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
+        <lastmod>2018-06-22T00:36:35.204Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
+        <lastmod>2018-06-22T00:36:31.004Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/05/05/COMP9318-Support-Vector-Machine/</loc>
+        <lastmod>2018-06-22T00:36:23.409Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
+        <lastmod>2018-06-22T00:36:15.348Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -104,7 +72,47 @@
 
     <url>
         <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
-        <lastmod>2018-06-06T00:49:50.931Z</lastmod>
+        <lastmod>2018-06-22T00:36:10.884Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
+        <lastmod>2018-06-22T00:36:07.045Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
+        <lastmod>2018-06-22T00:36:02.594Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
+        <lastmod>2018-06-22T00:35:56.202Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
+        <lastmod>2018-06-22T00:31:56.922Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/2018/06/13/COMP-9321-Data-Services-Engineering-Review/</loc>
+        <lastmod>2018-06-15T08:00:42.173Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

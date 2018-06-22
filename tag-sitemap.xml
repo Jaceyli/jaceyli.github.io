@@ -44,13 +44,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/Spark/</loc>
-        <lastmod>2018-05-28T10:16:39.238Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/Scala/</loc>
         <lastmod>2018-05-28T10:16:39.238Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,57 +51,85 @@
     </url>
 
     <url>
+        <loc>http://jingxuan.li/tags/Spark/</loc>
+        <lastmod>2018-05-28T10:16:39.238Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9321/</loc>
+        <lastmod>2018-06-15T08:00:42.173Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Flask/</loc>
+        <lastmod>2018-06-15T08:00:42.173Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Restful/</loc>
+        <lastmod>2018-06-15T08:00:42.173Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jingxuan.li/tags/COMP9313/</loc>
-        <lastmod>2018-06-09T08:00:52.281Z</lastmod>
+        <lastmod>2018-06-22T00:36:15.348Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Big-Data/</loc>
-        <lastmod>2018-06-09T08:00:52.281Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Classification/</loc>
-        <lastmod>2018-06-15T07:59:05.260Z</lastmod>
+        <lastmod>2018-06-22T00:36:15.348Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/SVM/</loc>
-        <lastmod>2018-06-15T08:10:01.891Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Association-Rule/</loc>
-        <lastmod>2018-06-16T10:17:10.381Z</lastmod>
+        <lastmod>2018-06-22T00:36:23.409Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Clustering/</loc>
-        <lastmod>2018-06-17T05:26:58.528Z</lastmod>
+        <lastmod>2018-06-22T00:36:35.204Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Classification/</loc>
+        <lastmod>2018-06-22T00:36:54.967Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/COMP9318/</loc>
-        <lastmod>2018-06-18T07:17:22.615Z</lastmod>
+        <lastmod>2018-06-22T00:36:59.340Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jingxuan.li/tags/Data-Mining/</loc>
-        <lastmod>2018-06-18T07:17:22.615Z</lastmod>
+        <lastmod>2018-06-22T00:36:59.340Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Association-Rule/</loc>
+        <lastmod>2018-06-22T00:36:59.340Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
