@@ -44,20 +44,6 @@
     </url>
 
     <url>
-        <loc>http://jingxuan.li/tags/Scala/</loc>
-        <lastmod>2018-05-28T10:16:39.238Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/Spark/</loc>
-        <lastmod>2018-05-28T10:16:39.238Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jingxuan.li/tags/COMP9321/</loc>
         <lastmod>2018-06-15T08:00:42.173Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -74,13 +60,6 @@
     <url>
         <loc>http://jingxuan.li/tags/Restful/</loc>
         <lastmod>2018-06-15T08:00:42.173Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jingxuan.li/tags/COMP9313/</loc>
-        <lastmod>2018-06-22T00:36:15.348Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -130,6 +109,41 @@
     <url>
         <loc>http://jingxuan.li/tags/Association-Rule/</loc>
         <lastmod>2018-06-22T00:36:59.340Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Spark/</loc>
+        <lastmod>2018-06-23T02:29:00.414Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Scala/</loc>
+        <lastmod>2018-06-23T02:29:00.414Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Recommender-Systems/</loc>
+        <lastmod>2018-06-23T02:33:57.457Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/COMP9313/</loc>
+        <lastmod>2018-06-23T02:34:02.103Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jingxuan.li/tags/Data-Stream/</loc>
+        <lastmod>2018-06-23T02:34:02.103Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
