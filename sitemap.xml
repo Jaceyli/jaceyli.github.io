@@ -2,79 +2,128 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-8-Finding-Similar-Items/</loc>
+    <loc>https://jingxuan.li/about/index.html</loc>
     
-    <lastmod>2018-06-24T04:18:22.016Z</lastmod>
+    <lastmod>2018-07-12T09:08:59.189Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/06/23/Mining-Data-Streams/</loc>
+    <loc>https://jingxuan.li/2018/03/08/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84%E2%80%94%E2%80%94github-page-hexo-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</loc>
     
-    <lastmod>2018-06-23T07:00:25.273Z</lastmod>
+    <lastmod>2018-07-12T06:58:33.385Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jingxuan.li/2018/06/23/Recommender-Systems/</loc>
     
-    <lastmod>2018-06-23T02:33:57.457Z</lastmod>
+    <lastmod>2018-07-12T06:57:10.200Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-7-Spark-II/</loc>
+    <loc>https://jingxuan.li/2018/06/23/Mining-Data-Streams/</loc>
     
-    <lastmod>2018-06-23T02:29:00.414Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-6-Spark-I/</loc>
-    
-    <lastmod>2018-06-22T06:59:03.727Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/06/15/Association-Rule-Mining/</loc>
-    
-    <lastmod>2018-06-22T00:36:59.340Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/06/08/Bayesian-Classifiers/</loc>
-    
-    <lastmod>2018-06-22T00:36:54.967Z</lastmod>
+    <lastmod>2018-07-12T06:56:35.318Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
     
-    <lastmod>2018-06-22T00:36:49.958Z</lastmod>
+    <lastmod>2018-07-12T06:55:33.207Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
+    <loc>https://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
     
-    <lastmod>2018-06-22T00:36:41.134Z</lastmod>
+    <lastmod>2018-07-12T06:55:24.470Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
+    <loc>https://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
     
-    <lastmod>2018-06-22T00:36:35.204Z</lastmod>
+    <lastmod>2018-07-12T06:55:17.911Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
     
-    <lastmod>2018-06-22T00:36:31.004Z</lastmod>
+    <lastmod>2018-07-12T06:55:04.897Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
+    
+    <lastmod>2018-07-12T06:54:56.345Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
+    
+    <lastmod>2018-07-12T06:54:48.244Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-8-Finding-Similar-Items/</loc>
+    
+    <lastmod>2018-07-12T06:54:41.274Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-7-Spark-II/</loc>
+    
+    <lastmod>2018-07-12T06:54:33.032Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-6-Spark-I/</loc>
+    
+    <lastmod>2018-07-12T06:54:24.852Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
+    
+    <lastmod>2018-07-12T06:54:17.147Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
+    
+    <lastmod>2018-07-12T06:54:08.826Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
+    
+    <lastmod>2018-07-12T06:53:47.556Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/06/08/Bayesian-Classifiers/</loc>
+    
+    <lastmod>2018-07-12T06:53:26.954Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/06/15/Association-Rule-Mining/</loc>
+    
+    <lastmod>2018-07-12T06:53:02.919Z</lastmod>
     
   </url>
   
@@ -86,20 +135,6 @@
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
-    
-    <lastmod>2018-06-22T00:36:15.348Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
-    
-    <lastmod>2018-06-22T00:36:10.884Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
     
     <lastmod>2018-06-22T00:36:07.045Z</lastmod>
@@ -107,37 +142,9 @@
   </url>
   
   <url>
-    <loc>https://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
-    
-    <lastmod>2018-06-22T00:36:02.594Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
-    
-    <lastmod>2018-06-22T00:35:56.202Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
-    
-    <lastmod>2018-06-22T00:31:56.922Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jingxuan.li/2018/06/13/COMP-9321-Data-Services-Engineering-Review/</loc>
     
     <lastmod>2018-06-15T08:00:42.173Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/about/index.html</loc>
-    
-    <lastmod>2018-06-07T10:52:15.470Z</lastmod>
     
   </url>
   
@@ -166,13 +173,6 @@
     <loc>https://jingxuan.li/archive/index.html</loc>
     
     <lastmod>2018-03-29T08:16:50.043Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/03/08/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84%E2%80%94%E2%80%94github-page-hexo-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</loc>
-    
-    <lastmod>2018-03-29T07:30:39.078Z</lastmod>
     
   </url>
   

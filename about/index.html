@@ -215,10 +215,29 @@
                 post-container
             ">
             
-                <blockquote>
-<p>May there be enough clouds in your life to make a beautiful sunset.</p>
-</blockquote>
-<p></p><h4 id="hey-welcome-to-my-blog">Hey, welcome to my blog.</h4><p></p>
+                <div class="row">
+<button class="btn btn-default" id="btn_en" style="display:none">英文 English</button>
+<button class="btn btn-default" id="btn_zh">中文 Chinese</button>
+</div>
+<!-- Chinese Version -->
+<div class="zh post-container" id="zh-container" style="display:none">
+ <h4 id="hey">Hey, </h4>
+<p>我是李婧璇，狮子座</p>
+<p>现就读于新南威尔士大学，这个博客主要记录我学习点滴，包括很多课程内容。</p>
+<!--### Education-->
+<ul>
+<li>
+<p>2012.9 - 2016.6 哈尔滨工业大学    本科, 软件工程</p>
+</li>
+<li>
+<p>2017.7 - 2019.5 新南威尔士大学    硕士, IT</p>
+</li>
+</ul>
+<p>希望博客的内容可以帮到你，欢迎留言，或者通过社交平台联系~(^o^)/~</p>
+</div>
+<!-- English Version -->
+<div class="en post-container" id="en-container">
+   <h4 id="hey-welcome-to-my-blog">Hey, welcome to my blog.</h4>
 <p>My name is Jingxuan Li and this is my personal technology blog or better my personal knowledge base where I am writing down my thoughts and notes.</p>
 <p>I am from China, and currently studying in UNSW.</p>
 <!--### Education-->
@@ -228,7 +247,7 @@
 <strong>Degree</strong> : Bachelor of Science, Software Engineering</p>
 </li>
 <li>
-<p>2017.7 - now the University of New South Wales     <em>NSW, Sydney</em><br>
+<p>2017.7 - 2019.5 The University of New South Wales     <em>NSW, Sydney</em><br>
 <strong>Degree</strong> : Master of Engineering, Information Technology</p>
 </li>
 </ul>
@@ -244,7 +263,22 @@
 * Familiar: Spark(Scala), Shell
 * Knowing: HTML, CSS, Javascript-->
 <p>I hope you would find information on this blog useful. Do not hesitate to write comments to posts or contact me via social networks.</p>
-<p><br><br></p>
+ </div>
+<script>
+document.getElementById("btn_en").onclick = function() {
+    document.getElementById("zh-container").style.display = "none";
+    document.getElementById("en-container").style.display = "block";
+    document.getElementById("btn_zh").style.display = "block";
+    document.getElementById("btn_en").style.display = "none";
+}
+document.getElementById("btn_zh").onclick = function() {
+    document.getElementById("en-container").style.display = "none";
+    document.getElementById("zh-container").style.display = "block";
+    document.getElementById("btn_zh").style.display = "none";
+    document.getElementById("btn_en").style.display = "block";
+}
+
+</script>
 
 
                 <!-- 如果开启评论功能 -->
@@ -350,11 +384,11 @@
             
         
             
-        
-            
-        
-            
             <a href="/tags/#Github" title="Github" rel="2">Github</a>
+            
+        
+            
+        
             
         
             
@@ -518,7 +552,7 @@
                     <span style="display: inline-block; margin: 0 5px;">
                     | 
                     <span id="busuanzi_container_site_pv">
-                     本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
                     </span>
                 </p>
             </div>

@@ -3,34 +3,18 @@
 
 
     
-  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-8-Finding-Similar-Items/</loc>
-    <lastmod>2018-06-24T04:18:22.016Z</lastmod>
-    <data>
-        <display>
-        <title>Finding Similar Items</title>
-        <pubTime>2018-05-05T04:09:19.000Z</pubTime>
-        
-        <tag>COMP9313</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
-    <loc>https://jingxuan.li/2018/06/23/Mining-Data-Streams/</loc>
-    <lastmod>2018-06-23T07:00:25.273Z</lastmod>
+    <loc>https://jingxuan.li/2018/03/08/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84%E2%80%94%E2%80%94github-page-hexo-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</loc>
+    <lastmod>2018-07-12T06:58:33.385Z</lastmod>
     <data>
         <display>
-        <title>Mining Data Streams</title>
-        <pubTime>2018-06-23T02:30:05.000Z</pubTime>
+        <title>我的博客是如何搭建的——github page + hexo + 绑定域名</title>
+        <pubTime>2018-03-08T07:40:35.000Z</pubTime>
         
-        <tag>COMP9313</tag>
+        <tag>Github</tag>
          
-        <tag>Data Stream</tag>
+        <tag>Hexo</tag>
          
          
            
@@ -41,7 +25,7 @@
     
   <url>
     <loc>https://jingxuan.li/2018/06/23/Recommender-Systems/</loc>
-    <lastmod>2018-06-23T02:33:57.457Z</lastmod>
+    <lastmod>2018-07-12T06:57:10.200Z</lastmod>
     <data>
         <display>
         <title>Recommender Systems</title>
@@ -59,8 +43,164 @@
 
     
   <url>
+    <loc>https://jingxuan.li/2018/06/23/Mining-Data-Streams/</loc>
+    <lastmod>2018-07-12T06:56:35.318Z</lastmod>
+    <data>
+        <display>
+        <title>Mining Data Streams</title>
+        <pubTime>2018-06-23T02:30:05.000Z</pubTime>
+        
+        <tag>COMP9313</tag>
+         
+        <tag>Data Stream</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
+    <lastmod>2018-07-12T06:55:33.207Z</lastmod>
+    <data>
+        <display>
+        <title>Decision Tree Classifier</title>
+        <pubTime>2018-06-08T05:02:21.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+        <tag>Classification</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
+    <lastmod>2018-07-12T06:55:24.470Z</lastmod>
+    <data>
+        <display>
+        <title>Data Warehousing and OLAP II</title>
+        <pubTime>2018-03-18T10:22:38.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
+    <lastmod>2018-07-12T06:55:17.911Z</lastmod>
+    <data>
+        <display>
+        <title>Data Warehousing and OLAP I</title>
+        <pubTime>2018-03-11T02:56:20.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
+    <lastmod>2018-07-12T06:55:04.897Z</lastmod>
+    <data>
+        <display>
+        <title>Data Preprocessing and Data Cleaning</title>
+        <pubTime>2018-05-05T04:13:57.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
+    <lastmod>2018-07-12T06:54:56.345Z</lastmod>
+    <data>
+        <display>
+        <title>Clustering</title>
+        <pubTime>2018-05-05T04:15:48.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+        <tag>Clustering</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
+    <lastmod>2018-07-12T06:54:48.244Z</lastmod>
+    <data>
+        <display>
+        <title>Classification and Prediction Basics</title>
+        <pubTime>2018-05-05T04:14:19.000Z</pubTime>
+        
+        <tag>COMP9318</tag>
+         
+        <tag>Data Mining</tag>
+         
+        <tag>Classification</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-8-Finding-Similar-Items/</loc>
+    <lastmod>2018-07-12T06:54:41.274Z</lastmod>
+    <data>
+        <display>
+        <title>Finding Similar Items</title>
+        <pubTime>2018-05-05T04:09:19.000Z</pubTime>
+        
+        <tag>COMP9313</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-7-Spark-II/</loc>
-    <lastmod>2018-06-23T02:29:00.414Z</lastmod>
+    <lastmod>2018-07-12T06:54:33.032Z</lastmod>
     <data>
         <display>
         <title>Spark II</title>
@@ -81,7 +221,7 @@
     
   <url>
     <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-6-Spark-I/</loc>
-    <lastmod>2018-06-22T06:59:03.727Z</lastmod>
+    <lastmod>2018-07-12T06:54:24.852Z</lastmod>
     <data>
         <display>
         <title>Spark I</title>
@@ -101,18 +241,54 @@
 
     
   <url>
-    <loc>https://jingxuan.li/2018/06/15/Association-Rule-Mining/</loc>
-    <lastmod>2018-06-22T00:36:59.340Z</lastmod>
+    <loc>https://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
+    <lastmod>2018-07-12T06:54:17.147Z</lastmod>
     <data>
         <display>
-        <title>Association Rule Mining</title>
-        <pubTime>2018-06-15T08:03:49.000Z</pubTime>
+        <title>MapReduce III</title>
+        <pubTime>2018-04-14T06:48:49.000Z</pubTime>
         
-        <tag>COMP9318</tag>
+        <tag>COMP9313</tag>
          
-        <tag>Data Mining</tag>
+        <tag>Big Data</tag>
          
-        <tag>Association Rule</tag>
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
+    <lastmod>2018-07-12T06:54:08.826Z</lastmod>
+    <data>
+        <display>
+        <title>MapReduce II</title>
+        <pubTime>2018-03-19T23:58:30.000Z</pubTime>
+        
+        <tag>COMP9313</tag>
+         
+        <tag>Big Data</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
+    <lastmod>2018-07-12T06:53:47.556Z</lastmod>
+    <data>
+        <display>
+        <title>Introduction to Big Data</title>
+        <pubTime>2018-03-12T03:57:29.000Z</pubTime>
+        
+        <tag>COMP9313</tag>
+         
+        <tag>Big Data</tag>
          
          
            
@@ -123,7 +299,7 @@
     
   <url>
     <loc>https://jingxuan.li/2018/06/08/Bayesian-Classifiers/</loc>
-    <lastmod>2018-06-22T00:36:54.967Z</lastmod>
+    <lastmod>2018-07-12T06:53:26.954Z</lastmod>
     <data>
         <display>
         <title>Bayesian Classifiers</title>
@@ -143,79 +319,18 @@
 
     
   <url>
-    <loc>https://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
-    <lastmod>2018-06-22T00:36:49.958Z</lastmod>
+    <loc>https://jingxuan.li/2018/06/15/Association-Rule-Mining/</loc>
+    <lastmod>2018-07-12T06:53:02.919Z</lastmod>
     <data>
         <display>
-        <title>Decision Tree Classifier</title>
-        <pubTime>2018-06-08T05:02:21.000Z</pubTime>
+        <title>Association Rule Mining</title>
+        <pubTime>2018-06-15T08:03:49.000Z</pubTime>
         
         <tag>COMP9318</tag>
          
         <tag>Data Mining</tag>
          
-        <tag>Classification</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9318-Classification-and-Prediction/</loc>
-    <lastmod>2018-06-22T00:36:41.134Z</lastmod>
-    <data>
-        <display>
-        <title>Classification and Prediction Basics</title>
-        <pubTime>2018-05-05T04:14:19.000Z</pubTime>
-        
-        <tag>COMP9318</tag>
-         
-        <tag>Data Mining</tag>
-         
-        <tag>Classification</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9318-Clustering/</loc>
-    <lastmod>2018-06-22T00:36:35.204Z</lastmod>
-    <data>
-        <display>
-        <title>Clustering</title>
-        <pubTime>2018-05-05T04:15:48.000Z</pubTime>
-        
-        <tag>COMP9318</tag>
-         
-        <tag>Data Mining</tag>
-         
-        <tag>Clustering</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9318-Data-Preprocessing-and-Data-Cleaning/</loc>
-    <lastmod>2018-06-22T00:36:31.004Z</lastmod>
-    <data>
-        <display>
-        <title>Data Preprocessing and Data Cleaning</title>
-        <pubTime>2018-05-05T04:13:57.000Z</pubTime>
-        
-        <tag>COMP9318</tag>
-         
-        <tag>Data Mining</tag>
+        <tag>Association Rule</tag>
          
          
            
@@ -244,44 +359,6 @@
 
     
   <url>
-    <loc>https://jingxuan.li/2018/04/14/COMP9313-Week-4-MapReduce-III/</loc>
-    <lastmod>2018-06-22T00:36:15.348Z</lastmod>
-    <data>
-        <display>
-        <title>MapReduce III</title>
-        <pubTime>2018-04-14T06:48:49.000Z</pubTime>
-        
-        <tag>COMP9313</tag>
-         
-        <tag>Big Data</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-1/</loc>
-    <lastmod>2018-06-22T00:36:10.884Z</lastmod>
-    <data>
-        <display>
-        <title>Introduction to Big Data</title>
-        <pubTime>2018-03-12T03:57:29.000Z</pubTime>
-        
-        <tag>COMP9313</tag>
-         
-        <tag>Big Data</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jingxuan.li/2018/03/12/COMP9313-Week-2/</loc>
     <lastmod>2018-06-22T00:36:07.045Z</lastmod>
     <data>
@@ -292,63 +369,6 @@
         <tag>COMP9313</tag>
          
         <tag>Big Data</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/</loc>
-    <lastmod>2018-06-22T00:36:02.594Z</lastmod>
-    <data>
-        <display>
-        <title>MapReduce II</title>
-        <pubTime>2018-03-19T23:58:30.000Z</pubTime>
-        
-        <tag>COMP9313</tag>
-         
-        <tag>Big Data</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/03/11/COMP9318-Week-2/</loc>
-    <lastmod>2018-06-22T00:35:56.202Z</lastmod>
-    <data>
-        <display>
-        <title>Data Warehousing and OLAP I</title>
-        <pubTime>2018-03-11T02:56:20.000Z</pubTime>
-        
-        <tag>COMP9318</tag>
-         
-        <tag>Data Mining</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
-    <lastmod>2018-06-22T00:31:56.922Z</lastmod>
-    <data>
-        <display>
-        <title>Data Warehousing and OLAP II</title>
-        <pubTime>2018-03-18T10:22:38.000Z</pubTime>
-        
-        <tag>COMP9318</tag>
-         
-        <tag>Data Mining</tag>
          
          
            
@@ -377,7 +397,6 @@
     </data>
     </url>
 
-    
     
   <url>
     <loc>https://jingxuan.li/2018/05/28/Spark-%E8%B5%84%E6%BA%90%E6%B1%87%E6%80%BB/</loc>
@@ -420,25 +439,6 @@
 
     
     
-    
-  <url>
-    <loc>https://jingxuan.li/2018/03/08/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%98%AF%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E7%9A%84%E2%80%94%E2%80%94github-page-hexo-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D/</loc>
-    <lastmod>2018-03-29T07:30:39.078Z</lastmod>
-    <data>
-        <display>
-        <title>我的博客是如何搭建的——github page + hexo + 绑定域名</title>
-        <pubTime>2018-03-08T07:40:35.000Z</pubTime>
-        
-        <tag>Hexo</tag>
-         
-        <tag>Github</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
