@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          用Cloudflare为自定义域名的Github Pages添加SSL - Jingxuan&#39;s blog
+          正则表达式 - Jingxuan&#39;s blog
         
     </title>
 
-    <link rel="canonical" href="https://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/">
+    <link rel="canonical" href="https://jingxuan.li/2018/07/31/正则表达式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -97,16 +97,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Github" title="Github">Github</a>
-                            
-                              <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                              <a class="tag" href="/tags/#RegEx" title="RegEx">RegEx</a>
                             
                         </div>
-                        <h1>用Cloudflare为自定义域名的Github Pages添加SSL</h1>
-                        <h2 class="subheading"></h2>
+                        <h1>正则表达式</h1>
+                        <h2 class="subheading">Regular expression</h2>
                         <span class="meta">
                             Posted by Jingxuan on
-                            2018-03-10
+                            2018-07-31
                         </span>
                     </div>
                 
@@ -223,44 +221,159 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="why-https">Why Https?</h1>
-<hr>
+                <blockquote>
+<p><a href="https://regexr.com/" target="_blank" rel="noopener">RegExr</a>：一款在线学习、构建和测试正则表达式的工具</p>
+</blockquote>
+<h1 id="字符匹配">字符匹配</h1>
 <ul>
-<li>http协议传输的数据都是未加密的。比如你访问某网站，在经过如路由器、宽带接入商等中间环节时，搜索的关键字、账号密码等都是可见的，因此使用http协议传输隐私信息是不安全的。为了保证这些隐私数据能加密传输，于是设计了ssl协议用于对http协议传输的数据进行加密，从而就诞生了https。</li>
-<li>简单来说，https协议是由ssl+ http协议构建的可进行加密传输、身份认证的网络协议，比http协议安全性高。可以这样理解，网站的服务器产生一对密钥，公钥给用户用来加密，加密后发给服务端，服务端用自己的私钥解密后得到数据。这样即使中间环节劫持到内容也会因没有密钥无法破解。</li>
-<li>在这个环节中，为了验证服务器是不是你所要访问的真实的服务器，就需要第三方来检验，这个第三方就叫CA(Certificate Authority，是数字证书认证中心的简称，作为独立的第三方，其职能是核实身份，保证获得证书的是被授权者本人而不是其他冒充机构)。ssl证书就是由第三方CA机构来颁发的。</li>
-</ul>
-<h1 id="why-cloudflare">Why CloudFlare?</h1>
-<hr>
-<p>首先，Github Pages并不支持自定义域名添加SSL证书，为此我还浪费了一个namecheap的SSL证书(；′⌒`)。所以之前都是”裸奔”的状态，直到我遇到了Cloudflare。</p>
-<h2 id="cloudflare有什么优势呢">CloudFlare有什么优势呢？</h2>
+<li><code>.</code> :匹配任意单个字符</li>
+<li><code>[]</code>:匹配指定范围内任意单个字符</li>
+<li><code>[^]</code>:匹配指定范围外任意单个字符</li>
+<li>POSIX字符类: <code>[:lower:]</code> <code>[:upper:]</code> <code>[:alpha:]</code> <code>[:alnum:]</code> <code>[:punct:]</code> <code>[:space:]</code>
 <ul>
-<li>免费</li>
-<li>CloudFlare 提供一种被他们称之为 Universal SSL 的服务，可以让任意 HTTP 站点支持 HTTPS。它的原理是当访客使用 HTTPS 访问站点的时候，从访客到 CloudFlare 这段是加密的，然后从 CloudFlare 到站点这段是明文的。虽然不是全程加密，但是也能很大程度上解决中间人，如果从 CloudFlare 到站点的信道相对可靠的话</li>
+<li>grep <code>r[[:alpha:]][[:alpha:]]t</code></li>
 </ul>
-<h2 id="所以我们牺牲了什么">所以我们牺牲了什么？</h2>
+</li>
+</ul>
+<h1 id="匹配次数">匹配次数</h1>
+<p>写在要指定其出现次数的字符的后面</p>
 <ul>
-<li>我们必须修改域名的DNS服务器为Cloudflare提供的地址才能使用这项服务</li>
-<li>无法进行coding+github双线部署，除非你使用Cloudflare的收费服务</li>
+<li><code>*</code>:匹配其前面的字符任意次 0,1,多次</li>
+<li><code>.*</code>: 匹配任意长度的任意字符</li>
+<li><code>?</code>:匹配其前字符0次或1次</li>
+<li><code>+</code>:匹配其前的字符1次或多次,即字符出现至少1次</li>
+<li><code>{m}</code>:匹配其前字符m次</li>
+<li><code>{m,n}</code>:匹配其前字符至少m次,至多n次</li>
+<li><code>{0,n}</code>:至多n次</li>
+<li><code>{m,}</code>:至少m次</li>
 </ul>
-<h1 id="如何使用cloudflare">如何使用CloudFlare?</h1>
-<hr>
-<h2 id="step-1-注册账号添加网站">Step 1: 注册账号，添加网站</h2>
-<h2 id="step-2-前往域名所在的网站更改dns服务器">Step 2: 前往域名所在的网站，更改DNS服务器：</h2>
-<p><img src="pic1.png" alt="以Namecheap为例"></p>
-<p>改好以后，大概等个十几分钟Status变成Active的状态，表示已经修改成功：<br>
-<img src="pic2.png" alt=""></p>
-<h2 id="step-3-设置ssl">Step 3: 设置SSL</h2>
-<p>在rypto菜单下状态设置为Flexible，否则是不允许 CDN 通过 HTTP连接服务器的，配上以后浏览器才不会提示不安全：</p>
-<p><img src="pic3.png" alt=""><br>
-待Status变为Active Certificate就说明已经完成认证，大概要等1个多小时吧。</p>
-<h2 id="step-4添加重定向规则">Step 4：添加重定向规则</h2>
-<p>在Page Rule菜单下，添加如下两条：</p>
-<p><img src="pic4.png" alt=""></p>
-<p><img src="pic5.png" alt=""></p>
-<p>OK! 大功告成！小绿锁就出现了(＾－＾)</p>
-<p><img src="pic6.png" alt=""></p>
-<p>如果是黄色叹号，查看下控制台的报错，可能是引入了一些第三方资源。</p>
+<h1 id="位置锚定">位置锚定</h1>
+<ul>
+<li>
+<p><code>^</code>:行首锚定 写在模式最左侧</p>
+</li>
+<li>
+<p><code>$</code>:行尾锚定 写在模式最右侧</p>
+</li>
+<li>
+<p><code>^PATTERN$</code>：用于PATTERN来匹配整行；</p>
+<ul>
+<li><code>^$</code>：空白行；</li>
+<li><code>^[[:space:]]*$</code>：空行或包含空白字符的行；</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;</code> 或 <code>\b</code>：词首锚定，用于单词模式的左侧；</p>
+</li>
+<li>
+<p><code>&gt;</code> 或 <code>\b</code>：词尾锚定，用于单词模式的右侧；</p>
+</li>
+<li>
+<p><code>&lt;PATTERN&gt;</code>：匹配完整单词；</p>
+</li>
+<li>
+<p>单词：非特殊字符组成的连续字符（字符串）都称为单词；</p>
+</li>
+<li>
+<p>分组及引用</p>
+</li>
+<li>
+<p><code>()</code>：将一个或多个字符捆绑在一起，当作一个整体进行处理 反斜线表示转义</p>
+<ul>
+<li>(xy)*ab</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Note:<br>
+分组括号中的模式匹配到的内容会被正则表达式引擎自动记录于内部的变量中，这些变量为：<br>
+\1：模式从左侧起，第一个左括号以及与之匹配的右括号之间的模式所匹配到的字符；<br>
+\2：模式从左侧起，第二个左括号以及与之匹配的右括号之间的模式所匹配到的字符；<br>
+\3<br>
+…</li>
+</ul>
+<h1 id="例子解释">例子解释</h1>
+<ul>
+<li>
+<p>校验是否全由数字组成 <code>^[0-9]{1,20}$</code></p>
+<ul>
+<li>^ 表示打头的字符要匹配紧跟^后面的规则</li>
+<li>$ 表示打头的字符要匹配紧靠$前面的规则</li>
+<li>[ ] 中的内容是可选字符集</li>
+<li>[0-9] 表示要求字符范围在0-9之间</li>
+<li>{1,20}表示数字字符串长度合法为1到20，即为[0-9]中的字符出现次数的范围是1到20次。</li>
+<li>^ 和 $成对使用应该是表示要求整个字符串完全匹配定义的规则，而不是只匹配字符串中的一个子串。</li>
+</ul>
+</li>
+<li>
+<p>校验登录名：只能输入5-20个以字母开头、可带数字、“_”、“.”的字串<br>
+<code>^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$</code></p>
+<ul>
+<li>^[a-zA-Z]{1} 表示第一个字符要求是字母。</li>
+<li>([a-zA-Z0-9]|[.<em>]){4,19} 表示从第二位开始（因为它紧跟在上个表达式后面）的一个长度为4到19位的字符串，它要求是由大小写字母、数字或者特殊字符集[.</em>]组成。</li>
+</ul>
+</li>
+<li>
+<p>校验用户姓名：只能输入1-30个以字母开头的字串 <code>^[a-zA-Z]{1,30}$</code></p>
+</li>
+<li>
+<p>校验密码：只能输入6-20个字母、数字、下划线<code>^(\w){6,20}$</code></p>
+<ul>
+<li>\w：用于匹配字母，数字或下划线字符</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>
+<p>校验普通电话、传真号码：可以“+”或数字开头，可含有“-” 和 “ ”<br>
+<code>^[+]{0,1}(\d){1,3}[ ]?([-]?((\d)|[ ]){1,12})+$</code></p>
+<ul>
+<li>\d：用于匹配从0到9的数字；</li>
+<li>“?”元字符规定其前导对象必须在目标对象中连续出现零次或一次</li>
+<li>可以匹配的字符串如：+123 -999 999 ； +123-999 999 ；123 999 999 ；+123 999999等</li>
+</ul>
+</li>
+<li>
+<p>校验URL<br>
+<code>^http[s]{0,1}:\/\/.+$/ 或 /^http[s]{0,1}:\/\/.{1,n}$</code><br>
+(表示url串的长度为length(“https://”) + n )</p>
+<ul>
+<li>\ / ：表示字符“/”。</li>
+<li>. 表示所有字符的集</li>
+<li>+ 等同于{1,}，就是1到正无穷吧。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>校验纯中文字符<code>^[\u4E00-\u9FA5]+$</code></li>
+</ul>
+<h1 id="常用正则表达式">常用正则表达式</h1>
+<ul>
+<li><code>^\d+$</code>　　非负整数（正整数 + 0）</li>
+<li><code>^[0-9]*[1-9][0-9]*$</code>　　正整数</li>
+<li><code>^((-\d+)|(0+))$</code>　　//非正整数（负整数 + 0）</li>
+<li><code>^-[0-9]*[1-9][0-9]*$</code>　　负整数</li>
+<li><code>^-?\d+$</code>　　　　整数</li>
+<li><code>^\d+(\.\d+)?$</code>　　非负浮点数（正浮点数 + 0）</li>
+<li><code>^(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*))$</code>　　正浮点数</li>
+<li><code>^((-\d+(\.\d+)?)|(0+(\.0+)?))$</code>　　非正浮点数（负浮点数 + 0）</li>
+<li><code>^(-(([0-9]+\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9]+)|([0-9]*[1-9][0-9]*)))$</code>　　负浮点数</li>
+<li><code>^(-?\d+)(\.\d+)?$</code>　　浮点数</li>
+<li><code>^[A-Za-z]+$</code>　　由26个英文字母组成的字符串</li>
+<li><code>^[A-Z]+$</code>　　由26个英文字母的大写组成的字符串</li>
+<li><code>^[a-z]+$</code>　　由26个英文字母的小写组成的字符串</li>
+<li><code>^[A-Za-z0-9]+$</code>　　//由数字和26个英文字母组成的字符串</li>
+<li><code>^\w+$</code>　　由数字、26个英文字母或者下划线组成的字符串</li>
+<li><code>^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$</code>　　　　email地址</li>
+<li><code>^[a-zA-z]+://(\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\S*)?$</code>　　url</li>
+<li><code>^(d{2}|d{4})-((0([1-9]{1}))|(1[1|2]))-(([0-2]([1-9]{1}))|(3[0|1]))$</code>     年-月-日</li>
+<li><code>^((0([1-9]{1}))|(1[1|2]))/(([0-2]([1-9]{1}))|(3[0|1]))/(d{2}|d{4})$</code>    月/日/年</li>
+<li><code>^([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$</code>   Email</li>
+<li><code>(d+-)?(d{4}-?d{7}|d{3}-?d{8}|^d{7,8})(-d+)?</code>     电话号码</li>
+<li><code>^(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5]).(d{1,2}|1dd|2[0-4]d|25[0-5])$</code>   IP地址</li>
+<li><code>^([0-9A-F]{2})(-[0-9A-F]{2}){5}$</code>   MAC地址的正则表达式</li>
+<li><code>^[-+]?\d+(\.\d+)?$</code>  值类型正则表达式</li>
+</ul>
 
                 
 
@@ -268,13 +381,9 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/03/11/COMP9318-Week-2/" data-toggle="tooltip" data-placement="top" title="Data Warehousing and OLAP I">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/03/08/我的博客是如何搭建的——github-page-hexo-绑定域名/" data-toggle="tooltip" data-placement="top" title="我的博客是如何搭建的——github page + hexo + 绑定域名">Next Post &rarr;</a>
+                            <a href="/2018/07/31/Linux-文本处理——find-grep-cut-sort-uniq-tr-sed-awk/" data-toggle="tooltip" data-placement="top" title="Linux 文本处理">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -304,7 +413,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-https"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why Https?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-cloudflare"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Why CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cloudflare有什么优势呢"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">CloudFlare有什么优势呢？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#所以我们牺牲了什么"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">所以我们牺牲了什么？</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#如何使用cloudflare"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">如何使用CloudFlare?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-1-注册账号添加网站"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Step 1: 注册账号，添加网站</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-2-前往域名所在的网站更改dns服务器"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Step 2: 前往域名所在的网站，更改DNS服务器：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-3-设置ssl"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Step 3: 设置SSL</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#step-4添加重定向规则"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">Step 4：添加重定向规则</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#字符匹配"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">字符匹配</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#匹配次数"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">匹配次数</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#位置锚定"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">位置锚定</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#例子解释"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">例子解释</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#常用正则表达式"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">常用正则表达式</span></a></li></ol>
         
         </div>
       </aside>
@@ -324,9 +433,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Github" title="Github">Github</a>
-                        
-                          <a class="tag" href="/tags/#Cloudflare" title="Cloudflare">Cloudflare</a>
+                          <a class="tag" href="/tags/#RegEx" title="RegEx">RegEx</a>
                         
                     </div>
                 </section>
@@ -346,8 +453,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "jingxuan-li";
-    var disqus_identifier = "https://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/";
-    var disqus_url = "https://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/";
+    var disqus_identifier = "https://jingxuan.li/2018/07/31/正则表达式/";
+    var disqus_url = "https://jingxuan.li/2018/07/31/正则表达式/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
