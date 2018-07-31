@@ -3,6 +3,23 @@
 
 
     
+  <url>
+    <loc>https://jingxuan.li/2018/07/31/Linux-%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E2%80%94%E2%80%94find-grep-cut-sort-uniq-tr-sed-awk/</loc>
+    <lastmod>2018-07-31T12:41:15.256Z</lastmod>
+    <data>
+        <display>
+        <title>Linux 文本处理——find,grep,cut,sort,uniq,tr,sed,awk</title>
+        <pubTime>2018-07-31T11:58:49.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
     
   <url>
     <loc>https://jingxuan.li/2018/06/23/Recommender-Systems/</loc>
@@ -31,9 +48,9 @@
         <title>我的博客是如何搭建的——github page + hexo + 绑定域名</title>
         <pubTime>2018-03-08T07:40:35.000Z</pubTime>
         
-        <tag>Hexo</tag>
-         
         <tag>Github</tag>
+         
+        <tag>Hexo</tag>
          
          
            
