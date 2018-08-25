@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Boolean Retrieval - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jingxuan.li/2018/08/25/Boolean-retrieval/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                            
+                              <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                            
+                        </div>
+                        <h1>Boolean Retrieval</h1>
+                        <h2 class="subheading">COMP6714 Week 2-3 @18S2 UNSW</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-08-25
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>Abstract:</p>
+<ul>
+<li>Inverted index</li>
+<li>Query processing</li>
+</ul>
+</blockquote>
+<p><strong>Overview</strong><br>
+Boolean model is one of the earliest model in IR, so it is easy to support and easy to optimise. Usually faster, but contains less information than vector model.</p>
+<ul>
+<li>Why we need IR model？ —— disadvantage of “grep”:
+<ul>
+<li>Time complexity O(n), slow for large data</li>
+<li>Other operations not feasible, (e.g., find the word “Romans” near “countrymen”)</li>
+<li>Ranked retrieval (best documents to return)</li>
+</ul>
+</li>
+</ul>
+<h1 id="model-the-document">Model the document</h1>
+<ul>
+<li>
+<p>Term-document incidence matrix<br>
+<img src="1.png" alt=""><br>
+Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (complemented) -&gt; <strong>bitwise AND</strong>. 110100 AND 110111 AND 101111 = 100100.<br>
+(speed up than traditional RDBMS)</p>
+</li>
+<li>
+<p>But some information are <strong>not captured</strong> in the matrix:</p>
+<ul>
+<li>order between the words</li>
+<li>how many times the word occurs in the doc</li>
+</ul>
+</li>
+<li>
+<p><strong>Sparse matrix</strong>(稀疏矩阵)</p>
+<ul>
+<li>E.g., 1 million words and n docs which contains only 1000 words. There will be only 1000 1‘s in one column, matrix is extremely sparse.</li>
+<li>Solutions:
+<ol>
+<li>（常用）类似于表示Graph(V,E)用adjoin list，这里我们用list存docid，也就是Inverted index倒排索引</li>
+<li>（不常用）用Run-length encoding，doc:2-1s, 1-0s 表示 2个1，1个0</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="inverted-index-倒排索引">Inverted index 倒排索引</h1>
+<ul>
+<li>For each term t, we must store a list of all documents(docId) that contain t.</li>
+</ul>
+<p><img src="2.png" alt=""></p>
+<ul>
+<li>
+<p>Inverted index construction<br>
+<img src="3.png" alt=""></p>
+</li>
+<li>
+<p>Indexer steps:</p>
+<ol>
+<li>Token sequence</li>
+</ol>
+<ul>
+<li>Sequence of (Modified token, Document ID) pairs.<br>
+通常会处理term单复数，大小写，过去式变成原形等等。但是下面example没处理。<br>
+<img src="4.png" alt=""></li>
+</ul>
+<ol start="2">
+<li><strong>Sort</strong></li>
+</ol>
+<ul>
+<li>Sort by terms and then docID<br>
+<img src="5.png" alt=""></li>
+</ul>
+<ol start="3">
+<li>Dictionary &amp; Postings</li>
+</ol>
+<ul>
+<li>Multiple term entries in a single document are merged.</li>
+<li>Split into Dictionary and Postings</li>
+<li>Doc. frequency information is added. frequency指的是有几个文件出现了这个terms，但是一个doc中出现了几次没有记录<br>
+<img src="6.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<p>N.B.</p>
+<ul>
+<li>Hashing-based construction methods are more efficient (though harder to implement)</li>
+<li>Inverted index can be compressed to
+<ul>
+<li>reduce index size</li>
+<li>reduces transfer time between storage and memory</li>
+</ul>
+</li>
+</ul>
+<h1 id="query-processing">Query processing</h1>
+<h2 id="2-list-intersection">2 list intersection</h2>
+<p>Consider processing the query: Brutus AND Caesar</p>
+<p>这里介绍3种思路：</p>
+<ol>
+<li>Walk through the <strong>two postings simultaneously</strong>, in time linear in the total number of postings entries<br>
+<strong>Crucial: postings sorted by docID.</strong><br>
+<img src="7.png" alt=""><br>
+If the list lengths are n and m, the merge takes O(n+m) operations.</li>
+</ol>
+<p><img src="8.jpg" alt=""></p>
+<ol start="2">
+<li>Walk through the one list, and check if the element exists in another list</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach x ∈ LA</span><br><span class="line">    if x ∈ LB: </span><br><span class="line">        output x</span><br></pre></td></tr></table></figure>
+<p>重点就是if x ∈ LB的效率，我们介绍一种快速集合元素查询的方式：<strong>Bloom Filter</strong></p>
+<blockquote>
+<ul>
+<li>Bloom Filter使用k个相互独立的哈希函数（Hash Function），它们分别将集合中的每个元素映射到{1,…,m}的范围中。对任意一个元素x，第i个哈希函数映射的位置hi(x)就会被置为1（1≤i≤k)。在判断y是否属于这个集合时，我们对y应用k次哈希函数，如果所有hi(y)的位置都是1（1≤i≤k），那么我们就认为y是集合中的元素，否则就认为y不是集合中的元素。</li>
+<li>if x ∈ LB =&gt; Yes<br>
+if x ∉ LB =&gt; 可能会出现 false positive的情况</li>
+<li><strong>Bloom Filter很常用，它是用极小的错误换取了很大的空间节省</strong><br>
+P.S. 在COMP9313 Chapter9-Mining Data Streams中有详细介绍</li>
+</ul>
+</blockquote>
+<p>If the list lengths are n and m, the merge takes O(nlogm) operations.</p>
+<ol start="3">
+<li>Merge A and B, then sort</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C = A ○ B  (just merge A,B into C。连接A,B)</span><br><span class="line">sorted(C)</span><br><span class="line">foreach x ∈ C: output x</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Time complexity is most cost by sorting.<br>
+So it takes O((n+m)log(n+m))  n &lt;&lt; m. which is much slower than other algorithm.</li>
+<li><strong>BUT Advantage</strong>: Distributed sorting (suitable for big data), because reliable for sorting is really good，it can easy apply to MapReduce/Spark.</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>For big data, scalability, reliability and efficiency of the algorithm are all<br>
+very important.</strong></li>
+</ul>
+</blockquote>
+<p>☺️每个算法有各自的优点吧，不是time complexity小的一定就好</p>
+<h2 id="multiple-list-intersection">Multiple list intersection</h2>
+<p><strong>Recursive</strong></p>
+<ul>
+<li>有两种方法：</li>
+</ul>
+<ol>
+<li></li>
+</ol>
+<p><img src="9.png" alt=""></p>
+<ol start="2">
+<li></li>
+</ol>
+<p><img src="10.png" alt=""></p>
+<p>第二种方法更好！<br>
+因为intersect(L1, L2) ∈ [0, min(n, m)]<br>
+比如: 一个极端的例子，A长度为3，B为10，C为1M。intersection(A,B)= ∅. 甚至都不用考虑C了<br>
+<img src="11.png" alt=""></p>
+<h1 id="optimise-algorithm">Optimise algorithm</h1>
+<p>Faster postings merges: skip pointers/ skip lists 上面第一个算法（2 pointer）的优化</p>
+<p>SKIPTO()</p>
+<p>TO BE CONTINUED…</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/07/31/正则表达式/" data-toggle="tooltip" data-placement="top" title="正则表达式">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#model-the-document"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Model the document</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#inverted-index-倒排索引"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Inverted index 倒排索引</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Query processing</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-list-intersection"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">2 list intersection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#multiple-list-intersection"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Multiple list intersection</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#optimise-algorithm"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Optimise algorithm</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                        
+                          <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "https://jingxuan.li/2018/08/25/Boolean-retrieval/";
+    var disqus_url = "https://jingxuan.li/2018/08/25/Boolean-retrieval/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    <span id="busuanzi_container_site_pv">
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+</body>
+
+</html>
