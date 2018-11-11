@@ -2,20 +2,20 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
-    <meta charset="utf-8">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="baidu-site-verification" content="E91H9LxOVM" />
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="baidu-site-verification" content="E91H9LxOVM">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword"  content="">
+    <meta name="keyword" content="">
     <link rel="shortcut icon" href="/img/favicon.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Boolean Retrieval - Jingxuan&#39;s blog
+          Boolean retrieval - Jingxuan&#39;s blog
         
     </title>
 
@@ -69,13 +69,13 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-116294246-1');
-    </script>
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
-	<!-- Modified by Yu-Hsuan Yen -->
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
@@ -87,7 +87,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -102,7 +102,7 @@
                               <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
                             
                         </div>
-                        <h1>Boolean Retrieval</h1>
+                        <h1>Boolean retrieval</h1>
                         <h2 class="subheading">COMP6714 Week 2-3 @18S2 UNSW</h2>
                         <span class="meta">
                             Posted by Jingxuan on
@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -228,10 +228,11 @@
 <ul>
 <li>Inverted index</li>
 <li>Query processing</li>
+<li>Pharse Queries</li>
 </ul>
 </blockquote>
 <p><strong>Overview</strong><br>
-Boolean model is one of the earliest model in IR, so it is easy to support and easy to optimise. Usually faster, but contains less information than vector model.</p>
+​    Boolean model is one of the earliest model in IR, so it is easy to support and easy to optimise. Usually faster, but contains less information than vector model.</p>
 <ul>
 <li>Why we need IR model？ —— disadvantage of “grep”:
 <ul>
@@ -244,9 +245,9 @@ Boolean model is one of the earliest model in IR, so it is easy to support and e
 <h1 id="model-the-document">Model the document</h1>
 <ul>
 <li>
-<p>Term-document incidence matrix<br>
-<img src="1.png" alt=""><br>
-Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (complemented) -&gt; <strong>bitwise AND</strong>. 110100 AND 110111 AND 101111 = 100100.<br>
+<p>Term-document incidence matrix</p>
+<p><img src="1.png" alt=""></p>
+<p>Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (complemented) -&gt; <strong>bitwise AND</strong>. 110100 AND 110111 AND 101111 = 100100.<br>
 (speed up than traditional RDBMS)</p>
 </li>
 <li>
@@ -269,7 +270,7 @@ Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (com
 </ul>
 </li>
 </ul>
-<h1 id="inverted-index-倒排索引">Inverted index 倒排索引</h1>
+<h1 id="inverted-index">Inverted index</h1>
 <ul>
 <li>For each term t, we must store a list of all documents(docId) that contain t.</li>
 </ul>
@@ -312,22 +313,27 @@ Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (com
 <li>Hashing-based construction methods are more efficient (though harder to implement)</li>
 <li>Inverted index can be compressed to
 <ul>
-<li>reduce index size</li>
-<li>reduces transfer time between storage and memory</li>
+<li>
+<p>reduce index size</p>
+</li>
+<li>
+<p>reduces transfer time between storage and memory</p>
+</li>
 </ul>
 </li>
 </ul>
-<h1 id="query-processing">Query processing</h1>
-<h2 id="2-list-intersection">2 list intersection</h2>
+<h1 id="query-processing-with-an-inverted-index">Query processing with an inverted index</h1>
+<h2 id="and-2-list-intersection">AND: 2 list intersection</h2>
 <p>Consider processing the query: Brutus AND Caesar</p>
-<p>这里介绍3种思路：</p>
+<p>这里介绍3种Merge思路：</p>
 <ol>
 <li>Walk through the <strong>two postings simultaneously</strong>, in time linear in the total number of postings entries<br>
 <strong>Crucial: postings sorted by docID.</strong><br>
 <img src="7.png" alt=""><br>
-If the list lengths are n and m, the merge takes O(n+m) operations.</li>
+If the list lengths are n and m, the merge takes <strong>O(n+m)</strong> operations.</li>
 </ol>
 <p><img src="8.jpg" alt=""></p>
+<p><img src="image-20181105115741845.png" alt="image-20181105115741845"></p>
 <ol start="2">
 <li>Walk through the one list, and check if the element exists in another list</li>
 </ol>
@@ -342,7 +348,7 @@ if x ∉ LB =&gt; 可能会出现 false positive的情况</li>
 P.S. 在COMP9313 Chapter9-Mining Data Streams中有详细介绍</li>
 </ul>
 </blockquote>
-<p>If the list lengths are n and m, the merge takes O(nlogm) operations.</p>
+<p>If the list lengths are n and m, the merge takes <strong>O(nlogm)</strong> operations.</p>
 <ol start="3">
 <li>Merge A and B, then sort</li>
 </ol>
@@ -350,7 +356,7 @@ P.S. 在COMP9313 Chapter9-Mining Data Streams中有详细介绍</li>
 <ul>
 <li>Time complexity is most cost by sorting.<br>
 So it takes O((n+m)log(n+m))  n &lt;&lt; m. which is much slower than other algorithm.</li>
-<li><strong>BUT Advantage</strong>: Distributed sorting (suitable for big data), because reliable for sorting is really good，it can easy apply to MapReduce/Spark.</li>
+<li>BUT Advantage: Distributed sorting (suitable for big data), because reliable for sorting is really good，it can easy apply to MapReduce/Spark.</li>
 </ul>
 <blockquote>
 <ul>
@@ -358,34 +364,193 @@ So it takes O((n+m)log(n+m))  n &lt;&lt; m. which is much slower than other algo
 very important.</strong></li>
 </ul>
 </blockquote>
-<p>☺️每个算法有各自的优点吧，不是time complexity小的一定就好</p>
+<p>每个算法有各自的优点吧，不是time complexity小的一定就好</p>
 <h2 id="multiple-list-intersection">Multiple list intersection</h2>
-<p><strong>Recursive</strong></p>
 <ul>
-<li>有两种方法：</li>
-</ul>
+<li>
+<p>2 methods：</p>
 <ol>
-<li></li>
+<li>Combine each 2 lists, then recursive</li>
 </ol>
 <p><img src="9.png" alt=""></p>
 <ol start="2">
-<li></li>
+<li>Settle the dispute within the first two lists  = &gt; <strong>max algorithm</strong></li>
 </ol>
 <p><img src="10.png" alt=""></p>
-<p>第二种方法更好！<br>
-因为intersect(L1, L2) ∈ [0, min(n, m)]<br>
-比如: 一个极端的例子，A长度为3，B为10，C为1M。intersection(A,B)= ∅. 甚至都不用考虑C了<br>
-<img src="11.png" alt=""></p>
-<h1 id="optimise-algorithm">Optimise algorithm</h1>
-<p>Faster postings merges: skip pointers/ skip lists 上面第一个算法（2 pointer）的优化</p>
-<p>SKIPTO()</p>
-<p>TO BE CONTINUED…</p>
+</li>
+</ul>
+<p>The second is better cause:</p>
+<ul>
+<li>Better locality of accesse =&gt; fewer cache misses</li>
+<li>Similar to SvS</li>
+</ul>
+<p>因为intersect(L1, L2) ∈ [0, min(n, m)]<br>
+比如: 一个极端的例子，A长度为3，B为10，C为1M。intersection(A,B)= ∅. 甚至都不用考虑C了</p>
+<p><img src="11.png" alt=""></p>
+<p>Hence , we process in order of <strong>increasing</strong> freq: <strong>start with smallest set, then keep cutting further.</strong></p>
+<h3 id="max-algorithm">MAX algorithm</h3>
+<p><img src="image-20181105161647177.png" alt="image-20181105161647177"></p>
+<h2 id="faster-postings-merges">Faster postings merges</h2>
+<ul>
+<li>
+<p><strong>sorted list</strong>: We optimise the algrithom by making use of this information in the list</p>
+</li>
+<li>
+<p><strong>skipTo(id):</strong>  To skip postings that will not figure in the search results.</p>
+<ul>
+<li>Tradeoff:
+<ul>
+<li>More skips =&gt; shorter skip spans =&gt; more likely to skip. But lots of comparisons to skip pointers.</li>
+<li>Fewer skips =&gt; few pointer comparison, but then long skip spansa =&gt; few successful skips.</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181105183541241.png" alt="image-20181105183541241"></p>
+</li>
+</ul>
+<h3 id="binary-search">Binary Search</h3>
+<p><img src="image-20181105154743992.png" alt="image-20181105154743992"></p>
+<ul>
+<li>Binary search space is always <strong>halved at each step</strong>.</li>
+<li>Guaranteed to finish in <strong>O(log(n))</strong> time.</li>
+</ul>
+<h3 id="gralloping-search">Gralloping Search</h3>
+<p>also known as Double Binary Search and Exponential search</p>
+<p><img src="image-20181105154828023.png" alt="image-20181105154828023"></p>
+<ul>
+<li>Stage 1: Gralloping search starts at the first element and keeps <strong>doubling the upper limit of the search range</strong> until the value there is larger than the searched key.</li>
+<li>Stage 2: After this, we can apply a standard <strong>binary search</strong> or restart another <strong>galloping search</strong> in the last range.</li>
+<li>The former one guarantees an <strong>O(log(n))</strong> runtime, the latter one is closer to <strong>O(n)</strong> runtime.</li>
+<li>Galloping search is efficient if we expect to find the element closer to the beginning of the array.</li>
+</ul>
+<p>More about time complexity if using galloping search for stage1 and binary search for stage2:<br>
+<img src="image-20181105170345382.png" alt="image-20181105170345382"></p>
+<blockquote>
+<p><img src="image-20181105175709679.png" alt="image-20181105175709679"></p>
+<p>Arithmetic mean &gt; Geometric mean</p>
+</blockquote>
+<!-- Since $$\left(\prod _{i=1}^{n}l_{i}\right)^{\frac {1}{n}} ≤  \frac{1}{n} \sum_{i=i}^{n} l_{i} = \frac {L2}{n}$$-->
+<!--we have $$log\left(\prod _{i=1}^{n}l_{i}\right) =log (\frac {L2}{n})^n = n log\frac {L2}{n} = L1 log\frac {L2}{L1}$$-->
+<p><img src="image-20181105182240361.png" alt="image-20181105182240361"></p>
+<p>As L1&lt;&lt; L2, the time complexity will be small, quite <strong>robust</strong>.</p>
+<h3 id="skip-listspointers">Skip lists/pointers</h3>
+<ul>
+<li>A skip pointer (d, p) contains a document number d and a byte (or bit) position p</li>
+<li>there is an inverted list posting that starts at position p, and the posting before it was for document d</li>
+</ul>
+<p><img src="image-20181105183155880.png" alt="image-20181105183155880"></p>
+<blockquote>
+<p><strong>Sequential search</strong> (<strong>linear search</strong>)：</p>
+<ul>
+<li>sequentially checks <strong>each element</strong> of the list for the target value until a match is found or until all the elements have been searched.</li>
+<li>time complexity O(n)</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>Step 1: We perform sequential search in the skip pointers array, and then</p>
+</li>
+<li>
+<p>Step 2: We perform sequential search in the target segment.</p>
+</li>
+</ul>
+<p>If there is n pointers, then we have L/n gaps(target segment).</p>
+<ul>
+<li>What is the best number of skip pointers?
+<ul>
+<li>The total time complexity is O(n + L/n).</li>
+<li>we take the derative and make it equal to 0.</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181105185931743.png" alt="image-20181105185931743"></p>
+<ul>
+<li>Similar, if we perform binary search in step 1 and sequentially search in step 2:
+<ul>
+<li>The total time complexity is O(logn + L/n).</li>
+<li>The best n = L.</li>
+</ul>
+</li>
+</ul>
+<h1 id="pharse-queries-and-positional-indexs">Pharse Queries and positional indexs</h1>
+<ul>
+<li>Phrase queries:
+<ul>
+<li>Want to be able to answer queries such as “Los Angeles” – as a phrase</li>
+<li>For this, it no longer suffices to store only  <term :="" docs=""> entries</term></li>
+</ul>
+</li>
+</ul>
+<h2 id="solution-1-biword-indexes">Solution 1: Biword indexes</h2>
+<ul>
+<li>Index every consecutive pair of terms in the text as a phrase</li>
+<li>For example the text “Friends, Romans, Countrymen” would generate the biwords
+<ul>
+<li>friends romans</li>
+<li>romans countrymen</li>
+</ul>
+</li>
+<li>Each of these biwords is now a dictionary term</li>
+<li>Two-word phrase query-processing is now immediate.</li>
+<li>Issues:
+<ul>
+<li>False positives, as noted before</li>
+<li>Index blowup due to bigger dictionary</li>
+<li>Infeasible for more than biwords, big even for them</li>
+</ul>
+</li>
+<li>Biword indexes are not the standard solution (for all biwords) but can be part of a compound strategy.</li>
+</ul>
+<h2 id="solution-2-positional-indexes">Solution 2 : Positional indexes</h2>
+<ul>
+<li>
+<p>In the postings, store, for each term the position(s) in  which tokens of it appear:</p>
+<p>&lt;term, number of docs containing term;<br>
+doc1: position1, position2 … ;<br>
+doc2: position1, position2 … ;<br>
+etc.&gt;</p>
+</li>
+<li>
+<p>For example:</p>
+<p><img src="image-20181105191511559.png" alt="image-20181105191511559"></p>
+</li>
+<li>
+<p>For phrase queries, we use a <strong>merge algorithm</strong> recursively at the document level</p>
+</li>
+<li>
+<p>Processing a phrase query</p>
+<ul>
+<li>
+<p>Extract inverted index entries for each distinct term:  to, be, or, not</p>
+</li>
+<li>
+<p>Merge their doc:position lists to enumerate all positions with “to be or not to be”.</p>
+<p><img src="image-20181105193116144.png" alt="image-20181105193116144"></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Proximity queries</p>
+<ul>
+<li><strong>/k:</strong> within k words; <strong>/s:</strong> in the same sentence; <strong>/p:</strong> in the same paragraph</li>
+<li>Solution 1: We just extract position, sentenceid and paragraphid and process as usual.</li>
+<li>Solution 2: Extent list approach.(c.f., Chap 5.3.4 in [CMS09]).</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181105191902988.png" alt="image-20181105191902988"></p>
+<h2 id="solution-3-suffix-treearray">Solution 3: Suffix Tree/Array</h2>
+<p><a href="https://en.wikipedia.org/wiki/Suffix_array" target="_blank" rel="noopener">wiki - suffix tree</a></p>
 
                 
 
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/11/05/Preprocessing/" data-toggle="tooltip" data-placement="top" title="Preprocessing">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
@@ -419,7 +584,7 @@ very important.</strong></li>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#model-the-document"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Model the document</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#inverted-index-倒排索引"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Inverted index 倒排索引</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Query processing</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-list-intersection"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">2 list intersection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#multiple-list-intersection"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Multiple list intersection</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#optimise-algorithm"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Optimise algorithm</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#model-the-document"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Model the document</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#inverted-index"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Inverted index</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#query-processing-with-an-inverted-index"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Query processing with an inverted index</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#and-2-list-intersection"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">AND: 2 list intersection</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#multiple-list-intersection"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Multiple list intersection</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#max-algorithm"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">MAX algorithm</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#faster-postings-merges"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">Faster postings merges</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#binary-search"><span class="toc-nav-number">3.3.1.</span> <span class="toc-nav-text">Binary Search</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#gralloping-search"><span class="toc-nav-number">3.3.2.</span> <span class="toc-nav-text">Gralloping Search</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#skip-listspointers"><span class="toc-nav-number">3.3.3.</span> <span class="toc-nav-text">Skip lists/pointers</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#pharse-queries-and-positional-indexs"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Pharse Queries and positional indexs</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#solution-1-biword-indexes"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Solution 1: Biword indexes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#solution-2-positional-indexes"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Solution 2 : Positional indexes</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#solution-3-suffix-treearray"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">Solution 3: Suffix Tree/Array</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -537,7 +702,7 @@ very important.</strong></li>
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/jaceyli">
+                        <a target="_blank" href="https://github.com/jaceyli">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -548,7 +713,7 @@ very important.</strong></li>
 
                 
                     <li>
-                        <a target="_blank"  href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                        <a target="_blank" href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -572,7 +737,7 @@ very important.</strong></li>
                     <span id="busuanzi_container_site_pv">
                      Total <span id="busuanzi_value_site_pv"></span> Hits
                     </span>
-                </p>
+                </span></span></span></span></p>
             </div>
         </div>
     </div>
@@ -675,6 +840,23 @@ very important.</strong></li>
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 

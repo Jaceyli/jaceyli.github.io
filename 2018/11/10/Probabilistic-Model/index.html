@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Probabilistic Model - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jingxuan.li/2018/11/10/Probabilistic-Model/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                            
+                              <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                            
+                        </div>
+                        <h1>Probabilistic Model</h1>
+                        <h2 class="subheading">COMP6714 Week 7 @18S2 UNSW</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-11-10
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>Abstract:</p>
+<ul>
+<li>Probability Ranking Principle</li>
+<li>Binary Independence Model</li>
+</ul>
+</blockquote>
+<h1 id="why-probabilities-in-ir">Why probabilities in IR?</h1>
+<ul>
+<li>
+<p>In traditional IR systems, matching between each document and query is attempted in a semantically imprecise space of index terms.</p>
+</li>
+<li>
+<p>Probabilities provide a <strong>principled foundation for uncertain reasoning</strong></p>
+</li>
+<li>
+<p><strong>Idea</strong>: Rank by probability of relevance of the document w.r.t. information need</p>
+<ul>
+<li><strong>P(relevant|document<sub>i</sub>, query)</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="recall-a-few-probability-basics">Recall a few probability basics</h1>
+<p><img src="image-20181110112117234.png" alt="image-20181110112117234"></p>
+<h1 id="probability-ranking-principle">Probability Ranking Principle</h1>
+<p><img src="image-20181110112631028.png" alt="image-20181110112631028"></p>
+<ul>
+<li>
+<p>Bayes’ Optimal Decision Rule:  <strong>x is relevant iff p(R|x) &gt; p(NR|x)</strong></p>
+</li>
+<li>
+<p>PRP in action: Rank all documents by p(R|x)</p>
+</li>
+<li>
+<p>Theorem:</p>
+<ul>
+<li>Using the PRP is optimal, in that it minimizes the loss (Bayes risk) under 1/ 0 loss</li>
+<li>Provable if all probabilities correct, etc.</li>
+</ul>
+</li>
+<li>
+<p><strong>Probability Ranking Principle</strong>: if</p>
+<p><img src="image-20181110131556551.png" alt="image-20181110131556551"></p>
+<ul>
+<li>for all d’ not yet retrieved, then d is the next document to be retrieved,</li>
+<li>d - document,</li>
+<li>C - cost of retrieval of relevant document,</li>
+<li>C’ - cost of retrieval of non-relevant document</li>
+</ul>
+</li>
+</ul>
+<h2 id="questionable-assumptions">Questionable assumptions</h2>
+<ul>
+<li>“Relevance” of each document is independent of relevance of other documents.
+<ul>
+<li>Really, it’s bad to keep on returning duplicates</li>
+</ul>
+</li>
+<li>Boolean model of relevance</li>
+<li>That one has a single step information need
+<ul>
+<li>Seeing a range of results might let user refine query</li>
+</ul>
+</li>
+</ul>
+<h1 id="binary-independence-model">Binary Independence Model</h1>
+<ul>
+<li>
+<p>Traditionally used in conjunction with PRP</p>
+</li>
+<li>
+<p><strong>“Binary”</strong> = Boolean: documents are represented as binary incidence vectors of terms (cf. lecture 1):</p>
+</li>
+<li>
+<p>x=(x<sub>1</sub>,…,x<sub>n</sub> )</p>
+</li>
+<li>
+<p>xi = 1 iff term i is present in document x.</p>
+</li>
+<li>
+<p><strong>“Independence”</strong>: terms occur in documents independently</p>
+</li>
+<li>
+<p>Different documents can be modeled as same vector</p>
+</li>
+<li>
+<p>Bernoulli Naive Bayes model (cf. text categorization!)</p>
+</li>
+<li>
+<p>Under the BIM, we model the probability P(R|d, q) that a document is relevant via the probability in terms of term incidence vectors P(R|x, q). Then, using Bayes rule, we have:</p>
+<p><img src="image-20181110134352880.png" alt="image-20181110134352880"></p>
+<ul>
+<li>Here, P(x|R = 1,q) and P(x|R = 0, q) are the probability that if a relevant or nonrelevant, respectively, document is retrieved, then that document’s representation is x.</li>
+</ul>
+</li>
+</ul>
+<h2 id="deriving-a-ranking-function-for-query-terms">Deriving a ranking function for query terms</h2>
+<ul>
+<li>
+<p>Queries: binary term incidence vectors</p>
+</li>
+<li>
+<p>Given query q,</p>
+<ul>
+<li>for each document d need to compute <strong>p(R|q,d)</strong>.</li>
+<li>replace with computing <strong>p(R|q,x)</strong> where x is binary term incidence vector representing d <strong>Interested only in ranking</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181110150644830.png" alt="image-20181110150644830"></p>
+<p><img src="image-20181110151101540.png" alt="image-20181110151101540"></p>
+<ul>
+<li>
+<p>Retrieval Status Value:</p>
+<p><img src="image-20181110151253328.png" alt="image-20181110151253328"></p>
+</li>
+</ul>
+<p><img src="image-20181110171427619.png" alt="image-20181110171427619"></p>
+<h2 id="probability-estimates-in-theory">Probability estimates in theory</h2>
+<ul>
+<li>For each term i look at this table of document counts:</li>
+<li>n = df<sub>t</sub> : number of documents which contains t</li>
+<li>log (1– ri)/ri = log (N– n)/n ≈ log N/n = <strong>IDF</strong>!</li>
+</ul>
+<p><img src="image-20181110151654123.png" alt="image-20181110151654123"></p>
+<p><img src="image-20181110151751264.png" alt="image-20181110151751264"></p>
+<ul>
+<li>This estimate could be 0, so <strong>add 1⁄2 Smoothing</strong></li>
+</ul>
+<p><img src="image-20181110151907220.png" alt="image-20181110151907220"></p>
+<h2 id="okapi-bm25">Okapi BM25</h2>
+<ul>
+<li>Heuristically extend the BIR to include information of term frequencies, document length, etc.</li>
+</ul>
+<p><img src="image-20181110155205451.png" alt="image-20181110155205451"></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/11/10/Language-Model/" data-toggle="tooltip" data-placement="top" title="Language Model">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/09/Evaluation/" data-toggle="tooltip" data-placement="top" title="Evaluation">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-probabilities-in-ir"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why probabilities in IR?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#recall-a-few-probability-basics"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Recall a few probability basics</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#probability-ranking-principle"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Probability Ranking Principle</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#questionable-assumptions"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Questionable assumptions</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#binary-independence-model"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Binary Independence Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#deriving-a-ranking-function-for-query-terms"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Deriving a ranking function for query terms</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#probability-estimates-in-theory"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Probability estimates in theory</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#okapi-bm25"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">Okapi BM25</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                        
+                          <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "https://jingxuan.li/2018/11/10/Probabilistic-Model/";
+    var disqus_url = "https://jingxuan.li/2018/11/10/Probabilistic-Model/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    <span id="busuanzi_container_site_pv">
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
+                    </span>
+                </span></span></span></span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

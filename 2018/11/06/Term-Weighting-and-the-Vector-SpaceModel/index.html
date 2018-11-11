@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Term Weighting and Vector Space Model - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                            
+                              <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                            
+                        </div>
+                        <h1>Term Weighting and Vector Space Model</h1>
+                        <h2 class="subheading">COMP6714 Week 5 @18S2 UNSW</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-11-06
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>Abstract:</p>
+<ul>
+<li>Ranked retrieval</li>
+<li>Tf-idf</li>
+<li>vector space model</li>
+</ul>
+</blockquote>
+<h1 id="why-ranked-retrieval-model">Why ranked retrieval model?</h1>
+<ul>
+<li>Boolean Model =&gt; documents either 1 or 0 (match or not).</li>
+<li>Not good for the majority of users
+<ul>
+<li>Most users incapable of writing Boolean queries</li>
+<li>Most users don’t want to wade through 1000s of results.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Problem: feast or famine (result too many or too few)
+<ul>
+<li>Query 1: “standard user dlink 650” → 200,000 hits</li>
+<li>Query 2: “standard user dlink 650 no card found”: 0 hits</li>
+</ul>
+</li>
+</ul>
+<h1 id="ranked-retrieval-models">Ranked retrieval models</h1>
+<ul>
+<li>
+<p>Ranked retrieval models <strong>returns an ordering over the (top) documents</strong> in the collection with respect to a query.</p>
+</li>
+<li>
+<p>Boolean model returns D1:1, D2:1</p>
+</li>
+<li>
+<p>Ranked retrieval model returns D1:0.75, D2:0.32</p>
+</li>
+<li>
+<p><strong>Free text queries</strong>: Rather than a query language of operators and expressions, the user’s query is just one or more words in a human language.</p>
+</li>
+<li>
+<p>“Feast or famine”: not a problem in ranked retrieval：</p>
+<ul>
+<li>When a system produces a ranked result set, large result sets are not an issue</li>
+<li>Indeed, the size of the result set is not an issue</li>
+<li>We just show the <strong>top k</strong> ( ≈ 10) results</li>
+<li>We don’t overwhelm the user</li>
+</ul>
+</li>
+</ul>
+<h1 id="scoring">Scoring</h1>
+<ul>
+<li>How can we rank-order the documents in the collection with respect to a query?
+<ul>
+<li>Assign a score – say in [0, 1] – to each document</li>
+<li>This score measures how well document and query “match”.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Let’s start with a one-term query
+<ul>
+<li>If the query term does not occur in the document: score should be 0</li>
+<li>The more frequent the query term in the document, the higher the score (should be)</li>
+</ul>
+</li>
+</ul>
+<h2 id="jaccard-coefficient">Jaccard coefficient</h2>
+<ul>
+<li>
+<p>A commonly used measure of overlap of two sets A and B</p>
+<ul>
+<li><strong>jaccard(A,B) = |A ∩ B| / |A ∪ B|</strong></li>
+<li>jaccard(A,A) = 1</li>
+<li>jaccard(A,B) = 0 if A ∩ B = 0</li>
+</ul>
+</li>
+<li>
+<p>Example</p>
+<ul>
+<li>Query: ides of <strong>march</strong></li>
+<li>Document 1: caesar died in <strong>march</strong>  =&gt; Jaccard(q,doc1) = 1/6</li>
+<li>Document 2: the long <strong>march</strong> =&gt; Jaccard(q,doc1) = 1/5</li>
+</ul>
+</li>
+<li>
+<p>Issues</p>
+<ul>
+<li>It doesn’t consider <strong>term frequency</strong> (how many times a term occurs in a document)   =&gt; <strong>tf</strong></li>
+<li><strong>Rare terms in a collection are more informative than frequent terms</strong>. Jaccard doesn’t consider this information. =&gt; <strong>idf</strong></li>
+<li>We need a more sophisticated way of normalizing for length.
+<ul>
+<li>Jaccard similarity favor the small document, we can tell that from the example above.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>General methods to compare documents:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Ocurr times</th>
+<th style="text-align:center">Query A</th>
+<th style="text-align:center">Query B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">D1</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">D2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">20</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p><s>Prioritige</s>: If we know A is more important than B, then we scoring according to A. So consider query B only if we got the same score in query A.</p>
+<ul>
+<li>这个方法，我们需要知道哪个query更为重要，所有在IR中基本不用</li>
+</ul>
+</li>
+<li>
+<p><strong>Weight sum</strong>: we give the queries certain weight.</p>
+<ul>
+<li>
+<p>E.g, weight(A):0.7 weight(B):0.3</p>
+<p>​	score(D1) = 100 * 0.7 + 2 *0.3</p>
+<p>​	score(D2) = 1 * 0.7 + 20 *0.3</p>
+</li>
+</ul>
+<p><strong>Different about weight sum in ML &amp; IR:</strong></p>
+<ul>
+<li>In ML, we try to learn the best weigths. We assign some term weights to experiments and adjust the weight according the result.</li>
+<li>In IR, weights are computed by some certain functions. Then we can compute the scores of the documents and rank them.</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h1 id="bag-of-words-modelbow">Bag of words model（BoW）</h1>
+<ul>
+<li>Vector representation the number of occurrences of a term in a document</li>
+</ul>
+<p><img src="image-20181106131327742.png" alt="image-20181106131327742"></p>
+<ul>
+<li><span style="color:red">BoW model contains term frequency(tf), but not order</span>
+<ul>
+<li>E.g., “John is quicker than Mary” and “Mary is quicker than John” have the same vectors</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Model ——&gt; Representation</p>
+<p>每种模型都取舍，例如BoW就保留了词频信息而没有保留词位置信息。后面还会介绍更多侧重点不同的模型</p>
+</blockquote>
+<h1 id="tf">tf</h1>
+<ul>
+<li>
+<p>term frequency (tf): <strong>the number of times that t occurs in d.</strong></p>
+</li>
+<li>
+<p>raw tf</p>
+<ul>
+<li>A document with 10 occurrences of the term is more relevant than a document with 1 occurrence of the term.</li>
+<li>But not 10 times more relevant.</li>
+</ul>
+</li>
+<li>
+<p>log tf</p>
+<ul>
+<li>The log frequency weight of term t in d :</li>
+</ul>
+<p><img src="image-20181106135217921.png" alt="image-20181106135217921"></p>
+<ul>
+<li>Score for a document-query pair: sum over terms t in both q and d:</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181106135303016.png" alt="image-20181106135303016"></p>
+<h1 id="idf">idf</h1>
+<ul>
+<li><strong>Rare terms are more informative than frequent terms</strong>, so we want a high weight for rare terms.</li>
+<li>inverse document frequency (idf): a measure of how much information the word provides, i.e., if it’s common or rare across all documents.</li>
+<li>We define idf of t:
+<ul>
+<li><img src="image-20181106135832617.png" alt="image-20181106135832617"></li>
+<li>with:
+<ul>
+<li>dft: the document frequency of t: the number of documents that contain t</li>
+<li>N: total number of documents in the corpus N =|D|</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="tf-idf">tf-idf</h1>
+<ul>
+<li>The tf-idf weight of a term is the <strong>product of its tf weight and its idf weight.</strong></li>
+</ul>
+<p><img src="image-20181106142201238.png" alt="image-20181106142201238"></p>
+<ul>
+<li>Increases with the number of occurrences within a document</li>
+</ul>
+<ul>
+<li>Increases with the rarity of the term in the collection</li>
+<li>Final ranking score:</li>
+</ul>
+<p><img src="image-20181106142405291.png" alt="image-20181106142405291"></p>
+<h2 id="tf-idf-weighting-has-many-variants">tf-idf weighting has many variants</h2>
+<p><img src="image-20181106185028036.png" alt="image-20181106185028036"></p>
+<ul>
+<li>SMART Notation: denotes the combination in use in an engine, with the notation ddd.qqq, using the acronyms from the previous table</li>
+</ul>
+<h2 id="lncltc"><strong>lnc.ltc</strong></h2>
+<ul>
+<li>
+<p><strong>Inc</strong> =&gt; <strong>documnet</strong> vector, <strong>I</strong> for <strong>l</strong>og tf, <strong>n</strong> for <strong>n</strong>o idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
+</li>
+<li>
+<p><strong>Itc</strong> =&gt; <strong>query</strong> vector,  <strong>I</strong> for <strong>l</strong>og tf, <strong>t</strong> for idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
+</li>
+<li>
+<p>E.g.,</p>
+<p><img src="image-20181109150208118.png" alt="image-20181109150208118"></p>
+<ul>
+<li>
+<p>Query:</p>
+<p>​	N = 1,000,000</p>
+<p><img src="image-20181106142201238.png" alt="image-20181106142201238"></p>
+<p>​	For term “car”, wt(“car”) = (1+log1)*2 = 2</p>
+<p><img src="image-20181109151932579.png" alt="image-20181109151932579"></p>
+</li>
+<li>
+<p>Document:</p>
+<p>For term “car”, wt(“car”)=(1+log1) = 1</p>
+<p><img src="image-20181109152210133.png" alt="image-20181109152210133"></p>
+</li>
+<li>
+<p>Score:</p>
+<p><img src="image-20181106142405291.png" alt="image-20181106142405291"></p>
+<p>= &lt;Wq, Wd&gt; = 0 * 0.52 + 0.34  * 0 + 0.52 * 0.52 + 0.78 * 0.68 = 0.8</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="vector-space-model">Vector Space Model</h1>
+<ul>
+<li>
+<p>Binary -&gt; Count -&gt; Weight Matrix (tf-idf)</p>
+<p><img src="image-20181106142553307.png" alt="image-20181106142553307"></p>
+<p>Each document is now represented by a real-valued vector of <strong>tf-idf weights</strong> ∈ R^|V|^</p>
+</li>
+</ul>
+<h2 id="documents-as-vectors">Documents as vectors</h2>
+<ul>
+<li>|V|-dimensional vector space</li>
+<li>Very high-dimensional: tens of millions of dimensions when you apply this to a web search engine</li>
+<li>very sparse vectors</li>
+</ul>
+<h2 id="queries-as-vectors">Queries as vectors</h2>
+<ul>
+<li>
+<p>Represente the queries as  vectors in the space, same as the document</p>
+<p>How to  Rank documents according to their proximity to the query in this space?</p>
+</li>
+</ul>
+<h2 id="formalizing-vector-space-proximity">Formalizing vector space proximity</h2>
+<ul>
+<li>
+<p>Euclidean distance? —— NOT a good idea, cause it is sensitive to different lengths</p>
+</li>
+<li>
+<p>Angle:</p>
+<ul>
+<li>Rank documents in decreasing order of the angle between query and document</li>
+<li>Rank documents in increasing order of <strong>cosine</strong>(query,document)</li>
+</ul>
+</li>
+<li>
+<p>A vector can be (length-) normalized by dividing each of its components by its length for this we use the L2 norm: <strong>L2 范数</strong></p>
+<p><img src="image-20181106144743684.png" alt="image-20181106144743684"></p>
+<ul>
+<li>Dividing a vector by its L2 norm makes it a unit (length) vector (on surface of unit hypersphere)</li>
+<li>Long and short documents now have comparable weights 长文档和短文档之间的长度差异就不会影响相关性了</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Why nomalization?</p>
+<ul>
+<li>we only care about angle(cosine score) between d nd q, not size d (length of vector)</li>
+</ul>
+</blockquote>
+<h3 id="cosinequery-document">Cosine(query, document)</h3>
+<p><img src="image-20181106145042867.png" alt="image-20181106145042867"></p>
+<ul>
+<li>qi is the tf-idf weight of term i in the query</li>
+<li>di is the tf-idf weight of term i in the document</li>
+</ul>
+<h3 id="cosine-for-length-normalized-vectors">Cosine for length-normalized vectors</h3>
+<ul>
+<li>For length-normalized vectors, cosine similarity is simply the dot product (or scalar product):</li>
+</ul>
+<p><img src="image-20181106145208674.png" alt="image-20181106145208674"></p>
+<p>With q, d length-normalized.</p>
+<p><img src="image-20181106145258682.png" alt="image-20181106145258682"></p>
+<h3 id="computering-cosine-scores">Computering cosine scores</h3>
+<p><img src="image-20181106145358613.png" alt="image-20181106145358613"></p>
+<p><img src="image-20181106175518570.png" alt="image-20181106175518570"></p>
+<h3 id="3-algorithms-of-selecting-top-k">3 Algorithms of selecting top K</h3>
+<ol>
+<li>
+<p><strong>Sort(s)</strong></p>
+<p>Return s[1:3]</p>
+<p>time complexity: O(nlogn)</p>
+</li>
+<li>
+<p><strong>Use Memory</strong></p>
+<ul>
+<li>
+<p>类似于inserting sort</p>
+</li>
+<li>
+<p>go throngh each element, and update top k</p>
+</li>
+<li>
+<p>in the worst case similar to queue</p>
+<p><img src="image-20181106181458895.png" alt="image-20181106181458895"></p>
+</li>
+<li>
+<p>worst time complexity: <em><em>n</em>O(k)</em>*   with n docs, and k about 1000 for search engines,  so it’s not good enough</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Optimize</strong>: using Heap (Priority queue)</p>
+<blockquote>
+<ul>
+<li>
+<p><strong>Priority queue</strong></p>
+<ul>
+<li>similart to a normal queue excpet that <strong>each element has a certain priority.</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Heap</strong></p>
+<ul>
+<li>a <strong>heap</strong> is a specialized tree-based data structure that satisfies the <em>heap property:</em> if P is a parent node of C, then the <em>key</em> (the <em>value</em>) of P is either greater than or equal to (in a <em>max heap</em>) or less than or equal to (in a <em>min heap</em>) the key of C.</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181106183225385.png" alt="image-20181106183225385"></p>
+</blockquote>
+<ul>
+<li>
+<p>We use a min-heap to find top k scores. H for heap</p>
+<ol>
+<li>Generate min-heap for current k scores.</li>
+<li>when a new score(x) comes into heap, using <strong>H.push(x)</strong>
+<ul>
+<li>heap.push time complexiy is  O(logn), for this case is O(logk)</li>
+</ul>
+</li>
+<li>pop the smallest score. using <strong>H.pop()</strong>
+<ul>
+<li>heap.push time complexiy is  also O(logn), for this case is O(log(k+1))</li>
+</ul>
+</li>
+</ol>
+<p>So, finally we get:</p>
+<ul>
+<li>time complextiy: <strong>n*O(logk)</strong></li>
+<li>space complextiy: <strong>O(k)</strong></li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>Quick Select</strong></li>
+</ol>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Quickselect" target="_blank" rel="noopener">QuickSelect</a> is similar to QuickSort to find the top-K elements from an array
+<ul>
+<li>Takes O(n) time</li>
+</ul>
+</li>
+<li>Sorting the top-K items takes O(k*log(k)) time
+<ul>
+<li>Total time is <strong>O(n + k*log(k))</strong></li>
+<li>space complexity is <strong>O(n)</strong></li>
+<li>less time but more space</li>
+</ul>
+</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/11/06/Vector-SpaceModel-II-Scoring/" data-toggle="tooltip" data-placement="top" title="Vector Space Model II Scoring">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/05/Preprocessing/" data-toggle="tooltip" data-placement="top" title="Preprocessing">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#why-ranked-retrieval-model"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Why ranked retrieval model?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ranked-retrieval-models"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Ranked retrieval models</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#scoring"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Scoring</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#jaccard-coefficient"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Jaccard coefficient</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#bag-of-words-modelbow"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Bag of words model（BoW）</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#tf"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">tf</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#idf"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">idf</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#tf-idf"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">tf-idf</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tf-idf-weighting-has-many-variants"><span class="toc-nav-number">7.1.</span> <span class="toc-nav-text">tf-idf weighting has many variants</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#lncltc"><span class="toc-nav-number">7.2.</span> <span class="toc-nav-text">lnc.ltc</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#vector-space-model"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">Vector Space Model</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#documents-as-vectors"><span class="toc-nav-number">8.1.</span> <span class="toc-nav-text">Documents as vectors</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#queries-as-vectors"><span class="toc-nav-number">8.2.</span> <span class="toc-nav-text">Queries as vectors</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#formalizing-vector-space-proximity"><span class="toc-nav-number">8.3.</span> <span class="toc-nav-text">Formalizing vector space proximity</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cosinequery-document"><span class="toc-nav-number">8.3.1.</span> <span class="toc-nav-text">Cosine(query, document)</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#cosine-for-length-normalized-vectors"><span class="toc-nav-number">8.3.2.</span> <span class="toc-nav-text">Cosine for length-normalized vectors</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#computering-cosine-scores"><span class="toc-nav-number">8.3.3.</span> <span class="toc-nav-text">Computering cosine scores</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#3-algorithms-of-selecting-top-k"><span class="toc-nav-number">8.3.4.</span> <span class="toc-nav-text">3 Algorithms of selecting top K</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                        
+                          <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/";
+    var disqus_url = "https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    <span id="busuanzi_container_site_pv">
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
+                    </span>
+                </span></span></span></span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

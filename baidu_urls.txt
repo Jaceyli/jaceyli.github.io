@@ -1,3 +1,10 @@
+https://jingxuan.li/2018/11/10/Language-Model-N-grams/
+https://jingxuan.li/2018/11/10/Language-Model/
+https://jingxuan.li/2018/11/10/Probabilistic-Model/
+https://jingxuan.li/2018/11/09/Evaluation/
+https://jingxuan.li/2018/11/06/Vector-SpaceModel-II-Scoring/
+https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/
+https://jingxuan.li/2018/11/05/Preprocessing/
 https://jingxuan.li/2018/08/25/Boolean-retrieval/
 https://jingxuan.li/2018/07/31/正则表达式/
 https://jingxuan.li/2018/07/31/Linux-文本处理——find-grep-cut-sort-uniq-tr-sed-awk/
@@ -21,7 +28,3 @@ https://jingxuan.li/2018/03/20/COMP9313-Week-3-MapReduce-II/
 https://jingxuan.li/2018/03/18/COMP9318-Week-3/
 https://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA结合Maven本地运行和调试MapReduce程序/
 https://jingxuan.li/2018/03/12/COMP9313-Week-2/
-https://jingxuan.li/2018/03/12/COMP9313-Week-1/
-https://jingxuan.li/2018/03/11/COMP9318-Week-2/
-https://jingxuan.li/2018/03/10/用Cloudflare为自定义域名的Github-Pages添加SSL/
-https://jingxuan.li/2018/03/08/我的博客是如何搭建的——github-page-hexo-绑定域名/

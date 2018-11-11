@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Language Model N-grams - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jingxuan.li/2018/11/10/Language-Model-N-grams/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                            
+                              <a class="tag" href="/tags/#NLP" title="NLP">NLP</a>
+                            
+                        </div>
+                        <h1>Language Model N-grams</h1>
+                        <h2 class="subheading">COMP6714 Week 11 @18S2 UNSW</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-11-10
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="probabilistic-language-models">Probabilistic Language Models</h1>
+<h2 id="why-we-need-a-language-model">Why we need a language model</h2>
+<ul>
+<li>Assign a probability to a sentence
+<ul>
+<li>Machine Translation:
+<ul>
+<li>P(<strong>high</strong> winds tonite) &gt; P(<strong>large</strong> winds tonite)</li>
+</ul>
+</li>
+<li>Spell Correction
+<ul>
+<li>The office is about fifteen minuets from my house</li>
+<li>P(about fifteen <strong>minutes</strong> from) &gt; P(about fifteen <strong>minuets</strong> from)</li>
+</ul>
+</li>
+<li>Speech Recognition
+<ul>
+<li>P(I saw a van) &gt;&gt; P(eyes awe of an)</li>
+</ul>
+</li>
+<li>Summarization, question-answering, etc., etc.!!</li>
+</ul>
+</li>
+</ul>
+<h2 id="what-is-language-model">What is language model</h2>
+<ul>
+<li>
+<p>Goal: <strong>compute the probability of a sentence or sequence of words</strong>:</p>
+<ul>
+<li>P(W) = P(w1,w2,w3,w4,w5…wn)</li>
+</ul>
+</li>
+<li>
+<p>Related task: <strong>probability of an upcoming word</strong>: P(w5|w1,w2,w3,w4)</p>
+</li>
+<li>
+<p>A model that computes either of these:</p>
+<p>P(W) or P(wn|w1,w2…wn-1) is called a <strong>language model</strong> (LM).</p>
+</li>
+</ul>
+<h2 id="how-to-compute-pw">How to compute P(w)</h2>
+<h3 id="the-chain-rule">The Chain Rule</h3>
+<ul>
+<li>The Chain Rule applied to compute joint probability of words in sentence</li>
+</ul>
+<p><img src="image-20181110210209272.png" alt="image-20181110210209272"></p>
+<ul>
+<li>
+<p>Example:</p>
+<p>P(“its water is so transparent”) =</p>
+<p>​	P(its)</p>
+<p>​	* P(water |its)</p>
+<p>​	* P(is | its water)</p>
+<p>​	* P(so | its water is)</p>
+<p>​	* P(transparent | its water is so)</p>
+</li>
+</ul>
+<h2 id="how-to-estimate-these-probabilities">How to estimate these probabilities</h2>
+<h3 id="markov-assumption">Markov Assumption</h3>
+<p><img src="image-20181110210653793.png" alt="image-20181110210653793"></p>
+<h3 id="unigram-model">Unigram model</h3>
+<ul>
+<li>Simplest case</li>
+</ul>
+<p><img src="image-20181110210754117.png" alt="image-20181110210754117"></p>
+<h3 id="bigram-model">Bigram model</h3>
+<ul>
+<li>
+<p>Condition on the previous word</p>
+<p><img src="image-20181110210858083.png" alt="image-20181110210858083"></p>
+</li>
+</ul>
+<h3 id="n-gram-models">N-gram models</h3>
+<ul>
+<li>
+<p>We can extend to trigrams, 4-grams, 5-grams</p>
+</li>
+<li>
+<p>In general this is an insufficient model of language because language has long-distance dependencies</p>
+</li>
+</ul>
+<h1 id="estimating-n-gram-probabilities">Estimating N-gram Probabilities</h1>
+<h2 id="bigram-probabilities">bigram probabilities</h2>
+<ul>
+<li>The <strong>Maximum Likelihood Estimate</strong> (MLE)</li>
+</ul>
+<p><img src="image-20181110211113331.png" alt="image-20181110211113331"></p>
+<ul>
+<li>
+<p>Example:<br>
+<img src="image-20181110211207288.png" alt="image-20181110211207288"></p>
+</li>
+<li>
+<p>Raw bigram counts</p>
+</li>
+</ul>
+<p><img src="image-20181110211452029.png" alt="image-20181110211452029"></p>
+<p><img src="image-20181110211421726.png" alt="image-20181110211421726"></p>
+<h3 id="bigram-estimates-of-sentence-probabilities">Bigram estimates of sentence probabilities</h3>
+<p><img src="image-20181110211704174.png" alt="image-20181110211704174"></p>
+<h1 id="evaluation-and-perplexity">Evaluation and Perplexity</h1>
+<h2 id="extrinsic-evaluation">Extrinsic evaluation</h2>
+<ul>
+<li>Time-consuming; can take days or weeks</li>
+</ul>
+<h2 id="intrinsic-evaluation-perplexity">Intrinsic evaluation: perplexity</h2>
+<ul>
+<li>The best language model is one that best predicts an unseen test set
+<ul>
+<li>Gives the highest P(sentence)</li>
+</ul>
+</li>
+<li><strong>Perplexity(复杂度)</strong> is the inverse probability of the test set, normalized by the number of words
+<ul>
+<li><strong>Minimizing perplexity is the same as maximizing probability</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20181110212802202.png" alt="image-20181110212802202"></p>
+<h1 id="generalization-and-zeros">Generalization and zeros</h1>
+<ul>
+<li>Bigrams with zero probability
+<ul>
+<li>mean that we will assign 0 probability to the test set!</li>
+</ul>
+</li>
+</ul>
+<p>How to avoid 0?</p>
+<h2 id="smoothing-add-one-laplace-smoothing">Smoothing: Add-one (Laplace) smoothing</h2>
+<p><img src="image-20181110213237428.png" alt="image-20181110213237428"></p>
+<ul>
+<li>Disadvange:
+<ul>
+<li>if c(w<sub>i-1</sub>, wi) is big enough, +1 does not matter too much</li>
+<li>if c(w<sub>i-1</sub>, wi) = 0, the result is always the same! It’s not fair.</li>
+</ul>
+</li>
+</ul>
+<h3 id="interpolation">Interpolation</h3>
+<p><img src="image-20181110213657267.png" alt="image-20181110213657267"></p>
+<ul>
+<li>Even if  prob of bigram and 3-grams all are 0, we can still <strong>add the prob of unigram which can not be 0.</strong></li>
+</ul>
+<h3 id="oov">OOV</h3>
+<ul>
+<li>
+<p>OOV: <strong>Out of Vocabulary</strong></p>
+</li>
+<li>
+<p>Create an unknown word token <code>&lt;UNK&gt;</code></p>
+<ul>
+<li>Training of <code>&lt;UNK&gt;</code> probabilities
+<ul>
+<li>Create a fixed lexicon L of size V</li>
+<li>At text normalization phase, any training word not in L changed to <code>&lt;UNK&gt;</code></li>
+<li>Now we train its probabilities like a normal word</li>
+</ul>
+</li>
+<li>At decoding time
+<ul>
+<li>If text input: Use UNK probabilities for any word not in training</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="stupid-backoff">Stupid backoff</h3>
+<ul>
+<li>
+<p>Smoothing for Web-scale N-grams</p>
+</li>
+<li>
+<p><strong>backoff</strong> :  go back to a <strong>n-1 gram level</strong> to calculate the probabilities when you encounter a word with prob=0.</p>
+</li>
+<li>
+<p>No discounting, just use relative frequencies</p>
+</li>
+</ul>
+<p><img src="image-20181111113848276.png" alt="image-20181111113848276"></p>
+<h2 id="kneser-ney-smoothing">Kneser-Ney Smoothing</h2>
+<h3 id="absolute-discounting-interpolation">Absolute Discounting Interpolation</h3>
+<p><img src="image-20181111120442456.png" alt="image-20181111120442456"></p>
+<ul>
+<li>Save ourselves some time and just subtract 0.75 (or some d)!</li>
+</ul>
+<p><img src="image-20181111114332244.png" alt="image-20181111114332244"></p>
+<h3 id="kneser-ney-smoothing">Kneser-Ney Smoothing</h3>
+<ul>
+<li>
+<p>Better estimate for probabilities of lower-order unigrams!</p>
+</li>
+<li>
+<p>Instead of P(w): “How likely is w” , <strong>P<sub>continuation</sub>(w)</strong>: “How likely is w to appear as a novel continuation?</p>
+<ul>
+<li>For each word, count the number of bigram types it completes</li>
+<li>Every bigram type was a <strong>novel continuation the first time it was seen</strong></li>
+</ul>
+<p><img src="image-20181111114723756.png" alt="image-20181111114723756"></p>
+</li>
+<li>
+<p>Normalized by the total number of word bigram types</p>
+</li>
+</ul>
+<p><img src="image-20181111115026447.png" alt="image-20181111115026447"></p>
+<ul>
+<li>Alternative metaphor: The number of # of word types seen to precede w</li>
+</ul>
+<p><img src="image-20181111115127525.png" alt="image-20181111115127525"></p>
+<ul>
+<li>normalized by the # of words preceding all words:</li>
+</ul>
+<p><img src="image-20181111115154691.png" alt="image-20181111115154691"></p>
+<p><img src="image-20181111115230726.png" alt="image-20181111115230726"></p>
+<ul>
+<li>Recursive formulation</li>
+</ul>
+<p><img src="image-20181111115935054.png" alt="image-20181111115935054"></p>
+<ul>
+<li>
+<p>Example</p>
+<p><img src="image-20181111115349759.png" alt="image-20181111115349759"></p>
+</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/11/10/Language-Model/" data-toggle="tooltip" data-placement="top" title="Language Model">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#probabilistic-language-models"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Probabilistic Language Models</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#why-we-need-a-language-model"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Why we need a language model</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#what-is-language-model"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">What is language model</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-compute-pw"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">How to compute P(w)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#the-chain-rule"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">The Chain Rule</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#how-to-estimate-these-probabilities"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">How to estimate these probabilities</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#markov-assumption"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">Markov Assumption</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#unigram-model"><span class="toc-nav-number">1.4.2.</span> <span class="toc-nav-text">Unigram model</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#bigram-model"><span class="toc-nav-number">1.4.3.</span> <span class="toc-nav-text">Bigram model</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#n-gram-models"><span class="toc-nav-number">1.4.4.</span> <span class="toc-nav-text">N-gram models</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#estimating-n-gram-probabilities"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Estimating N-gram Probabilities</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#bigram-probabilities"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">bigram probabilities</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#bigram-estimates-of-sentence-probabilities"><span class="toc-nav-number">2.1.1.</span> <span class="toc-nav-text">Bigram estimates of sentence probabilities</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#evaluation-and-perplexity"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Evaluation and Perplexity</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#extrinsic-evaluation"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Extrinsic evaluation</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#intrinsic-evaluation-perplexity"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Intrinsic evaluation: perplexity</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#generalization-and-zeros"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Generalization and zeros</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#smoothing-add-one-laplace-smoothing"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Smoothing: Add-one (Laplace) smoothing</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#interpolation"><span class="toc-nav-number">4.1.1.</span> <span class="toc-nav-text">Interpolation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#oov"><span class="toc-nav-number">4.1.2.</span> <span class="toc-nav-text">OOV</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#stupid-backoff"><span class="toc-nav-number">4.1.3.</span> <span class="toc-nav-text">Stupid backoff</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#kneser-ney-smoothing"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Kneser-Ney Smoothing</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#absolute-discounting-interpolation"><span class="toc-nav-number">4.2.1.</span> <span class="toc-nav-text">Absolute Discounting Interpolation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kneser-ney-smoothing"><span class="toc-nav-number">4.2.2.</span> <span class="toc-nav-text">Kneser-Ney Smoothing</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                        
+                          <a class="tag" href="/tags/#NLP" title="NLP">NLP</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "https://jingxuan.li/2018/11/10/Language-Model-N-grams/";
+    var disqus_url = "https://jingxuan.li/2018/11/10/Language-Model-N-grams/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    <span id="busuanzi_container_site_pv">
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
+                    </span>
+                </span></span></span></span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

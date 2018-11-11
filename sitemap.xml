@@ -2,16 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
+    <loc>https://jingxuan.li/2018/11/10/Language-Model/</loc>
     
-    <lastmod>2018-10-12T02:12:19.875Z</lastmod>
+    <lastmod>2018-11-11T10:02:54.456Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/10/Language-Model-N-grams/</loc>
+    
+    <lastmod>2018-11-11T01:09:24.129Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/10/Probabilistic-Model/</loc>
+    
+    <lastmod>2018-11-10T09:29:41.530Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/09/Evaluation/</loc>
+    
+    <lastmod>2018-11-09T10:28:02.911Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/06/Vector-SpaceModel-II-Scoring/</loc>
+    
+    <lastmod>2018-11-09T08:14:30.690Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://jingxuan.li/2018/08/25/Boolean-retrieval/</loc>
     
-    <lastmod>2018-08-25T11:02:46.199Z</lastmod>
+    <lastmod>2018-11-09T04:47:10.127Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/</loc>
+    
+    <lastmod>2018-11-09T04:32:17.647Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/11/05/Preprocessing/</loc>
+    
+    <lastmod>2018-11-09T02:15:01.672Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jingxuan.li/2018/03/18/Hadoop-IntelliJ-IDEA%E7%BB%93%E5%90%88Maven%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95MapReduce%E7%A8%8B%E5%BA%8F/</loc>
+    
+    <lastmod>2018-10-12T02:12:19.875Z</lastmod>
     
   </url>
   

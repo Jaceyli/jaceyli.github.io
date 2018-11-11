@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="baidu-site-verification" content="E91H9LxOVM">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Preprocessing - Jingxuan&#39;s blog
+        
+    </title>
+
+    <link rel="canonical" href="https://jingxuan.li/2018/11/05/Preprocessing/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116294246-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-116294246-1');
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg1.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                            
+                              <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                            
+                        </div>
+                        <h1>Preprocessing</h1>
+                        <h2 class="subheading">COMP6714 Week 4 @18S2 UNSW</h2>
+                        <span class="meta">
+                            Posted by Jingxuan on
+                            2018-11-05
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Jingxuan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p><img src="image-20181105202703693.png" alt="image-20181105202703693"></p>
+<h1 id="parsing-a-document">Parsing a document</h1>
+<ul>
+<li>Complications: <strong>Format/language</strong>
+<ul>
+<li>Documents being indexed can include docs from many different languages
+<ul>
+<li>A single index may have to contain terms of several languages.  E.g. id in English and French</li>
+</ul>
+</li>
+<li>Sometimes a document or its components can contain multiple languages/formats
+<ul>
+<li>French email with a German pdf attachment.</li>
+</ul>
+</li>
+<li>What is a unit document?
+<ul>
+<li>A file?</li>
+<li>An email? (Perhaps one of many in an mbox.)</li>
+<li>An email with 5 attachments?</li>
+<li>A group of files (PPT or LaTeX as HTML pages)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="tokens-and-terms">Tokens and Terms</h1>
+<h2 id="tokenization">Tokenization</h2>
+<ul>
+<li>
+<p>Input: “Friends, Romans and Countrymen”</p>
+</li>
+<li>
+<p>Output:</p>
+<ul>
+<li>Friends</li>
+<li>Romans</li>
+<li>Countrymen</li>
+</ul>
+</li>
+<li>
+<p>A token is an instance of a sequence of characters</p>
+</li>
+<li>
+<p>Each such token is now a candidate for an index entry, after further processing</p>
+<h2 id="issues">Issues</h2>
+<h3 id="issues-in-tokenizaiton">Issues in tokenizaiton</h3>
+</li>
+<li>
+<p>Finland’s capital =&gt; Finland? Finlands? Finland’s?</p>
+</li>
+<li>
+<p>Hewlett-Packarda 惠普=&gt; Hewlett and Packard as two tokens? 分开意思完全变了</p>
+<ul>
+<li>state-of-the-art: break up hyphenated sequence.</li>
+<li>co-education</li>
+<li>lowercase, lower-case, lower case ?</li>
+<li>It can be effective to get the user to put in possible hyphens连字符</li>
+</ul>
+</li>
+<li>
+<p>San Francisco: one token or two?</p>
+<h3 id="issues-in-numbers">Issues in Numbers</h3>
+</li>
+</ul>
+<ul>
+<li>
+<p>Dates, postcodes, phone numbers etc. in different forms</p>
+<ul>
+<li>3/20/91   Mar. 12, 1991  20/3/91</li>
+<li>55 B.C.</li>
+<li>B-52</li>
+<li>My PGP key is 324a3df234cb23e</li>
+<li>(800) 234-2333</li>
+<li>12,334,556  ‘,’  issues</li>
+</ul>
+</li>
+<li>
+<p>Often have embedded spaces</p>
+</li>
+<li>
+<p>Older IR systems may not index numbers</p>
+<ul>
+<li>But often very useful: think about things like looking up error codes/stacktraces on the web</li>
+<li>(One answer is using n-grams: Lecture 3)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Will often index “meta-data” separately
+<ul>
+<li>Creation date, format, etc.</li>
+</ul>
+</li>
+</ul>
+<h3 id="issues-in-language">Issues in language</h3>
+<ul>
+<li>French: L’ensemble =&gt; L ? L’ ? Le ?</li>
+<li>German: noun compounds. E.g., Lebensversicherungsgesellschaftsangestellter</li>
+<li>Chinese: no spaces between words. 还有些即使分词还有歧义 E.g.,南京市长江大桥</li>
+<li>Japanse: Dates/amounts in multiple formats</li>
+<li>Arabic (or Hebrew): written right to left, but numbers written left to right</li>
+</ul>
+<p>…</p>
+<h2 id="stop-words">Stop words</h2>
+<ul>
+<li>
+<p>With a stop list, you exclude from the dictionary entirely the commonest words. Intuition:</p>
+<ul>
+<li>
+<p>They have little semantic content: the, a, and, to, be</p>
+</li>
+<li>
+<p>There are a lot of them: ~30% of postings for top 30 words</p>
+<p>很多系统给了stop words，或者通过token的frequency把高频词加到stop words</p>
+</li>
+</ul>
+</li>
+<li>
+<p>But the trend is away from doing this:</p>
+</li>
+<li>
+<p>Good compression techniques (lecture 5) means the space for</p>
+<p>including stopwords in a system is very small</p>
+</li>
+<li>
+<p>Good query optimization techniques (lecture 7) mean you pay little at query time for including stop words.</p>
+</li>
+<li>
+<p>You need them for:</p>
+<ul>
+<li>Phrase queries: “King of Denmark”</li>
+<li>Various song titles, etc.: “Let it be”, “To be or not to be”</li>
+<li>“Relational” queries: “flights to London” vs. “flights from London”</li>
+</ul>
+</li>
+</ul>
+<h2 id="normolization">Normolization</h2>
+<h3 id="normolization-in-tokens">Normolization in tokens</h3>
+<ul>
+<li>
+<p>We need to “normalize” words in indexed text as well as query words into the same form</p>
+<ul>
+<li>E.g., match U.S.A. and USA</li>
+</ul>
+</li>
+<li>
+<p>We most commonly implicitly define equivalence classes of terms by, e.g.,</p>
+<ul>
+<li>deleting periods to form a term § U.S.A., USA =&gt; USA</li>
+<li>deleting hyphens to form a term
+<ul>
+<li>anti-discriminatory, antidiscriminatory =&gt; antidiscriminatory</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="normolization-in-languages">Normolization in languages</h3>
+<ul>
+<li>Accents: e.g., French résumé vs. resume.</li>
+<li>Umlauts: e.g., German: Tuebingen vs. Tübingen</li>
+<li>Chinese: e.g., 简体 vs. 繁體</li>
+</ul>
+<h2 id="case-folding">Case folding</h2>
+<ul>
+<li>Reduce all letters to lower case
+<ul>
+<li>exception: upper case in mid-sentence?
+<ul>
+<li>e.g., General Motors</li>
+<li>Fed vs. fed</li>
+<li>SAIL vs. sail</li>
+</ul>
+</li>
+<li>Often best to lower case everything, since users will use lowercase regardless of ‘correct’ capitalization…</li>
+</ul>
+</li>
+<li>Google example:
+<ul>
+<li>Query C.A.T. : #1 result is for “cat” (well, Lolcats) not Caterpillar Inc.</li>
+</ul>
+</li>
+</ul>
+<h2 id="thesauri-and-soundex">Thesauri and soundex</h2>
+<ul>
+<li>Do we handle synonyms and homonyms?
+<ul>
+<li>E.g., by hand-constructed equivalence classes
+<ul>
+<li>car = automobile,  color = colour</li>
+</ul>
+</li>
+<li>We can rewrite to form equivalence-class terms
+<ul>
+<li>When the document contains automobile, index it under car- automobile (and vice-versa)</li>
+</ul>
+</li>
+<li>Or we can expand a query
+<ul>
+<li>When the query contains automobile, look under car as well</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>What about spelling mistakes?
+<ul>
+<li>One approach is soundex, which forms equivalence classes<br>
+of words based on phonetic heuristics</li>
+<li>deal with :
+<ul>
+<li>noise input 打错了</li>
+<li>打太快，没打空格</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="lemmatization">Lemmatization</h2>
+<ul>
+<li>
+<p><strong>Reduce inflectional/variant forms</strong> to base form</p>
+<ul>
+<li>
+<p>E.g., am, are, isa =&gt; be</p>
+<p>car, cars, car’s, cars’ =&gt; car</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>the boy’s cars are different colors  =&gt;  the boy car be different color</li>
+<li>Lemmatization implies doing “proper” reduction to dictionary headword form</li>
+</ul>
+<h2 id="stemming">Stemming</h2>
+<ul>
+<li>
+<p><strong>Reduce terms to their “roots” before indexing</strong></p>
+</li>
+<li>
+<p>“Stemming” suggest crude affix chopping</p>
+<ul>
+<li>
+<p>language dependent</p>
+</li>
+<li>
+<p>e.g., automate(s), automatic, automation all reduced to automat. 即使automat不是一个真实存在的词，也没关系 =&gt; 词根</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Do stemming and other normalizations help?
+<ul>
+<li>English: very mixed results. Helps recall for some queries but harms precision on others
+<ul>
+<li>E.g., operative (dentistry) ⇒ oper</li>
+</ul>
+</li>
+<li>Definitely useful for Spanish, German, Finnish, …
+<ul>
+<li>30% performance gains for Finnish!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="dictionary-entries-first-cut">Dictionary entries – first cut</h2>
+<p><img src="image-20181105212434807.png" alt="image-20181105212434807"></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/" data-toggle="tooltip" data-placement="top" title="Term Weighting and Vector Space Model">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/08/25/Boolean-retrieval/" data-toggle="tooltip" data-placement="top" title="Boolean retrieval">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#parsing-a-document"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Parsing a document</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#tokens-and-terms"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Tokens and Terms</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tokenization"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Tokenization</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#issues"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Issues</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#issues-in-tokenizaiton"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">Issues in tokenizaiton</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#issues-in-numbers"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">Issues in Numbers</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#issues-in-language"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">Issues in language</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#stop-words"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Stop words</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#normolization"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Normolization</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#normolization-in-tokens"><span class="toc-nav-number">2.4.1.</span> <span class="toc-nav-text">Normolization in tokens</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#normolization-in-languages"><span class="toc-nav-number">2.4.2.</span> <span class="toc-nav-text">Normolization in languages</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#case-folding"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">Case folding</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#thesauri-and-soundex"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">Thesauri and soundex</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#lemmatization"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">Lemmatization</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#stemming"><span class="toc-nav-number">2.8.</span> <span class="toc-nav-text">Stemming</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#dictionary-entries-first-cut"><span class="toc-nav-number">2.9.</span> <span class="toc-nav-text">Dictionary entries – first cut</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#COMP6714" title="COMP6714">COMP6714</a>
+                        
+                          <a class="tag" href="/tags/#Information Retrieval" title="Information Retrieval">Information Retrieval</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "jingxuan-li";
+    var disqus_identifier = "https://jingxuan.li/2018/11/05/Preprocessing/";
+    var disqus_url = "https://jingxuan.li/2018/11/05/Preprocessing/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jingxuan0">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/jaceyli">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/jingxuan-li-490a60152/">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jingxuan 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    | 
+                    <span style="display: inline-block; margin: 0 5px;">
+                    <span id="busuanzi_container_site_pv">
+                     Total <span id="busuanzi_value_site_pv"></span> Hits
+                    </span>
+                </span></span></span></span></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- 不蒜子统计 -->
+<!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jingxuan.li/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
