@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -228,6 +228,7 @@ img{
     max-width: 80%!important
 }
 </style>
+
 <blockquote>
 <p>Abstract:</p>
 <ul>
@@ -236,10 +237,8 @@ img{
 <li>Data Cube介绍</li>
 </ul>
 </blockquote>
-<h1 id="data-warehouses">Data Warehouses</h1>
-<hr>
-<h2 id="why-data-warehouses">Why Data Warehouses?</h2>
-<p>Data Analysis Problems:</p>
+<h1 id="data-warehouses"><a href="#Data-Warehouses" class="headerlink" title="Data Warehouses"></a>Data Warehouses</h1><hr>
+<h2 id="why-data-warehouses"><a href="#Why-Data-Warehouses" class="headerlink" title="Why Data Warehouses?"></a>Why Data Warehouses?</h2><p>Data Analysis Problems:</p>
 <ul>
 <li>The same data found in many different systems</li>
 <li>Heterogeneous（各种各样的） sources</li>
@@ -248,65 +247,51 @@ img{
 <li>Data are “volatile”(易失的)</li>
 </ul>
 <p>So, the solution is data warehouses.</p>
-<h2 id="what-are-data-warehouses">What are Data Warehouses?</h2>
-<p>Defined in many different ways, but not rigorously.</p>
+<h2 id="what-are-data-warehouses"><a href="#What-are-Data-Warehouses" class="headerlink" title="What are Data Warehouses?"></a>What are Data Warehouses?</h2><p>Defined in many different ways, but not rigorously.</p>
 <blockquote>
-<p>“A data warehouse is a <strong>subject-oriented</strong>, <strong>integrated</strong>, <strong>time-variant</strong>, and <strong>nonvolatile</strong> collection of data in support of management’s decision-making process.”   --W. H. Inmon</p>
+<p>“A data warehouse is a <strong>subject-oriented</strong>, <strong>integrated</strong>, <strong>time-variant</strong>, and <strong>nonvolatile</strong> collection of data in support of management’s decision-making process.”   —W. H. Inmon</p>
 </blockquote>
-<h3 id="subject-oriented面向主题的">Subject-oriented（面向主题的）</h3>
-<ul>
+<h3 id="subject-oriented面向主题的"><a href="#Subject-oriented（面向主题的）" class="headerlink" title="Subject-oriented（面向主题的）"></a>Subject-oriented（面向主题的）</h3><ul>
 <li>Organized around major subjects, such as customer,product, sales.</li>
 <li>Focusing on the modeling and analysis of data for decision makers, not on daily operations or transaction processing.</li>
 <li>Provide a simpleand conciseview around particular subject issues by excluding data that are not useful in the decision support process.</li>
 </ul>
 <p>数据仓库关注决策者的数据建模与分析，而不是构造组织结构的日常操作与事务处理。因此，数据仓库排除对于决策无用的数据，提供指定主题的简明视图。</p>
-<h3 id="integrated集成的">Integrated（集成的）</h3>
-<ul>
+<h3 id="integrated集成的"><a href="#Integrated（集成的）" class="headerlink" title="Integrated（集成的）"></a>Integrated（集成的）</h3><ul>
 <li>Constructed by integrating multiple, heterogeneous data sources: relational databases, flat files, on-line transaction records</li>
 <li>Data cleaning and data integration techniques are applied.</li>
 </ul>
 <p>通常，构造数据仓库是将多个不同类型的数据源集成在一起，使用数据清理，数据集成技术，确保命名约定、编码结构、属性度量的一致性。</p>
-<h3 id="time-variant时变的">Time-variant（时变的）</h3>
-<ul>
-<li>The time horizon for the data warehouse is significantly longer than that of operational systems. It provides information from a<br>
-historical perspective(e.g., past 5-10 years).</li>
+<h3 id="time-variant时变的"><a href="#Time-variant（时变的）" class="headerlink" title="Time-variant（时变的）"></a>Time-variant（时变的）</h3><ul>
+<li>The time horizon for the data warehouse is significantly longer than that of operational systems. It provides information from a<br>historical perspective(e.g., past 5-10 years).</li>
 <li>Every key structure in the data warehouse contains an element of time, explicitly(显式) or implicitly（隐式）. But the key of operational data may or may not contain “time element”.</li>
 </ul>
-<h3 id="non-volatile非易失的">Non-volatile（非易失的）</h3>
-<ul>
-<li>
-<p>A <strong>physically separate store</strong> of data transformed from the operational environment.</p>
-</li>
-<li>
-<p>Operational <strong>update of data does not occur</strong> in the data warehouse environment.</p>
-<p>Does not require transaction processing, recovery, and concurrency control mechanisms.</p>
-<p>Requires only two operations in data accessing:</p>
+<h3 id="non-volatile非易失的"><a href="#Non-volatile（非易失的）" class="headerlink" title="Non-volatile（非易失的）"></a>Non-volatile（非易失的）</h3><ul>
+<li>A <strong>physically separate store</strong> of data transformed from the operational environment.</li>
+<li><p>Operational <strong>update of data does not occur</strong> in the data warehouse environment. </p>
+<p>  Does not require transaction processing, recovery, and concurrency control mechanisms.</p>
+<p>  Requires only two operations in data accessing:</p>
 <ul>
 <li><strong>Initial loading of data</strong></li>
 <li><strong>Access of data</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="data-warehouse-architecture">Data Warehouse Architecture</h2>
-<p><img src="1.png" alt="Data Warehouse Architecture"></p>
+<h2 id="data-warehouse-architecture"><a href="#Data-Warehouse-Architecture" class="headerlink" title="Data Warehouse Architecture"></a>Data Warehouse Architecture</h2><p><img src="1.png" alt="Data Warehouse Architecture"></p>
 <ul>
 <li>外部数据通过Extract, Transform, Load, Refresh这些步骤，将数据进行clean , match, aggregate， 然后放入Data Warehouse。</li>
 <li>DW已经是所有subject的data一个统一体，我们还可以进行细分，将Data Warehouse分成若干个Data Marts，这些Marts都是针对于specific subject的。在DW中，那我们用OLAP分析处理这些数据呢</li>
 <li>经过OLAP的分析处理后，我们还可以用这些已经比较直观的数据再次进行analysis, query, data Mining 来获取更加深层次的隐藏的信息。</li>
 </ul>
-<h2 id="why-separate-data-warehouse">Why Separate Data Warehouse?</h2>
-<p>为什么不直接在这种数据库上进行联机分析处理，而是另外花费时间和资源去构造一个分离的数据仓库呢？</p>
+<h2 id="why-separate-data-warehouse"><a href="#Why-Separate-Data-Warehouse" class="headerlink" title="Why Separate Data Warehouse?"></a>Why Separate Data Warehouse?</h2><p>为什么不直接在这种数据库上进行联机分析处理，而是另外花费时间和资源去构造一个分离的数据仓库呢？</p>
 <ul>
-<li>
-<p>High performance for both systems</p>
+<li><p>High performance for both systems</p>
 <ul>
-<li>DBMS — tuned for OLTP: access methods, indexing, concurrency<br>
-control, recovery</li>
+<li>DBMS — tuned for OLTP: access methods, indexing, concurrency<br>control, recovery</li>
 <li>Warehouse — tuned for OLAP: complex OLAP queries, multidimensional view, consolidation.</li>
 </ul>
 </li>
-<li>
-<p>Different functions and different data:</p>
+<li><p>Different functions and different data:</p>
 <ul>
 <li><strong>missing data</strong>: Decision support requires historical data which operational DBs do not typically maintain</li>
 <li><strong>data consolidation</strong>: DS requires consolidation (aggregation, summarization) of data from heterogeneous sources</li>
@@ -314,30 +299,23 @@ control, recovery</li>
 </ul>
 </li>
 </ul>
-<h1 id="olap">OLAP</h1>
-<hr>
-<h2 id="what-is-olap">What is OLAP?</h2>
-<p>Data warehouses provide on-line analytical processing (OLAP) tools for the interactive analysis of multidimensional data of varied granularities（各种粒度的多维数据分析）, which facilitates effective data generalization and data mining. Many other data mining functions, such as association, classification, prediction, and clustering, can be integrated with OLAP operations to enhance interactive mining of knowledge at multiple levels of abstraction. Hence, the data warehouse has become an increasingly important platform for data analysis and on-line analytical processing and will provide an effective platform for data mining.</p>
+<h1 id="olap"><a href="#OLAP" class="headerlink" title="OLAP"></a>OLAP</h1><hr>
+<h2 id="what-is-olap"><a href="#What-is-OLAP" class="headerlink" title="What is OLAP?"></a>What is OLAP?</h2><p>Data warehouses provide on-line analytical processing (OLAP) tools for the interactive analysis of multidimensional data of varied granularities（各种粒度的多维数据分析）, which facilitates effective data generalization and data mining. Many other data mining functions, such as association, classification, prediction, and clustering, can be integrated with OLAP operations to enhance interactive mining of knowledge at multiple levels of abstraction. Hence, the data warehouse has become an increasingly important platform for data analysis and on-line analytical processing and will provide an effective platform for data mining.</p>
 <ul>
-<li>OLTP (on-line transaction processing)
-<ul>
+<li>OLTP (on-line transaction processing)<ul>
 <li>Major task of traditional relational DBMS</li>
 <li>Day-to-day operations: purchasing, inventory, banking, manufacturing, payroll, registration, accounting, etc.</li>
 </ul>
 </li>
-<li>OLAP (on-line analytical processing)
-<ul>
+<li>OLAP (on-line analytical processing)<ul>
 <li>Major task of data warehouse system</li>
 <li>Data analysis and decision making</li>
 </ul>
 </li>
 </ul>
-<h2 id="oltp-vs-olap">OLTP vs. OLAP</h2>
-<p><img src="2.png" alt=""></p>
-<h1 id="the-multidimensional-model">The Multidimensional Model</h1>
-<hr>
-<h2 id="what-is-the-multidimensional-model">What is the Multidimensional Model?</h2>
-<p>A data warehouse is based on a multidimensional data model which views data in the form of a <strong>data cube</strong>. A data cube allows data to be modeled and viewed in multiple dimensions. It is defined by <strong>dimensions</strong> and <strong>facts</strong>.</p>
+<h2 id="oltp-vs-olap"><a href="#OLTP-vs-OLAP" class="headerlink" title="OLTP vs. OLAP"></a>OLTP vs. OLAP</h2><p><img src="2.png" alt=""></p>
+<h1 id="the-multidimensional-model"><a href="#The-Multidimensional-Model" class="headerlink" title="The Multidimensional Model"></a>The Multidimensional Model</h1><hr>
+<h2 id="what-is-the-multidimensional-model"><a href="#What-is-the-Multidimensional-Model" class="headerlink" title="What is the Multidimensional Model?"></a>What is the Multidimensional Model?</h2><p>A data warehouse is based on a multidimensional data model which views data in the form of a <strong>data cube</strong>. A data cube allows data to be modeled and viewed in multiple dimensions. It is defined by <strong>dimensions</strong> and <strong>facts</strong>.</p>
 <p>Key concepts:</p>
 <ul>
 <li><strong>Facts</strong>: the subject it models; Facts are numerical measures.</li>
@@ -345,30 +323,14 @@ control, recovery</li>
 <li><strong>Dimensions</strong>: context of the measure（Dimensions are the perspectives or entities with respect to which an organization wants to keep records</li>
 <li><strong>Hierarchies</strong>: Provide contexts of different granularities (aka. grains), a tree of dimension values</li>
 </ul>
-<p>举例说明：<br>
-<img src="3.png" alt="example1"><br>
-在这个cube中，它的dimensions其实是product，location，time，那么为什么我们看到的图的三个维度分别是product，month，city呢？因为每个dimension是分hierarchy的（就如这里的city，如果我们使用OLAP工具进行操作的话，它可以roll-up到sate，也可以drill-down到stor)。因此，我们需要给每个dimension一个类似于总称的东西。</p>
-<p><img src="4.png" alt="example2"><br>
-蓝色区域表示所有product的汇总。<br>
-第一个小cube（箭头指的那个）表示所有product一月份在纽约的销售总量。</p>
-<p>所以，我们可以得到以下汇总图：<br>
-<img src="5.png" alt=""><br>
-<img src="6.png" alt=""></p>
-<h2 id="olap-operations">OLAP Operations</h2>
-<p>All operations are closed under the multidimensional model, i.e., <strong>both input and output of an operation is a cube</strong>. So that they can be composed.</p>
-<h3 id="roll-up">Roll-up</h3>
-<p>Roll-up: move up the hierarchy 聚集数据</p>
-<h3 id="drill-down">Drill-down</h3>
-<p>Drill-down: move down the hierarchy 展开详细数据<br>
-<img src="7.png" alt=""></p>
-<h3 id="slice-and-dice">Slice and Dice</h3>
-<p>Slice: a selection on one dimension of the given cube, resulting in a subcube.<br>
-<img src="8.png" alt=""><br>
-Dice：defines a subcube by performing a selection on two or more dimensions.<br>
-<img src="9.png" alt=""></p>
-<h3 id="pivoting">Pivoting</h3>
-<p>Pivoting: aggregate on selected dimensions, usually 2 dims (cross- tabulation)<br>
-<img src="10.png" alt=""></p>
+<p>举例说明：<br><img src="3.png" alt="example1"><br>在这个cube中，它的dimensions其实是product，location，time，那么为什么我们看到的图的三个维度分别是product，month，city呢？因为每个dimension是分hierarchy的（就如这里的city，如果我们使用OLAP工具进行操作的话，它可以roll-up到sate，也可以drill-down到stor)。因此，我们需要给每个dimension一个类似于总称的东西。</p>
+<p><img src="4.png" alt="example2"><br>蓝色区域表示所有product的汇总。<br>第一个小cube（箭头指的那个）表示所有product一月份在纽约的销售总量。</p>
+<p>所以，我们可以得到以下汇总图：<br><img src="5.png" alt=""><br><img src="6.png" alt=""></p>
+<h2 id="olap-operations"><a href="#OLAP-Operations" class="headerlink" title="OLAP Operations"></a>OLAP Operations</h2><p>All operations are closed under the multidimensional model, i.e., <strong>both input and output of an operation is a cube</strong>. So that they can be composed.</p>
+<h3 id="roll-up"><a href="#Roll-up" class="headerlink" title="Roll-up"></a>Roll-up</h3><p>Roll-up: move up the hierarchy 聚集数据</p>
+<h3 id="drill-down"><a href="#Drill-down" class="headerlink" title="Drill-down"></a>Drill-down</h3><p>Drill-down: move down the hierarchy 展开详细数据<br><img src="7.png" alt=""></p>
+<h3 id="slice-and-dice"><a href="#Slice-and-Dice" class="headerlink" title="Slice and Dice"></a>Slice and Dice</h3><p>Slice: a selection on one dimension of the given cube, resulting in a subcube.<br><img src="8.png" alt=""><br>Dice：defines a subcube by performing a selection on two or more dimensions.<br><img src="9.png" alt=""></p>
+<h3 id="pivoting"><a href="#Pivoting" class="headerlink" title="Pivoting"></a>Pivoting</h3><p>Pivoting: aggregate on selected dimensions, usually 2 dims (cross- tabulation)<br><img src="10.png" alt=""></p>
 
                 
 

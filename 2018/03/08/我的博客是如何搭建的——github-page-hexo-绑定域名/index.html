@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -231,20 +231,14 @@
 <li>需要安装git</li>
 </ul>
 </blockquote>
-<h1 id="github-pages">Github Pages</h1>
-<hr>
-<p>首先，要有一个github账户，创建一个仓库，命名为:username.github.io.<br>
-注意<strong>username必须和github用户名一致啊！</strong>(之前创建的不是一样的，就一直404…)<br>
-详细步骤可以看<a href="https://pages.github.com" target="_blank" rel="noopener">官方网站</a></p>
-<h1 id="hexo">Hexo</h1>
-<hr>
+<h1 id="github-pages"><a href="#Github-Pages" class="headerlink" title="Github Pages"></a>Github Pages</h1><hr>
+<p>首先，要有一个github账户，创建一个仓库，命名为:username.github.io.<br>注意<strong>username必须和github用户名一致啊！</strong>(之前创建的不是一样的，就一直404…)<br>详细步骤可以看<a href="https://pages.github.com" target="_blank" rel="noopener">官方网站</a></p>
+<h1 id="hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><hr>
 <p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章</p>
-<h2 id="安装">安装</h2>
-<p><strong>参考官网教程：</strong><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo官网</a>，<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo中文教程</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>参考官网教程：</strong><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo官网</a>，<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo中文教程</a></p>
 <p>已经装好node.js和git的前提下，直接用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install -g hexo-cli</span></span><br></pre></td></tr></table></figure>
-<h2 id="建站">建站</h2>
-<p>创建hexo文件夹，进入路径后初始化：</p>
+<h2 id="建站"><a href="#建站" class="headerlink" title="建站"></a>建站</h2><p>创建hexo文件夹，进入路径后初始化：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> hexo init</span></span><br></pre></td></tr></table></figure>
 <p>安装依赖包：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install</span></span><br></pre></td></tr></table></figure>
@@ -254,18 +248,13 @@
 <p>接下来配置与Github pages进行关联，打开_config.yml文件，在最下面添加如下配置信息：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">deploy:</span></span><br><span class="line"><span class="string">type:</span> git</span><br><span class="line"><span class="string">repo:</span> <span class="string">https:</span><span class="comment">//github.com/username/username.github.io.git</span></span><br><span class="line"><span class="string">branch:</span> master</span><br></pre></td></tr></table></figure>
 <p>repo字段的值替换成你的github pages提交代码的git地址。</p>
-<h2 id="部署">部署</h2>
-<p>首先需要明白所谓部署到github的原理。</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>首先需要明白所谓部署到github的原理。</p>
 <ul>
-<li>
-<p>之前步骤中在Github上创建的那个特别的repo一个最大的特点就是其master中的html静态文件，可以通过链接http://username.github.io来直接访问。</p>
+<li><p>之前步骤中在Github上创建的那个特别的repo一个最大的特点就是其master中的html静态文件，可以通过链接<a href="http://username.github.io来直接访问。" target="_blank" rel="noopener">http://username.github.io来直接访问。</a></p>
 </li>
-<li>
-<p>Hexo -g 会生成一个静态网站（第一次会生成一个public目录），这个静态文件可以直接访问。</p>
+<li><p>Hexo -g 会生成一个静态网站（第一次会生成一个public目录），这个静态文件可以直接访问。</p>
 </li>
-<li>
-<p>需要将hexo生成的静态网站，提交到github上。</p>
-</li>
+<li>需要将hexo生成的静态网站，提交到github上。</li>
 </ul>
 <p>所以你就需要在你的站点里使用终端命令进行发布：</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">hexo clean</span></span><br><span class="line"><span class="attribute">hexo g</span></span><br><span class="line"><span class="attribute">hexo d</span></span><br></pre></td></tr></table></figure>
@@ -273,28 +262,23 @@
 <p><strong>更多Hexo指令请参考：</strong><a href="https://hexo.io/zh-cn/docs/commands.html" target="_blank" rel="noopener">Hexo官方指令</a></p>
 <blockquote>
 <p><strong>总结hexo常用命令：</strong></p>
-</blockquote>
-<blockquote>
 <p>$ hexo generate (hexo g) 生成静态文件，会在当前目录下生成一个新的叫做public的文件夹</p>
 <p>$ hexo server (hexo s) 启动本地web服务，用于博客的预览</p>
 <p>$ hexo deploy (hexo d) 部署播客到远端（比如github, heroku等平台）</p>
 <p>$ hexo new “postName” 新建文章</p>
 <p>$ hexo clean 清除缓存，**强烈建议每次执行命令前先清理缓存，每次部署前先删除</p>
 </blockquote>
-<h2 id="主题">主题</h2>
-<p>恭喜你已经有了自己的Blog了，但是很丑，对不对？… 所以需要换一个主题，如果没有合适的选择，可以看看：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">知乎：有哪些好看的 Hexo 主题？</a>。当然<a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">Hexo theme官网</a>上也有很多不错的选择。</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>恭喜你已经有了自己的Blog了，但是很丑，对不对？… 所以需要换一个主题，如果没有合适的选择，可以看看：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">知乎：有哪些好看的 Hexo 主题？</a>。当然<a href="https://hexo.io/themes/index.html" target="_blank" rel="noopener">Hexo theme官网</a>上也有很多不错的选择。</p>
 <p>每个不同的主题会需要不同的配置，主题配置文件在主题目录下的_config.yml。</p>
-<h1 id="域名绑定">域名绑定</h1>
-<hr>
+<h1 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h1><hr>
 <ul>
 <li>购买域名。我是在namecheap买的，比较便宜。</li>
 <li>在你的域名注册提供商那里配置DNS解析。我先用了DNSPod的，不是很稳定，国外访问比较慢，又换成了namecheap。</li>
 <li>在本地目录中，进入source目录，添加CNAME文件(没有后缀)，里面添加你的域名信息（不加http://）</li>
-<li>下一步注册DNSpod，然后添加域名，添加记录即可。添加域名填写你的域名即可，不用添加http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github pages的地址）</li>
+<li>下一步注册DNSpod，然后添加域名，添加记录即可。添加域名填写你的域名即可，不用添加<a href="http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github" target="_blank" rel="noopener">http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github</a> pages的地址）</li>
 </ul>
 <p>那么现在把你本地的Hexo生成一下在提交到Github pages上吧（生成和提交简写命令hexo d -g），然后打开你的浏览器输入你购买的域名尝试吧。（刚配置的dns可以能要一段时间才能生效）</p>
-<h1 id="写在最后">写在最后</h1>
-<hr>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><hr>
 <p>搭建博客还是很简单的，重点是要坚持写啊~</p>
 
                 

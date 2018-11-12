@@ -155,14 +155,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -234,78 +234,44 @@
 <li>Decision tree pruning</li>
 </ul>
 </blockquote>
-<h1 id="a-decision-tree-example">A Decision Tree Example</h1>
-<hr>
+<h1 id="a-decision-tree-example"><a href="#A-Decision-Tree-Example" class="headerlink" title="A Decision Tree Example"></a>A Decision Tree Example</h1><hr>
 <p><img src="1.png" alt=""></p>
 <p><img src="2.png" alt=""></p>
 <p>下面介绍如何选择attribute to split</p>
-<h2 id="extracting-classification-rules-from-trees">Extracting Classification Rules from Trees</h2>
-<ul>
+<h2 id="extracting-classification-rules-from-trees"><a href="#Extracting-Classification-Rules-from-Trees" class="headerlink" title="Extracting Classification Rules from Trees"></a>Extracting Classification Rules from Trees</h2><ul>
 <li>represent the knowledge in the form of <strong>IF-THEN</strong> rules</li>
-<li>One rule is created for each path from the root to leaf
-<ul>
+<li>One rule is created for each path from the root to leaf<ul>
 <li>Each attribute-value pair along a path forms a conjunction</li>
-<li>The leaf node holds the class prediction<br>
-E.g.,<br>
-<strong>IF</strong> age = “&lt;=30” <strong>AND</strong> student = “no” <strong>THEN</strong> buys_computer = “no”</li>
+<li>The leaf node holds the class prediction<br>E.g.,<br><strong>IF</strong> age = “&lt;=30” <strong>AND</strong> student = “no” <strong>THEN</strong> buys_computer = “no”</li>
 </ul>
 </li>
 </ul>
-<h1 id="algorithm-for-decision-tree-induction">Algorithm for Decision Tree Induction</h1>
-<hr>
+<h1 id="algorithm-for-decision-tree-induction"><a href="#Algorithm-for-Decision-Tree-Induction" class="headerlink" title="Algorithm for Decision Tree Induction"></a>Algorithm for Decision Tree Induction</h1><hr>
 <ul>
-<li>Basic algorithm
-<ul>
+<li>Basic algorithm<ul>
 <li>Input: Attributes are categorical (if continuous-valued, they are discretized in advance)</li>
-<li>Overview: Tree is constructed in a <strong>top-down recursive divide-and-conquer manner</strong><br>
-<strong>使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果</strong></li>
+<li>Overview: Tree is constructed in a <strong>top-down recursive divide-and-conquer manner</strong><br><strong>使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果</strong></li>
 </ul>
 </li>
-<li>Three conditions for stopping partitioning (i.e.,boundary conditions)
-<ul>
+<li>Three conditions for stopping partitioning (i.e.,boundary conditions)<ul>
 <li>There are no samples left, OR</li>
 <li>All samples for a given node belong to the same class, OR</li>
-<li>There are <strong>no remaining attributes</strong> for further partitioning (majority voting is employed for classifying the leaf) &lt;—— only for id3, not cart</li>
+<li>There are <strong>no remaining attributes</strong> for further partitioning (majority voting is employed for classifying the leaf) &lt;—— only for id3, not cart<h2 id="attribute-selection-measure"><a href="#Attribute-Selection-Measure" class="headerlink" title="Attribute Selection Measure"></a>Attribute Selection Measure</h2><h3 id="information-gainid3-c45"><a href="#Information-Gain-ID3-C4-5" class="headerlink" title="Information Gain(ID3 / C4.5):"></a>Information Gain(ID3 / C4.5):</h3></li>
 </ul>
 </li>
-</ul>
-<h2 id="attribute-selection-measure">Attribute Selection Measure</h2>
-<h3 id="information-gainid3-c45">Information Gain(ID3 / C4.5):</h3>
+<li>select the attribute with the <strong>highest information gain</strong><br><img src="3.png" alt=""><br>For the example above, we use the information gain as the criteria, and splitting the age into 3 partitions because it is always better than 2 partitions, as 3 partitions got smaller entropy. So, <strong>we should always spilt partitions as many as we can.</strong><br><br></li>
+<li><p>Information Gain Computation</p>
 <ul>
-<li>
-<p>select the attribute with the <strong>highest information gain</strong><br>
-<img src="3.png" alt=""><br>
-For the example above, we use the information gain as the criteria, and splitting the age into 3 partitions because it is always better than 2 partitions, as 3 partitions got smaller entropy. So, <strong>we should always spilt partitions as many as we can.</strong><br>
-<br></p>
-</li>
-<li>
-<p>Information Gain Computation</p>
-<ul>
-<li>why we choose age to split not other attributes?<br>
-Let’s compute the information gain for all attribute:<br>
-class s1: buy_computer = “yes”, s2:&quot;no&quot;<br>
-<img src="4.png" alt=""><br>
-The entropy for age:<br>
-<img src="5.png" alt=""><br>
-5/14*I(2,3) means “age&lt;=30” has 5 out of 14 samples, with 2 yes and 3 no.<br>
-Hence, Gain(age) = I ( p, n) - E(age) = 0.246<br>
-Similarly,<br>
-Gain(income) = 0.029<br>
-Gain(student) = 0.151<br>
-Gain(credit _ rating) = 0.048<br>
-So, we choose age to spilt is most reasonable.</li>
-</ul>
+<li><p>why we choose age to split not other attributes?<br>Let’s compute the information gain for all attribute:<br>class s1: buy<em>computer = “yes”, s2:”no”<br><img src="4.png" alt=""><br>The entropy for age:<br><img src="5.png" alt=""><br>5/14*I(2,3) means “age&lt;=30” has 5 out of 14 samples, with 2 yes and 3 no.<br>Hence, Gain(age) = I ( p, n) - E(age) = 0.246<br>Similarly,<br>Gain(income) = 0.029<br>Gain(student) = 0.151<br>Gain(credit </em> rating) = 0.048<br>So, we choose age to spilt is most reasonable.</p>
 <p>先根据age分，得到三个分支，然后根据每个分支的information gain再选择attribute split。</p>
-<p><strong>注意:</strong><br>
-在一棵决策树上也许会存在一部分节点，它们具有多种可能的结果值，但是又无法再进一步拆分。例如:把第一行数据buys_computer改为yes，在age&lt;30, student = 'No’的情况下就是多种结果。<br>
-<img src="13.png" alt=""></p>
+<p><strong>注意:</strong><br>在一棵决策树上也许会存在一部分节点，它们具有多种可能的结果值，但是又无法再进一步拆分。例如:把第一行数据buys_computer改为yes，在age&lt;30, student = ‘No’的情况下就是多种结果。<br><img src="13.png" alt=""></p>
 </li>
 </ul>
-<h3 id="gini-indexcart">Gini index(CART)</h3>
-<ul>
+</li>
+</ul>
+<h3 id="gini-indexcart"><a href="#Gini-index-CART" class="headerlink" title="Gini index(CART)"></a>Gini index(CART)</h3><ul>
 <li>CART stand for Classification And Regression Tree</li>
-<li>Gini index (CART, IBM IntelligentMiner)
-<ul>
+<li>Gini index (CART, IBM IntelligentMiner)<ul>
 <li>All attributes are assumed <strong>continuous-valued</strong></li>
 <li>Assume there exist several possible split values for each attribute</li>
 <li>May need other tools, such as clustering, to get the possible split values</li>
@@ -313,127 +279,82 @@ So, we choose age to spilt is most reasonable.</li>
 </ul>
 </li>
 <li>Induces <strong>binary split =&gt; binary decision trees</strong></li>
-<li>If a data set T contains examples from n classes, gini index, gini(T) is defined as<br>
-<img src="6.png" alt=""><br>
-where pj is the relative frequency of class j in T.<br>
-<strong>Gini index measures the probability to make mistake</strong></li>
-<li>If a data set T is split into two subsets T1 and T2 with sizes N1 and N2 respectively, the gini index of the split data contains examples from n classes, the gini index gini(T) is defined as<br>
-<img src="7.png" alt=""></li>
-<li>The attribute provides the smallest ginisplit(T) is chosen to split the node (<strong>need to enumerate all possible splitting points for each attribute</strong>).</li>
+<li>If a data set T contains examples from n classes, gini index, gini(T) is defined as<br><img src="6.png" alt=""><br>where pj is the relative frequency of class j in T.<br><strong>Gini index measures the probability to make mistake</strong></li>
+<li>If a data set T is split into two subsets T1 and T2 with sizes N1 and N2 respectively, the gini index of the split data contains examples from n classes, the gini index gini(T) is defined as<br><img src="7.png" alt=""></li>
+<li>The attribute provides the smallest ginisplit(T) is chosen to split the node (<strong>need to enumerate all possible splitting points for each attribute</strong>).<h4 id="case-i-numerical-attributes"><a href="#Case-I-Numerical-Attributes" class="headerlink" title="Case I: Numerical Attributes"></a>Case I: Numerical Attributes</h4><img src="8.png" alt=""><h4 id="case-ii-categorical-attributes"><a href="#Case-II-Categorical-Attributes" class="headerlink" title="Case II: Categorical Attributes"></a>Case II: Categorical Attributes</h4><img src="9.png" alt=""></li>
 </ul>
-<h4 id="case-i-numerical-attributes">Case I: Numerical Attributes</h4>
-<p><img src="8.png" alt=""></p>
-<h4 id="case-ii-categorical-attributes">Case II: Categorical Attributes</h4>
-<p><img src="9.png" alt=""></p>
-<h3 id="id3-vs-cart">ID3 vs. CART</h3>
-<ul>
+<h3 id="id3-vs-cart"><a href="#ID3-vs-CART" class="headerlink" title="ID3 vs. CART"></a>ID3 vs. CART</h3><ul>
 <li>ID3是多叉树</li>
 <li>CART是二叉树，且每个非叶子节点都有两个孩子</li>
 </ul>
-<h1 id="overfitting">Overfitting</h1>
-<hr>
+<h1 id="overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h1><hr>
 <ul>
-<li>Overfitting: An induced tree may overfit the training data
-<ul>
-<li>Too many branches, some may reflect anomalies(反常) due to noise or outliers</li>
-<li>Poor accuracy for unseen samples<br>
-<img src="10.png" alt=""></li>
+<li>Overfitting: An induced tree may overfit the training data<ul>
+<li>Too many branches, some may reflect anomalies(反常) due to noise or outliers </li>
+<li>Poor accuracy for unseen samples<br><img src="10.png" alt=""></li>
 </ul>
 </li>
 <li>Overfitting: <strong>model too complex -&gt; training error keep decreasing, but testing error increases</strong></li>
 <li>Underfitting : model too simple -&gt;both training and testing has large errors.</li>
 </ul>
-<p>Overfitting examples in Regression &amp; Classification:<br>
-<img src="11.png" alt=""></p>
-<h2 id="avoid-overfitting">Avoid Overfitting</h2>
-<ul>
-<li>Prepruning: Halt tree construction early – do not split a node if this would result in the goodness measure falling below a threshold
-<ul>
-<li>Difficult to choose an appropriate threshold</li>
+<p>Overfitting examples in Regression &amp; Classification:<br><img src="11.png" alt=""></p>
+<h2 id="avoid-overfitting"><a href="#Avoid-Overfitting" class="headerlink" title="Avoid Overfitting"></a>Avoid Overfitting</h2><ul>
+<li>Prepruning: Halt tree construction early — do not split a node if this would result in the goodness measure falling below a threshold<ul>
+<li>Difficult to choose an appropriate threshold  </li>
 </ul>
 </li>
-<li>Postpruning: Remove branches from a “fully grown” tree – get a sequence of progressively(逐渐地) pruned trees
-<ul>
-<li>Use a set of data different from the training data to decide which is the “best pruned tree”</li>
+<li>Postpruning: Remove branches from a “fully grown” tree — get a sequence of progressively(逐渐地) pruned trees <ul>
+<li>Use a set of data different from the training data to decide which is the “best pruned tree”<h3 id="pruning-methods"><a href="#Pruning-Methods" class="headerlink" title="Pruning Methods"></a>Pruning Methods</h3></li>
 </ul>
 </li>
-</ul>
-<h3 id="pruning-methods">Pruning Methods</h3>
-<ul>
 <li>Use a separate <strong>validation set</strong></li>
 <li>Estimation of generalization/test errors</li>
-<li>Use all the data for training
-<ul>
+<li>Use all the data for training<ul>
 <li>but apply a <strong>statistical test</strong> (e.g., chi-square) to estimate whether expanding or pruning a node may improve the entire distribution</li>
 </ul>
 </li>
-<li>Use minimum description length (MDL) principle
-<ul>
-<li>halting growth of the tree when the encoding is minimized</li>
+<li>Use minimum description length (MDL) principle<ul>
+<li>halting growth of the tree when the encoding is minimized<h4 id="pessimistic-post-pruning"><a href="#Pessimistic-Post-pruning" class="headerlink" title="Pessimistic Post-pruning"></a>Pessimistic Post-pruning</h4></li>
 </ul>
 </li>
-</ul>
-<h4 id="pessimistic-post-pruning">Pessimistic Post-pruning</h4>
-<ul>
-<li>Observed on the training data
-<ul>
-<li>e(t): #errors on a leaf node t of the tree T</li>
+<li>Observed on the training data<ul>
+<li>e(t): #errors on a leaf node t of the tree T </li>
 <li>e(T)=∑ e(t)</li>
 </ul>
 </li>
-<li>What’s the <strong>generalization errors</strong>(i.e.,errors on testing data) on T?
-<ul>
+<li>What’s the <strong>generalization errors</strong>(i.e.,errors on testing data) on T?<ul>
 <li>Use pessimistic estimates</li>
 <li>e(t)= e(t)+0.5</li>
 <li>E(T) = e(T) + 0.5N, where N is the number of leaf nodes in T</li>
 </ul>
 </li>
-<li>What’s the generalization errors on root(T) only?
-<ul>
+<li>What’s the generalization errors on root(T) only? <ul>
 <li>E’ (root(T)) = e(T) + 0.5</li>
 </ul>
 </li>
-<li>Post-pruning from bottom-up
-<ul>
+<li>Post-pruning from bottom-up<ul>
 <li>If generalization error reduces after pruning, replace sub-tree by a leaf node</li>
-<li>Use majority voting to decide the class label<br>
-<br><br>
-Example<br>
-<img src="12.png" alt=""><br>
-The pessimistic error before splitting is 10.5 out of 30 smaller than after splitting 11 out of 30.<br>
-So, we pruned the subtree at A, then left A as leaf node and marked as “Yes”.</li>
+<li>Use majority voting to decide the class label<br><br><br>Example<br><img src="12.png" alt=""><br>The pessimistic error before splitting is 10.5 out of 30 smaller than after splitting 11 out of 30.<br>So, we pruned the subtree at A, then left A as leaf node and marked as “Yes”.<h1 id="enhancements-to-basic-decision-tree-induction"><a href="#Enhancements-to-basic-decision-tree-induction" class="headerlink" title="Enhancements to basic decision tree induction"></a>Enhancements to basic decision tree induction</h1></li>
 </ul>
 </li>
-</ul>
-<h1 id="enhancements-to-basic-decision-tree-induction">Enhancements to basic decision tree induction</h1>
-<ul>
-<li>Allow for continuous-valued attributes
-<ul>
+<li>Allow for continuous-valued attributes<ul>
 <li>Dynamically define new discrete-valued attributes that partition the continuous attribute value into a discrete set of intervals, one-hot encoding, or specialized DT learning algorithms</li>
 </ul>
 </li>
-<li>Handle missing attribute values
-<ul>
+<li>Handle missing attribute values<ul>
 <li>Assign the most common value of the attribute n</li>
 <li>Assign probability to each of the possible values</li>
 </ul>
 </li>
-<li>Attribute construction
-<ul>
-<li>Create new attributes based on existing ones that are<br>
-sparsely represented</li>
-<li>This reduces fragmentation, repetition, and replication</li>
+<li>Attribute construction<ul>
+<li>Create new attributes based on existing ones that are<br>sparsely represented</li>
+<li>This reduces fragmentation, repetition, and replication<h1 id="classification-in-large-databases"><a href="#Classification-in-Large-Databases" class="headerlink" title="Classification in Large Databases"></a>Classification in Large Databases</h1></li>
 </ul>
 </li>
-</ul>
-<h1 id="classification-in-large-databases">Classification in Large Databases</h1>
-<ul>
 <li>Classification—a classical problem extensively studied by statisticians and machine learning researchers</li>
 <li>Scalability: Classifying data sets with millions of examples and hundreds of attributes with reasonable speed</li>
-<li>Why decision tree induction in data mining?
-<ul>
-<li>relatively faster learning speed (than other classification<br>
-methods)</li>
+<li>Why decision tree induction in data mining?<ul>
+<li>relatively faster learning speed (than other classification<br>methods)</li>
 <li>convertible to simple and easy to understand classification rules</li>
 <li>can use SQL queries for accessing databases</li>
 <li>comparable classification accuracy with other methods</li>

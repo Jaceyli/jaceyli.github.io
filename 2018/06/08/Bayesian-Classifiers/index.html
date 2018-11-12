@@ -155,14 +155,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -230,26 +230,16 @@
 <ul>
 <li>Bayesian Theorem</li>
 <li>Naïve Bayes Classifier</li>
-<li>Smoothing</li>
+<li>Smoothing<br><style><br>table{<br>  margin: 0 auto!important;<br>  max-width:70%!important;<br>}
+</style><h1 id="why-bayesian-classification"><a href="#Why-Bayesian-Classification" class="headerlink" title="Why Bayesian Classification?"></a>Why Bayesian Classification?</h1></li>
 </ul>
-</blockquote>
-<style>
-table{
-    margin: 0 auto!important;
-    max-width:70%!important;
-}
-</style>
-<h1 id="why-bayesian-classification">Why Bayesian Classification?</h1>
 <hr>
-<blockquote>
 <ul>
-<li>Decision tree classifiers predict the class label of y.
-<ul>
+<li>Decision tree classifiers predict the class label of y.<ul>
 <li>E.g., it is yes or no.</li>
 </ul>
 </li>
-<li>Bayesian classifiers calculate probabilities for hypothesis.
-<ul>
+<li>Bayesian classifiers calculate probabilities for hypothesis. <ul>
 <li>E.g., the probabilities to be yes and no.</li>
 </ul>
 </li>
@@ -261,8 +251,7 @@ table{
 <li><strong>Probabilistic prediction</strong>: Predict multiple hypotheses, weighted by their probabilities</li>
 <li>Standard: Even when Bayesian methods are computationally intractable(难对付的), they can provide a standard of optimal decision making against which other methods can be measured</li>
 </ul>
-<h1 id="bayesian-theorem">Bayesian Theorem</h1>
-<hr>
+<h1 id="bayesian-theorem"><a href="#Bayesian-Theorem" class="headerlink" title="Bayesian Theorem"></a>Bayesian Theorem</h1><hr>
 <ul>
 <li>Let X be a data sample whose class label is <strong>unknown</strong></li>
 <li>Let h be <strong>hypothesis</strong> that X belongs to class C</li>
@@ -270,81 +259,36 @@ table{
 <li>P(h): <strong>prior</strong> probability of hypothesis h(i.e. the initial probability before we observe any data, reflects the background knowledge)</li>
 <li>P(X): probability that sample data is observed</li>
 <li>P(X|h): probability of observing the sample X, given that the hypothesis holds</li>
-<li>Given training data X, posteriori probability of a hypothesis h, P(h|X) follows the Bayes theorem<br>
-<img src="1.png" alt=""></li>
-<li>Informally, this can be written as <strong>posterior = likelihood * prior / evidence</strong><br>
-posterior: P(h|X)<br>
-likelihood: P(X|h)<br>
-prior: P(h)<br>
-evidence: P(X)</li>
-<li>MAP(<strong>maximum posteriori</strong>后期) hypothesis<br>
-<img src="2.png" alt=""></li>
+<li>Given training data X, posteriori probability of a hypothesis h, P(h|X) follows the Bayes theorem<br><img src="1.png" alt=""></li>
+<li>Informally, this can be written as <strong>posterior = likelihood * prior / evidence</strong><br>  posterior: P(h|X)<br>  likelihood: P(X|h)<br>  prior: P(h)<br>  evidence: P(X)</li>
+<li>MAP(<strong>maximum posteriori</strong>后期) hypothesis<br><img src="2.png" alt=""><h2 id="naïve-bayes-classifier"><a href="#Naïve-Bayes-Classifier" class="headerlink" title="Naïve Bayes Classifier"></a>Naïve Bayes Classifier</h2></li>
+<li>Assumption: attributes are <strong>conditionally independent</strong>:<br><img src="3.png" alt=""></li>
+<li>The product of occurrence of say 2 elements x1 and x2,<br>given the current class is C, is the product of the probabilities of each element taken separately, given the same class P([x1,x2],C) = P(x1,C) * P(x2,C)</li>
+<li>Greatly reduces the computation cost, only count the class distribution -&gt; Only need to estimate P(x<sub>k</sub> | Ci)<br><br><br>Example:<br><img src="4.png" alt=""><br>Compute P(X|Ci) for each class<br>X=(age&lt;=30 , income =medium, student=yes, credit_rating=fair)<br><br>P(age=”<30" |="" buys_computer="yes" )="2/9=0.222" p(age="<30" =0.6="" <br="">
+P(income="medium" | buys_computer="yes")= 4/9 =0.444 
+P(income="medium" | buys_computer="no") = 2/5 = 0.4 <br>
+P(student="yes" | buys_computer="yes)= 6/9 =0.667 
+P(student="yes" | buys_computer="no")= 1/5=0.2 <br><br>P(credit_rating=”fair” | buys_computer=”yes”)=6/9=0.667<br>P(credit_rating=”fair” | buys_computer=”no”)=2/5=0.4<br><br><strong>P(X|Ci)</strong> :<br>P(X|buys_computer=”yes”)= 0.222 x 0.444 x 0.667 x 0.0.667 =0.044<br>P(X|buys_computer=”no”)= 0.6 x 0.4 x 0.2 x 0.4 =0.019<br><br><strong>P(X|Ci)* P(Ci)</strong> :<br>P(buys_computer=”yes”) = 9/14<br>P(buys_computer=”no”) = 5/14<br><br>P(X|buys_computer=”yes”) <em> P(buys_computer=”yes”)=0.028<br>P(X|buys_computer=”no”) </em> P(buys_computer=”no”)=0.007<br><strong>So, X belongs to class “buys_computer=yes”</strong></30"></li>
 </ul>
-<h2 id="naïve-bayes-classifier">Naïve Bayes Classifier</h2>
-<ul>
-<li>Assumption: attributes are <strong>conditionally independent</strong>:<br>
-<img src="3.png" alt=""></li>
-<li>The product of occurrence of say 2 elements x1 and x2,<br>
-given the current class is C, is the product of the probabilities of each element taken separately, given the same class P([x1,x2],C) = P(x1,C) * P(x2,C)</li>
-<li>Greatly reduces the computation cost, only count the class distribution -&gt; Only need to estimate P(x<sub>k</sub> | Ci)<br>
-<br><br>
-Example:<br>
-<img src="4.png" alt=""><br>
-Compute P(X|Ci) for each class<br>
-X=(age&lt;=30 , income =medium, student=yes, credit_rating=fair)<br><br>
-P(age=&quot;&lt;30&quot; | buys_computer=“yes”) = 2/9=0.222<br>
-P(age=&quot;&lt;30&quot; | buys_computer=“no”) = 3/5 =0.6 <br><br>
-P(income=“medium” | buys_computer=“yes”)= 4/9 =0.444<br>
-P(income=“medium” | buys_computer=“no”) = 2/5 = 0.4 <br><br>
-P(student=“yes” | buys_computer=&quot;yes)= 6/9 =0.667<br>
-P(student=“yes” | buys_computer=“no”)= 1/5=0.2 <br><br>
-P(credit_rating=“fair” | buys_computer=“yes”)=6/9=0.667<br>
-P(credit_rating=“fair” | buys_computer=“no”)=2/5=0.4<br><br>
-<strong>P(X|Ci)</strong> :<br>
-P(X|buys_computer=“yes”)= 0.222 x 0.444 x 0.667 x 0.0.667 =0.044<br>
-P(X|buys_computer=“no”)= 0.6 x 0.4 x 0.2 x 0.4 =0.019<br><br>
-<strong>P(X|Ci)* P(Ci)</strong> :<br>
-P(buys_computer=“yes”) = 9/14<br>
-P(buys_computer=“no”) = 5/14<br><br>
-P(X|buys_computer=“yes”) * P(buys_computer=“yes”)=0.028<br>
-P(X|buys_computer=“no”) * P(buys_computer=“no”)=0.007<br>
-<strong>So, X belongs to class “buys_computer=yes”</strong></li>
-</ul>
-<h2 id="smoothing">Smoothing</h2>
-<ul>
-<li>
-<p>Pr[X<sub>i</sub> = v<sub>j</sub> | C<sub>k</sub>] could still be 0, <strong>if not observed in the training data</strong></p>
-<ul>
+<h2 id="smoothing"><a href="#Smoothing" class="headerlink" title="Smoothing"></a>Smoothing</h2><ul>
+<li>Pr[X<sub>i</sub> = v<sub>j</sub> | C<sub>k</sub>] could still be 0, <strong>if not observed in the training data</strong><ul>
 <li>makes Pr[C<sub>k</sub> | X] = 0, regardless of other likelihood values of Pr[C<sub>t</sub> = v<sub>t</sub>| C<sub>k</sub>]</li>
 </ul>
 </li>
-<li>
-<p><strong>Add-1 Smoothing</strong></p>
+<li><p><strong>Add-1 Smoothing</strong></p>
 <ul>
-<li>reserve a <strong>small amount of probability for<br>
-unseen probabilities</strong></li>
-<li>(conditional) probabilities of observed events have to be adjusted to <strong>make the total probability equals 1.0</strong><br>
-<img src="5.png" alt=""></li>
+<li>reserve a <strong>small amount of probability for<br>unseen probabilities</strong></li>
+<li>(conditional) probabilities of observed events have to be adjusted to <strong>make the total probability equals 1.0</strong><br><img src="5.png" alt=""></li>
 </ul>
 </li>
-<li>
-<p>What’s the right value for B?</p>
+<li><p>What’s the right value for B?</p>
 <ul>
 <li>B is used to make sure the total probability equals 1, ∑v<sub>j</sub> Pr[X<sub>i</sub>  =v<sub>j</sub>  |C<sub>k</sub> ]=1</li>
-<li>B = dom(X<sub>i</sub>), i.e., # of values X<sub>i</sub> can take.  -&gt;<strong>how many distinct values that X have</strong><br>
-<br><br>
-Example: Consider no instance of age&lt;30 in the class<br>
-<img src="6.png" alt=""><br>
-X=(age&lt;=30 , income =medium, student=yes, credit_rating=fair)<br><br>
-P(age=&quot;&lt;30&quot; | buys_computer=“no”) = (0 +1) / (5 +3) = 0.125<br>
-P(income=“medium” | buys_computer=“no”) = (2 +1) / (5 +3) = 0.375<br>
-P(student=“yes” | buys_computer=“no”)= (1 +1) / (5 +2) = 0.286<br>
-P(credit_rating=“fair” | buys_computer=“no”)= (2 +1) / (5 +2) = 0.429<br>
-<strong>P(X|Ci)</strong> : P(X|buys_computer=“no”)= 0.125 x 0.375 x 0.286 x 0.429 = 0.00575<br>
-<strong>P(X|Ci)*P(Ci)</strong> : P(X|buys_computer=“no”) * P(buys_computer=“no”) = 0.00205</li>
+<li>B = dom(X<sub>i</sub>), i.e., # of values X<sub>i</sub> can take.  -&gt;<strong>how many distinct values that X have</strong><br><br><br>Example: Consider no instance of age<30 in="" the="" class="" ![](6.png)="" x="(age<=30" ,="" income="medium," student="yes," credit_rating="fair)<br"><br>P(age=”&lt;30” | buys_computer=”no”) = (0 +1) / (5 +3) = 0.125<br>P(income=”medium” | buys_computer=”no”) = (2 +1) / (5 +3) = 0.375<br>P(student=”yes” | buys_computer=”no”)= (1 +1) / (5 +2) = 0.286<br>P(credit_rating=”fair” | buys_computer=”no”)= (2 +1) / (5 +2) = 0.429<br><strong>P(X|Ci)</strong> : P(X|buys_computer=”no”)= 0.125 x 0.375 x 0.286 x 0.429 = 0.00575<br><strong>P(X|Ci)*P(Ci)</strong> : P(X|buys_computer=”no”) * P(buys_computer=”no”) = 0.00205</30></li>
 </ul>
 </li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -355,194 +299,127 @@ P(credit_rating=“fair” | buys_computer=“no”)= (2 +1) / (5 +2) = 0.429<br
 </thead>
 <tbody>
 <tr>
-<td>Pr[&lt;=30 | No]</td>
+<td>Pr[&lt;=30 \</td>
+<td>No]</td>
 <td>0 / 5</td>
 <td>1 / 8</td>
 </tr>
 <tr>
-<td>Pr[30…40 | No]</td>
+<td>Pr[30…40 \</td>
+<td>No]</td>
 <td>3 / 5</td>
 <td>4 / 8</td>
 </tr>
 <tr>
-<td>Pr[&gt;=40 | No]</td>
+<td>Pr[&gt;=40 \</td>
+<td>No]</td>
 <td>2 / 5</td>
 <td>3 / 8</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>不是只有probability=0的+1，所有的都+1</strong></p>
-<h2 id="how-to-handle-numeric-values">How to Handle Numeric Values</h2>
-<ul>
+<h2 id="how-to-handle-numeric-values"><a href="#How-to-Handle-Numeric-Values" class="headerlink" title="How to Handle Numeric Values"></a>How to Handle Numeric Values</h2><ul>
 <li>Need to model the distribution of Pr[X<sub>i</sub> | C<sub>k</sub>]</li>
 <li>Method 1: Gaussian Naïve Bayes<img src="7.png" alt=""></li>
 <li>Method 2: Use binning to discretize the feature values</li>
 </ul>
-<h1 id="text-classification">Text Classification</h1>
-<p>Naïve Bayes has been widely used in text classificiation (aka., text categorization)</p>
+<h1 id="text-classification"><a href="#Text-Classification" class="headerlink" title="Text Classification"></a>Text Classification</h1><p>Naïve Bayes has been widely used in text classificiation (aka., text categorization)</p>
 <ul>
-<li>Document Classification<br>
-Assign labels to each document or web-page:
-<ul>
-<li>Labels are most often topics such as Yahoo-categories<br>
-e.g., “finance,” “sports,” “news&gt;world&gt;asia&gt;business”</li>
-<li>Labels may be genres<br>
-e.g., “editorials” “movie-reviews” “news”</li>
-<li>Labels may be opinion on a person/product<br>
-e.g.,“like”,“hate”,“neutral”</li>
-<li>Labels may be domain-specific<br>
-e.g., “interesting-to-me” : &quot;not-interesting-to-me&quot;<br>
-e.g., contains adult language:&quot;doesn’t&quot;<br>
-e.g., language identification: English, French, Chinese, …<br>
-e.g., search vertical: about Linux versus not<br>
-e.g.,“link spam”,“not link spam”</li>
+<li>Document Classification<br>Assign labels to each document or web-page:<ul>
+<li>Labels are most often topics such as Yahoo-categories<br>e.g., “finance,” “sports,” “news&gt;world&gt;asia&gt;business”</li>
+<li>Labels may be genres<br>e.g., “editorials” “movie-reviews” “news”</li>
+<li>Labels may be opinion on a person/product<br>e.g.,”like”,”hate”,”neutral”</li>
+<li>Labels may be domain-specific<br>e.g., “interesting-to-me” : “not-interesting-to-me”<br>e.g., contains adult language:”doesn’t”<br>e.g., language identification: English, French, Chinese, …<br>e.g., search vertical: about Linux versus not<br>e.g.,”link spam”,”not link spam”</li>
 </ul>
 </li>
 </ul>
-<h2 id="basic-method">Basic Method</h2>
-<ul>
-<li>Attributes are text positions, values are words.<br>
-<img src="12.png" alt=""></li>
-<li>Assume the classification is independent of the<br>
-positions of the words
-<ul>
+<h2 id="basic-method"><a href="#Basic-Method" class="headerlink" title="Basic Method"></a>Basic Method</h2><ul>
+<li>Attributes are text positions, values are words.<br><img src="12.png" alt="">  </li>
+<li>Assume the classification is independent of the<br>positions of the words   <ul>
 <li>Use same parameters for each position</li>
-<li>Result is bag of words model</li>
+<li>Result is bag of words model<h3 id="learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h3></li>
 </ul>
 </li>
-</ul>
-<h3 id="learning">Learning</h3>
-<ul>
-<li>From training corpus, extract V = Vocabulary</li>
-<li>Calculate required P(c<sub>j</sub>) and P(x<sub>k</sub>| c<sub>j</sub>) terms
-<ul>
-<li>For each c<sub>j</sub> in C do
-<ul>
+<li>From training corpus, extract V = Vocabulary </li>
+<li>Calculate required P(c<sub>j</sub>) and P(x<sub>k</sub>| c<sub>j</sub>) terms<ul>
+<li>For each c<sub>j</sub> in C do<ul>
 <li>docs<sub>j</sub> &lt;- subset of documents for which the target class is c<sub>j</sub></li>
 <li><img src="10.png" alt=""></li>
 </ul>
 </li>
 <li>Text<sub>j</sub> &lt;- single document containing all docs<sub>j</sub></li>
-<li>for each word x<sub>k</sub> in Vocabulary
-<ul>
-<li>n<sub>k</sub> &lt;- number of occurrences of x<sub>k</sub> in Text<sub>j</sub><br>
-<img src="11.png" alt=""><br>
-<strong>α : smoothing</strong></li>
+<li>for each word x<sub>k</sub> in Vocabulary<ul>
+<li>n<sub>k</sub> &lt;- number of occurrences of x<sub>k</sub> in Text<sub>j</sub><br><img src="11.png" alt=""><br><strong>α : smoothing</strong><h3 id="classifying"><a href="#Classifying" class="headerlink" title="Classifying"></a>Classifying</h3></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-<h3 id="classifying">Classifying</h3>
-<ul>
 <li>positions &lt;- all word positions in current document which contain tokens found in Vocabulary</li>
 <li>Return c<sub>NB</sub>, where<img src="12.png" alt=""></li>
 </ul>
-<h3 id="time-complexity">Time Complexity</h3>
+<h3 id="time-complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h3><ul>
+<li><p><strong>Training Time</strong>: O(|D|L<sub>d</sub> + |C||V|))<br>where L<sub>d</sub> is the average length of a document in D.</p>
 <ul>
-<li>
-<p><strong>Training Time</strong>: O(|D|L<sub>d</sub> + |C||V|))<br>
-where L<sub>d</sub> is the average length of a document in D.</p>
-<ul>
-<li>Assumes V and all D<sub>i</sub> , n<sub>i</sub>, and n<sub>ij</sub> pre-computed in O(|D|L<sub>d</sub>)<br>
-time during one pass through all of the data.</li>
+<li>Assumes V and all D<sub>i</sub> , n<sub>i</sub>, and n<sub>ij</sub> pre-computed in O(|D|L<sub>d</sub>)<br>time during one pass through all of the data.</li>
 <li>Generally just <strong>O(|D|L<sub>d</sub>)</strong> since usually |C||V| &lt; |D|L<sub>d</sub></li>
 </ul>
 </li>
-<li>
-<p><strong>Test Time</strong>: O(|C| L<sub>t</sub>)<br>
-where Lt is the average length of a test document.</p>
+<li><p><strong>Test Time</strong>: O(|C| L<sub>t</sub>)<br>where Lt is the average length of a test document.</p>
 <ul>
-<li>Very efficient overall, linearly proportional to the time needed to just read in all the data.</li>
-</ul>
-</li>
-</ul>
-<h2 id="multinomial多项式-model">Multinomial(多项式)  Model</h2>
-<blockquote>
+<li>Very efficient overall, linearly proportional to the time needed to just read in all the data.<h2 id="multinomial多项式-model"><a href="#Multinomial-多项式-Model" class="headerlink" title="Multinomial(多项式)  Model"></a>Multinomial(多项式)  Model</h2><blockquote>
 <p>sklearn.naive_bayes.MultinomialNB</p>
 </blockquote>
-<ul>
-<li>Based on a statistical language model, turns out to be the <strong>bag of words</strong> model if using unigrams(一元)</li>
+</li>
 </ul>
-<h3 id="underflow-prevention-log-space">Underflow Prevention: log space</h3>
-<ul>
+</li>
+<li>Based on a statistical language model, turns out to be the <strong>bag of words</strong> model if using unigrams(一元)    <h3 id="underflow-prevention-log-space"><a href="#Underflow-Prevention-log-space" class="headerlink" title="Underflow Prevention: log space"></a>Underflow Prevention: log space</h3></li>
 <li><strong>Multiplying lots of probabilities, which are between 0 and 1 by definition, can result in floating-point underflow.</strong></li>
 <li>Since log(xy) = log(x) + log(y), it is better to perform all computations by summing logs of probabilities rather than multiplying probabilities.</li>
-<li>Class with highest final un-normalized log probability score is still the most probable.<br>
-<img src="13.png" alt=""></li>
+<li>Class with highest final un-normalized log probability score is still the most probable.<br><img src="13.png" alt=""></li>
 <li>Note that model is now just max of sum of weights…</li>
 </ul>
-<h3 id="unigram-and-higher-order-language-models-in-information-retrieval">Unigram and higher-order Language models in Information Retrieval</h3>
-<ul>
-<li>
-<p>P(“abcd”)= P(a) * P(b | a) * P(c | a b) * P(d | a b c)</p>
-</li>
-<li>
-<p>Unigram(一元) model: 0-th order Markov Model</p>
+<h3 id="unigram-and-higher-order-language-models-in-information-retrieval"><a href="#Unigram-and-higher-order-Language-models-in-Information-Retrieval" class="headerlink" title="Unigram and higher-order Language models in Information Retrieval"></a>Unigram and higher-order Language models in Information Retrieval</h3><ul>
+<li>P(“abcd”)= P(a) <em> P(b | a) </em> P(c | a b) * P(d | a b c)</li>
+<li><p>Unigram(一元) model: 0-th order Markov Model</p>
 <ul>
 <li><strong>the probability of a word only depend on itself</strong></li>
-<li>P(d | a b c) = P(d)</li>
+<li>P(d | a b c) = P(d) </li>
 </ul>
 </li>
-<li>
-<p>Bigram(二元) Language Models: 1st order Markov Model</p>
+<li><p>Bigram(二元) Language Models: 1st order Markov Model </p>
 <ul>
 <li><strong>the probability of a word only depend on its previous token</strong></li>
 <li>P(d | a b c) = P(d | c)</li>
-<li>P(a b c d) = P(a) * P(b | a) * P(c | b) * P(d | c)</li>
+<li>P(a b c d) = P(a) <em> P(b | a) </em> P(c | b) * P(d | c)</li>
 </ul>
 </li>
-<li>
-<p>The same with class-conditional probabilities,</p>
-<ul>
-<li>i.e., the unigram model<br>
-P(“a b c d” | C) = P (a | C) * P ( b | C) * P (c | C) * P (d | C)</li>
+<li>The same with class-conditional probabilities,<ul>
+<li>i.e., the unigram model<br>P(“a b c d” | C) = P (a | C) <em> P ( b | C) </em> P (c | C) * P (d | C)  </li>
 </ul>
 </li>
 </ul>
 <p><img src="8.png" alt=""></p>
 <ul>
-<li>
-<p>Essentially, the classification is independent of the<br>
-positions of the words</p>
+<li><p>Essentially, the classification is independent of the<br>positions of the words   </p>
 <ul>
 <li>Use same parameters for each position</li>
-<li>Result is bag of words model <img src="9.png" alt=""><br>
-E.g. “to be or not to be”</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>x<sub>i</sub></th>
-<th>To</th>
-<th>Be</th>
-<th>Or</th>
-<th>Not</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>θ<sub>i</sub></td>
-<td>2</td>
-<td>2</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<li><p>Result is bag of words model <img src="9.png" alt=""><br>E.g. “to be or not to be”</p>
+<p>| x<sub>i</sub> | To | Be | Or | Not |<br>| —- | —- | —- | —- | —- |<br>| θ<sub>i</sub> | 2 | 2 | 1 | 1 |</p>
+<h2 id="bernoulli伯努利-model"><a href="#Bernoulli-伯努利-Model" class="headerlink" title="Bernoulli(伯努利) Model"></a>Bernoulli(伯努利) Model</h2><blockquote>
+<p>sklearn.naive_bayes.BernoulliNB<br>View a text as a <strong>set of tokens</strong>, a boolean vector in {0, 1}<sup>|V|</sup>, where V is the vocabulary.</p>
+</blockquote>
 </li>
 </ul>
-<h2 id="bernoulli伯努利-model">Bernoulli(伯努利) Model</h2>
-<blockquote>
-<p>sklearn.naive_bayes.BernoulliNB<br>
-View a text as a <strong>set of tokens</strong>, a boolean vector in {0, 1}<sup>|V|</sup>, where V is the vocabulary.</p>
-</blockquote>
+</li>
+</ul>
 <ul>
 <li>V={a,b,c,d,e} = {x1,x2,x3,x4,x5}</li>
 <li>Feature functions fi(text) = if text contains x<sub>i</sub></li>
-<li>The feature functions extract a vector of {0, 1}<sup>|V| </sup>from any text<br>
-E.g.,“a b c d”, “d e b”</li>
+<li>The feature functions extract a vector of {0, 1}<sup>|V| </sup>from any text<br>E.g.,”a b c d”, “d e b”</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -573,85 +450,60 @@ E.g.,“a b c d”, “d e b”</li>
 </tr>
 </tbody>
 </table>
-<h2 id="two-models-compare">Two Models Compare</h2>
-<h3 id="naïve-bayes-assumption">Naïve Bayes assumption</h3>
-<ul>
-<li>Multinomial Naïve Bayes
-<ul>
-<li>One feature Xi for each word pos in document
-<ul>
-<li>feature’s values are all words in dictionary</li>
+</div>
+<h2 id="two-models-compare"><a href="#Two-Models-Compare" class="headerlink" title="Two Models Compare"></a>Two Models Compare</h2><h3 id="naïve-bayes-assumption"><a href="#Naïve-Bayes-assumption" class="headerlink" title="Naïve Bayes assumption"></a>Naïve Bayes assumption</h3><ul>
+<li>Multinomial Naïve Bayes<ul>
+<li>One feature Xi for each word pos in document<ul>
+<li>feature’s values are all words in dictionary </li>
 </ul>
 </li>
 <li><strong>Value of X<sub>i</sub> is the word in position i</strong></li>
-<li>Naïve Bayes assumption:
-<ul>
-<li>Given the document’stopic, word in one position in the document tells us nothing about words in other positions</li>
+<li>Naïve Bayes assumption:<ul>
+<li>Given the document’stopic, word in one position in the document tells us nothing about words in other positions </li>
 </ul>
 </li>
-<li>Second assumption:
-<ul>
-<li><strong>Word appearance does not depend on position</strong> P(Xi =w|c)=P(Xj =w|c)<br>
-for all positions i,j, word w, and class c</li>
-<li>Just have one multinomial feature predicting all words<br>
-E.g., “to be or not to be” = “to to be be or not”</li>
+<li>Second assumption:<ul>
+<li><strong>Word appearance does not depend on position</strong> P(Xi =w|c)=P(Xj =w|c)<br>for all positions i,j, word w, and class c</li>
+<li>Just have one multinomial feature predicting all words<br>E.g., “to be or not to be” = “to to be be or not”</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Multivariate(多变量) Bernoulli(伯努利)
-<ul>
+<li>Multivariate(多变量) Bernoulli(伯努利)<ul>
 <li>One feature Xw for each word in dictionary</li>
 <li><strong>X<sub>w</sub> = true in document d if w appears in d</strong></li>
-<li>Naive Bayes assumption:
-<ul>
+<li>Naive Bayes assumption:<ul>
 <li>Given the document’s topic, <strong>appearance of one word in the document tells us nothing about chances that another word appears</strong></li>
 </ul>
 </li>
-<li>This is the model used in the <strong>binary independence model</strong> in classic probabilistic relevance feedback in hand-classified data (Maron in IR was a very early user of NB)</li>
+<li>This is the model used in the <strong>binary independence model</strong> in classic probabilistic relevance feedback in hand-classified data (Maron in IR was a very early user of NB)<h3 id="parameter-estimation"><a href="#Parameter-estimation" class="headerlink" title="Parameter estimation"></a>Parameter estimation</h3></li>
 </ul>
 </li>
+<li>Multinomial model:<br>P(X<sub>i</sub> = w|c<sub>j</sub>)= fraction of times in which word w appears across all documents of topic c<sub>j</sub><br><br></li>
+<li>Multivariate Bernoulli model:<br>P(X<sub>w</sub> = t|c<sub>j</sub>)= fraction of documents of topic c<sub>j</sub> in which word w appears<h3 id="classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h3>Multinomial model is almost always more effective in text applications!</li>
 </ul>
-<h3 id="parameter-estimation">Parameter estimation</h3>
-<ul>
-<li>Multinomial model:<br>
-P(X<sub>i</sub> = w|c<sub>j</sub>)= fraction of times in which word w appears across all documents of topic c<sub>j</sub><br>
-<br></li>
-<li>Multivariate Bernoulli model:<br>
-P(X<sub>w</sub> = t|c<sub>j</sub>)= fraction of documents of topic c<sub>j</sub> in which word w appears</li>
-</ul>
-<h3 id="classification">Classification</h3>
-<p>Multinomial model is almost always more effective in text applications!</p>
-<h3 id="feature-selection">Feature selection</h3>
-<ul>
-<li>Multinomial model:
-<ul>
+<h3 id="feature-selection"><a href="#Feature-selection" class="headerlink" title="Feature selection"></a>Feature selection</h3><ul>
+<li>Multinomial model:<ul>
 <li>means something different for multinomial NB. It means dictionary truncation(缩短)</li>
 <li>The multinomial NB model only has 1 feature</li>
 </ul>
 </li>
-<li>Multivariate Bernoulli model:<br>
-In general feature selection is necessary for multivariate Bernoulli NB. Otherwise you suffer from noise, multi-counting.</li>
+<li>Multivariate Bernoulli model:<br>  In general feature selection is necessary for multivariate Bernoulli NB. Otherwise you suffer from noise, multi-counting.</li>
 </ul>
-<h2 id="naïve-bayesian-classifier-comments">Naïve Bayesian Classifier: Comments</h2>
-<ul>
-<li>Advantages:
-<ul>
+<h2 id="naïve-bayesian-classifier-comments"><a href="#Naïve-Bayesian-Classifier-Comments" class="headerlink" title="Naïve Bayesian Classifier: Comments"></a>Naïve Bayesian Classifier: Comments</h2><ul>
+<li>Advantages:<ul>
 <li>Easy to implement</li>
 <li>Good results obtained in most of the cases</li>
 </ul>
 </li>
-<li>Disadvantages
-<ul>
+<li>Disadvantages<ul>
 <li>Assumption: class conditional independence , therefore loss of accuracy</li>
 <li>Practically, dependencies exist among variables</li>
-<li>E.g., hospitals: patients: Profile: age, family history etc<br>
-Symptoms: fever, cough etc., Disease: lung cancer, diabetes etc</li>
+<li>E.g., hospitals: patients: Profile: age, family history etc<br>Symptoms: fever, cough etc., Disease: lung cancer, diabetes etc</li>
 <li>Dependencies among these cannot be modeled by Naïve Bayesian Classifier</li>
 </ul>
 </li>
-<li>Better methods?
-<ul>
+<li>Better methods?<ul>
 <li>Bayesian Belief Networks</li>
 <li>Logistic regression / maxent</li>
 </ul>

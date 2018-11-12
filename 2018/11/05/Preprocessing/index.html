@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -224,218 +224,171 @@
                 post-container">
 
                 <p><img src="image-20181105202703693.png" alt="image-20181105202703693"></p>
-<h1 id="parsing-a-document">Parsing a document</h1>
-<ul>
-<li>Complications: <strong>Format/language</strong>
-<ul>
-<li>Documents being indexed can include docs from many different languages
-<ul>
+<h1 id="parsing-a-document"><a href="#Parsing-a-document" class="headerlink" title="Parsing a document"></a>Parsing a document</h1><ul>
+<li>Complications: <strong>Format/language</strong><ul>
+<li>Documents being indexed can include docs from many different languages <ul>
 <li>A single index may have to contain terms of several languages.  E.g. id in English and French</li>
 </ul>
 </li>
-<li>Sometimes a document or its components can contain multiple languages/formats
-<ul>
-<li>French email with a German pdf attachment.</li>
+<li>Sometimes a document or its components can contain multiple languages/formats <ul>
+<li>French email with a German pdf attachment. </li>
 </ul>
 </li>
-<li>What is a unit document?
-<ul>
-<li>A file?</li>
-<li>An email? (Perhaps one of many in an mbox.)</li>
+<li>What is a unit document? <ul>
+<li>A file? </li>
+<li>An email? (Perhaps one of many in an mbox.) </li>
 <li>An email with 5 attachments?</li>
-<li>A group of files (PPT or LaTeX as HTML pages)</li>
+<li>A group of files (PPT or LaTeX as HTML pages) </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="tokens-and-terms">Tokens and Terms</h1>
-<h2 id="tokenization">Tokenization</h2>
-<ul>
-<li>
-<p>Input: “Friends, Romans and Countrymen”</p>
+<h1 id="tokens-and-terms"><a href="#Tokens-and-Terms" class="headerlink" title="Tokens and Terms"></a>Tokens and Terms</h1><h2 id="tokenization"><a href="#Tokenization" class="headerlink" title="Tokenization"></a>Tokenization</h2><ul>
+<li><p>Input: “Friends, Romans and Countrymen” </p>
 </li>
-<li>
-<p>Output:</p>
+<li><p>Output: </p>
 <ul>
 <li>Friends</li>
 <li>Romans</li>
-<li>Countrymen</li>
+<li>Countrymen </li>
 </ul>
 </li>
-<li>
-<p>A token is an instance of a sequence of characters</p>
+<li><p>A token is an instance of a sequence of characters</p>
 </li>
-<li>
-<p>Each such token is now a candidate for an index entry, after further processing</p>
-<h2 id="issues">Issues</h2>
-<h3 id="issues-in-tokenizaiton">Issues in tokenizaiton</h3>
+<li><p>Each such token is now a candidate for an index entry, after further processing </p>
+<h2 id="issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><h3 id="issues-in-tokenizaiton"><a href="#Issues-in-tokenizaiton" class="headerlink" title="Issues in tokenizaiton"></a>Issues in tokenizaiton</h3></li>
+<li><p>Finland’s capital =&gt; Finland? Finlands? Finland’s?</p>
 </li>
-<li>
-<p>Finland’s capital =&gt; Finland? Finlands? Finland’s?</p>
-</li>
-<li>
-<p>Hewlett-Packarda 惠普=&gt; Hewlett and Packard as two tokens? 分开意思完全变了</p>
+<li><p>Hewlett-Packarda 惠普=&gt; Hewlett and Packard as two tokens? 分开意思完全变了</p>
 <ul>
-<li>state-of-the-art: break up hyphenated sequence.</li>
-<li>co-education</li>
+<li>state-of-the-art: break up hyphenated sequence. </li>
+<li>co-education </li>
 <li>lowercase, lower-case, lower case ?</li>
 <li>It can be effective to get the user to put in possible hyphens连字符</li>
 </ul>
 </li>
-<li>
-<p>San Francisco: one token or two?</p>
-<h3 id="issues-in-numbers">Issues in Numbers</h3>
-</li>
+<li><p>San Francisco: one token or two? </p>
+<h3 id="issues-in-numbers"><a href="#Issues-in-Numbers" class="headerlink" title="Issues in Numbers"></a>Issues in Numbers</h3></li>
 </ul>
 <ul>
-<li>
-<p>Dates, postcodes, phone numbers etc. in different forms</p>
+<li><p>Dates, postcodes, phone numbers etc. in different forms</p>
 <ul>
 <li>3/20/91   Mar. 12, 1991  20/3/91</li>
 <li>55 B.C.</li>
 <li>B-52</li>
-<li>My PGP key is 324a3df234cb23e</li>
-<li>(800) 234-2333</li>
+<li>My PGP key is 324a3df234cb23e </li>
+<li>(800) 234-2333 </li>
 <li>12,334,556  ‘,’  issues</li>
 </ul>
 </li>
-<li>
-<p>Often have embedded spaces</p>
+<li><p>Often have embedded spaces </p>
 </li>
-<li>
-<p>Older IR systems may not index numbers</p>
-<ul>
+<li>Older IR systems may not index numbers<ul>
 <li>But often very useful: think about things like looking up error codes/stacktraces on the web</li>
-<li>(One answer is using n-grams: Lecture 3)</li>
+<li>(One answer is using n-grams: Lecture 3) </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Will often index “meta-data” separately
-<ul>
-<li>Creation date, format, etc.</li>
+<li>Will often index “meta-data” separately <ul>
+<li>Creation date, format, etc. </li>
 </ul>
 </li>
 </ul>
-<h3 id="issues-in-language">Issues in language</h3>
-<ul>
+<h3 id="issues-in-language"><a href="#Issues-in-language" class="headerlink" title="Issues in language"></a>Issues in language</h3><ul>
 <li>French: L’ensemble =&gt; L ? L’ ? Le ?</li>
 <li>German: noun compounds. E.g., Lebensversicherungsgesellschaftsangestellter</li>
-<li>Chinese: no spaces between words. 还有些即使分词还有歧义 E.g.,南京市长江大桥</li>
+<li>Chinese: no spaces between words. 还有些即使分词还有歧义 E.g.,南京市长江大桥 </li>
 <li>Japanse: Dates/amounts in multiple formats</li>
 <li>Arabic (or Hebrew): written right to left, but numbers written left to right</li>
 </ul>
-<p>…</p>
-<h2 id="stop-words">Stop words</h2>
+<p>….</p>
+<h2 id="stop-words"><a href="#Stop-words" class="headerlink" title="Stop words"></a>Stop words</h2><ul>
+<li><p>With a stop list, you exclude from the dictionary entirely the commonest words. Intuition: </p>
 <ul>
-<li>
-<p>With a stop list, you exclude from the dictionary entirely the commonest words. Intuition:</p>
-<ul>
-<li>
-<p>They have little semantic content: the, a, and, to, be</p>
+<li><p>They have little semantic content: the, a, and, to, be</p>
 </li>
-<li>
-<p>There are a lot of them: ~30% of postings for top 30 words</p>
+<li><p>There are a lot of them: ~30% of postings for top 30 words </p>
 <p>很多系统给了stop words，或者通过token的frequency把高频词加到stop words</p>
 </li>
 </ul>
 </li>
-<li>
-<p>But the trend is away from doing this:</p>
+<li><p>But the trend is away from doing this: </p>
+<ul>
+<li><p>Good compression techniques (lecture 5) means the space for </p>
+<p>including stopwords in a system is very small </p>
 </li>
-<li>
-<p>Good compression techniques (lecture 5) means the space for</p>
-<p>including stopwords in a system is very small</p>
+<li><p>Good query optimization techniques (lecture 7) mean you pay little at query time for including stop words. </p>
 </li>
-<li>
-<p>Good query optimization techniques (lecture 7) mean you pay little at query time for including stop words.</p>
-</li>
-<li>
-<p>You need them for:</p>
+<li><p>You need them for:</p>
 <ul>
 <li>Phrase queries: “King of Denmark”</li>
 <li>Various song titles, etc.: “Let it be”, “To be or not to be”</li>
-<li>“Relational” queries: “flights to London” vs. “flights from London”</li>
-</ul>
-</li>
-</ul>
-<h2 id="normolization">Normolization</h2>
-<h3 id="normolization-in-tokens">Normolization in tokens</h3>
-<ul>
-<li>
-<p>We need to “normalize” words in indexed text as well as query words into the same form</p>
-<ul>
-<li>E.g., match U.S.A. and USA</li>
-</ul>
-</li>
-<li>
-<p>We most commonly implicitly define equivalence classes of terms by, e.g.,</p>
-<ul>
-<li>deleting periods to form a term § U.S.A., USA =&gt; USA</li>
-<li>deleting hyphens to form a term
-<ul>
-<li>anti-discriminatory, antidiscriminatory =&gt; antidiscriminatory</li>
+<li>“Relational” queries: “flights to London” vs. “flights from London” </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="normolization-in-languages">Normolization in languages</h3>
+<h2 id="normolization"><a href="#Normolization" class="headerlink" title="Normolization"></a>Normolization</h2><h3 id="normolization-in-tokens"><a href="#Normolization-in-tokens" class="headerlink" title="Normolization in tokens"></a>Normolization in tokens</h3><ul>
+<li><p>We need to “normalize” words in indexed text as well as query words into the same form </p>
 <ul>
-<li>Accents: e.g., French résumé vs. resume.</li>
-<li>Umlauts: e.g., German: Tuebingen vs. Tübingen</li>
+<li>E.g., match U.S.A. and USA </li>
+</ul>
+</li>
+<li><p>We most commonly implicitly define equivalence classes of terms by, e.g., </p>
+<ul>
+<li>deleting periods to form a term § U.S.A., USA =&gt; USA </li>
+<li>deleting hyphens to form a term<ul>
+<li>anti-discriminatory, antidiscriminatory =&gt; antidiscriminatory </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="normolization-in-languages"><a href="#Normolization-in-languages" class="headerlink" title="Normolization in languages"></a>Normolization in languages</h3><ul>
+<li>Accents: e.g., French résumé vs. resume. </li>
+<li>Umlauts: e.g., German: Tuebingen vs. Tübingen </li>
 <li>Chinese: e.g., 简体 vs. 繁體</li>
 </ul>
-<h2 id="case-folding">Case folding</h2>
-<ul>
-<li>Reduce all letters to lower case
-<ul>
-<li>exception: upper case in mid-sentence?
-<ul>
+<h2 id="case-folding"><a href="#Case-folding" class="headerlink" title="Case folding"></a>Case folding</h2><ul>
+<li>Reduce all letters to lower case<ul>
+<li>exception: upper case in mid-sentence? <ul>
 <li>e.g., General Motors</li>
 <li>Fed vs. fed</li>
-<li>SAIL vs. sail</li>
+<li>SAIL vs. sail </li>
 </ul>
 </li>
-<li>Often best to lower case everything, since users will use lowercase regardless of ‘correct’ capitalization…</li>
+<li>Often best to lower case everything, since users will use lowercase regardless of ‘correct’ capitalization… </li>
 </ul>
 </li>
-<li>Google example:
-<ul>
-<li>Query C.A.T. : #1 result is for “cat” (well, Lolcats) not Caterpillar Inc.</li>
+<li>Google example: <ul>
+<li>Query C.A.T. : #1 result is for “cat” (well, Lolcats) not Caterpillar Inc. </li>
 </ul>
 </li>
 </ul>
-<h2 id="thesauri-and-soundex">Thesauri and soundex</h2>
-<ul>
-<li>Do we handle synonyms and homonyms?
-<ul>
-<li>E.g., by hand-constructed equivalence classes
-<ul>
-<li>car = automobile,  color = colour</li>
+<h2 id="thesauri-and-soundex"><a href="#Thesauri-and-soundex" class="headerlink" title="Thesauri and soundex"></a>Thesauri and soundex</h2><ul>
+<li>Do we handle synonyms and homonyms? <ul>
+<li>E.g., by hand-constructed equivalence classes <ul>
+<li>car = automobile,  color = colour </li>
 </ul>
 </li>
-<li>We can rewrite to form equivalence-class terms
-<ul>
-<li>When the document contains automobile, index it under car- automobile (and vice-versa)</li>
+<li>We can rewrite to form equivalence-class terms<ul>
+<li>When the document contains automobile, index it under car- automobile (and vice-versa) </li>
 </ul>
 </li>
-<li>Or we can expand a query
-<ul>
-<li>When the query contains automobile, look under car as well</li>
+<li>Or we can expand a query<ul>
+<li>When the query contains automobile, look under car as well </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>What about spelling mistakes?
-<ul>
-<li>One approach is soundex, which forms equivalence classes<br>
-of words based on phonetic heuristics</li>
-<li>deal with :
-<ul>
+<li>What about spelling mistakes?<ul>
+<li>One approach is soundex, which forms equivalence classes<br>of words based on phonetic heuristics</li>
+<li>deal with : <ul>
 <li>noise input 打错了</li>
 <li>打太快，没打空格</li>
 </ul>
@@ -443,58 +396,46 @@ of words based on phonetic heuristics</li>
 </ul>
 </li>
 </ul>
-<h2 id="lemmatization">Lemmatization</h2>
+<h2 id="lemmatization"><a href="#Lemmatization" class="headerlink" title="Lemmatization"></a>Lemmatization</h2><ul>
+<li><p><strong>Reduce inflectional/variant forms</strong> to base form </p>
 <ul>
-<li>
-<p><strong>Reduce inflectional/variant forms</strong> to base form</p>
-<ul>
-<li>
-<p>E.g., am, are, isa =&gt; be</p>
-<p>car, cars, car’s, cars’ =&gt; car</p>
+<li><p>E.g., am, are, isa =&gt; be </p>
+<p>  car, cars, car’s, cars’ =&gt; car</p>
 </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>the boy’s cars are different colors  =&gt;  the boy car be different color</li>
-<li>Lemmatization implies doing “proper” reduction to dictionary headword form</li>
+<li>the boy’s cars are different colors  =&gt;  the boy car be different color </li>
+<li>Lemmatization implies doing “proper” reduction to dictionary headword form </li>
 </ul>
-<h2 id="stemming">Stemming</h2>
-<ul>
-<li>
-<p><strong>Reduce terms to their “roots” before indexing</strong></p>
+<h2 id="stemming"><a href="#Stemming" class="headerlink" title="Stemming"></a>Stemming</h2><ul>
+<li><p><strong>Reduce terms to their “roots” before indexing</strong> </p>
 </li>
-<li>
-<p>“Stemming” suggest crude affix chopping</p>
+<li><p>“Stemming” suggest crude affix chopping </p>
 <ul>
-<li>
-<p>language dependent</p>
+<li><p>language dependent </p>
 </li>
-<li>
-<p>e.g., automate(s), automatic, automation all reduced to automat. 即使automat不是一个真实存在的词，也没关系 =&gt; 词根</p>
+<li><p>e.g., automate(s), automatic, automation all reduced to automat. 即使automat不是一个真实存在的词，也没关系 =&gt; 词根</p>
 </li>
 </ul>
 </li>
 </ul>
 <hr>
 <ul>
-<li>Do stemming and other normalizations help?
-<ul>
-<li>English: very mixed results. Helps recall for some queries but harms precision on others
-<ul>
-<li>E.g., operative (dentistry) ⇒ oper</li>
+<li>Do stemming and other normalizations help? <ul>
+<li>English: very mixed results. Helps recall for some queries but harms precision on others <ul>
+<li>E.g., operative (dentistry) ⇒ oper </li>
 </ul>
 </li>
-<li>Definitely useful for Spanish, German, Finnish, …
-<ul>
-<li>30% performance gains for Finnish!</li>
+<li>Definitely useful for Spanish, German, Finnish, … <ul>
+<li>30% performance gains for Finnish! </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="dictionary-entries-first-cut">Dictionary entries – first cut</h2>
-<p><img src="image-20181105212434807.png" alt="image-20181105212434807"></p>
+<h2 id="dictionary-entries-first-cut"><a href="#Dictionary-entries-–-first-cut" class="headerlink" title="Dictionary entries – first cut"></a>Dictionary entries – first cut</h2><p><img src="image-20181105212434807.png" alt="image-20181105212434807"></p>
 
                 
 

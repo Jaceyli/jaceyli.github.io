@@ -155,14 +155,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -232,23 +232,18 @@
 <li>Classification Process</li>
 </ul>
 </blockquote>
-<h1 id="problem-definition-and-preliminaries">Problem definition and preliminaries</h1>
-<hr>
-<h2 id="classification-vs-prediction">Classification vs. Prediction</h2>
-<ul>
-<li><strong>Classficaiton</strong>
-<ul>
+<h1 id="problem-definition-and-preliminaries"><a href="#Problem-definition-and-preliminaries" class="headerlink" title="Problem definition and preliminaries"></a>Problem definition and preliminaries</h1><hr>
+<h2 id="classification-vs-prediction"><a href="#Classification-vs-Prediction" class="headerlink" title="Classification vs. Prediction"></a>Classification vs. Prediction</h2><ul>
+<li><strong>Classficaiton</strong><ul>
 <li>predicts categorical class labels(discrete or nominal)</li>
 <li>classifies data(constructs a model) based on the training set and the values(<strong>class labels</strong>) in a classifying attribute and uses it in classifying new data</li>
 </ul>
 </li>
-<li><strong>Prediction(Regression 回归)</strong>
-<ul>
+<li><strong>Prediction(Regression 回归)</strong><ul>
 <li>models continuous-valued functions, i.e., predicts unknown or missing values</li>
 </ul>
 </li>
-<li>Typical Applicaitions
-<ul>
+<li>Typical Applicaitions<ul>
 <li>credit approval</li>
 <li>target marketing</li>
 <li>medical diagnosis</li>
@@ -256,38 +251,27 @@
 </ul>
 </li>
 </ul>
-<h2 id="classification-and-regression">Classification and Regression</h2>
-<ul>
-<li>given a new object o(it could be a document, image, video), map it to a feature vector<br>
-<img src="1.png" alt=""></li>
-<li>Predict the output(<strong>class label</strong>) y ∈ Y
-<ul>
+<h2 id="classification-and-regression"><a href="#Classification-and-Regression" class="headerlink" title="Classification and Regression"></a>Classification and Regression</h2><ul>
+<li>given a new object o(it could be a document, image, video), map it to a feature vector<br><img src="1.png" alt=""></li>
+<li>Predict the output(<strong>class label</strong>) y ∈ Y<ul>
 <li>Binary classification: y={-1, +1} sometimes, {0,1}</li>
 <li>Multi-class classification: y = {1,2,…,C}</li>
 </ul>
 </li>
-<li>Learn a classification <strong>function</strong>:<br>
-we try to learn a function that matches a vector in d dimension space into the domain of y<br>
-<img src="2.png" alt=""></li>
-<li>Regression: y becomes a scalar value. Typically, a real value<br>
-<img src="3.png" alt=""></li>
+<li>Learn a classification <strong>function</strong>:<br>we try to learn a function that matches a vector in d dimension space into the domain of y<br><img src="2.png" alt=""></li>
+<li>Regression: y becomes a scalar value. Typically, a real value<br><img src="3.png" alt=""></li>
 </ul>
-<h2 id="supervised-learning">Supervised Learning</h2>
-<ul>
+<h2 id="supervised-learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h2><ul>
 <li>How to find f()? f ∈ F, most of time linear functions</li>
-<li>In supervised learning, we are given a set of <strong>training examples</strong>:<br>
-<img src="4.png" alt=""></li>
-<li>Identical independent distribution (i.i.d) assumption (A critical assumption for machine learning theory)</li>
-</ul>
-<h2 id="machine-learning-terminologies">Machine Learning Terminologies</h2>
-<ul>
-<li>Supervised learning has input labelled data
-<ul>
-<li>#instances x #attributes matrix/table</li>
-<li>#attributes = #features + 1（we use the last attribute for class attribute）</li>
+<li>In supervised learning, we are given a set of <strong>training examples</strong>:<br><img src="4.png" alt=""></li>
+<li>Identical independent distribution (i.i.d) assumption (A critical assumption for machine learning theory)<h2 id="machine-learning-terminologies"><a href="#Machine-Learning-Terminologies" class="headerlink" title="Machine Learning Terminologies"></a>Machine Learning Terminologies</h2></li>
+<li>Supervised learning has input labelled data <ul>
+<li><h1 id="instances-x-attributes-matrixtable"><a href="#instances-x-attributes-matrix-table" class="headerlink" title="instances x #attributes matrix/table"></a>instances x #attributes matrix/table</h1></li>
+<li><h1 id="attributes-features-1we-use-the-last-attribute-for-class-attribute"><a href="#attributes-features-1（we-use-the-last-attribute-for-class-attribute）" class="headerlink" title="attributes = #features + 1（we use the last attribute for class attribute）"></a>attributes = #features + 1（we use the last attribute for class attribute）</h1></li>
 </ul>
 </li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -372,68 +356,49 @@ we try to learn a function that matches a vector in d dimension space into the d
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
-<li>Labelled data split into 2 or 3 disjoint subsets
-<ul>
-<li>Training data: <strong>build a model</strong>
-<ul>
-<li>Training error = 1.0 – #correctly_classified / #training_instances</li>
+<li>Labelled data split into 2 or 3 disjoint subsets<ul>
+<li>Training data: <strong>build a model</strong><ul>
+<li>Training error = 1.0 – #correctly_classified / #training_instances </li>
 </ul>
 </li>
 <li>Validation/development data: <strong>select/refine the model</strong></li>
-<li>Testing data: <strong>evaluate the model</strong>
-<ul>
+<li>Testing data: <strong>evaluate the model</strong><ul>
 <li>Testing/generalization error = 1.0 – #correctly_classified / #testing_instances</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="overview-of-the-classification-process">Overview of the classification process</h1>
-<hr>
-<h2 id="preprocessing-amp-feature-engineering">Preprocessing &amp; Feature Engineering</h2>
-<p><img src="5.png" alt=""></p>
-<h2 id="training">Training</h2>
-<p><img src="6.png" alt=""></p>
-<h2 id="evaluate-the-model-on-testing-data">Evaluate the Model on Testing Data</h2>
-<p><img src="7.png" alt=""></p>
-<h2 id="use-the-model-in-production">Use the Model in Production</h2>
-<p><img src="8.png" alt=""></p>
-<h1 id="how-to-judge-a-model">How to judge a model?</h1>
-<hr>
+<h1 id="overview-of-the-classification-process"><a href="#Overview-of-the-classification-process" class="headerlink" title="Overview of the classification process"></a>Overview of the classification process</h1><hr>
+<h2 id="preprocessing-amp-feature-engineering"><a href="#Preprocessing-amp-Feature-Engineering" class="headerlink" title="Preprocessing &amp; Feature Engineering"></a>Preprocessing &amp; Feature Engineering</h2><p><img src="5.png" alt=""></p>
+<h2 id="training"><a href="#Training" class="headerlink" title="Training"></a>Training</h2><p><img src="6.png" alt=""></p>
+<h2 id="evaluate-the-model-on-testing-data"><a href="#Evaluate-the-Model-on-Testing-Data" class="headerlink" title="Evaluate the Model on Testing Data"></a>Evaluate the Model on Testing Data</h2><p><img src="7.png" alt=""></p>
+<h2 id="use-the-model-in-production"><a href="#Use-the-Model-in-Production" class="headerlink" title="Use the Model in Production"></a>Use the Model in Production</h2><p><img src="8.png" alt=""></p>
+<h1 id="how-to-judge-a-model"><a href="#How-to-judge-a-model" class="headerlink" title="How to judge a model?"></a>How to judge a model?</h1><hr>
 <ul>
-<li>Based on training error or testing error? —— <strong>Testing error</strong>
-<ul>
-<li>otherwise, this is a kind of data scooping -&gt; <strong>overfitting</strong></li>
+<li>Based on training error or testing error? —— <strong>Testing error</strong><ul>
+<li>otherwise, this is a kind of data scooping -&gt; <strong>overfitting</strong> </li>
 </ul>
 </li>
-<li>What if there are multiple models to choose from?
-<ul>
-<li>Further split a “test/development set” from the training set to see which model performance better</li>
+<li>What if there are multiple models to choose from?<ul>
+<li>Further split a “test/development set” from the training set to see which model performance better </li>
 </ul>
 </li>
-<li>Can we trust the error values on the development set?
-<ul>
+<li>Can we trust the error values on the development set?<ul>
 <li>Need “large” development set</li>
-<li><strong>k-fold cross-validation(CV)</strong>
-<ul>
-<li>if we pre-split data, sometimes the model may good enough, but it just won’t work on some test data, we use k-fold CV to solve this problem.<br>
-E.g., 把all labelled data 分10份，每次用其中9份train，1份test，然后把10次的testing error取平均值作为 testing error<br>
-<img src="9.png" alt=""></li>
+<li><strong>k-fold cross-validation(CV)</strong><ul>
+<li>if we pre-split data, sometimes the model may good enough, but it just won’t work on some test data, we use k-fold CV to solve this problem.<br>E.g., 把all labelled data 分10份，每次用其中9份train，1份test，然后把10次的testing error取平均值作为 testing error<br><img src="9.png" alt=""></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="supervised-vs-unsupervised-learning">Supervised vs. Unsupervised Learning</h1>
-<hr>
-<h2 id="supervised-learning-classification">Supervised learning (classification)</h2>
-<ul>
+<h1 id="supervised-vs-unsupervised-learning"><a href="#Supervised-vs-Unsupervised-Learning" class="headerlink" title="Supervised vs. Unsupervised Learning"></a>Supervised vs. Unsupervised Learning</h1><hr>
+<h2 id="supervised-learning-classification"><a href="#Supervised-learning-classification" class="headerlink" title="Supervised learning (classification)"></a>Supervised learning (classification)</h2><ul>
 <li>Supervision: The training data (observations, measurements, etc.) are accompanied by labels indicating the class of the observations</li>
-<li>New data is classified based on the training set n</li>
-</ul>
-<h2 id="unsupervised-learning-clustering">Unsupervised learning (clustering)</h2>
-<ul>
+<li>New data is classified based on the training set n <h2 id="unsupervised-learning-clustering"><a href="#Unsupervised-learning-clustering" class="headerlink" title="Unsupervised learning (clustering)"></a>Unsupervised learning (clustering)</h2></li>
 <li>The class labels of training data is unknown</li>
 <li>Given a set of measurements, observations, etc. with the aim of establishing the existence of classes or clusters in the data</li>
 </ul>
@@ -480,7 +445,7 @@ E.g., 把all labelled data 分10份，每次用其中9份train，1份test，然�
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#problem-definition-and-preliminaries"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Problem definition and preliminaries</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#classification-vs-prediction"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Classification vs. Prediction</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#classification-and-regression"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Classification and Regression</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#supervised-learning"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Supervised Learning</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#machine-learning-terminologies"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Machine Learning Terminologies</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#overview-of-the-classification-process"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Overview of the classification process</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#preprocessing-amp-feature-engineering"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Preprocessing &amp; Feature Engineering</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#training"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Training</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#evaluate-the-model-on-testing-data"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Evaluate the Model on Testing Data</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#use-the-model-in-production"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Use the Model in Production</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#how-to-judge-a-model"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">How to judge a model?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#supervised-vs-unsupervised-learning"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Supervised vs. Unsupervised Learning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#supervised-learning-classification"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Supervised learning (classification)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#unsupervised-learning-clustering"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Unsupervised learning (clustering)</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#problem-definition-and-preliminaries"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Problem definition and preliminaries</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#classification-vs-prediction"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Classification vs. Prediction</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#classification-and-regression"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Classification and Regression</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#supervised-learning"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Supervised Learning</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#machine-learning-terminologies"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Machine Learning Terminologies</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#instances-x-attributes-matrixtable"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">instances x #attributes matrix/table</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#attributes-features-1we-use-the-last-attribute-for-class-attribute"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">attributes = #features + 1（we use the last attribute for class attribute）</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#overview-of-the-classification-process"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Overview of the classification process</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#preprocessing-amp-feature-engineering"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Preprocessing &amp; Feature Engineering</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#training"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">Training</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#evaluate-the-model-on-testing-data"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">Evaluate the Model on Testing Data</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#use-the-model-in-production"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">Use the Model in Production</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#how-to-judge-a-model"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">How to judge a model?</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#supervised-vs-unsupervised-learning"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Supervised vs. Unsupervised Learning</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#supervised-learning-classification"><span class="toc-nav-number">6.1.</span> <span class="toc-nav-text">Supervised learning (classification)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#unsupervised-learning-clustering"><span class="toc-nav-number">6.2.</span> <span class="toc-nav-text">Unsupervised learning (clustering)</span></a></li></ol></li></ol>
         
         </div>
       </aside>

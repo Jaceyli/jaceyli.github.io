@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -230,193 +230,141 @@
 <li>Querying Data Streams</li>
 </ul>
 </blockquote>
-<h1 id="data-streams">Data Streams</h1>
-<hr>
+<h1 id="data-streams"><a href="#Data-Streams" class="headerlink" title="Data Streams"></a>Data Streams</h1><hr>
 <ul>
 <li>In many data mining situations, we do not know the entire data set in advance</li>
-<li>Stream Management is important when the input rate is controlled <strong>externally</strong>:
-<ul>
+<li>Stream Management is important when the input rate is controlled <strong>externally</strong>:<ul>
 <li>Google queries</li>
 <li>Twitter or Facebook status updates</li>
 </ul>
 </li>
-<li>We can think of the data as infinite and non-stationary(the distribution changes over time)</li>
-</ul>
-<h2 id="characteristics">Characteristics</h2>
-<ul>
+<li>We can think of the data as infinite and non-stationary(the distribution changes over time)<h2 id="characteristics"><a href="#Characteristics" class="headerlink" title="Characteristics"></a>Characteristics</h2></li>
 <li>Huge volumes of continuous data, possibly infinite</li>
 <li>Fast changing and requires fast, real-time response</li>
 <li>Random access is expensive—single scan algorithm (can only have one look)</li>
 <li>Store only the summary of the data seen thus far</li>
 </ul>
-<h2 id="stream-model">Stream Model</h2>
-<ul>
+<h2 id="stream-model"><a href="#Stream-Model" class="headerlink" title="Stream Model"></a>Stream Model</h2><ul>
 <li>Input elements enter at a rapid rate, at one or more input ports(i.e., streams)</li>
 <li>The system cannot store the entire stream accessibly</li>
 </ul>
-<h2 id="dbms-vs-dsms">DBMS VS. DSMS</h2>
-<p>DBMS: Database Management System Data Processing<br>
-DSMS: General Data Stream Management System Processing model<br>
-<img src="1.png" alt=""></p>
+<h2 id="dbms-vs-dsms"><a href="#DBMS-VS-DSMS" class="headerlink" title="DBMS VS. DSMS"></a>DBMS VS. DSMS</h2><p>DBMS: Database Management System Data Processing<br>DSMS: General Data Stream Management System Processing model<br><img src="1.png" alt=""></p>
 <ul>
-<li>DBMS:
-<ul>
+<li>DBMS:<ul>
 <li>stored sets of relatively <strong>static records</strong> with no pre-defined notion of time</li>
 <li>good for applications that require <strong>persistent data storage</strong> and <strong>complex querying</strong></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>DSMS:
-<ul>
+<li>DSMS:<ul>
 <li>support on-line analysis of <strong>rapidly changing data streams</strong></li>
 <li>data stream: real-time, continuous, ordered(implicitly by arrival time or explicitly by timestamp) sequence of items, too large to store entirely, no ending</li>
-<li><strong>continuous queries</strong><br>
-<img src="2.png" alt=""></li>
+<li><strong>continuous queries</strong><br><img src="2.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h2 id="problems-on-data-streams">Problems on Data Streams</h2>
-<ul>
-<li>Types of queries one wants on answer on a data stream
-<ul>
+<h2 id="problems-on-data-streams"><a href="#Problems-on-Data-Streams" class="headerlink" title="Problems on Data Streams"></a>Problems on Data Streams</h2><ul>
+<li>Types of queries one wants on answer on a data stream<ul>
 <li>Sampling data from a stream: construct a random sample which can reflect the original database</li>
 <li>Queries over sliding windows: number of items of type x in the last k elements of the stream</li>
 <li>Filtering a data stream: Select elements with property x from the stream</li>
-<li>Counting distinct elements: Number of distinct elements in the last k elements of the stream<br>
-We are going to talk about this topics.</li>
+<li>Counting distinct elements: Number of distinct elements in the last k elements of the stream<br>We are going to talk about this topics.    <h2 id="applicaitons"><a href="#Applicaitons" class="headerlink" title="Applicaitons"></a>Applicaitons</h2></li>
 </ul>
 </li>
-</ul>
-<h2 id="applicaitons">Applicaitons</h2>
-<ul>
-<li>Mining query streams
-<ul>
-<li>Google wants to know what queries are more frequent today than<br>
-yesterday</li>
+<li>Mining query streams<ul>
+<li>Google wants to know what queries are more frequent today than<br>yesterday</li>
 </ul>
 </li>
-<li>Mining click streams
-<ul>
+<li>Mining click streams<ul>
 <li>Yahoo wants to know which of its pages are getting an unusual number of hits in the past hour</li>
 </ul>
 </li>
-<li>Mining social network news feeds
-<ul>
+<li>Mining social network news feeds<ul>
 <li>E.g., look for trending topics on Twitter, Facebook</li>
 </ul>
 </li>
-<li>Sensor Networks
-<ul>
+<li>Sensor Networks<ul>
 <li>Many sensors feeding into a central controller</li>
 </ul>
 </li>
-<li>Telephone call records
-<ul>
+<li>Telephone call records<ul>
 <li>Data feeds into customer bills as well as settlements between telephone companies</li>
 </ul>
 </li>
-<li>IP packets monitored at a switch
-<ul>
+<li>IP packets monitored at a switch<ul>
 <li>Gather information for optimal routing</li>
 </ul>
 </li>
 </ul>
-<h1 id="sampling-data-streams">Sampling Data Streams</h1>
-<hr>
+<h1 id="sampling-data-streams"><a href="#Sampling-Data-Streams" class="headerlink" title="Sampling Data Streams"></a>Sampling Data Streams</h1><hr>
 <ul>
-<li>
-<p>Since we can not store the entire stream, one obvious approach is to store a sample<br>
-<img src="4.png" alt=""></p>
+<li><p>Since we can not store the entire stream, one obvious approach is to store a sample<br><img src="4.png" alt=""></p>
 </li>
-<li>
-<p>Two different problems:</p>
+<li><p>Two different problems:</p>
 <ul>
-<li>Sample a <strong>fixed proportion</strong>(固定比例) of elements in the steam
-<ul>
+<li>Sample a <strong>fixed proportion</strong>(固定比例) of elements in the steam<ul>
 <li>As the stream grows, the sample also <strong>gets bigger</strong></li>
 </ul>
 </li>
-<li>Maintain a <strong>random sample of fixed size</strong>(固定大小) over a potentially infinite stream
-<ul>
-<li>As the stream grows, the sample is of <strong>fixed size</strong></li>
+<li>Maintain a <strong>random sample of fixed size</strong>(固定大小) over a potentially infinite stream<ul>
+<li>As the stream grows, the sample is of <strong>fixed size</strong>   </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="sampling-a-fixed-proportion">Sampling a Fixed Proportion</h2>
-<ul>
-<li>
-<p>Question: How often did a user run the same query in a single days?</p>
-<ul>
+<h2 id="sampling-a-fixed-proportion"><a href="#Sampling-a-Fixed-Proportion" class="headerlink" title="Sampling a Fixed Proportion"></a>Sampling a Fixed Proportion</h2><ul>
+<li>Question: How often did a user run the same query in a single days? <ul>
 <li>Stream of tuples: (user, query, time)</li>
 <li>If you have space to store 1/10th of query stream</li>
 </ul>
 </li>
-<li>
-<p>Naïve solution:</p>
-<ul>
-<li>Generate a random integer in [0…9] for each query</li>
+<li>Naïve solution:<ul>
+<li>Generate a random integer in [0..9] for each query</li>
 <li>Store the query if the integer is 0, otherwise discard</li>
 </ul>
 </li>
-<li>
-<p>Problem with Naïve solution:</p>
-<ul>
-<li>What fraction of queries by an average search engine user are <strong>duplicates</strong>?<br>
-Example:</li>
+<li>Problem with Naïve solution:<ul>
+<li>What fraction of queries by an average search engine user are <strong>duplicates</strong>?<br>Example:</li>
 </ul>
 </li>
-<li>
-<p>Suppose each user issues x queries once and d queries twice (total of x+2d queries)</p>
-<ul>
+<li>Suppose each user issues x queries once and d queries twice (total of x+2d queries)<ul>
 <li>Correct answer: d/(x+d)</li>
 </ul>
 </li>
-<li>
-<p>Proposed solution: We keep <strong>10% of the queries</strong></p>
+<li><p>Proposed solution: We keep <strong>10% of the queries</strong></p>
 <ul>
 <li>Sample will contain x/10 of the singleton queries and 2d/10 of the duplicate queries at least once</li>
-<li>But only d/100 pairs of duplicates
-<ul>
-<li>d/100 = 1/10 * 1/10 * d</li>
+<li>But only d/100 pairs of duplicates<ul>
+<li>d/100 = 1/10 <em> 1/10 </em> d</li>
 </ul>
 </li>
-<li>Of d “duplicates” 18d/100 appear exactly once
-<ul>
-<li>18d/100 = ((1/10 * 9/10)+(9/10 * 1/10)) * d</li>
+<li>Of d “duplicates” 18d/100 appear exactly once<ul>
+<li>18d/100 = ((1/10 <em> 9/10)+(9/10 </em> 1/10)) * d</li>
 </ul>
 </li>
 <li>So the sample-based answer is d/100 / (x/10 + d/100 + 18d/100 ) ≠ d/(x+d)</li>
 </ul>
 </li>
-<li>
-<p><strong>Solution: Sample Users</strong></p>
+<li><p><strong>Solution: Sample Users</strong></p>
 <ul>
 <li>Pick 1/10th of users and take all their searches in the sample</li>
-<li>Use a hash function that hashes the user name or user id uniformly into <strong>10 buckets</strong>
-<ul>
+<li>Use a hash function that hashes the user name or user id uniformly into <strong>10 buckets</strong><ul>
 <li>We hash each user name to one of ten buckets, 0 through 9</li>
-<li>If the user hashes to bucket 0, then accept this search query for the sample, and if not, then not.</li>
+<li>If the user hashes to bucket 0, then accept this search query for the sample, and if not, then not. </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p><strong>总结</strong>：a Fixed Proportion Generalized Problem and Solution<br>
-<img src="5.png" alt=""></p>
-</li>
+<li><strong>总结</strong>：a Fixed Proportion Generalized Problem and Solution<br>  <img src="5.png" alt="">    </li>
 </ul>
-<h2 id="a-fixed-size-sample">A Fixed-size Sample</h2>
-<ul>
+<h2 id="a-fixed-size-sample"><a href="#A-Fixed-size-Sample" class="headerlink" title="A Fixed-size Sample"></a>A Fixed-size Sample</h2><ul>
 <li>Suppose we need to maintain a random sample S of size exactly s tuples</li>
 <li>Suppose at time n we have seen n items, Each item is in the sample S with equal prob. s/n</li>
-<li><strong>Algorithm (a.k.a. Reservoir Sampling)</strong>
-<ul>
+<li><strong>Algorithm (a.k.a. Reservoir Sampling)</strong><ul>
 <li>Store all the first s elements of the stream to S</li>
-<li>Suppose we have seen n-1 elements, and now the n<sup>th</sup> element arrives(n &gt; s)
-<ul>
+<li>Suppose we have seen n-1 elements, and now the n<sup>th</sup> element arrives(n &gt; s)<ul>
 <li>With probability s/n, keep the n<sup>th</sup> element, else discard it</li>
 <li>If we picked the n<sup>th</sup> element, then it replaces one of the s elements in the sample S, picked uniformly at random</li>
 </ul>
@@ -425,34 +373,27 @@ Example:</li>
 </li>
 </ul>
 <p><strong>After n elements, the sample contains each element seen so far with probability s/n</strong></p>
-<p>How to prove it? ---- Induction</p>
+<p>How to prove it? —— Induction</p>
 <ul>
 <li>Assume that after n elements, the sample contains each element seen so far with probability s/n</li>
-<li>We need to show that after seeing element n+1 the sample<br>
-maintains the property
-<ul>
+<li>We need to show that after seeing element n+1 the sample<br>maintains the property<ul>
 <li>Sample contains each element seen so far with probability s/(n+1)</li>
 </ul>
 </li>
-<li><strong>Base case</strong>:
-<ul>
-<li>After we see n=s elements the sample S has the desired property
-<ul>
+<li><strong>Base case</strong>:<ul>
+<li>After we see n=s elements the sample S has the desired property<ul>
 <li>Each out of n=s elements is in the sample with probability s/s =1</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>Inductive step</strong>: For elements already in S, probability that the algorithm keeps it in S is:<br>
-<img src="6.png" alt=""></li>
+<li><strong>Inductive step</strong>: For elements already in S, probability that the algorithm keeps it in S is:<br><img src="6.png" alt=""></li>
 <li>So, at time n, tuples in S were there with prob. s/n</li>
 <li>Time n -&gt; n+1, tuple stayed in S with prob. n/(n+1)</li>
 <li>So prob. tuple is in S at time n+1 = s/n * n/n+1 = s/n+1</li>
 </ul>
-<h1 id="querying-data-streams">Querying Data Streams</h1>
-<hr>
-<h2 id="sliding-windows">Sliding Windows</h2>
-<ul>
+<h1 id="querying-data-streams"><a href="#Querying-Data-Streams" class="headerlink" title="Querying Data Streams"></a>Querying Data Streams</h1><hr>
+<h2 id="sliding-windows"><a href="#Sliding-Windows" class="headerlink" title="Sliding Windows"></a>Sliding Windows</h2><ul>
 <li>A useful model of stream processing is that queries are about a window of length N —— the N most recent elements received</li>
 <li>Interesting case: N is so large that the data cannot be stored in memory, or even on disk</li>
 </ul>

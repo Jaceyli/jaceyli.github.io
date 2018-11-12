@@ -155,14 +155,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -229,101 +229,64 @@
 <p>Abstract:</p>
 <ul>
 <li>What is Association Rule Mining?</li>
-<li>Association Rule Mining Alorithms:
-<ul>
+<li>Association Rule Mining Alorithms:<ul>
 <li>Apriori Property</li>
 <li>FP-growth</li>
 </ul>
 </li>
 </ul>
 </blockquote>
-<h1 id="what-is-association-mining">What Is Association Mining?</h1>
-<ul>
+<h1 id="what-is-association-mining"><a href="#What-Is-Association-Mining" class="headerlink" title="What Is Association Mining?"></a>What Is Association Mining?</h1><ul>
 <li>Association rule mining:</li>
 <li>Finding frequent patterns, associations, correlations, or causal structures among sets of items or objects in transaction databases, relational databases, and other information repositories.</li>
-<li>Frequent pattern: pattern (set of items, sequence, etc.) that occurs frequently in a database</li>
-</ul>
-<h1 id="why-is-frequent-pattern-or-assoiciation-mining-an-essential-task-in-data-mining">Why Is Frequent Pattern or Assoiciation Mining an Essential Task in Data Mining?</h1>
-<ul>
-<li>Foundation for many essential data mining tasks
-<ul>
+<li>Frequent pattern: pattern (set of items, sequence, etc.) that occurs frequently in a database<h1 id="why-is-frequent-pattern-or-assoiciation-mining-an-essential-task-in-data-mining"><a href="#Why-Is-Frequent-Pattern-or-Assoiciation-Mining-an-Essential-Task-in-Data-Mining" class="headerlink" title="Why Is Frequent Pattern or Assoiciation Mining an Essential Task in Data Mining?"></a>Why Is Frequent Pattern or Assoiciation Mining an Essential Task in Data Mining?</h1></li>
+<li>Foundation for many essential data mining tasks<ul>
 <li>Association, correlation, causality</li>
 <li>Sequential patterns, temporal or cyclic association, partial periodicity, spatial and multimedia association</li>
 <li>Associative classification, cluster analysis, iceberg cube, fascicles (semantic data compression)</li>
 </ul>
 </li>
-<li>Broad applications
-<ul>
-<li>Basket data analysis, cross-marketing, catalog design,<br>
-sale campaign analysis</li>
+<li>Broad applications<ul>
+<li>Basket data analysis, cross-marketing, catalog design,<br>sale campaign analysis</li>
 <li>Web log (click stream) analysis, DNA sequence analysis, etc.</li>
 </ul>
 </li>
 </ul>
-<h1 id="basic-concepts">Basic Concepts</h1>
-<p>X -&gt; Y</p>
+<h1 id="basic-concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h1><p>X -&gt; Y</p>
 <ul>
 <li><strong>Support</strong>, probability that a transaction contains X∪Y</li>
 <li><strong>Confidence</strong>, conditional probability that a transaction having X also contains Y.</li>
 </ul>
 <p><img src="1.png" alt=""></p>
-<h1 id="association-rule-mining-algorithms">Association Rule Mining Algorithms</h1>
-<ul>
-<li>Naïve algorithm
-<ul>
+<h1 id="association-rule-mining-algorithms"><a href="#Association-Rule-Mining-Algorithms" class="headerlink" title="Association Rule Mining Algorithms"></a>Association Rule Mining Algorithms</h1><ul>
+<li>Naïve algorithm<ul>
 <li>Enumerate all possible itemsets and check their support against min_sup</li>
 <li>Generate all association rules and check their confidence against min_conf</li>
 </ul>
 </li>
-<li>The Apriori property
-<ul>
+<li>The Apriori property<ul>
 <li>Apriori Algorithm</li>
-<li>FP-growth Algorithm</li>
+<li>FP-growth Algorithm<h2 id="apriori-property"><a href="#Apriori-Property" class="headerlink" title="Apriori Property"></a>Apriori Property</h2></li>
 </ul>
 </li>
+<li>A frequent (used to be called large) itemset is an itemset whose support is ≥ min_sup.</li>
+<li><p>Apriori property (downward closure): <strong>any subsets</strong> of a frequent itemset are also frequent itemsets<br><img src="2.png" alt=""></p>
+</li>
+<li><p><strong>Apriori pruning principle</strong>: If there is <strong>any</strong> itemset which is infrequent, its superset should not be generated/tested!</p>
+</li>
+<li>Algorithm<img src="3.png" alt=""></li>
+<li>Pseudo code<img src="4.png" alt=""></li>
+<li>Example<img src="5.png" alt=""></li>
 </ul>
-<h2 id="apriori-property">Apriori Property</h2>
+<h3 id="derive-rules-from-frequent-itemsets"><a href="#Derive-rules-from-frequent-itemsets" class="headerlink" title="Derive rules from frequent itemsets"></a>Derive rules from frequent itemsets</h3><p>For each frequent itemset X,<br>For each <strong>proper nonempty</strong> subset A of X,</p>
 <ul>
-<li>
-<p>A frequent (used to be called large) itemset is an itemset whose support is ≥ min_sup.</p>
+<li>Let B = X - A</li>
+<li><p>A -&gt; B is an association rule<br>  if Confidence (A -&gt; B) ≥ min_conf, where support (A -&gt; B) = support (AB), and confidence (A -&gt; B) = support (AB) / support (A)</p>
 </li>
-<li>
-<p>Apriori property (downward closure): <strong>any subsets</strong> of a frequent itemset are also frequent itemsets<br>
-<img src="2.png" alt=""></p>
-</li>
-<li>
-<p><strong>Apriori pruning principle</strong>: If there is <strong>any</strong> itemset which is infrequent, its superset should not be generated/tested!</p>
-</li>
-<li>
-<p>Algorithm<img src="3.png" alt=""></p>
-</li>
-<li>
-<p>Pseudo code<img src="4.png" alt=""></p>
-</li>
-<li>
-<p>Example<img src="5.png" alt=""></p>
+<li><p>Example<img src="6.png" alt=""></p>
 </li>
 </ul>
-<h3 id="derive-rules-from-frequent-itemsets">Derive rules from frequent itemsets</h3>
-<p>For each frequent itemset X,<br>
-For each <strong>proper nonempty</strong> subset A of X,</p>
-<ul>
-<li>
-<p>Let B = X - A</p>
-</li>
-<li>
-<p>A -&gt; B is an association rule<br>
-if Confidence (A -&gt; B) ≥ min_conf, where support (A -&gt; B) = support (AB), and confidence (A -&gt; B) = support (AB) / support (A)</p>
-</li>
-<li>
-<p>Example<img src="6.png" alt=""></p>
-</li>
-</ul>
-<h2 id="fp-growth">FP-growth</h2>
-<p><strong>Recursive algorithm</strong><br>
-<img src="7.png" alt=""><br>
-<img src="8.png" alt=""><br>
-<img src="9.png" alt=""></p>
+<h2 id="fp-growth"><a href="#FP-growth" class="headerlink" title="FP-growth"></a>FP-growth</h2><p><strong>Recursive algorithm</strong><br><img src="7.png" alt=""><br><img src="8.png" alt=""><br><img src="9.png" alt=""></p>
 <ul>
 <li>Example<img src="10.png" alt=""><img src="11.png" alt=""><img src="12.png" alt=""></li>
 </ul>
