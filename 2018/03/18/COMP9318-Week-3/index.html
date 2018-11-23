@@ -223,8 +223,11 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><style><br>img{<br>    max-width: 80%!important<br>}
-</style></p>
+                <style>
+img{
+    max-width: 80%!important
+}
+</style>
 <blockquote>
 <p>Abstract:</p>
 <ul>
@@ -234,72 +237,101 @@
 <li>Materialized Cuboids and Efficient Computing Cuboids</li>
 </ul>
 </blockquote>
-<h1 id="the-logical-model"><a href="#The-Logical-Model" class="headerlink" title="The Logical Model"></a>The Logical Model</h1><hr>
+<h1 id="the-logical-model">The Logical Model</h1>
+<hr>
 <p>Two main approaches:</p>
 <ul>
-<li><strong>Using relational DB technology</strong>:<ul>
-<li>Star schema </li>
+<li><strong>Using relational DB technology</strong>:
+<ul>
+<li>Star schema</li>
 <li>Snowflake schema</li>
 <li>Fact constellation</li>
 </ul>
 </li>
-<li>Using multidimensional technology:<ul>
+<li>Using multidimensional technology:
+<ul>
 <li>Just as multidimensional data cube</li>
 </ul>
 </li>
 </ul>
 <p>首先解释维度建模两个基本概念，一个是事实表（Fact Table），一个是维度表（Dimension Table）</p>
-<p><strong>Fact Table</strong><br>事实表一般由两部分组成，维度（Dimension）和度量（Measurement）。</p>
+<p><strong>Fact Table</strong><br>
+事实表一般由两部分组成，维度（Dimension）和度量（Measurement）。</p>
 <p>事实表可以通俗的理解为「什么人在什么时间做了什么事」的事实记录或者场景上下文，拥有最大的数据量，它是业务流程的核心体现。比如订单的场景(table第一行)：</p>
 <blockquote>
 <p>产品76Ha在商店S136卖了10个，共计40刀，时间xxx</p>
 </blockquote>
-<p><img src="1.png" alt=""><br>Fact table:<br><img src="2.png" alt=""></p>
-<p><strong>Dimension Table</strong><br>维度表用于对事实表的补充说明，描述和还原事实发生时的场景。<br>这个例子我们用了三个维度：产品，时间，地址。<br><img src="3.png" alt=""><br>对于每一个维度而言，都有若干个属性来描述，比如产品有名称，类别，品牌，颜色等信息。这些维度的属性就是之后数据统计的依据，比如我们可以统计不同类别，不同品牌，不同颜色在订单中的差异，从向用户制定更精细的营销策略。</p>
-<h2 id="star-schema"><a href="#Star-schema" class="headerlink" title="Star schema"></a>Star schema</h2><p>The most common modeling paradigm is the star schema, in which the data warehouse contains:</p>
+<p><img src="1.png" alt=""><br>
+Fact table:<br>
+<img src="2.png" alt=""></p>
+<p><strong>Dimension Table</strong><br>
+维度表用于对事实表的补充说明，描述和还原事实发生时的场景。<br>
+这个例子我们用了三个维度：产品，时间，地址。<br>
+<img src="3.png" alt=""><br>
+对于每一个维度而言，都有若干个属性来描述，比如产品有名称，类别，品牌，颜色等信息。这些维度的属性就是之后数据统计的依据，比如我们可以统计不同类别，不同品牌，不同颜色在订单中的差异，从向用户制定更精细的营销策略。</p>
+<h2 id="star-schema">Star schema</h2>
+<p>The most common modeling paradigm is the star schema, in which the data warehouse contains:</p>
 <ul>
 <li>a large central table (fact table) containing the bulk of the data, with no redundancy</li>
-<li>a set of smaller attendant tables (dimension tables), one for each dimension.<br>The schema graph resembles a starburst, with the dimension tables displayed in a radial pattern around the central fact table.</li>
+<li>a set of smaller attendant tables (dimension tables), one for each dimension.<br>
+The schema graph resembles a starburst, with the dimension tables displayed in a radial pattern around the central fact table.</li>
 </ul>
 <p><strong>A fact table in the middle connected to a set of dimension tables.</strong></p>
-<p>For example:<br><img src="4.png" alt="star schema"><br>其实这里的star schema是由universal schema经过normalization转化而来，具体有：</p>
+<p>For example:<br>
+<img src="4.png" alt="star schema"><br>
+其实这里的star schema是由universal schema经过normalization转化而来，具体有：</p>
 <ul>
-<li>Each dimension is represented by a dimension-table<ul>
+<li>Each dimension is represented by a dimension-table
+<ul>
 <li>LOCATION (location_key, store, street_address, city, state, country, region)</li>
 <li>dimension tables are not normalized</li>
 </ul>
 </li>
-<li>Transactions are described through a fact-table<ul>
+<li>Transactions are described through a fact-table
+<ul>
 <li>each tuple consists of a pointer to each of the dimension-tables (foreign-key) and a list of measures (units_sold; amount)</li>
 </ul>
 </li>
 </ul>
-<p>Star schema 优点：<br>Facts and dimensions are clearly depicted</p>
+<p>Star schema 优点：<br>
+Facts and dimensions are clearly depicted</p>
 <ul>
 <li>dimension tables are relatively static, data is loaded (append mostly) into fact table(s)</li>
 <li>easy to comprehend (and write queries)</li>
 </ul>
-<h2 id="snowflake-schema"><a href="#Snowflake-schema" class="headerlink" title="Snowflake schema"></a>Snowflake schema</h2><p>A refinement of star schema where some dimensional hierarchy is <strong>normalized</strong> into a set of smaller dimension tables, forming a shape similar to snowflake</p>
+<h2 id="snowflake-schema">Snowflake schema</h2>
+<p>A refinement of star schema where some dimensional hierarchy is <strong>normalized</strong> into a set of smaller dimension tables, forming a shape similar to snowflake</p>
 <blockquote>
 <p><strong>Normalization</strong>：Database normalization, or simply normalization, is the process of restructuring a relational database in accordance with a series of so-called normal forms in order to <strong>reduce data redundancy and improve data integrity</strong>. Normalization entails organizing the columns (attributes) and tables (relations) of a database to ensure that their dependencies are properly enforced by database integrity constraints. It is accomplished by applying some formal rules either by a process of synthesis (creating a new database design) or decomposition (improving an existing database design).(RDMS的1NF-&gt;2NF-&gt;3NF等等的转换)</p>
 </blockquote>
-<h3 id="star-schema-vs-snowflake-schema"><a href="#Star-schema-V-S-Snowflake-schema" class="headerlink" title="Star schema V.S. Snowflake schema:"></a>Star schema V.S. Snowflake schema:</h3><ul>
-<li>Star schema:<br><img src="5.png" alt=""> </li>
-<li>Snowflake schema:<br><img src="6.png" alt=""></li>
+<h3 id="star-schema-vs-snowflake-schema">Star schema V.S. Snowflake schema:</h3>
+<ul>
+<li>Star schema:<br>
+<img src="5.png" alt=""></li>
+<li>Snowflake schema:<br>
+<img src="6.png" alt=""></li>
 </ul>
 <p>由此可知，Snowflake schema只要经过Denormalization就可以变回Star schema.</p>
-<p>在关系型数据库三范式（3NF）设计中，我们极力避免数据的冗余，达到数据的高度一致性。但在数据仓库中，这样的设计并不是最佳实践，因为与巨大的fact table相比，dimension table本身很小，所以减少冗余节省的空间忽略，而且执行查询需要更多的连接操作，Snowflake的结构性能会降低。<br>所以在维度建模中，<strong>维度表一般采取反范式的设计</strong>，在一张维度表中扁平化的存储维度的属性，尽量避免使用外键。也就是说Snowflake在实际中用的更多。</p>
-<h2 id="fact-constellation"><a href="#Fact-constellation" class="headerlink" title="Fact constellation"></a>Fact constellation</h2><p>Multiple fact tables share dimension tables, viewed as a collection of stars,<br>therefore called <strong>galaxy schema</strong> or fact constellation.</p>
-<p>For example:<br><img src="7.png" alt=""></p>
-<h1 id="query-language"><a href="#Query-Language" class="headerlink" title="Query Language"></a>Query Language</h1><ul>
-<li>Two approaches:<ul>
+<p>在关系型数据库三范式（3NF）设计中，我们极力避免数据的冗余，达到数据的高度一致性。但在数据仓库中，这样的设计并不是最佳实践，因为与巨大的fact table相比，dimension table本身很小，所以减少冗余节省的空间忽略，而且执行查询需要更多的连接操作，Snowflake的结构性能会降低。<br>
+所以在维度建模中，<strong>维度表一般采取反范式的设计</strong>，在一张维度表中扁平化的存储维度的属性，尽量避免使用外键。也就是说Snowflake在实际中用的更多。</p>
+<h2 id="fact-constellation">Fact constellation</h2>
+<p>Multiple fact tables share dimension tables, viewed as a collection of stars,<br>
+therefore called <strong>galaxy schema</strong> or fact constellation.</p>
+<p>For example:<br>
+<img src="7.png" alt=""></p>
+<h1 id="query-language">Query Language</h1>
+<ul>
+<li>Two approaches:
+<ul>
 <li>Using relational DB technology: SQL (with extensions such as <strong>CUBE/PIVOT/UNPIVOT</strong>)</li>
 <li>Using multidimensional technology: <strong>MDX</strong></li>
 </ul>
 </li>
 </ul>
-<p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br><img src="8.png" alt=""></p>
-<h1 id="physical-model"><a href="#Physical-Model" class="headerlink" title="Physical Model"></a>Physical Model</h1><p>Data Warehouse architecture分为3层：</p>
+<p>下图左边的是SQL，右边的是MDX。相较而言，MDX更为简单，因为它的语句更加直观简洁。<br>
+<img src="8.png" alt=""></p>
+<h1 id="physical-model">Physical Model</h1>
+<p>Data Warehouse architecture分为3层：</p>
 <ol>
 <li>最底层，Data Warehouse Server</li>
 <li>中间层，OLAP Server</li>
@@ -307,12 +339,14 @@
 </ol>
 <p><img src="9.png" alt=""></p>
 <ul>
-<li><strong>OLAP Server</strong> Two main approaches:<ul>
+<li><strong>OLAP Server</strong> Two main approaches:
+<ul>
 <li>Using relational DB technology: ROLAP</li>
 <li>Using multidimensional technology: MOLAP</li>
 </ul>
 </li>
-<li>Hybrid: HOLAP<ul>
+<li>Hybrid: HOLAP
+<ul>
 <li>Base cuboid: ROLAP</li>
 <li>Other cuboids: MOLAP</li>
 </ul>
@@ -321,24 +355,42 @@
 <p><strong>Relational OLAP (ROLAP) servers</strong>: These are the intermediate servers that stand in between a relational back-end server and client front-end tools. They use a relational or extended-relational DBMS to store and manage warehouse data, and OLAP middleware to support missing pieces. ROLAP servers include optimization for each DBMS back end, implementation of aggregation navigation logic, and additional tools and services. ROLAP technology tends to have greater scalability than MOLAP technology. The DSS server of Microstrategy, for example, adopts the ROLAP approach.</p>
 <p><strong>Multidimensional OLAP (MOLAP) servers</strong>: These servers support multidimensional views of data through array-based multidimensional storage engines. They map multidimensional views directly to data cube array structures. The advantage of using a data136 Chapter 3 Data Warehouse and OLAP Technology: An Overview cube is that it allows fast indexing to precomputed summarized data. Notice that with multidimensional data stores, the storage utilization may be low if the data set is sparse. In such cases, sparse matrix compression techniques should be explored (Chapter 4). Many MOLAP servers adopt a two-level storage representation to handle dense and sparse data sets: denser subcubes are identified and stored as array structures, whereas sparse subcubes employ compression technology for efficient storage utilization.</p>
 <p><strong>Hybrid OLAP (HOLAP) servers</strong>: The hybrid OLAP approach combines ROLAP and MOLAP technology, benefiting from the greater scalability of ROLAP and the faster computation of MOLAP. For example, a HOLAP server may allow large volumes of detail data to be stored in a relational database, while aggregations are kept in a separate MOLAP store. The Microsoft SQL Server 2000 supports a hybrid OLAP server.</p>
-<p>HOLAP example:<br><img src="14.jpg" alt=""></p>
+<p>HOLAP example:<br>
+<img src="14.jpg" alt=""></p>
 <p>We use the relational technology to store the base cuboid. The base cuboid is the fact table of star schema. While the aggregations below the base cuboid we use the multidimensional technology.</p>
-<h1 id="query-processing-techniques"><a href="#Query-Processing-Techniques" class="headerlink" title="Query Processing Techniques"></a>Query Processing Techniques</h1><h2 id="rolap"><a href="#ROLAP" class="headerlink" title="ROLAP"></a>ROLAP</h2><p><img src="20.png" alt=""></p>
-<h3 id="top-down-approach"><a href="#Top-down-Approach" class="headerlink" title="Top-down Approach"></a>Top-down Approach</h3><p>Model dependencies among the aggregates:<br><img src="21.png" alt=""></p>
-<h3 id="bottom-up-approach-buc"><a href="#Bottom-up-Approach-BUC" class="headerlink" title="Bottom-up Approach (BUC)"></a>Bottom-up Approach (BUC)</h3><p><strong>Recursion</strong></p>
+<h1 id="query-processing-techniques">Query Processing Techniques</h1>
+<h2 id="rolap">ROLAP</h2>
+<p><img src="20.png" alt=""></p>
+<h3 id="top-down-approach">Top-down Approach</h3>
+<p>Model dependencies among the aggregates:<br>
+<img src="21.png" alt=""></p>
+<h3 id="bottom-up-approach-buc">Bottom-up Approach (BUC)</h3>
+<p><strong>Recursion</strong></p>
 <ul>
-<li><p>Reduce Cube(in 2D) to Cube(in 1D)<br><img src="22.png" alt=""></p>
+<li>
+<p>Reduce Cube(in 2D) to Cube(in 1D)<br>
+<img src="22.png" alt=""></p>
 </li>
-<li><p>Reduce Cube(in 3D) to Cube(in 2D)</p>
+<li>
+<p>Reduce Cube(in 3D) to Cube(in 2D)</p>
 </li>
 </ul>
-<p><img src="23.png" alt=""><br><img src="24.png" alt=""></p>
+<p><img src="23.png" alt=""><br>
+<img src="24.png" alt=""></p>
 <ul>
-<li>BUC-SR(Simple Recursion)<br><img src="25.png" alt=""><br><img src="26.png" alt=""></li>
+<li>BUC-SR(Simple Recursion)<br>
+<img src="25.png" alt=""><br>
+<img src="26.png" alt=""></li>
 </ul>
-<h2 id="molap"><a href="#MOLAP" class="headerlink" title="MOLAP"></a>MOLAP</h2><p>We adopt a MOLAP architecture to store the full data cube of R, with the following mapping functions<br><img src="27.png" alt=""><br><img src="28.png" alt=""></p>
-<p>f(time,item) = 4<em>time + item<br>解释下系数为什么分别是4和1:<br>其实只要保证值是一一对应的就可以。这里取4和1是保证一一对应最简单的系数。因为time有4个不同的值，item有4个，给time编码保证权重大于等于1 </em> 4 = 4，给item编码大于等于1就可以。</p>
-<p>P.S. Ass中L,T, I,分别有3,3,4个不同的值，那么就是<br>h(L, T , I ) = (3 <em> 4) L + (4 </em> 1) I + 1 * I = 12L + 4T + I</p>
+<h2 id="molap">MOLAP</h2>
+<p>We adopt a MOLAP architecture to store the full data cube of R, with the following mapping functions<br>
+<img src="27.png" alt=""><br>
+<img src="28.png" alt=""></p>
+<p>f(time,item) = 4*time + item<br>
+解释下系数为什么分别是4和1:<br>
+其实只要保证值是一一对应的就可以。这里取4和1是保证一一对应最简单的系数。因为time有4个不同的值，item有4个，给time编码保证权重大于等于1 * 4 = 4，给item编码大于等于1就可以。</p>
+<p>P.S. Ass中L,T, I,分别有3,3,4个不同的值，那么就是<br>
+h(L, T , I ) = (3 * 4) L + (4 * 1) I + 1 * I = 12L + 4T + I</p>
 
                 
 

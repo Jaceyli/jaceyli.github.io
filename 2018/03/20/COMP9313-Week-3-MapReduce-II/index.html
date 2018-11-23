@@ -228,7 +228,6 @@ img{
     max-width: 80%!important
 }
 </style>
-
 <blockquote>
 <p>Abstract:</p>
 <ul>
@@ -242,96 +241,125 @@ img{
 <li><strong>To minimize the data transferred between map and reduce tasks</strong></li>
 <li>Combiner function is <strong>run on the map output</strong></li>
 <li>Both input and output data types must be <strong>consistent with</strong>（保持一致） the output of mapper (or input of reducer)</li>
-<li>But Hadoop do not guarantee how many times it will call combiner function for a particular map output record<ul>
+<li>But Hadoop do not guarantee how many times it will call combiner function for a particular map output record
+<ul>
 <li>It is just optimization</li>
-<li>The number of calling (even zero) does not affect the output of<br>Reducers</li>
+<li>The number of calling (even zero) does not affect the output of<br>
+Reducers</li>
 </ul>
 </li>
-<li><font color="#FF6347">Applicable on problems that are commutative and associative</font><ul>
+<li><font color="#FF6347">Applicable on problems that are commutative and associative</font>
+<ul>
 <li>Commutative（交换率）: max(a, b) = max(b, a)</li>
-<li>Associative（结合律）: max (max(a, b), c) = max(a, max(b, c)) </li>
+<li>Associative（结合律）: max (max(a, b), c) = max(a, max(b, c))</li>
 </ul>
 </li>
 </ul>
-<h1 id="design-pattern-1-in-mapper-combining"><a href="#Design-Pattern-1-In-mapper-Combining" class="headerlink" title="Design Pattern 1: In-mapper Combining"></a>Design Pattern 1: In-mapper Combining</h1><hr>
-<h2 id="importance-of-local-aggregation"><a href="#Importance-of-Local-Aggregation" class="headerlink" title="Importance of Local Aggregation"></a>Importance of Local Aggregation</h2><ul>
-<li>Ideal scaling characteristics:<ul>
+<h1 id="design-pattern-1-in-mapper-combining">Design Pattern 1: In-mapper Combining</h1>
+<hr>
+<h2 id="importance-of-local-aggregation">Importance of Local Aggregation</h2>
+<ul>
+<li>Ideal scaling characteristics:
+<ul>
 <li>Twice the data, twice the running time</li>
 <li>Twice the resources, half the running time</li>
 </ul>
 </li>
-<li>Why can’t we achieve this?<ul>
+<li>Why can’t we achieve this?
+<ul>
 <li><strong>Data synchronization requires communication</strong></li>
 <li><strong>Communication kills performance</strong></li>
 </ul>
 </li>
-<li>How to avoid communication?<ul>
+<li>How to avoid communication?
+<ul>
 <li>Reduce intermediate data via <strong>local aggregation</strong></li>
 <li>in-mapper combining can help!</li>
 </ul>
 </li>
 </ul>
-<h2 id="example-1-wordcount"><a href="#Example-1-WordCount" class="headerlink" title="Example 1: WordCount"></a>Example 1: WordCount</h2><p>WordCount Baseline:<br><img src="1.png" alt=""></p>
-<h3 id="version-1"><a href="#Version-1" class="headerlink" title="Version 1"></a>Version 1</h3><p><img src="2.png" alt=""></p>
+<h2 id="example-1-wordcount">Example 1: WordCount</h2>
+<p>WordCount Baseline:<br>
+<img src="1.png" alt=""></p>
+<h3 id="version-1">Version 1</h3>
+<p><img src="2.png" alt=""></p>
 <p>这种方法，每执行一次map就new一个Hashmap，将一个document下所有term t都sum到 H{t} 中，然后EMIT(term t, count H{t})。</p>
 <p><strong>This mapper use more space to reduce time cost.</strong></p>
 <ul>
-<li>Are combiners still needed?<br>Yes, one hashmap is applied to one document, and it need to aggregate.</li>
+<li>Are combiners still needed?<br>
+Yes, one hashmap is applied to one document, and it need to aggregate.</li>
 </ul>
 <p>但是由于在combiner中aggregate效率还是不高，所以我们继续改进为in-mapper combining</p>
-<h3 id="version-2-in-mapper-combining"><a href="#Version-2-in-mapper-combining" class="headerlink" title="Version 2: in-mapper combining"></a>Version 2: in-mapper combining</h3><p><img src="3.png" alt=""></p>
+<h3 id="version-2-in-mapper-combining">Version 2: in-mapper combining</h3>
+<p><img src="3.png" alt=""></p>
 <p>这种方法，先new一个总的Hashmap，通过不断的读入documents来不断的将term t的数量sum到这个总的Hashmap的H{t}中。</p>
-<h2 id="example-2-computing-the-mean"><a href="#Example-2-Computing-the-Mean" class="headerlink" title="Example 2: Computing the Mean"></a>Example 2: Computing the Mean</h2><h3 id="version-1"><a href="#Version-1-1" class="headerlink" title="Version 1"></a>Version 1</h3><p><img src="4.png" alt=""></p>
-<font color="#FF6347">**! WRONG**</font>
-
+<h2 id="example-2-computing-the-mean">Example 2: Computing the Mean</h2>
+<h3 id="version-1">Version 1</h3>
+<p><img src="4.png" alt=""></p>
+<p><font color="#FF6347"><strong>! WRONG</strong></font></p>
 <ul>
-<li>Why can’t we use reducer as combiner?<br>Mean(1, 2, 3, 4, 5) != Mean(Mean(1, 2), Mean(3, 4, 5)) <strong>不满于结合律</strong></li>
+<li>Why can’t we use reducer as combiner?<br>
+Mean(1, 2, 3, 4, 5) != Mean(Mean(1, 2), Mean(3, 4, 5)) <strong>不满于结合律</strong></li>
 </ul>
-<h3 id="version-2"><a href="#Version-2" class="headerlink" title="Version 2"></a>Version 2</h3><p><img src="6.png" alt=""></p>
-<font color="#FF6347">**! WRONG**</font>
-
+<h3 id="version-2">Version 2</h3>
+<p><img src="6.png" alt=""></p>
+<p><font color="#FF6347"><strong>! WRONG</strong></font></p>
 <ul>
-<li>Why doesn’t this work?<br>Combiners must have the same input and output type, <strong>consistent with the input of reducers (output of mappers)</strong></li>
+<li>Why doesn’t this work?<br>
+Combiners must have the same input and output type, <strong>consistent with the input of reducers (output of mappers)</strong></li>
 </ul>
-<h3 id="version-3"><a href="#Version-3" class="headerlink" title="Version 3"></a>Version 3</h3><p><img src="5.png" alt=""></p>
-<p>这个方法是对的，但是有combiner还是不那么高效，可以将其转化为更高效的in-mapper combining </p>
-<h3 id="version-4-in-mapper-combining"><a href="#Version-4-in-mapper-combining" class="headerlink" title="Version 4 : in-mapper combining"></a>Version 4 : in-mapper combining</h3><p><img src="7.png" alt=""></p>
-<h2 id="how-to-implement-in-mapper-combiner-in-mapreduce"><a href="#How-to-Implement-In-mapper-Combiner-in-MapReduce" class="headerlink" title="How to Implement In-mapper Combiner in MapReduce?"></a>How to Implement In-mapper Combiner in MapReduce?</h2><ul>
-<li>Lifecycle: setup -&gt; map -&gt; cleanup<ul>
+<h3 id="version-3">Version 3</h3>
+<p><img src="5.png" alt=""></p>
+<p>这个方法是对的，但是有combiner还是不那么高效，可以将其转化为更高效的in-mapper combining</p>
+<h3 id="version-4-in-mapper-combining">Version 4 : in-mapper combining</h3>
+<p><img src="7.png" alt=""></p>
+<h2 id="how-to-implement-in-mapper-combiner-in-mapreduce">How to Implement In-mapper Combiner in MapReduce?</h2>
+<ul>
+<li>Lifecycle: setup -&gt; map -&gt; cleanup
+<ul>
 <li>setup(): called once at the beginning of the task</li>
 <li>map(): do the map</li>
 <li>cleanup(): called once at the end of the task.</li>
 <li>We do not invoke these functions</li>
 </ul>
 </li>
-<li>In-mapper Combining:<ul>
+<li>In-mapper Combining:
+<ul>
 <li>Use setup() to <strong>initialize the state preserving data structure</strong></li>
 <li>Use clearnup() to <strong>emit the final key-value pairs</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
-<li>“In-mapper combining”<ul>
+<h2 id="summary">Summary</h2>
+<ul>
+<li>“In-mapper combining”
+<ul>
 <li>Fold the functionality of the combiner into the mapper by preserving state across multiple map calls</li>
 </ul>
 </li>
-<li>Advantages <ul>
+<li>Advantages
+<ul>
 <li>Speed</li>
 <li>faster than actual combiners(因为in-mapper combining是完全在memory中进行的, no I/O cost)</li>
 </ul>
 </li>
-<li>Disadvantages<ul>
+<li>Disadvantages
+<ul>
 <li>Explicit memory management required（need for space, 数据量过大的时候，还是需要用combiner）</li>
 <li>Potential for order-dependent bugs</li>
 </ul>
 </li>
 </ul>
-<h1 id="design-pattern-2-pairs-vs-stripes"><a href="#Design-Pattern-2-Pairs-vs-Stripes" class="headerlink" title="Design Pattern 2: Pairs vs Stripes"></a>Design Pattern 2: Pairs vs Stripes</h1><hr>
-<h2 id="term-co-occurrence-matrix"><a href="#Term-co-occurrence-matrix" class="headerlink" title="Term co-occurrence matrix"></a>Term co-occurrence matrix</h2><ul>
-<li>Term co-occurrence matrix for a text collection<ul>
+<h1 id="design-pattern-2-pairs-vs-stripes">Design Pattern 2: Pairs vs Stripes</h1>
+<hr>
+<h2 id="term-co-occurrence-matrix">Term co-occurrence matrix</h2>
+<ul>
+<li>Term co-occurrence matrix for a text collection
+<ul>
 <li>M = N x N matrix (N = vocabulary size)</li>
 <li>Mij: number of times i and j co-occur in some context (for concreteness, let’s say context = sentence)</li>
-<li>specific instance of a large counting problem<ul>
+<li>specific instance of a large counting problem
+<ul>
 <li>A large event space (number of terms)</li>
 <li>A large number of observations (the collection itself)</li>
 <li>Goal: keep track of interesting statistics about the events</li>
@@ -339,14 +367,17 @@ img{
 </li>
 </ul>
 </li>
-<li>Basic approach<ul>
+<li>Basic approach
+<ul>
 <li>Mappers generate partial counts</li>
 <li>Reducers aggregate partial counts</li>
 </ul>
 </li>
 </ul>
-<h2 id="pairs"><a href="#Pairs" class="headerlink" title="Pairs"></a>Pairs</h2><ul>
-<li>Each mapper takes a sentence<ul>
+<h2 id="pairs">Pairs</h2>
+<ul>
+<li>Each mapper takes a sentence
+<ul>
 <li>Generate all co-occurring term pairs</li>
 <li>For all pairs, emit (a, b) → count</li>
 </ul>
@@ -356,39 +387,50 @@ img{
 </ul>
 <p><img src="8.png" alt=""></p>
 <ul>
-<li><p>Advantages</p>
+<li>
+<p>Advantages</p>
 <ul>
 <li>Easy to implement, easy to understand</li>
 </ul>
 </li>
-<li><p>Disadvantages</p>
+<li>
+<p>Disadvantages</p>
 <ul>
 <li>Lots of pairs to sort and shuffle around (upper bound?)</li>
 <li>Not many opportunities for combiners to work</li>
 </ul>
 </li>
 </ul>
-<h2 id="stripes"><a href="#Stripes" class="headerlink" title="Stripes"></a>Stripes</h2><ul>
-<li><p>Idea: group together pairs into an associative array<br>(a, b) → 1 ,    (a, c) → 2 ,   (a, d) → 5 ,  (a, f) → 2<br>generate: a → { b: 1, c: 2, d: 5, e: 3, f: 2 } (a, e) → 3</p>
+<h2 id="stripes">Stripes</h2>
+<ul>
+<li>
+<p>Idea: group together pairs into an associative array<br>
+(a, b) → 1 ,    (a, c) → 2 ,   (a, d) → 5 ,  (a, f) → 2<br>
+generate: a → { b: 1, c: 2, d: 5, e: 3, f: 2 } (a, e) → 3</p>
 </li>
-<li><p>Each mapper takes a sentence:</p>
+<li>
+<p>Each mapper takes a sentence:</p>
 <ul>
 <li>Generate all co-occurring term pairs</li>
 <li>For each term, emit a → { b: countb, c: countc, d: countd … }</li>
 </ul>
 </li>
-<li><p>Reducers perform element-wise sum of associative arrays<br><img src="9.png" alt=""></p>
+<li>
+<p>Reducers perform element-wise sum of associative arrays<br>
+<img src="9.png" alt=""></p>
 </li>
 </ul>
 <p><img src="10.png" alt=""></p>
 <ul>
-<li><p>Advantages</p>
+<li>
+<p>Advantages</p>
 <ul>
 <li>Far less sorting and shuffling of key-value pairs</li>
 <li>Can make better use of combiners</li>
 </ul>
 </li>
-<li><p>Disadvantages</p>
+<li>
+<p>Disadvantages</p>
 <ul>
 <li>More difficult to implement</li>
 <li>Underlying object more heavyweight</li>
@@ -396,16 +438,19 @@ img{
 </ul>
 </li>
 </ul>
-<h2 id="pairs-vs-stripes"><a href="#Pairs-vs-Stripes" class="headerlink" title="Pairs vs. Stripes"></a>Pairs vs. Stripes</h2><p><img src="11.png" alt=""></p>
+<h2 id="pairs-vs-stripes">Pairs vs. Stripes</h2>
+<p><img src="11.png" alt=""></p>
 <ul>
-<li><p>The pairs approach</p>
+<li>
+<p>The pairs approach</p>
 <ul>
 <li>Keep track of <strong>each term co-occurrence separately</strong></li>
 <li>Generates <strong>a large number of key-value pairs</strong> (also intermediate)</li>
 <li>The benefit from combiners is limited, as it is less likely for a mapper to process multiple occurrences of a word</li>
 </ul>
 </li>
-<li><p>The stripe approach</p>
+<li>
+<p>The stripe approach</p>
 <ul>
 <li>Keep track of <strong>all terms that co-occur with the same term</strong></li>
 <li>Generates <strong>fewer and shorted intermediate keys</strong></li>
@@ -414,57 +459,70 @@ img{
 <li><strong>More efficient, but may suffer from memory problem</strong></li>
 </ul>
 </li>
-<li><p>These two design patterns are broadly useful and frequently observed<br>in a variety of applications</p>
+<li>
+<p>These two design patterns are broadly useful and frequently observed<br>
+in a variety of applications</p>
 <ul>
 <li>Text processing, data mining, and bioinformatics</li>
 </ul>
 </li>
 </ul>
-<h2 id="how-to-implement-pairs-and-stripes-in-mapreduce"><a href="#How-to-Implement-“Pairs”-and-“Stripes”-in-MapReduce" class="headerlink" title="How to Implement “Pairs” and “Stripes” in MapReduce?"></a>How to Implement “Pairs” and “Stripes” in MapReduce?</h2><ul>
+<h2 id="how-to-implement-pairs-and-stripes-in-mapreduce">How to Implement “Pairs” and “Stripes” in MapReduce?</h2>
+<ul>
 <li>Process of turning structured objects into a byte stream for <strong>transmission over a network</strong> or for <strong>writing to persistent storage</strong></li>
 <li>Deserialization is the reverse process of serialization</li>
-<li>Requirements <ul>
-<li>Compact: to make efficient use of storage space </li>
-<li>Fast: the overhead in reading and writing of data is minimal </li>
-<li>Extensible: we can transparently read data written in an older format </li>
+<li>Requirements
+<ul>
+<li>Compact: to make efficient use of storage space</li>
+<li>Fast: the overhead in reading and writing of data is minimal</li>
+<li>Extensible: we can transparently read data written in an older format</li>
 <li>Interoperable（能共同操作的）: we can read or write persistent data using different language</li>
 </ul>
 </li>
 </ul>
-<h3 id="writable-interface"><a href="#Writable-Interface" class="headerlink" title="Writable Interface"></a>Writable Interface</h3><p>Writable is a serializable object which implements a simple, efficient, serialization protocol</p>
+<h3 id="writable-interface">Writable Interface</h3>
+<p>Writable is a serializable object which implements a simple, efficient, serialization protocol</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Writable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">write</span><span class="params">(DataOutput out)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">readFields</span><span class="params">(DataInput in)</span> <span class="keyword">throws</span> IOException</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>All values must implement interface Writable</li>
 <li>All keys must implement interface WritableComparable</li>
-<li>context.write(WritableComparable, Writable)<ul>
+<li>context.write(WritableComparable, Writable)
+<ul>
 <li>You cannot use java primitives here!!</li>
 </ul>
 </li>
 </ul>
-<h3 id="stripes-implementation"><a href="#Stripes-Implementation" class="headerlink" title="Stripes Implementation"></a>Stripes Implementation</h3><ul>
-<li>A stripe key-value pair a → {b:1,c:2,d:5,e:3,f:2}: <ul>
+<h3 id="stripes-implementation">Stripes Implementation</h3>
+<ul>
+<li>A stripe key-value pair a → {b:1,c:2,d:5,e:3,f:2}:
+<ul>
 <li>Key: the term a</li>
-<li>Value:the stripe{b:1,c:2,d:5,e:3,f:2}<ul>
+<li>Value:the stripe{b:1,c:2,d:5,e:3,f:2}
+<ul>
 <li>In Java, easy, use map (hashmap)</li>
 <li>How to represent this stripe in MapReduce?</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>MapWritable: the wrapper of Java map in MapReduce<ul>
+<li>MapWritable: the wrapper of Java map in MapReduce
+<ul>
 <li>put(Writable key, Writable value)</li>
 <li>get(Object key)</li>
 <li>containsKey(Object key)</li>
 <li>containsValue(Object value)</li>
-<li>entrySet()  returns Set<map.entry<writable,writable>&gt;, used for iteration</map.entry<writable,writable></li>
+<li>entrySet()  returns Set&lt;Map.Entry&lt;Writable,Writable&gt;&gt;, used for iteration</li>
 </ul>
 </li>
 </ul>
-<h3 id="pairs-implementation"><a href="#Pairs-Implementation" class="headerlink" title="Pairs Implementation"></a>Pairs Implementation</h3><ul>
-<li>Key-value pair (a, b) → count<ul>
+<h3 id="pairs-implementation">Pairs Implementation</h3>
+<ul>
+<li>Key-value pair (a, b) → count
+<ul>
 <li>Value: count</li>
-<li>Key: (a, b)<ul>
-<li>In Java, easy, implement a pair class </li>
+<li>Key: (a, b)
+<ul>
+<li>In Java, easy, implement a pair class</li>
 <li>How to store the key in MapReduce?</li>
 </ul>
 </li>
@@ -472,14 +530,19 @@ img{
 </li>
 <li>You must customize your own key, which must implement interface WritableComparable!</li>
 </ul>
-<h1 id="design-pattern-3-order-inversion"><a href="#Design-Pattern-3-Order-Inversion" class="headerlink" title="Design Pattern 3: Order Inversion"></a>Design Pattern 3: Order Inversion</h1><hr>
-<h2 id="computing-relative-frequencies"><a href="#Computing-Relative-Frequencies" class="headerlink" title="Computing Relative Frequencies"></a>Computing Relative Frequencies</h2><ul>
-<li>“Relative” Co-occurrence matrix construction<ul>
-<li><strong>we take into consideration the fact that some words appear more frequently than others</strong><ul>
+<h1 id="design-pattern-3-order-inversion">Design Pattern 3: Order Inversion</h1>
+<hr>
+<h2 id="computing-relative-frequencies">Computing Relative Frequencies</h2>
+<ul>
+<li>“Relative” Co-occurrence matrix construction
+<ul>
+<li><strong>we take into consideration the fact that some words appear more frequently than others</strong>
+<ul>
 <li>Word wi may co-occur frequently with word wj simply because one of the two is very common</li>
 </ul>
 </li>
-<li>We need to convert absolute counts to relative frequencies f(wj|wi)<ul>
+<li>We need to convert absolute counts to relative frequencies f(wj|wi)
+<ul>
 <li>What proportion of the time does wj appear in the context of wi?</li>
 </ul>
 </li>
@@ -491,60 +554,76 @@ img{
 <li>N(·,·) is the number of times a co-occurring word pair is observed</li>
 <li>The denominator is called the marginal</li>
 </ul>
-<h2 id="fwjwi-stripes"><a href="#f-wj-wi-“Stripes”" class="headerlink" title="f(wj|wi): “Stripes”"></a>f(wj|wi): “Stripes”</h2><p>In the reducer, the counts of all words that co-occur with the conditioning variable (wi) are available in the associative array. Hence, the sum of all those counts gives the marginal.</p>
-<p>a→ {b1:3,b2 :12,b3 :7,b4 :1,…}<br>f(b1|a) = 3 / (3 + 12 + 7 + 1 + …)</p>
-<p><strong>Problems:</strong><br>Memory:所有的stripes的计算在内存中进行</p>
-<h2 id="fwjwi-pairs"><a href="#f-wj-wi-“Pairs”" class="headerlink" title="f(wj|wi): “Pairs”"></a>f(wj|wi): “Pairs”</h2><ul>
-<li>The reducer receives the pair (wi, wj) and the count<br><strong>Problems:</strong><br>It is not possible to compute f(wj|wi) ,cause the marginal(边缘) cannot be computed until you got all counts</li>
+<h2 id="fwjwi-stripes">f(wj|wi): “Stripes”</h2>
+<p>In the reducer, the counts of all words that co-occur with the conditioning variable (wi) are available in the associative array. Hence, the sum of all those counts gives the marginal.</p>
+<p>a→ {b1:3,b2 :12,b3 :7,b4 :1,…}<br>
+f(b1|a) = 3 / (3 + 12 + 7 + 1 + …)</p>
+<p><strong>Problems:</strong><br>
+Memory:所有的stripes的计算在内存中进行</p>
+<h2 id="fwjwi-pairs">f(wj|wi): “Pairs”</h2>
+<ul>
+<li>The reducer receives the pair (wi, wj) and the count<br>
+<strong>Problems:</strong><br>
+It is not possible to compute f(wj|wi) ,cause the marginal(边缘) cannot be computed until you got all counts</li>
 </ul>
-<h3 id="solution-1"><a href="#Solution-1" class="headerlink" title="Solution 1"></a>Solution 1</h3><p>Fortunately, as for the mapper, also the reducer can preserve state across multiple keys</p>
+<h3 id="solution-1">Solution 1</h3>
+<p>Fortunately, as for the mapper, also the reducer can preserve state across multiple keys</p>
 <ul>
 <li>We can buffer in memory all the words that co-occur with wi and their counts</li>
 <li>This is basically building the associative array in the stripes method</li>
 </ul>
 <p>We must define the sort order of the pair:</p>
 <ul>
-<li>the keys are first sorted by the left word, and then by the right word </li>
+<li>the keys are first sorted by the left word, and then by the right word</li>
 <li>we can detect if all pairs associated with the word we are conditioning on w(i) have been seen</li>
 <li>At this point, we can use the in-memory buffer, compute the relative frequencies and emit</li>
 </ul>
-<p>There is a problem: ((a, b1), {1, 1, 1, …}) and ((a, b2), {1, 1, 1, …}) may be assigned to different reducers.<br>So we must <strong>define an appropriate partitioner to make sure all pairs with the same left word are sent to the same reducer</strong>!</p>
+<p>There is a problem: ((a, b1), {1, 1, 1, …}) and ((a, b2), {1, 1, 1, …}) may be assigned to different reducers.<br>
+So we must <strong>define an appropriate partitioner to make sure all pairs with the same left word are sent to the same reducer</strong>!</p>
 <p>(The default partitioner is based on the hash value of the intermediate key, modulo the number of reducers)</p>
 <!--这个方法在mapper传来的pairs没有被sort的时候，需要对其先按照(wi, * )的方式进行sort，然后才是(wi, wj)的sort，然而在sort的过程中（即sort(wi, )），我们遍历了所有(wi,)对，所以分母就知道了。（所有的一切都是在memory中进行）
 这里还有个问题就是，reducer1可能索取了(wi, wj)，reducer2可能索取了(wi, wq)，这就会产生词频统计不正确的现象（因为分母错误了），所以我们需要自己设定**partitioner**来使一个reducer来请求(wi, * )的单词对。这里的partitioner是基于采用hash value的方式，因为hash值是具有身份鉴别功能，所以只需要(wi, * )中的wi的hash value相同，就会被同一个reducer fetch。
 -->
 <p><strong>Still suffer from the memory problem!</strong></p>
-<h3 id="solution-2-order-inversion"><a href="#Solution-2-Order-Inversion" class="headerlink" title="Solution 2: Order Inversion"></a>Solution 2: <strong>Order Inversion</strong></h3><p>我们先将计算好的marginal先传给reducer（pair(wi, *), all<em>count），再将各个单词对及其出现次数(pair(wi, wu), count)传输给reducer进行词频计算（即 frequency_of</em>(wi, wu) = count/all_count）。</p>
+<h3 id="solution-2-order-inversion">Solution 2: <strong>Order Inversion</strong></h3>
+<p>我们先将计算好的marginal先传给reducer（pair(wi, *), all_count），再将各个单词对及其出现次数(pair(wi, wu), count)传输给reducer进行词频计算（即 frequency_of_(wi, wu) = count/all_count）。</p>
 <ul>
-<li>The mapper:<ul>
+<li>The mapper:
+<ul>
 <li>additionally emits a “special” key of the form (wi, ∗)</li>
 <li>The value associated to the special key is one, that represents the contribution of the word pair to the marginal</li>
-<li>Using combiners, these partial marginal counts will be aggregated before being sent to the reducers </li>
+<li>Using combiners, these partial marginal counts will be aggregated before being sent to the reducers</li>
 </ul>
 </li>
-<li>The reducer:<ul>
+<li>The reducer:
+<ul>
 <li>We must make sure that the special key-value pairs are processed <strong>before</strong> any other key-value pairs where the left word is wi <strong>(define sort order)</strong></li>
-<li>We also need to guarantee that <strong>all pairs associated with the same word are sent to the same reducer (use partitioner)</strong><br><img src="media/15236805444236.jpg" alt=""></li>
+<li>We also need to guarantee that <strong>all pairs associated with the same word are sent to the same reducer (use partitioner)</strong><br>
+<img src="media/15236805444236.jpg" alt=""></li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Memory requirements:<ul>
-<li>Minimal, because <strong>only the marginal (an integer) needs to be<br>stored</strong></li>
+<li>Memory requirements:
+<ul>
+<li>Minimal, because <strong>only the marginal (an integer) needs to be<br>
+stored</strong></li>
 <li>No buffering of individual co-occurring word</li>
-<li>No scalability bottleneck   </li>
+<li>No scalability bottleneck</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Key ingredients for order inversion<ul>
+<li>Key ingredients for order inversion
+<ul>
 <li><strong>Emit a special key-value pair to capture the marginal</strong></li>
 <li><strong>Control the sort order of the intermediate key, so that the special key-value pair is processed first</strong></li>
 <li><strong>Define a custom partitioner for routing intermediate key-value pairs</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="how-to-implement-order-inversion-in-mapreduce"><a href="#How-to-Implement-Order-Inversion-in-MapReduce" class="headerlink" title="How to Implement Order Inversion in MapReduce?"></a>How to Implement Order Inversion in MapReduce?</h2><p>Implement a Custom partitioner</p>
+<h2 id="how-to-implement-order-inversion-in-mapreduce">How to Implement Order Inversion in MapReduce?</h2>
+<p>Implement a Custom partitioner</p>
 <ul>
 <li>You need to implement a “pair” class first as the key data type</li>
 <li>A customized partitioner extends the Partitioner class</li>
@@ -552,11 +631,11 @@ img{
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">YourPatitioner</span> <span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">Key</span>, <span class="title">Value</span>&gt;</span>&#123;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>The key and value are the intermediate key and value produced by the map function</li>
-<li><p>In the relevant frequencies computing problem</p>
+<li>In the relevant frequencies computing problem</li>
+</ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstPatitioner</span> <span class="keyword">extends</span> <span class="title">Partitioner</span>&lt;<span class="title">StringPair</span>, <span class="title">IntWritable</span>&gt;</span>&#123;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>It overrides the getPartition function, which has three parameters </p>
-</li>
+<ul>
+<li>It overrides the getPartition function, which has three parameters</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPartition</span><span class="params">(WritableComparable key, Writable value, <span class="keyword">int</span> numPartitions)</span></span></span><br></pre></td></tr></table></figure>
 <ul>

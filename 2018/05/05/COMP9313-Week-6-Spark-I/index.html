@@ -234,44 +234,60 @@
 <li>Spark programming model</li>
 </ul>
 </blockquote>
-<h1 id="spark-introduction"><a href="#Spark-Introduction" class="headerlink" title="Spark Introduction"></a>Spark Introduction</h1><hr>
-<h2 id="why-spark"><a href="#Why-Spark" class="headerlink" title="Why Spark?"></a>Why Spark?</h2><ul>
-<li><p>MapReduce greatly simplified big data analysis on large, unreliable clusters. It is great at one-pass computation.</p>
+<h1 id="spark-introduction">Spark Introduction</h1>
+<hr>
+<h2 id="why-spark">Why Spark?</h2>
+<ul>
+<li>
+<p>MapReduce greatly simplified big data analysis on large, unreliable clusters. It is great at one-pass computation.</p>
 </li>
-<li><p>But as soon as it got popular, users wanted more:</p>
+<li>
+<p>But as soon as it got popular, users wanted more:</p>
 <ul>
 <li>More <strong>complex</strong>, multi-pass analytics (e.g. ML, graph)</li>
 <li>More <strong>interactive</strong> ad-hoc(点对点) queries</li>
-<li>More <strong>real-time</strong> stream processing<br>All 3 need faster <strong>data sharing across parallel jobs</strong></li>
+<li>More <strong>real-time</strong> stream processing<br>
+All 3 need faster <strong>data sharing across parallel jobs</strong></li>
 </ul>
 </li>
-<li><p>Goals of Spark: <strong>Keep more data in-memory to improve the performance!</strong></p>
+<li>
+<p>Goals of Spark: <strong>Keep more data in-memory to improve the performance!</strong></p>
 </li>
-<li><p>Extend the MapReduce model to better support two common classes of analytics apps:</p>
+<li>
+<p>Extend the MapReduce model to better support two common classes of analytics apps:</p>
 <ul>
 <li>Iterative algorithms (machine learning, graphs)</li>
 <li>Interactive data mining</li>
 </ul>
 </li>
 </ul>
-<h2 id="what-is-spark"><a href="#What-is-Spark" class="headerlink" title="What is Spark?"></a>What is Spark?</h2><ul>
-<li><p>Open-source engine for large-scale data processing</p>
+<h2 id="what-is-spark">What is Spark?</h2>
+<ul>
+<li>
+<p>Open-source engine for large-scale data processing</p>
 <ul>
 <li>Supports generalized dataflows</li>
 <li>Written in Scala, with bindings in Java and Python</li>
 </ul>
 </li>
-<li><p>Brief History<br><img src="3.png" alt=""></p>
+<li>
+<p>Brief History<br>
+<img src="3.png" alt=""></p>
 </li>
-<li><p>Improves efficiency through:</p>
+<li>
+<p>Improves efficiency through:</p>
 <ul>
 <li>In-memory computing primitives</li>
-<li>General computation graphs<br><strong>Up to 100 times faster(10 * 10 on disk)</strong></li>
+<li>General computation graphs<br>
+<strong>Up to 100 times faster(10 * 10 on disk)</strong></li>
 </ul>
 </li>
-<li>Improves usability through:<ul>
+<li>
+<p>Improves usability through:</p>
+<ul>
 <li>Rich APIs in Scala, Java, Python</li>
-<li>Interactive shell<br><strong>Often 5 times less code</strong></li>
+<li>Interactive shell<br>
+<strong>Often 5 times less code</strong></li>
 </ul>
 </li>
 </ul>
@@ -282,36 +298,45 @@
 <li>GraphX (graph processing)</li>
 <li>MLlib (machine learning library)</li>
 </ul>
-<h2 id="data-sources"><a href="#Data-Sources" class="headerlink" title="Data Sources"></a>Data Sources</h2><ul>
+<h2 id="data-sources">Data Sources</h2>
+<ul>
 <li>Local Files</li>
 <li>S3</li>
 <li>Hadoop Distributed Filesystem</li>
 <li>HBase, Cassandra, etc.</li>
 </ul>
-<h2 id="spark-workflow"><a href="#Spark-Workflow" class="headerlink" title="Spark Workflow"></a>Spark Workflow</h2><ul>
-<li>A Spark program first creates a SparkContext object<ul>
+<h2 id="spark-workflow">Spark Workflow</h2>
+<ul>
+<li>A Spark program first creates a SparkContext object
+<ul>
 <li>Tells Spark how and where to access a cluster</li>
 <li>Connect to several types of cluster managers (e.g., YARN, Mesos, or its own manager)</li>
 </ul>
 </li>
-<li>Cluster manager:<ul>
-<li>Allocate resources acrossapplications </li>
+<li>Cluster manager:
+<ul>
+<li>Allocate resources acrossapplications</li>
 </ul>
 </li>
-<li><p>Spark executor:</p>
+<li>Spark executor:
 <ul>
 <li>Run computations</li>
-<li>Access data storage<br><img src="5.png" alt=""><h2 id="worker-nodes-and-executors"><a href="#Worker-Nodes-and-Executors" class="headerlink" title="Worker Nodes and Executors"></a>Worker Nodes and Executors</h2></li>
+<li>Access data storage<br>
+<img src="5.png" alt=""></li>
 </ul>
 </li>
-<li><p>Worker nodes are machines that run executors</p>
+</ul>
+<h2 id="worker-nodes-and-executors">Worker Nodes and Executors</h2>
+<ul>
+<li>Worker nodes are machines that run executors
 <ul>
 <li>Host one or multiple Workers</li>
 <li>One JVM (1 process) per Worker</li>
 <li>Each Worker can spawn one or more Executors</li>
 </ul>
 </li>
-<li>Executors run tasks<ul>
+<li>Executors run tasks
+<ul>
 <li>Run in child JVM (1 process)</li>
 <li>Execute one or more task using threads in a ThreadPool</li>
 </ul>
@@ -320,25 +345,35 @@
 <p><img src="6.png" alt=""></p>
 <hr>
 <ul>
-<li>Recommend a Clear Explanation for Spark<br><iframe width="560" height="315" src="https://www.youtube.com/embed/x8xXXqvhZq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><br><br></li>
+<li>Recommend a Clear Explanation for Spark</li>
 </ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x8xXXqvhZq8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<br>
 <p>From the course above, it shows main differences between MapReduce and Spark</p>
 <ul>
-<li>MapReduce<br><img src="1.png" alt=""></li>
-<li><p>Spark<br><img src="2.png" alt=""></p>
+<li>
+<p>MapReduce<br>
+<img src="1.png" alt=""></p>
+</li>
+<li>
+<p>Spark<br>
+<img src="2.png" alt=""></p>
 <ul>
 <li>Red: required interaction with disk ( I/O cost)</li>
 <li>Yellow: required spinning up and spinning down containers across the cluster</li>
 </ul>
 </li>
 </ul>
-<h1 id="scala-introduction"><a href="#Scala-Introduction" class="headerlink" title="Scala Introduction"></a>Scala Introduction</h1><hr>
+<h1 id="scala-introduction">Scala Introduction</h1>
+<hr>
 <ul>
-<li>Scala(<strong>Sca</strong>lable <strong>la</strong>nguage)<ul>
+<li>Scala(<strong>Sca</strong>lable <strong>la</strong>nguage)
+<ul>
 <li>Scala is a <strong>general-purpose</strong> programming language designed to express common programming patterns in a concise, elegant, and type-safe way</li>
 <li>Scala supports <strong>both Object Oriented Programming and Functional Programming</strong></li>
-<li>Scala is Practical<ul>
-<li>Can be used as drop-in replacement for Java, Mixed Scala/Java projects </li>
+<li>Scala is Practical
+<ul>
+<li>Can be used as drop-in replacement for Java, Mixed Scala/Java projects</li>
 <li>Use existing Java libraries</li>
 <li>Use existing Java tools (Ant, Maven, JUnit, etc…)</li>
 <li>Decent IDE Support (NetBeans, IntelliJ, Eclipse)</li>
@@ -347,25 +382,29 @@
 </ul>
 </li>
 </ul>
-<h2 id="scala-basic-syntax"><a href="#Scala-Basic-Syntax" class="headerlink" title="Scala Basic Syntax"></a>Scala Basic Syntax</h2><ul>
+<h2 id="scala-basic-syntax">Scala Basic Syntax</h2>
+<ul>
 <li>When considering a Scala program, it can be defined as <strong>a collection of objects</strong> that communicate via invoking each other’s methods.</li>
 <li><strong>Object</strong> − same as in Java</li>
 <li><strong>Class</strong> − same as in Java</li>
 <li><strong>Methods</strong> − same as in Java</li>
 <li><strong>Fields</strong> − Each object has its unique set of instant variables, which are called fields. An object’s state is created by the values assigned to these fields.</li>
 <li><strong>Traits</strong> − Like Java Interface. A trait encapsulates method and field definitions, which can then be reused by mixing them into classes.</li>
-<li><strong>Closure</strong> − A closure is a function, whose return value depends on the value of one or more variables declared outside this function.<br>closure = function + enviroment</li>
+<li><strong>Closure</strong> − A closure is a function, whose return value depends on the value of one or more variables declared outside this function.<br>
+closure = function + enviroment</li>
 </ul>
-<p><br></p>
+<br>
 <ul>
-<li>Scala is Statically Typed<ul>
+<li>Scala is Statically Typed
+<ul>
 <li>You don’t have to specify a type in most cases</li>
 </ul>
 </li>
 </ul>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sum = <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span></span><br><span class="line"><span class="keyword">val</span> nums = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">val</span> map = <span class="type">Map</span>(<span class="string">"abc"</span> -&gt; <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sum: <span class="type">Int</span> = <span class="number">1</span> + <span class="number">2</span> + <span class="number">3</span></span><br><span class="line"><span class="keyword">val</span> nums: <span class="type">List</span>[<span class="type">Int</span>] = <span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) </span><br><span class="line"><span class="keyword">val</span> map: <span class="type">Map</span>[<span class="type">String</span>, <span class="type">List</span>[<span class="type">Int</span>]] = ...</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Scala is High level<br>E.g., Java vs. scala check string uppercase</li>
+<li>Scala is High level<br>
+E.g., Java vs. scala check string uppercase</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java – Check if string has uppercase character</span></span><br><span class="line"><span class="keyword">boolean</span> hasUpperCase = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; name.length(); i++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(Character.isUpperCase(name.charAt(i))) &#123; </span><br><span class="line">        hasUpperCase = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">break</span>; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Scala</span></span><br><span class="line"><span class="keyword">val</span> hasUpperCase = name.exists(_.isUpper)</span><br></pre></td></tr></table></figure>
@@ -378,10 +417,10 @@
 <li><strong>Var</strong>iables and <strong>Val</strong>ues</li>
 </ul>
 <ol>
-<li>Variables: values stored can be changed </li>
+<li>Variables: values stored can be changed</li>
 </ol>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="string">"foo"</span></span><br><span class="line">foo = <span class="string">"bar"</span> <span class="comment">// okay</span></span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>Values: immutable variable 不可改变的</li>
 </ol>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> foo = <span class="string">"foo"</span></span><br><span class="line">foo = <span class="string">"bar"</span> <span class="comment">// nope</span></span><br></pre></td></tr></table></figure>
@@ -394,8 +433,10 @@
 </ul>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Like interfaces in Java</span></span><br><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">JVM</span> </span>&#123;</span><br><span class="line">    <span class="comment">// But allow implementation</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="keyword">super</span>.toString+<span class="string">" runs on JVM"</span> &#125; <span class="class"><span class="keyword">trait</span> <span class="title">Static</span> </span>&#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">toString</span> </span>= <span class="keyword">super</span>.toString+<span class="string">" is Static"</span> &#125;</span><br><span class="line"><span class="comment">// Traits are stackable</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Scala</span> <span class="keyword">extends</span> <span class="title">Language</span> <span class="keyword">with</span> <span class="title">JVM</span> <span class="keyword">with</span>  <span class="title">Static</span> </span>&#123; </span><br><span class="line">    <span class="keyword">val</span> name = <span class="string">"Scala"</span></span><br><span class="line">&#125;</span><br><span class="line">println(<span class="keyword">new</span> <span class="type">Scala</span>) -&gt; <span class="string">"Scala runs on JVM is Static"</span></span><br></pre></td></tr></table></figure>
 <ul>
-<li>Scala is Functional<br>A function that does at least one of the following:<ul>
-<li>takes one or more functions as arguments </li>
+<li>Scala is Functional<br>
+A function that does at least one of the following:
+<ul>
+<li>takes one or more functions as arguments</li>
 <li>returns a function as its result</li>
 </ul>
 </li>
@@ -408,19 +449,24 @@
 <li>In anonymous functions, the “_” acts as a placeholder for parameters</li>
 </ol>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nums.map(x =&gt; x + <span class="number">1</span>)</span><br><span class="line"><span class="comment">//is equivalent to:</span></span><br><span class="line">nums.map(_ + <span class="number">1</span>)</span><br><span class="line"><span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).foreach(print(_))</span><br><span class="line"><span class="comment">//is equivalent to:               </span></span><br><span class="line"><span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).foreach( a =&gt; print(a) )</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li>You can use two or more underscores to refer different parameters.</li>
 </ol>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> sum = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).reduceLeft(_+_)</span><br><span class="line">is equivalent to:</span><br><span class="line"><span class="keyword">val</span> sum = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>).reduceLeft((a, b) =&gt; a + b)</span><br></pre></td></tr></table></figure>
-<h1 id="rdd-introduction"><a href="#RDD-Introduction" class="headerlink" title="RDD Introduction"></a>RDD Introduction</h1><hr>
-<h2 id="why-rdd"><a href="#Why-RDD" class="headerlink" title="Why RDD?"></a>Why RDD?</h2><ul>
-<li>Existing Systems<ul>
-<li>Existing in-memory storage systems have interfaces based on fine-grained updates<ul>
+<h1 id="rdd-introduction">RDD Introduction</h1>
+<hr>
+<h2 id="why-rdd">Why RDD?</h2>
+<ul>
+<li>Existing Systems
+<ul>
+<li>Existing in-memory storage systems have interfaces based on fine-grained updates
+<ul>
 <li>Reads and writes to cells in a table</li>
 <li>E.g., databases, key-value stores, distributed memory</li>
 </ul>
 </li>
-<li>Requires replicating data or logs across nodes for fault tolerance -&gt; expensive!<ul>
+<li>Requires replicating data or logs across nodes for fault tolerance -&gt; expensive!
+<ul>
 <li>10-100x slower than memory write</li>
 </ul>
 </li>
@@ -428,19 +474,31 @@
 </li>
 </ul>
 <p>How to design a distributed memory abstraction that is both <strong>fault-tolerant and efficient</strong>?</p>
-<h2 id="what-is-rdd"><a href="#What-is-RDD" class="headerlink" title="What is RDD?"></a>What is RDD?</h2><ul>
-<li><p>RDD(Resilient Distributed Datasets):<br>A Fault-Tolerant Abstraction for In-Memory Cluster Computing.<br><strong>RDD is a distributed memory abstraction that lets programmers perform in-memory computations on large clusters in a fault-tolerant manner.</strong></p>
+<h2 id="what-is-rdd">What is RDD?</h2>
+<ul>
+<li>
+<p>RDD(Resilient Distributed Datasets):<br>
+A Fault-Tolerant Abstraction for In-Memory Cluster Computing.<br>
+<strong>RDD is a distributed memory abstraction that lets programmers perform in-memory computations on large clusters in a fault-tolerant manner.</strong></p>
 </li>
-<li><p><strong>Resilient</strong>(有弹性)<br>Fault-tolerant, is able to recompute missing or damaged partitions due to node failures.</p>
+<li>
+<p><strong>Resilient</strong>(有弹性)<br>
+Fault-tolerant, is able to recompute missing or damaged partitions due to node failures.</p>
 </li>
-<li><p><strong>Distributed</strong><br>Data residing on multiple nodes in a cluster.</p>
+<li>
+<p><strong>Distributed</strong><br>
+Data residing on multiple nodes in a cluster.</p>
 </li>
-<li><p><strong>Dataset</strong><br>A collection of partitioned elements, e.g.tuples or other objects(that represent records of the data you work with).</p>
+<li>
+<p><strong>Dataset</strong><br>
+A collection of partitioned elements, e.g.tuples or other objects(that represent records of the data you work with).</p>
 </li>
-<li><p>RDD is the primary data abstraction in Apache Spark and the core of Spark. It enables operations on collection of elements in parallel.</p>
+<li>
+<p>RDD is the primary data abstraction in Apache Spark and the core of Spark. It enables operations on collection of elements in parallel.</p>
 </li>
 </ul>
-<h2 id="rdd-traits"><a href="#RDD-Traits" class="headerlink" title="RDD Traits"></a>RDD Traits</h2><ul>
+<h2 id="rdd-traits">RDD Traits</h2>
+<ul>
 <li><strong>In-Memory</strong>, i.e. data inside RDD is stored in memory as much (size) and long (time) as possible.</li>
 <li><strong>Immutable</strong>(不可改变的) or <strong>Read-Only</strong>, i.e. it does not change once created and can only be transformed using transformations to new RDDs.</li>
 <li><strong>Lazy evaluated</strong>, i.e. the data inside RDD is not available or transformed until an action is executed that triggers the execution.</li>
@@ -449,26 +507,37 @@
 <li><strong>Typed</strong>, i.e. values in a RDD have types, e.g. RDD[Long] or RDD[(Int, String)].</li>
 <li><strong>Partitioned</strong>, i.e. the data inside a RDD is partitioned (split into partitions) and then distributed across nodes in a cluster (one partition per JVM that may or may not correspond to a single node).</li>
 </ul>
-<h2 id="rdd-operations"><a href="#RDD-Operations" class="headerlink" title="RDD Operations"></a>RDD Operations</h2><ul>
-<li><strong>Transformation</strong>: <strong>returns a new RDD.</strong><ul>
-<li>Nothing gets evaluated when you call a Transformation function, it<br>just takes an RDD and return a new RDD.</li>
+<h2 id="rdd-operations">RDD Operations</h2>
+<ul>
+<li><strong>Transformation</strong>: <strong>returns a new RDD.</strong>
+<ul>
+<li>Nothing gets evaluated when you call a Transformation function, it<br>
+just takes an RDD and return a new RDD.</li>
 <li>Transformation functions <strong>include map, filter, flatMap, groupByKey, reduceByKey, aggregateByKey, filter, join, etc.</strong></li>
 </ul>
 </li>
 </ul>
 <blockquote>
 <ul>
-<li>map: Return a new distributed dataset formed by passing each element of the source through a function func.<br>  <strong>一一映射</strong></li>
-<li>flatMap: Similar to map, but each input item can be mapped to 0 or more output items (so func should return a Seq rather than a single item).<br>  <strong>先映射，再扁平化</strong></li>
-<li><strong>Action</strong>: <strong>evaluates and returns a new value.</strong><ul>
+<li>map: Return a new distributed dataset formed by passing each element of the source through a function func.<br>
+<strong>一一映射</strong></li>
+<li>flatMap: Similar to map, but each input item can be mapped to 0 or more output items (so func should return a Seq rather than a single item).<br>
+<strong>先映射，再扁平化</strong></li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>Action</strong>: <strong>evaluates and returns a new value.</strong>
+<ul>
 <li>When an Action function is called on a RDD object, all the data processing queries are computed at that time and the result value is returned.</li>
-<li>Action operations <strong>include reduce, collect, count, first, take, countByKey, foreach, saveAsTextFile, etc.</strong><br><a href="http://homepage.cs.latrobe.edu.au/zhe/ZhenHeSparkRDDAPIExamples.html" target="_blank" rel="noopener">Spark RDD API Examples</a></li>
+<li>Action operations <strong>include reduce, collect, count, first, take, countByKey, foreach, saveAsTextFile, etc.</strong><br>
+<a href="http://homepage.cs.latrobe.edu.au/zhe/ZhenHeSparkRDDAPIExamples.html" target="_blank" rel="noopener">Spark RDD API Examples</a></li>
 </ul>
 </li>
 </ul>
-</blockquote>
-<h2 id="working-with-rdds"><a href="#Working-with-RDDs" class="headerlink" title="Working with RDDs"></a>Working with RDDs</h2><ol>
-<li><strong>Create an RDD</strong> from a data source<ul>
+<h2 id="working-with-rdds">Working with RDDs</h2>
+<ol>
+<li><strong>Create an RDD</strong> from a data source
+<ul>
 <li>by parallelizing existing collections (lists or arrays)</li>
 <li>by transforming an existing RDDs</li>
 <li>from files in HDFS or any other storage system</li>
@@ -479,57 +548,74 @@
 </ol>
 <p><img src="7.png" alt=""></p>
 <ul>
-<li>Users can control two other aspects: <ul>
+<li>Users can control two other aspects:
+<ul>
 <li>Persistence</li>
 <li>Partitioning</li>
 </ul>
 </li>
 </ul>
-<h3 id="creating-rdds"><a href="#Creating-RDDs" class="headerlink" title="Creating RDDs"></a>Creating RDDs</h3><ul>
+<h3 id="creating-rdds">Creating RDDs</h3>
+<ul>
 <li>From HDFS, text files, Amazon S3, Apache HBase, SequenceFiles, any other Hadoop InputFormat</li>
-<li>Creating an RDD from a File<br> E.g., val inputfile = sc.textFile(“…”, 4)<ul>
+<li>Creating an RDD from a File<br>
+E.g., val inputfile = sc.textFile(&quot;…&quot;, 4)
+<ul>
 <li>RDD distributed in 4 partitions</li>
 <li>Elements are lines of input</li>
 <li>Lazy evaluation means no execution happens now</li>
 </ul>
 </li>
-<li>Turn a collection into an RDD<ul>
+<li>Turn a collection into an RDD
+<ul>
 <li>sc.parallelize([1, 2, 3]), creating from a Python list</li>
 <li>sc.parallelize(Array(“hello”, “spark”)), creating from a Scala Array</li>
 </ul>
 </li>
-<li>Creating an RDD from an existing Hadoop InputFormat<ul>
+<li>Creating an RDD from an existing Hadoop InputFormat
+<ul>
 <li>sc.hadoopFile(keyClass, valClass, inputFmt, conf)</li>
 </ul>
 </li>
 </ul>
-<h3 id="transformations"><a href="#Transformations" class="headerlink" title="Transformations"></a>Transformations</h3><ul>
+<h3 id="transformations">Transformations</h3>
+<ul>
 <li>Create new datasets from an existing one</li>
-<li>Use lazy evaluation: results not computed right away – instead Spark remembers set of transformations applied to base dataset<ul>
+<li>Use lazy evaluation: results not computed right away – instead Spark remembers set of transformations applied to base dataset
+<ul>
 <li>Spark optimizes the required calculations</li>
 <li>Spark recovers from failures</li>
 </ul>
 </li>
-<li>Some transformation functions<br><img src="8.png" alt=""><br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations" target="_blank" rel="noopener">Common transformations API guide</a></li>
+<li>Some transformation functions<br>
+<img src="8.png" alt=""><br>
+<a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations" target="_blank" rel="noopener">Common transformations API guide</a></li>
 </ul>
-<h3 id="actions"><a href="#Actions" class="headerlink" title="Actions"></a>Actions</h3><ul>
+<h3 id="actions">Actions</h3>
+<ul>
 <li>Cause Spark to execute recipe to transform source</li>
 <li>Mechanism for getting results out of Spark</li>
-<li>Some action functions<br><img src="9.png" alt=""><br><a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions" target="_blank" rel="noopener">Common actions API guide</a></li>
+<li>Some action functions<br>
+<img src="9.png" alt=""><br>
+<a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#actions" target="_blank" rel="noopener">Common actions API guide</a></li>
 </ul>
 <p>Example</p>
 <figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//base RDD</span></span><br><span class="line"><span class="keyword">val</span> lines = sc.textFile(“hdfs:<span class="comment">//...”)</span></span><br><span class="line"><span class="comment">//Transformed RDD</span></span><br><span class="line"><span class="keyword">val</span> errors = lines.filter(_.startsWith(“<span class="type">Error</span>”))</span><br><span class="line">errors.persist()</span><br><span class="line"><span class="comment">//Action</span></span><br><span class="line">errors.count() </span><br><span class="line">errors.filter(_.contains(“<span class="type">HDFS</span>”))</span><br><span class="line">            .map(_.split(‘\t’(<span class="number">3</span>)) </span><br><span class="line">            .collect()</span><br></pre></td></tr></table></figure>
-<h2 id="rdd-persistence-cachepersist"><a href="#RDD-Persistence-Cache-Persist" class="headerlink" title="RDD Persistence: Cache/Persist"></a>RDD Persistence: Cache/Persist</h2><ul>
+<h2 id="rdd-persistence-cachepersist">RDD Persistence: Cache/Persist</h2>
+<ul>
 <li>When you persist an RDD, each node stores any partitions of it. You can reuse it in other actions on that dataset</li>
-<li>Each persisted RDD can be stored using a different storage level.<ul>
-<li>MEMORY_ONLY:<ul>
+<li>Each persisted RDD can be stored using a different storage level.
+<ul>
+<li>MEMORY_ONLY:
+<ul>
 <li>Store RDD as deserialized Java objects in the JVM.</li>
 <li>If the RDD does not fit in memory, some partitions will not be cached and will be recomputed when they’re needed.</li>
 <li>This is default level.</li>
 </ul>
 </li>
-<li>MEMORY_AND_DISK:<ul>
-<li>If the RDD does not fit in memory, store the partitions that don’t fit on disk, and read them from there when they’re needed.       </li>
+<li>MEMORY_AND_DISK:
+<ul>
+<li>If the RDD does not fit in memory, store the partitions that don’t fit on disk, and read them from there when they’re needed.</li>
 </ul>
 </li>
 </ul>
@@ -542,20 +628,27 @@
 <li>Persist will tell Spark to cache the data in memory, to reduce the data loading cost for further actions on the same data.</li>
 <li>error.persist() will do nothing. It is a lazy operation. But now the RDD says “read this file and then cache the contents”. The action will trigger computation and data caching.</li>
 </ul>
-<h2 id="key-value-rdds"><a href="#Key-Value-RDDs" class="headerlink" title="Key-Value RDDs"></a>Key-Value RDDs</h2><ul>
+<h2 id="key-value-rdds">Key-Value RDDs</h2>
+<ul>
 <li>Similar to Map Reduce, Spark supports Key-Value pairs</li>
 <li>Each element of a Pair RDD is a pair tuple</li>
-<li>Some Key-Value transformation functions:<br><img src="11.png" alt=""></li>
+<li>Some Key-Value transformation functions:<br>
+<img src="11.png" alt=""></li>
 </ul>
-<p>Example<br><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Create a pair RDD from existing RDDs</span><span class="keyword">val</span> pairs = sc.parallelize( <span class="type">List</span>( (“<span class="type">This</span>”, <span class="number">2</span>), (“is”, <span class="number">3</span>), (“<span class="type">Spark</span>”, <span class="number">5</span>), (“is”, <span class="number">3</span>) ) ) </span><br><span class="line">pairs.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">2</span>)</span><br><span class="line">(is,<span class="number">3</span>)</span><br><span class="line">(spark,<span class="number">5</span>)</span><br><span class="line">(is,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//reduceByKey() function: reduce key-value pairs by key using give func</span><span class="keyword">val</span> pair1 = pairs.reduceByKey((x,y) =&gt; x + y) </span><br><span class="line">pair1.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">2</span>)</span><br><span class="line">(spark,<span class="number">5</span>)</span><br><span class="line">(is,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//mapValues() function: work on values only</span><span class="keyword">val</span> pair2 = pairs.mapValues( x =&gt; x <span class="number">-1</span> ) pairs2.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">1</span>)</span><br><span class="line">(is,<span class="number">2</span>)</span><br><span class="line">(spark,<span class="number">4</span>)</span><br><span class="line">(is,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//groupByKey() function: When called on a dataset of (K, V) pairs, returns a dataset of (K, Iterable&lt;V&gt;) pairs</span></span><br><span class="line">pairs.groupByKey().collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="type">CompactBuffer</span>(<span class="number">2</span>))</span><br><span class="line">(spark,<span class="type">CompactBuffer</span>(<span class="number">5</span>))</span><br><span class="line">(is,<span class="type">CompactBuffer</span>(<span class="number">3</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure></p>
-<h1 id="spark-programming-model"><a href="#Spark-Programming-Model" class="headerlink" title="Spark Programming Model"></a>Spark Programming Model</h1><h2 id="how-spark-works"><a href="#How-Spark-Works" class="headerlink" title="How Spark Works"></a>How Spark Works</h2><ul>
+<p>Example</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Create a pair RDD from existing RDDs</span><span class="keyword">val</span> pairs = sc.parallelize( <span class="type">List</span>( (“<span class="type">This</span>”, <span class="number">2</span>), (“is”, <span class="number">3</span>), (“<span class="type">Spark</span>”, <span class="number">5</span>), (“is”, <span class="number">3</span>) ) ) </span><br><span class="line">pairs.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">2</span>)</span><br><span class="line">(is,<span class="number">3</span>)</span><br><span class="line">(spark,<span class="number">5</span>)</span><br><span class="line">(is,<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//reduceByKey() function: reduce key-value pairs by key using give func</span><span class="keyword">val</span> pair1 = pairs.reduceByKey((x,y) =&gt; x + y) </span><br><span class="line">pair1.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">2</span>)</span><br><span class="line">(spark,<span class="number">5</span>)</span><br><span class="line">(is,<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//mapValues() function: work on values only</span><span class="keyword">val</span> pair2 = pairs.mapValues( x =&gt; x <span class="number">-1</span> ) pairs2.collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="number">1</span>)</span><br><span class="line">(is,<span class="number">2</span>)</span><br><span class="line">(spark,<span class="number">4</span>)</span><br><span class="line">(is,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//groupByKey() function: When called on a dataset of (K, V) pairs, returns a dataset of (K, Iterable&lt;V&gt;) pairs</span></span><br><span class="line">pairs.groupByKey().collect().foreach(println)</span><br><span class="line"><span class="comment">//output:</span></span><br><span class="line">(<span class="keyword">this</span>,<span class="type">CompactBuffer</span>(<span class="number">2</span>))</span><br><span class="line">(spark,<span class="type">CompactBuffer</span>(<span class="number">5</span>))</span><br><span class="line">(is,<span class="type">CompactBuffer</span>(<span class="number">3</span>, <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="spark-programming-model">Spark Programming Model</h1>
+<h2 id="how-spark-works">How Spark Works</h2>
+<ul>
 <li>User application create RDDs, transform them, and run actions.</li>
 <li>This results in a <strong>DAG (Directed Acyclic Graph)</strong> of operators.</li>
 <li>DAG is compiled into <strong>stages</strong></li>
-<li>Each stage is executed as <strong>a series of Task</strong> (<strong>one Task for each Partition</strong>).<h2 id="word-count-in-spark"><a href="#Word-Count-in-Spark" class="headerlink" title="Word Count in Spark"></a>Word Count in Spark</h2></li>
+<li>Each stage is executed as <strong>a series of Task</strong> (<strong>one Task for each Partition</strong>).</li>
 </ul>
+<h2 id="word-count-in-spark">Word Count in Spark</h2>
 <p><img src="12.png" alt=""><img src="13.png" alt=""><img src="14.png" alt=""></p>
-<h1 id="self-contained-applications"><a href="#Self-Contained-Applications" class="headerlink" title="Self-Contained Applications"></a>Self-Contained Applications</h1><p><a href="https://jingxuan.li/2018/05/28/IntelliJ-IDEA%E7%BB%93%E5%90%88SBT%E5%88%9B%E5%BB%BAScala%E9%A1%B9%E7%9B%AE/">IntelliJ IDEA结合SBT创建Scala项目</a></p>
+<h1 id="self-contained-applications">Self-Contained Applications</h1>
+<p><a href="https://jingxuan.li/2018/05/28/IntelliJ-IDEA%E7%BB%93%E5%90%88SBT%E5%88%9B%E5%BB%BAScala%E9%A1%B9%E7%9B%AE/">IntelliJ IDEA结合SBT创建Scala项目</a></p>
 
                 
 

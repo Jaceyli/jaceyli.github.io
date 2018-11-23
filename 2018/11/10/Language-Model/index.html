@@ -223,83 +223,106 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="formal-language-model"><a href="#Formal-Language-Model" class="headerlink" title="Formal Language Model"></a>Formal Language Model</h1><ul>
-<li>Traditional generative model: generates strings <ul>
+                <h1 id="formal-language-model">Formal Language Model</h1>
+<ul>
+<li>Traditional generative model: generates strings
+<ul>
 <li>Finite state machines or regular grammars, etc.</li>
-<li>Example: </li>
+<li>Example:</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181110183155158.png" alt="image-20181110183155158"></p>
-<h1 id="stochastic-language-models"><a href="#Stochastic-Language-Models" class="headerlink" title="Stochastic Language Models"></a>Stochastic Language Models</h1><ul>
-<li>Models probability of generating strings in the language (commonly all strings over alphabet ∑) </li>
+<h1 id="stochastic-language-models">Stochastic Language Models</h1>
+<ul>
+<li>Models probability of generating strings in the language (commonly all strings over alphabet ∑)</li>
 </ul>
 <p><img src="image-20181110185612317.png" alt="image-20181110185612317"></p>
 <ul>
-<li>A statistical model for generating text <ul>
-<li>Probability distribution over strings in a given language </li>
+<li>A statistical model for generating text
+<ul>
+<li>Probability distribution over strings in a given language</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181110185720437.png" alt="image-20181110185720437"></p>
 <ul>
-<li><p>Unigram and higher-order models</p>
+<li>
+<p>Unigram and higher-order models</p>
 <p><img src="Language-Model/image-20181110185805474.png" alt="image-20181110185805474"></p>
 </li>
 </ul>
-<h1 id="using-language-models-in-ir"><a href="#Using-Language-Models-in-IR" class="headerlink" title="Using Language Models in IR"></a>Using Language Models in IR</h1><ul>
-<li>Treat each document as the basis for a model (e.g., unigram sufficient statistics) </li>
-<li>Rank document d based on <strong>P(d | q)</strong> </li>
-<li><p>P(d|q)=P(q|d) x P(d) / P(q) </p>
+<h1 id="using-language-models-in-ir">Using Language Models in IR</h1>
 <ul>
-<li>P(q) is the same for all documents, so ignore </li>
-<li>P(d) [the prior] is o}en treated as the same for all d, but we could use criteria like authority, length, genre </li>
-<li>P(q |d) is the probability of q given d’s model </li>
+<li>
+<p>Treat each document as the basis for a model (e.g., unigram sufficient statistics)</p>
+</li>
+<li>
+<p>Rank document d based on <strong>P(d | q)</strong></p>
+</li>
+<li>
+<p>P(d|q)=P(q|d) x P(d) / P(q)</p>
+<ul>
+<li>P(q) is the same for all documents, so ignore</li>
+<li>P(d) [the prior] is o}en treated as the same for all d, but we could use criteria like authority, length, genre</li>
+<li>P(q |d) is the probability of q given d’s model</li>
 </ul>
 </li>
-<li><p>Language Modeling Approaches </p>
+<li>
+<p>Language Modeling Approaches</p>
 <ul>
-<li>Attempt to <strong>model query generation process</strong> </li>
-<li>Documents are ranked by <strong>the probability that a query would be observed as a random sample from the respective document model</strong> </li>
+<li>Attempt to <strong>model query generation process</strong></li>
+<li>Documents are ranked by <strong>the probability that a query would be observed as a random sample from the respective document model</strong></li>
 <li>Multinomial approach</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181110192010421.png" alt="image-20181110192010421"></p>
-<h2 id="mle"><a href="#MLE" class="headerlink" title="MLE"></a>MLE</h2><ul>
-<li><p>MLE: <strong>Maximum Likelihood Estimation</strong></p>
+<h2 id="mle">MLE</h2>
+<ul>
+<li>
+<p>MLE: <strong>Maximum Likelihood Estimation</strong></p>
 </li>
-<li><p>Ranking formula : <strong>p(Q,d)= p(d) p(Q|d) ≈ p(d)p(Q|M<sub>d</sub> )</strong> </p>
+<li>
+<p>Ranking formula : <strong>p(Q,d)= p(d) p(Q|d) ≈ p(d)p(Q|M<sub>d</sub> )</strong></p>
 </li>
-<li><p>The probability of producing the query given the language model of<br>document d using MLE is:</p>
+<li>
+<p>The probability of producing the query given the language model of<br>
+document d using MLE is:</p>
 <p><img src="image-20181110193430683.png" alt="image-20181110193430683"></p>
 <ul>
-<li>M<sub>d</sub> : language model of document d </li>
-<li>tf<sub>(t,d)</sub> : raw tf of term t in document d </li>
-<li>dl<sub>d</sub> : total number of tokens in document d </li>
+<li>M<sub>d</sub> : language model of document d</li>
+<li>tf<sub>(t,d)</sub> : raw tf of term t in document d</li>
+<li>dl<sub>d</sub> : total number of tokens in document d</li>
 </ul>
 </li>
 </ul>
-<h2 id="insufficient-data"><a href="#Insufficient-data" class="headerlink" title="Insufficient data"></a>Insufficient data</h2><ul>
-<li><p>Zero probability: p( t | M<sub>d</sub> ) = 0</p>
+<h2 id="insufficient-data">Insufficient data</h2>
 <ul>
-<li>May not wish to assign a probability of zero to a document that is missing one or more of the query terms  </li>
-</ul>
-</li>
-<li><p>General approach</p>
+<li>
+<p>Zero probability: p( t | M<sub>d</sub> ) = 0</p>
 <ul>
-<li>A non-occurring term is possible, but no more likely than would be expected by chance in the collection. </li>
-<li>If tf(t,d) =0 , p(t|M<sub>d</sub>) = cf <sub>t</sub>/ cs<ul>
-<li>cf<sub>t</sub>: raw count of term t in the collection </li>
-<li>cs : raw collection size(total number of tokens in the collection) </li>
+<li>May not wish to assign a probability of zero to a document that is missing one or more of the query terms</li>
+</ul>
+</li>
+<li>
+<p>General approach</p>
+<ul>
+<li>A non-occurring term is possible, but no more likely than would be expected by chance in the collection.</li>
+<li>If tf(t,d) =0 , p(t|M<sub>d</sub>) = cf <sub>t</sub>/ cs
+<ul>
+<li>cf<sub>t</sub>: raw count of term t in the collection</li>
+<li>cs : raw collection size(total number of tokens in the collection)</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>How to avoid 0?  </p>
-<h2 id="background-model"><a href="#Background-model" class="headerlink" title="Background model"></a>Background model</h2><ul>
-<li><strong>Jelinek-Mercer</strong> method <ul>
+<p>How to avoid 0?</p>
+<h2 id="background-model">Background model</h2>
+<ul>
+<li><strong>Jelinek-Mercer</strong> method
+<ul>
 <li><strong>M<sub>d</sub>=&gt; local estimator</strong></li>
 <li><strong>M<sub>c</sub>=&gt; global estimator</strong>  (collection/background)</li>
 </ul>
@@ -307,12 +330,14 @@
 </ul>
 <p><img src="image-20181110194412066.png" alt="image-20181110194412066"></p>
 <ul>
-<li>Why smoothing is not a good idea?<ul>
+<li>Why smoothing is not a good idea?
+<ul>
 <li>if 1k words are not occur in current doc, they will all be assigned to the same valueλ, but in mixture model we use the global prob.</li>
 </ul>
 </li>
 </ul>
-<h2 id="relationship-to-idf"><a href="#Relationship-to-idf" class="headerlink" title="Relationship to idf"></a>Relationship to idf</h2><p><img src="image-20181110200937664.png" alt="image-20181110200937664"></p>
+<h2 id="relationship-to-idf">Relationship to idf</h2>
+<p><img src="image-20181110200937664.png" alt="image-20181110200937664"></p>
 
                 
 

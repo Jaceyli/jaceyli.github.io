@@ -223,167 +223,217 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="probabilistic-language-models"><a href="#Probabilistic-Language-Models" class="headerlink" title="Probabilistic Language Models"></a>Probabilistic Language Models</h1><h2 id="why-we-need-a-language-model"><a href="#Why-we-need-a-language-model" class="headerlink" title="Why we need a language model"></a>Why we need a language model</h2><ul>
-<li>Assign a probability to a sentence<ul>
-<li>Machine Translation: <ul>
-<li>P(<strong>high</strong> winds tonite) &gt; P(<strong>large</strong> winds tonite) </li>
+                <h1 id="probabilistic-language-models">Probabilistic Language Models</h1>
+<h2 id="why-we-need-a-language-model">Why we need a language model</h2>
+<ul>
+<li>Assign a probability to a sentence
+<ul>
+<li>Machine Translation:
+<ul>
+<li>P(<strong>high</strong> winds tonite) &gt; P(<strong>large</strong> winds tonite)</li>
 </ul>
 </li>
-<li>Spell Correction <ul>
-<li>The office is about fifteen minuets from my house<ul>
-<li>P(about fifteen <strong>minutes</strong> from) &gt; P(about fifteen <strong>minuets</strong> from) </li>
+<li>Spell Correction
+<ul>
+<li>The office is about fifteen minuets from my house</li>
+<li>P(about fifteen <strong>minutes</strong> from) &gt; P(about fifteen <strong>minuets</strong> from)</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Speech Recognition <ul>
+<li>Speech Recognition
+<ul>
 <li>P(I saw a van) &gt;&gt; P(eyes awe of an)</li>
 </ul>
 </li>
-<li>Summarization, question-answering, etc., etc.!! </li>
+<li>Summarization, question-answering, etc., etc.!!</li>
 </ul>
 </li>
 </ul>
-<h2 id="what-is-language-model"><a href="#What-is-language-model" class="headerlink" title="What is language model"></a>What is language model</h2><ul>
-<li><p>Goal: <strong>compute the probability of a sentence or sequence of words</strong>: </p>
+<h2 id="what-is-language-model">What is language model</h2>
 <ul>
-<li>P(W) = P(w1,w2,w3,w4,w5…wn) </li>
+<li>
+<p>Goal: <strong>compute the probability of a sentence or sequence of words</strong>:</p>
+<ul>
+<li>P(W) = P(w1,w2,w3,w4,w5…wn)</li>
 </ul>
 </li>
-<li><p>Related task: <strong>probability of an upcoming word</strong>: P(w5|w1,w2,w3,w4) </p>
+<li>
+<p>Related task: <strong>probability of an upcoming word</strong>: P(w5|w1,w2,w3,w4)</p>
 </li>
-<li><p>A model that computes either of these: </p>
+<li>
+<p>A model that computes either of these:</p>
 <p>P(W) or P(wn|w1,w2…wn-1) is called a <strong>language model</strong> (LM).</p>
 </li>
 </ul>
-<h2 id="how-to-compute-pw"><a href="#How-to-compute-P-w" class="headerlink" title="How to compute P(w)"></a>How to compute P(w)</h2><h3 id="the-chain-rule"><a href="#The-Chain-Rule" class="headerlink" title="The Chain Rule"></a>The Chain Rule</h3><ul>
+<h2 id="how-to-compute-pw">How to compute P(w)</h2>
+<h3 id="the-chain-rule">The Chain Rule</h3>
+<ul>
 <li>The Chain Rule applied to compute joint probability of words in sentence</li>
 </ul>
 <p><img src="image-20181110210209272.png" alt="image-20181110210209272"></p>
 <ul>
-<li><p>Example:</p>
+<li>
+<p>Example:</p>
 <p>P(“its water is so transparent”) =</p>
-<p>​    P(its)</p>
-<p>​    * P(water |its)</p>
-<p>​    * P(is | its water)</p>
-<p>​    * P(so | its water is)</p>
-<p>​    * P(transparent | its water is so) </p>
+<p>​	P(its)</p>
+<p>​	* P(water |its)</p>
+<p>​	* P(is | its water)</p>
+<p>​	* P(so | its water is)</p>
+<p>​	* P(transparent | its water is so)</p>
 </li>
 </ul>
-<h2 id="how-to-estimate-these-probabilities"><a href="#How-to-estimate-these-probabilities" class="headerlink" title="How to estimate these probabilities"></a>How to estimate these probabilities</h2><h3 id="markov-assumption"><a href="#Markov-Assumption" class="headerlink" title="Markov Assumption"></a>Markov Assumption</h3><p><img src="image-20181110210653793.png" alt="image-20181110210653793"></p>
-<h3 id="unigram-model"><a href="#Unigram-model" class="headerlink" title="Unigram model"></a>Unigram model</h3><ul>
+<h2 id="how-to-estimate-these-probabilities">How to estimate these probabilities</h2>
+<h3 id="markov-assumption">Markov Assumption</h3>
+<p><img src="image-20181110210653793.png" alt="image-20181110210653793"></p>
+<h3 id="unigram-model">Unigram model</h3>
+<ul>
 <li>Simplest case</li>
 </ul>
 <p><img src="image-20181110210754117.png" alt="image-20181110210754117"></p>
-<h3 id="bigram-model"><a href="#Bigram-model" class="headerlink" title="Bigram model"></a>Bigram model</h3><ul>
-<li><p>Condition on the previous word</p>
+<h3 id="bigram-model">Bigram model</h3>
+<ul>
+<li>
+<p>Condition on the previous word</p>
 <p><img src="image-20181110210858083.png" alt="image-20181110210858083"></p>
 </li>
 </ul>
-<h3 id="n-gram-models"><a href="#N-gram-models" class="headerlink" title="N-gram models"></a>N-gram models</h3><ul>
-<li><p>We can extend to trigrams, 4-grams, 5-grams </p>
+<h3 id="n-gram-models">N-gram models</h3>
+<ul>
+<li>
+<p>We can extend to trigrams, 4-grams, 5-grams</p>
 </li>
-<li><p>In general this is an insufficient model of language because language has long-distance dependencies</p>
+<li>
+<p>In general this is an insufficient model of language because language has long-distance dependencies</p>
 </li>
 </ul>
-<h1 id="estimating-n-gram-probabilities"><a href="#Estimating-N-gram-Probabilities" class="headerlink" title="Estimating N-gram Probabilities"></a>Estimating N-gram Probabilities</h1><h2 id="bigram-probabilities"><a href="#bigram-probabilities" class="headerlink" title="bigram probabilities"></a>bigram probabilities</h2><ul>
+<h1 id="estimating-n-gram-probabilities">Estimating N-gram Probabilities</h1>
+<h2 id="bigram-probabilities">bigram probabilities</h2>
+<ul>
 <li>The <strong>Maximum Likelihood Estimate</strong> (MLE)</li>
 </ul>
 <p><img src="image-20181110211113331.png" alt="image-20181110211113331"></p>
 <ul>
-<li><p>Example:<br><img src="image-20181110211207288.png" alt="image-20181110211207288"></p>
+<li>
+<p>Example:<br>
+<img src="image-20181110211207288.png" alt="image-20181110211207288"></p>
 </li>
-<li><p>Raw bigram counts</p>
+<li>
+<p>Raw bigram counts</p>
 </li>
 </ul>
 <p><img src="image-20181110211452029.png" alt="image-20181110211452029"></p>
 <p><img src="image-20181110211421726.png" alt="image-20181110211421726"></p>
-<h3 id="bigram-estimates-of-sentence-probabilities"><a href="#Bigram-estimates-of-sentence-probabilities" class="headerlink" title="Bigram estimates of sentence probabilities"></a>Bigram estimates of sentence probabilities</h3><p><img src="image-20181110211704174.png" alt="image-20181110211704174"></p>
-<h1 id="evaluation-and-perplexity"><a href="#Evaluation-and-Perplexity" class="headerlink" title="Evaluation and Perplexity"></a>Evaluation and Perplexity</h1><h2 id="extrinsic-evaluation"><a href="#Extrinsic-evaluation" class="headerlink" title="Extrinsic evaluation"></a>Extrinsic evaluation</h2><ul>
+<h3 id="bigram-estimates-of-sentence-probabilities">Bigram estimates of sentence probabilities</h3>
+<p><img src="image-20181110211704174.png" alt="image-20181110211704174"></p>
+<h1 id="evaluation-and-perplexity">Evaluation and Perplexity</h1>
+<h2 id="extrinsic-evaluation">Extrinsic evaluation</h2>
+<ul>
 <li>Time-consuming; can take days or weeks</li>
 </ul>
-<h2 id="intrinsic-evaluation-perplexity"><a href="#Intrinsic-evaluation-perplexity" class="headerlink" title="Intrinsic evaluation: perplexity"></a>Intrinsic evaluation: perplexity</h2><ul>
-<li>The best language model is one that best predicts an unseen test set<ul>
+<h2 id="intrinsic-evaluation-perplexity">Intrinsic evaluation: perplexity</h2>
+<ul>
+<li>The best language model is one that best predicts an unseen test set
+<ul>
 <li>Gives the highest P(sentence)</li>
 </ul>
 </li>
-<li><p><strong>Perplexity(复杂度)</strong> is the inverse probability of the test set, normalized by the number of words</p>
+<li><strong>Perplexity(复杂度)</strong> is the inverse probability of the test set, normalized by the number of words
 <ul>
 <li><strong>Minimizing perplexity is the same as maximizing probability</strong></li>
 </ul>
-<p><img src="image-20181110212802202.png" alt="image-20181110212802202"></p>
 </li>
 </ul>
-<h1 id="generalization-and-zeros"><a href="#Generalization-and-zeros" class="headerlink" title="Generalization and zeros"></a>Generalization and zeros</h1><ul>
-<li>Bigrams with zero probability<ul>
-<li>mean that we will assign 0 probability to the test set! </li>
+<p><img src="image-20181110212802202.png" alt="image-20181110212802202"></p>
+<h1 id="generalization-and-zeros">Generalization and zeros</h1>
+<ul>
+<li>Bigrams with zero probability
+<ul>
+<li>mean that we will assign 0 probability to the test set!</li>
 </ul>
 </li>
 </ul>
 <p>How to avoid 0?</p>
-<h2 id="smoothing-add-one-laplace-smoothing"><a href="#Smoothing-Add-one-Laplace-smoothing" class="headerlink" title="Smoothing: Add-one (Laplace) smoothing"></a>Smoothing: Add-one (Laplace) smoothing</h2><p><img src="image-20181110213237428.png" alt="image-20181110213237428"></p>
+<h2 id="smoothing-add-one-laplace-smoothing">Smoothing: Add-one (Laplace) smoothing</h2>
+<p><img src="image-20181110213237428.png" alt="image-20181110213237428"></p>
 <ul>
-<li>Disadvange:<ul>
+<li>Disadvange:
+<ul>
 <li>if c(w<sub>i-1</sub>, wi) is big enough, +1 does not matter too much</li>
 <li>if c(w<sub>i-1</sub>, wi) = 0, the result is always the same! It’s not fair.</li>
 </ul>
 </li>
 </ul>
-<h3 id="interpolation"><a href="#Interpolation" class="headerlink" title="Interpolation"></a>Interpolation</h3><p><img src="image-20181110213657267.png" alt="image-20181110213657267"></p>
+<h3 id="interpolation">Interpolation</h3>
+<p><img src="image-20181110213657267.png" alt="image-20181110213657267"></p>
 <ul>
 <li>Even if  prob of bigram and 3-grams all are 0, we can still <strong>add the prob of unigram which can not be 0.</strong></li>
 </ul>
-<h3 id="oov"><a href="#OOV" class="headerlink" title="OOV"></a>OOV</h3><ul>
-<li><p>OOV: <strong>Out of Vocabulary</strong></p>
-</li>
-<li><p>Create an unknown word token <code>&lt;UNK&gt;</code></p>
+<h3 id="oov">OOV</h3>
 <ul>
-<li>Training of <code>&lt;UNK&gt;</code> probabilities <ul>
-<li>Create a fixed lexicon L of size V </li>
-<li>At text normalization phase, any training word not in L changed to <code>&lt;UNK&gt;</code> </li>
-<li>Now we train its probabilities like a normal word </li>
+<li>
+<p>OOV: <strong>Out of Vocabulary</strong></p>
+</li>
+<li>
+<p>Create an unknown word token <code>&lt;UNK&gt;</code></p>
+<ul>
+<li>Training of <code>&lt;UNK&gt;</code> probabilities
+<ul>
+<li>Create a fixed lexicon L of size V</li>
+<li>At text normalization phase, any training word not in L changed to <code>&lt;UNK&gt;</code></li>
+<li>Now we train its probabilities like a normal word</li>
 </ul>
 </li>
-<li>At decoding time <ul>
-<li>If text input: Use UNK probabilities for any word not in training </li>
+<li>At decoding time
+<ul>
+<li>If text input: Use UNK probabilities for any word not in training</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="stupid-backoff"><a href="#Stupid-backoff" class="headerlink" title="Stupid backoff"></a>Stupid backoff</h3><ul>
-<li>Smoothing for Web-scale N-grams</li>
-<li><p><strong>backoff</strong> :  go back to a <strong>n-1 gram level</strong> to calculate the probabilities when you encounter a word with prob=0. </p>
+<h3 id="stupid-backoff">Stupid backoff</h3>
+<ul>
+<li>
+<p>Smoothing for Web-scale N-grams</p>
 </li>
-<li><p>No discounting, just use relative frequencies </p>
+<li>
+<p><strong>backoff</strong> :  go back to a <strong>n-1 gram level</strong> to calculate the probabilities when you encounter a word with prob=0.</p>
+</li>
+<li>
+<p>No discounting, just use relative frequencies</p>
 </li>
 </ul>
 <p><img src="image-20181111113848276.png" alt="image-20181111113848276"></p>
-<h2 id="kneser-ney-smoothing"><a href="#Kneser-Ney-Smoothing" class="headerlink" title="Kneser-Ney Smoothing"></a>Kneser-Ney Smoothing</h2><h3 id="absolute-discounting-interpolation"><a href="#Absolute-Discounting-Interpolation" class="headerlink" title="Absolute Discounting Interpolation"></a>Absolute Discounting Interpolation</h3><p><img src="image-20181111120442456.png" alt="image-20181111120442456"></p>
+<h2 id="kneser-ney-smoothing">Kneser-Ney Smoothing</h2>
+<h3 id="absolute-discounting-interpolation">Absolute Discounting Interpolation</h3>
+<p><img src="image-20181111120442456.png" alt="image-20181111120442456"></p>
 <ul>
 <li>Save ourselves some time and just subtract 0.75 (or some d)!</li>
 </ul>
 <p><img src="image-20181111114332244.png" alt="image-20181111114332244"></p>
-<h3 id="kneser-ney-smoothing"><a href="#Kneser-Ney-Smoothing-1" class="headerlink" title="Kneser-Ney Smoothing"></a>Kneser-Ney Smoothing</h3><ul>
-<li><p>Better estimate for probabilities of lower-order unigrams!</p>
+<h3 id="kneser-ney-smoothing">Kneser-Ney Smoothing</h3>
+<ul>
+<li>
+<p>Better estimate for probabilities of lower-order unigrams!</p>
 </li>
-<li><p>Instead of P(w): “How likely is w” , <strong>P<sub>continuation</sub>(w)</strong>: “How likely is w to appear as a novel continuation? </p>
+<li>
+<p>Instead of P(w): “How likely is w” , <strong>P<sub>continuation</sub>(w)</strong>: “How likely is w to appear as a novel continuation?</p>
 <ul>
 <li>For each word, count the number of bigram types it completes</li>
 <li>Every bigram type was a <strong>novel continuation the first time it was seen</strong></li>
 </ul>
 <p><img src="image-20181111114723756.png" alt="image-20181111114723756"></p>
 </li>
-<li><p>Normalized by the total number of word bigram types </p>
+<li>
+<p>Normalized by the total number of word bigram types</p>
 </li>
 </ul>
 <p><img src="image-20181111115026447.png" alt="image-20181111115026447"></p>
 <ul>
-<li>Alternative metaphor: The number of # of word types seen to precede w </li>
+<li>Alternative metaphor: The number of # of word types seen to precede w</li>
 </ul>
 <p><img src="image-20181111115127525.png" alt="image-20181111115127525"></p>
 <ul>
-<li>normalized by the # of words preceding all words: </li>
+<li>normalized by the # of words preceding all words:</li>
 </ul>
 <p><img src="image-20181111115154691.png" alt="image-20181111115154691"></p>
 <p><img src="image-20181111115230726.png" alt="image-20181111115230726"></p>
@@ -392,7 +442,8 @@
 </ul>
 <p><img src="image-20181111115935054.png" alt="image-20181111115935054"></p>
 <ul>
-<li><p>Example</p>
+<li>
+<p>Example</p>
 <p><img src="image-20181111115349759.png" alt="image-20181111115349759"></p>
 </li>
 </ul>

@@ -231,30 +231,38 @@
 <li>Pharse Queries</li>
 </ul>
 </blockquote>
-<p><strong>Overview</strong><br>​    Boolean model is one of the earliest model in IR, so it is easy to support and easy to optimise. Usually faster, but contains less information than vector model.</p>
+<p><strong>Overview</strong><br>
+​    Boolean model is one of the earliest model in IR, so it is easy to support and easy to optimise. Usually faster, but contains less information than vector model.</p>
 <ul>
-<li>Why we need IR model？ —— disadvantage of “grep”:<ul>
+<li>Why we need IR model？ —— disadvantage of “grep”:
+<ul>
 <li>Time complexity O(n), slow for large data</li>
-<li>Other operations not feasible, (e.g., find the word “Romans” near “countrymen”) </li>
+<li>Other operations not feasible, (e.g., find the word “Romans” near “countrymen”)</li>
 <li>Ranked retrieval (best documents to return)</li>
 </ul>
 </li>
 </ul>
-<h1 id="model-the-document"><a href="#Model-the-document" class="headerlink" title="Model the document"></a>Model the document</h1><ul>
-<li><p>Term-document incidence matrix</p>
+<h1 id="model-the-document">Model the document</h1>
+<ul>
+<li>
+<p>Term-document incidence matrix</p>
 <p><img src="1.png" alt=""></p>
-<p>Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (complemented) -&gt; <strong>bitwise AND</strong>. 110100 AND 110111 AND 101111 = 100100.<br>(speed up than traditional RDBMS)</p>
+<p>Then we can answer query: take the vectors for Brutus, Caesar and Calpurnia (complemented) -&gt; <strong>bitwise AND</strong>. 110100 AND 110111 AND 101111 = 100100.<br>
+(speed up than traditional RDBMS)</p>
 </li>
-<li><p>But some information are <strong>not captured</strong> in the matrix:</p>
+<li>
+<p>But some information are <strong>not captured</strong> in the matrix:</p>
 <ul>
 <li>order between the words</li>
 <li>how many times the word occurs in the doc</li>
 </ul>
 </li>
-<li><p><strong>Sparse matrix</strong>(稀疏矩阵)</p>
+<li>
+<p><strong>Sparse matrix</strong>(稀疏矩阵)</p>
 <ul>
 <li>E.g., 1 million words and n docs which contains only 1000 words. There will be only 1000 1‘s in one column, matrix is extremely sparse.</li>
-<li>Solutions:<ol>
+<li>Solutions:
+<ol>
 <li>（常用）类似于表示Graph(V,E)用adjoin list，这里我们用list存docid，也就是Inverted index倒排索引</li>
 <li>（不常用）用Run-length encoding，doc:2-1s, 1-0s 表示 2个1，1个0</li>
 </ol>
@@ -262,90 +270,111 @@
 </ul>
 </li>
 </ul>
-<h1 id="inverted-index"><a href="#Inverted-index" class="headerlink" title="Inverted index"></a>Inverted index</h1><ul>
-<li>For each term t, we must store a list of all documents(docId) that contain t. </li>
+<h1 id="inverted-index">Inverted index</h1>
+<ul>
+<li>For each term t, we must store a list of all documents(docId) that contain t.</li>
 </ul>
 <p><img src="2.png" alt=""></p>
 <ul>
-<li><p>Inverted index construction<br><img src="3.png" alt=""></p>
+<li>
+<p>Inverted index construction<br>
+<img src="3.png" alt=""></p>
 </li>
-<li><p>Indexer steps:</p>
+<li>
+<p>Indexer steps:</p>
 <ol>
 <li>Token sequence</li>
 </ol>
 <ul>
-<li>Sequence of (Modified token, Document ID) pairs.<br>通常会处理term单复数，大小写，过去式变成原形等等。但是下面example没处理。<br><img src="4.png" alt=""></li>
+<li>Sequence of (Modified token, Document ID) pairs.<br>
+通常会处理term单复数，大小写，过去式变成原形等等。但是下面example没处理。<br>
+<img src="4.png" alt=""></li>
 </ul>
-<ol>
+<ol start="2">
 <li><strong>Sort</strong></li>
 </ol>
 <ul>
-<li>Sort by terms and then docID<br><img src="5.png" alt=""></li>
+<li>Sort by terms and then docID<br>
+<img src="5.png" alt=""></li>
 </ul>
-<ol>
+<ol start="3">
 <li>Dictionary &amp; Postings</li>
 </ol>
 <ul>
 <li>Multiple term entries in a single document are merged.</li>
 <li>Split into Dictionary and Postings</li>
-<li>Doc. frequency information is added. frequency指的是有几个文件出现了这个terms，但是一个doc中出现了几次没有记录<br><img src="6.png" alt=""></li>
+<li>Doc. frequency information is added. frequency指的是有几个文件出现了这个terms，但是一个doc中出现了几次没有记录<br>
+<img src="6.png" alt=""></li>
 </ul>
 </li>
 </ul>
 <p>N.B.</p>
 <ul>
 <li>Hashing-based construction methods are more efficient (though harder to implement)</li>
-<li><p>Inverted index can be compressed to</p>
+<li>Inverted index can be compressed to
 <ul>
-<li><p>reduce index size</p>
+<li>
+<p>reduce index size</p>
 </li>
-<li><p>reduces transfer time between storage and memory</p>
+<li>
+<p>reduces transfer time between storage and memory</p>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="query-processing-with-an-inverted-index"><a href="#Query-processing-with-an-inverted-index" class="headerlink" title="Query processing with an inverted index"></a>Query processing with an inverted index</h1><h2 id="and-2-list-intersection"><a href="#AND-2-list-intersection" class="headerlink" title="AND: 2 list intersection"></a>AND: 2 list intersection</h2><p>Consider processing the query: Brutus AND Caesar</p>
+<h1 id="query-processing-with-an-inverted-index">Query processing with an inverted index</h1>
+<h2 id="and-2-list-intersection">AND: 2 list intersection</h2>
+<p>Consider processing the query: Brutus AND Caesar</p>
 <p>这里介绍3种Merge思路：</p>
 <ol>
-<li>Walk through the <strong>two postings simultaneously</strong>, in time linear in the total number of postings entries<br><strong>Crucial: postings sorted by docID.</strong><br><img src="7.png" alt=""><br>If the list lengths are n and m, the merge takes <strong>O(n+m)</strong> operations.</li>
+<li>Walk through the <strong>two postings simultaneously</strong>, in time linear in the total number of postings entries<br>
+<strong>Crucial: postings sorted by docID.</strong><br>
+<img src="7.png" alt=""><br>
+If the list lengths are n and m, the merge takes <strong>O(n+m)</strong> operations.</li>
 </ol>
 <p><img src="8.jpg" alt=""></p>
 <p><img src="image-20181105115741845.png" alt="image-20181105115741845"></p>
-<ol>
-<li>Walk through the one list, and check if the element exists in another list<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach x ∈ LA</span><br><span class="line">    if x ∈ LB: </span><br><span class="line">        output x</span><br></pre></td></tr></table></figure>
-</li>
+<ol start="2">
+<li>Walk through the one list, and check if the element exists in another list</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach x ∈ LA</span><br><span class="line">    if x ∈ LB: </span><br><span class="line">        output x</span><br></pre></td></tr></table></figure>
 <p>重点就是if x ∈ LB的效率，我们介绍一种快速集合元素查询的方式：<strong>Bloom Filter</strong></p>
 <blockquote>
 <ul>
 <li>Bloom Filter使用k个相互独立的哈希函数（Hash Function），它们分别将集合中的每个元素映射到{1,…,m}的范围中。对任意一个元素x，第i个哈希函数映射的位置hi(x)就会被置为1（1≤i≤k)。在判断y是否属于这个集合时，我们对y应用k次哈希函数，如果所有hi(y)的位置都是1（1≤i≤k），那么我们就认为y是集合中的元素，否则就认为y不是集合中的元素。</li>
-<li>if x ∈ LB =&gt; Yes<br>if x ∉ LB =&gt; 可能会出现 false positive的情况</li>
-<li><strong>Bloom Filter很常用，它是用极小的错误换取了很大的空间节省</strong><br>P.S. 在COMP9313 Chapter9-Mining Data Streams中有详细介绍</li>
+<li>if x ∈ LB =&gt; Yes<br>
+if x ∉ LB =&gt; 可能会出现 false positive的情况</li>
+<li><strong>Bloom Filter很常用，它是用极小的错误换取了很大的空间节省</strong><br>
+P.S. 在COMP9313 Chapter9-Mining Data Streams中有详细介绍</li>
 </ul>
 </blockquote>
 <p>If the list lengths are n and m, the merge takes <strong>O(nlogm)</strong> operations.</p>
-<ol>
-<li>Merge A and B, then sort<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C = A ○ B  (just merge A,B into C。连接A,B)</span><br><span class="line">sorted(C)</span><br><span class="line">foreach x ∈ C: output x</span><br></pre></td></tr></table></figure>
-</li>
+<ol start="3">
+<li>Merge A and B, then sort</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C = A ○ B  (just merge A,B into C。连接A,B)</span><br><span class="line">sorted(C)</span><br><span class="line">foreach x ∈ C: output x</span><br></pre></td></tr></table></figure>
 <ul>
-<li>Time complexity is most cost by sorting.<br>So it takes O((n+m)log(n+m))  n &lt;&lt; m. which is much slower than other algorithm.</li>
-<li>BUT Advantage: Distributed sorting (suitable for big data), because reliable for sorting is really good，it can easy apply to MapReduce/Spark. </li>
+<li>Time complexity is most cost by sorting.<br>
+So it takes O((n+m)log(n+m))  n &lt;&lt; m. which is much slower than other algorithm.</li>
+<li>BUT Advantage: Distributed sorting (suitable for big data), because reliable for sorting is really good，it can easy apply to MapReduce/Spark.</li>
 </ul>
 <blockquote>
 <ul>
-<li><strong>For big data, scalability, reliability and efficiency of the algorithm are all<br>very important.</strong></li>
+<li><strong>For big data, scalability, reliability and efficiency of the algorithm are all<br>
+very important.</strong></li>
 </ul>
 </blockquote>
 <p>每个算法有各自的优点吧，不是time complexity小的一定就好</p>
-<h2 id="multiple-list-intersection"><a href="#Multiple-list-intersection" class="headerlink" title="Multiple list intersection"></a>Multiple list intersection</h2><ul>
-<li><p>2 methods：</p>
+<h2 id="multiple-list-intersection">Multiple list intersection</h2>
+<ul>
+<li>
+<p>2 methods：</p>
 <ol>
 <li>Combine each 2 lists, then recursive</li>
 </ol>
 <p><img src="9.png" alt=""></p>
-<ol>
-<li>Settle the dispute within the first two lists  = &gt; <strong>max algorithm</strong> </li>
+<ol start="2">
+<li>Settle the dispute within the first two lists  = &gt; <strong>max algorithm</strong></li>
 </ol>
 <p><img src="10.png" alt=""></p>
 </li>
@@ -355,30 +384,38 @@
 <li>Better locality of accesse =&gt; fewer cache misses</li>
 <li>Similar to SvS</li>
 </ul>
-<p>因为intersect(L1, L2) ∈ [0, min(n, m)]<br>比如: 一个极端的例子，A长度为3，B为10，C为1M。intersection(A,B)= ∅. 甚至都不用考虑C了</p>
+<p>因为intersect(L1, L2) ∈ [0, min(n, m)]<br>
+比如: 一个极端的例子，A长度为3，B为10，C为1M。intersection(A,B)= ∅. 甚至都不用考虑C了</p>
 <p><img src="11.png" alt=""></p>
 <p>Hence , we process in order of <strong>increasing</strong> freq: <strong>start with smallest set, then keep cutting further.</strong></p>
-<h3 id="max-algorithm"><a href="#MAX-algorithm" class="headerlink" title="MAX algorithm"></a>MAX algorithm</h3><p><img src="image-20181105161647177.png" alt="image-20181105161647177"></p>
-<h2 id="faster-postings-merges"><a href="#Faster-postings-merges" class="headerlink" title="Faster postings merges"></a>Faster postings merges</h2><ul>
-<li><p><strong>sorted list</strong>: We optimise the algrithom by making use of this information in the list</p>
-</li>
-<li><p><strong>skipTo(id):</strong>  To skip postings that will not figure in the search results. </p>
+<h3 id="max-algorithm">MAX algorithm</h3>
+<p><img src="image-20181105161647177.png" alt="image-20181105161647177"></p>
+<h2 id="faster-postings-merges">Faster postings merges</h2>
 <ul>
-<li>Tradeoff: <ul>
-<li>More skips =&gt; shorter skip spans =&gt; more likely to skip. But lots of comparisons to skip pointers. </li>
-<li>Fewer skips =&gt; few pointer comparison, but then long skip spansa =&gt; few successful skips. </li>
+<li>
+<p><strong>sorted list</strong>: We optimise the algrithom by making use of this information in the list</p>
+</li>
+<li>
+<p><strong>skipTo(id):</strong>  To skip postings that will not figure in the search results.</p>
+<ul>
+<li>Tradeoff:
+<ul>
+<li>More skips =&gt; shorter skip spans =&gt; more likely to skip. But lots of comparisons to skip pointers.</li>
+<li>Fewer skips =&gt; few pointer comparison, but then long skip spansa =&gt; few successful skips.</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181105183541241.png" alt="image-20181105183541241"></p>
 </li>
 </ul>
-<h3 id="binary-search"><a href="#Binary-Search" class="headerlink" title="Binary Search"></a>Binary Search</h3><p><img src="image-20181105154743992.png" alt="image-20181105154743992"></p>
+<h3 id="binary-search">Binary Search</h3>
+<p><img src="image-20181105154743992.png" alt="image-20181105154743992"></p>
 <ul>
-<li>Binary search space is always <strong>halved at each step</strong>. </li>
+<li>Binary search space is always <strong>halved at each step</strong>.</li>
 <li>Guaranteed to finish in <strong>O(log(n))</strong> time.</li>
 </ul>
-<h3 id="gralloping-search"><a href="#Gralloping-Search" class="headerlink" title="Gralloping Search"></a>Gralloping Search</h3><p>also known as Double Binary Search and Exponential search</p>
+<h3 id="gralloping-search">Gralloping Search</h3>
+<p>also known as Double Binary Search and Exponential search</p>
 <p><img src="image-20181105154828023.png" alt="image-20181105154828023"></p>
 <ul>
 <li>Stage 1: Gralloping search starts at the first element and keeps <strong>doubling the upper limit of the search range</strong> until the value there is larger than the searched key.</li>
@@ -386,7 +423,8 @@
 <li>The former one guarantees an <strong>O(log(n))</strong> runtime, the latter one is closer to <strong>O(n)</strong> runtime.</li>
 <li>Galloping search is efficient if we expect to find the element closer to the beginning of the array.</li>
 </ul>
-<p>More about time complexity if using galloping search for stage1 and binary search for stage2:<br><img src="image-20181105170345382.png" alt="image-20181105170345382"></p>
+<p>More about time complexity if using galloping search for stage1 and binary search for stage2:<br>
+<img src="image-20181105170345382.png" alt="image-20181105170345382"></p>
 <blockquote>
 <p><img src="image-20181105175709679.png" alt="image-20181105175709679"></p>
 <p>Arithmetic mean &gt; Geometric mean</p>
@@ -395,83 +433,104 @@
 <!--we have $$log\left(\prod _{i=1}^{n}l_{i}\right) =log (\frac {L2}{n})^n = n log\frac {L2}{n} = L1 log\frac {L2}{L1}$$-->
 <p><img src="image-20181105182240361.png" alt="image-20181105182240361"></p>
 <p>As L1&lt;&lt; L2, the time complexity will be small, quite <strong>robust</strong>.</p>
-<h3 id="skip-listspointers"><a href="#Skip-lists-pointers" class="headerlink" title="Skip lists/pointers"></a>Skip lists/pointers</h3><ul>
+<h3 id="skip-listspointers">Skip lists/pointers</h3>
+<ul>
 <li>A skip pointer (d, p) contains a document number d and a byte (or bit) position p</li>
-<li>there is an inverted list posting that starts at position p, and the posting before it was for document d </li>
+<li>there is an inverted list posting that starts at position p, and the posting before it was for document d</li>
 </ul>
 <p><img src="image-20181105183155880.png" alt="image-20181105183155880"></p>
 <blockquote>
-<p><strong>Sequential search</strong> (<strong>linear search</strong>)： </p>
+<p><strong>Sequential search</strong> (<strong>linear search</strong>)：</p>
 <ul>
 <li>sequentially checks <strong>each element</strong> of the list for the target value until a match is found or until all the elements have been searched.</li>
 <li>time complexity O(n)</li>
 </ul>
 </blockquote>
 <ul>
-<li><p>Step 1: We perform sequential search in the skip pointers array, and then </p>
+<li>
+<p>Step 1: We perform sequential search in the skip pointers array, and then</p>
 </li>
-<li><p>Step 2: We perform sequential search in the target segment. </p>
+<li>
+<p>Step 2: We perform sequential search in the target segment.</p>
 </li>
 </ul>
 <p>If there is n pointers, then we have L/n gaps(target segment).</p>
 <ul>
-<li>What is the best number of skip pointers?  <ul>
+<li>What is the best number of skip pointers?
+<ul>
 <li>The total time complexity is O(n + L/n).</li>
-<li>we take the derative and make it equal to 0. </li>
+<li>we take the derative and make it equal to 0.</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181105185931743.png" alt="image-20181105185931743"></p>
 <ul>
-<li>Similar, if we perform binary search in step 1 and sequentially search in step 2:<ul>
+<li>Similar, if we perform binary search in step 1 and sequentially search in step 2:
+<ul>
 <li>The total time complexity is O(logn + L/n).</li>
 <li>The best n = L.</li>
 </ul>
 </li>
 </ul>
-<h1 id="pharse-queries-and-positional-indexs"><a href="#Pharse-Queries-and-positional-indexs" class="headerlink" title="Pharse Queries and positional indexs"></a>Pharse Queries and positional indexs</h1><ul>
-<li>Phrase queries:<ul>
+<h1 id="pharse-queries-and-positional-indexs">Pharse Queries and positional indexs</h1>
+<ul>
+<li>Phrase queries:
+<ul>
 <li>Want to be able to answer queries such as “Los Angeles” – as a phrase</li>
-<li>For this, it no longer suffices to store only  <term :="" docs=""> entries  </term></li>
+<li>For this, it no longer suffices to store only  <term :="" docs=""> entries</term></li>
 </ul>
 </li>
 </ul>
-<h2 id="solution-1-biword-indexes"><a href="#Solution-1-Biword-indexes" class="headerlink" title="Solution 1: Biword indexes"></a>Solution 1: Biword indexes</h2><ul>
-<li>Index every consecutive pair of terms in the text as a phrase </li>
-<li>For example the text “Friends, Romans, Countrymen” would generate the biwords <ul>
+<h2 id="solution-1-biword-indexes">Solution 1: Biword indexes</h2>
+<ul>
+<li>Index every consecutive pair of terms in the text as a phrase</li>
+<li>For example the text “Friends, Romans, Countrymen” would generate the biwords
+<ul>
 <li>friends romans</li>
-<li>romans countrymen </li>
+<li>romans countrymen</li>
 </ul>
 </li>
-<li>Each of these biwords is now a dictionary term </li>
-<li>Two-word phrase query-processing is now immediate. </li>
-<li>Issues:<ul>
-<li>False positives, as noted before </li>
+<li>Each of these biwords is now a dictionary term</li>
+<li>Two-word phrase query-processing is now immediate.</li>
+<li>Issues:
+<ul>
+<li>False positives, as noted before</li>
 <li>Index blowup due to bigger dictionary</li>
-<li>Infeasible for more than biwords, big even for them </li>
+<li>Infeasible for more than biwords, big even for them</li>
 </ul>
 </li>
 <li>Biword indexes are not the standard solution (for all biwords) but can be part of a compound strategy.</li>
 </ul>
-<h2 id="solution-2-positional-indexes"><a href="#Solution-2-Positional-indexes" class="headerlink" title="Solution 2 : Positional indexes"></a>Solution 2 : Positional indexes</h2><ul>
-<li><p>In the postings, store, for each term the position(s) in  which tokens of it appear: </p>
-<term, number="" of="" docs="" containing="" term;="" doc1:="" position1,="" position2="" ...="" ;="" doc2:="" etc.="">
-</term,></li>
-<li><p>For example:</p>
+<h2 id="solution-2-positional-indexes">Solution 2 : Positional indexes</h2>
+<ul>
+<li>
+<p>In the postings, store, for each term the position(s) in  which tokens of it appear:</p>
+<p>&lt;term, number of docs containing term;<br>
+doc1: position1, position2 … ;<br>
+doc2: position1, position2 … ;<br>
+etc.&gt;</p>
+</li>
+<li>
+<p>For example:</p>
 <p><img src="image-20181105191511559.png" alt="image-20181105191511559"></p>
 </li>
-<li><p>For phrase queries, we use a <strong>merge algorithm</strong> recursively at the document level</p>
+<li>
+<p>For phrase queries, we use a <strong>merge algorithm</strong> recursively at the document level</p>
 </li>
-<li><p>Processing a phrase query</p>
+<li>
+<p>Processing a phrase query</p>
 <ul>
-<li><p>Extract inverted index entries for each distinct term:  to, be, or, not </p>
+<li>
+<p>Extract inverted index entries for each distinct term:  to, be, or, not</p>
 </li>
-<li><p>Merge their doc:position lists to enumerate all positions with “to be or not to be”.</p>
+<li>
+<p>Merge their doc:position lists to enumerate all positions with “to be or not to be”.</p>
 <p><img src="image-20181105193116144.png" alt="image-20181105193116144"></p>
 </li>
 </ul>
 </li>
-<li><p>Proximity queries</p>
+<li>
+<p>Proximity queries</p>
 <ul>
 <li><strong>/k:</strong> within k words; <strong>/s:</strong> in the same sentence; <strong>/p:</strong> in the same paragraph</li>
 <li>Solution 1: We just extract position, sentenceid and paragraphid and process as usual.</li>
@@ -480,7 +539,8 @@
 </li>
 </ul>
 <p><img src="image-20181105191902988.png" alt="image-20181105191902988"></p>
-<h2 id="solution-3-suffix-treearray"><a href="#Solution-3-Suffix-Tree-Array" class="headerlink" title="Solution 3: Suffix Tree/Array"></a>Solution 3: Suffix Tree/Array</h2><p><a href="https://en.wikipedia.org/wiki/Suffix_array" target="_blank" rel="noopener">wiki - suffix tree</a></p>
+<h2 id="solution-3-suffix-treearray">Solution 3: Suffix Tree/Array</h2>
+<p><a href="https://en.wikipedia.org/wiki/Suffix_array" target="_blank" rel="noopener">wiki - suffix tree</a></p>
 
                 
 

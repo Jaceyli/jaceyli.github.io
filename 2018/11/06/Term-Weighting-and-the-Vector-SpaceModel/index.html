@@ -224,79 +224,97 @@
                 post-container">
 
                 <blockquote>
-<p> Abstract:</p>
+<p>Abstract:</p>
 <ul>
 <li>Ranked retrieval</li>
 <li>Tf-idf</li>
 <li>vector space model</li>
 </ul>
 </blockquote>
-<h1 id="why-ranked-retrieval-model"><a href="#Why-ranked-retrieval-model" class="headerlink" title="Why ranked retrieval model?"></a>Why ranked retrieval model?</h1><ul>
+<h1 id="why-ranked-retrieval-model">Why ranked retrieval model?</h1>
+<ul>
 <li>Boolean Model =&gt; documents either 1 or 0 (match or not).</li>
-<li>Not good for the majority of users<ul>
+<li>Not good for the majority of users
+<ul>
 <li>Most users incapable of writing Boolean queries</li>
 <li>Most users don’t want to wade through 1000s of results.</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Problem: feast or famine (result too many or too few)<ul>
-<li>Query 1: “standard user dlink 650” → 200,000 hits </li>
-<li>Query 2: “standard user dlink 650 no card found”: 0 hits </li>
-</ul>
-</li>
-</ul>
-<h1 id="ranked-retrieval-models"><a href="#Ranked-retrieval-models" class="headerlink" title="Ranked retrieval models"></a>Ranked retrieval models</h1><ul>
-<li><p>Ranked retrieval models <strong>returns an ordering over the (top) documents</strong> in the collection with respect to a query.</p>
+<li>Problem: feast or famine (result too many or too few)
 <ul>
-<li>Boolean model returns D1:1, D2:1</li>
-<li>Ranked retrieval model returns D1:0.75, D2:0.32</li>
+<li>Query 1: “standard user dlink 650” → 200,000 hits</li>
+<li>Query 2: “standard user dlink 650 no card found”: 0 hits</li>
 </ul>
 </li>
-<li><p><strong>Free text queries</strong>: Rather than a query language of operators and expressions, the user’s query is just one or more words in a human language.</p>
-</li>
-<li><p>“Feast or famine”: not a problem in ranked retrieval：</p>
+</ul>
+<h1 id="ranked-retrieval-models">Ranked retrieval models</h1>
 <ul>
-<li>When a system produces a ranked result set, large result sets are not an issue </li>
-<li>Indeed, the size of the result set is not an issue </li>
+<li>
+<p>Ranked retrieval models <strong>returns an ordering over the (top) documents</strong> in the collection with respect to a query.</p>
+</li>
+<li>
+<p>Boolean model returns D1:1, D2:1</p>
+</li>
+<li>
+<p>Ranked retrieval model returns D1:0.75, D2:0.32</p>
+</li>
+<li>
+<p><strong>Free text queries</strong>: Rather than a query language of operators and expressions, the user’s query is just one or more words in a human language.</p>
+</li>
+<li>
+<p>“Feast or famine”: not a problem in ranked retrieval：</p>
+<ul>
+<li>When a system produces a ranked result set, large result sets are not an issue</li>
+<li>Indeed, the size of the result set is not an issue</li>
 <li>We just show the <strong>top k</strong> ( ≈ 10) results</li>
-<li>We don’t overwhelm the user </li>
+<li>We don’t overwhelm the user</li>
 </ul>
 </li>
 </ul>
-<h1 id="scoring"><a href="#Scoring" class="headerlink" title="Scoring"></a>Scoring</h1><ul>
-<li>How can we rank-order the documents in the collection with respect to a query? <ul>
-<li>Assign a score – say in [0, 1] – to each document </li>
-<li>This score measures how well document and query “match”. </li>
+<h1 id="scoring">Scoring</h1>
+<ul>
+<li>How can we rank-order the documents in the collection with respect to a query?
+<ul>
+<li>Assign a score – say in [0, 1] – to each document</li>
+<li>This score measures how well document and query “match”.</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Let’s start with a one-term query <ul>
-<li>If the query term does not occur in the document: score should be 0 </li>
-<li>The more frequent the query term in the document, the higher the score (should be) </li>
-</ul>
-</li>
-</ul>
-<h2 id="jaccard-coefficient"><a href="#Jaccard-coefficient" class="headerlink" title="Jaccard coefficient"></a>Jaccard coefficient</h2><ul>
-<li>A commonly used measure of overlap of two sets A and B <ul>
-<li><strong>jaccard(A,B) = |A ∩ B| / |A ∪ B|</strong> </li>
-<li>jaccard(A,A) = 1 </li>
-<li>jaccard(A,B) = 0 if A ∩ B = 0 </li>
-</ul>
-</li>
-<li><p>Example</p>
+<li>Let’s start with a one-term query
 <ul>
-<li>Query: ides of <strong>march</strong> </li>
+<li>If the query term does not occur in the document: score should be 0</li>
+<li>The more frequent the query term in the document, the higher the score (should be)</li>
+</ul>
+</li>
+</ul>
+<h2 id="jaccard-coefficient">Jaccard coefficient</h2>
+<ul>
+<li>
+<p>A commonly used measure of overlap of two sets A and B</p>
+<ul>
+<li><strong>jaccard(A,B) = |A ∩ B| / |A ∪ B|</strong></li>
+<li>jaccard(A,A) = 1</li>
+<li>jaccard(A,B) = 0 if A ∩ B = 0</li>
+</ul>
+</li>
+<li>
+<p>Example</p>
+<ul>
+<li>Query: ides of <strong>march</strong></li>
 <li>Document 1: caesar died in <strong>march</strong>  =&gt; Jaccard(q,doc1) = 1/6</li>
 <li>Document 2: the long <strong>march</strong> =&gt; Jaccard(q,doc1) = 1/5</li>
 </ul>
 </li>
-<li><p>Issues </p>
+<li>
+<p>Issues</p>
 <ul>
 <li>It doesn’t consider <strong>term frequency</strong> (how many times a term occurs in a document)   =&gt; <strong>tf</strong></li>
 <li><strong>Rare terms in a collection are more informative than frequent terms</strong>. Jaccard doesn’t consider this information. =&gt; <strong>idf</strong></li>
-<li>We need a more sophisticated way of normalizing for length.<ul>
+<li>We need a more sophisticated way of normalizing for length.
+<ul>
 <li>Jaccard similarity favor the small document, we can tell that from the example above.</li>
 </ul>
 </li>
@@ -305,7 +323,6 @@
 </ul>
 <blockquote>
 <p>General methods to compare documents:</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -327,18 +344,20 @@
 </tr>
 </tbody>
 </table>
-</div>
 <ol>
-<li><p><del>Prioritige</del>: If we know A is more important than B, then we scoring according to A. So consider query B only if we got the same score in query A.</p>
+<li>
+<p><s>Prioritige</s>: If we know A is more important than B, then we scoring according to A. So consider query B only if we got the same score in query A.</p>
 <ul>
 <li>这个方法，我们需要知道哪个query更为重要，所有在IR中基本不用</li>
 </ul>
 </li>
-<li><p><strong>Weight sum</strong>: we give the queries certain weight.</p>
+<li>
+<p><strong>Weight sum</strong>: we give the queries certain weight.</p>
 <ul>
-<li><p>E.g, weight(A):0.7 weight(B):0.3</p>
-<p>​    score(D1) = 100 <em> 0.7 + 2 </em>0.3</p>
-<p>​    score(D2) = 1 <em> 0.7 + 20 </em>0.3</p>
+<li>
+<p>E.g, weight(A):0.7 weight(B):0.3</p>
+<p>​	score(D1) = 100 * 0.7 + 2 *0.3</p>
+<p>​	score(D2) = 1 * 0.7 + 20 *0.3</p>
 </li>
 </ul>
 <p><strong>Different about weight sum in ML &amp; IR:</strong></p>
@@ -349,13 +368,15 @@
 </li>
 </ol>
 </blockquote>
-<h1 id="bag-of-words-modelbow"><a href="#Bag-of-words-model（BoW）" class="headerlink" title="Bag of words model（BoW）"></a>Bag of words model（BoW）</h1><ul>
+<h1 id="bag-of-words-modelbow">Bag of words model（BoW）</h1>
+<ul>
 <li>Vector representation the number of occurrences of a term in a document</li>
 </ul>
 <p><img src="image-20181106131327742.png" alt="image-20181106131327742"></p>
 <ul>
-<li><span style="color:red">BoW model contains term frequency(tf), but not order</span><ul>
-<li>E.g., “John is quicker than Mary” and “Mary is quicker than John” have the same vectors </li>
+<li><span style="color:red">BoW model contains term frequency(tf), but not order</span>
+<ul>
+<li>E.g., “John is quicker than Mary” and “Mary is quicker than John” have the same vectors</li>
 </ul>
 </li>
 </ul>
@@ -363,16 +384,20 @@
 <p>Model ——&gt; Representation</p>
 <p>每种模型都取舍，例如BoW就保留了词频信息而没有保留词位置信息。后面还会介绍更多侧重点不同的模型</p>
 </blockquote>
-<h1 id="tf"><a href="#tf" class="headerlink" title="tf"></a>tf</h1><ul>
-<li><p>term frequency (tf): <strong>the number of times that t occurs in d.</strong></p>
-</li>
-<li><p>raw tf</p>
+<h1 id="tf">tf</h1>
 <ul>
-<li>A document with 10 occurrences of the term is more relevant than a document with 1 occurrence of the term. </li>
-<li>But not 10 times more relevant. </li>
+<li>
+<p>term frequency (tf): <strong>the number of times that t occurs in d.</strong></p>
+</li>
+<li>
+<p>raw tf</p>
+<ul>
+<li>A document with 10 occurrences of the term is more relevant than a document with 1 occurrence of the term.</li>
+<li>But not 10 times more relevant.</li>
 </ul>
 </li>
-<li><p>log tf</p>
+<li>
+<p>log tf</p>
 <ul>
 <li>The log frequency weight of term t in d :</li>
 </ul>
@@ -383,12 +408,15 @@
 </li>
 </ul>
 <p><img src="image-20181106135303016.png" alt="image-20181106135303016"></p>
-<h1 id="idf"><a href="#idf" class="headerlink" title="idf"></a>idf</h1><ul>
+<h1 id="idf">idf</h1>
+<ul>
 <li><strong>Rare terms are more informative than frequent terms</strong>, so we want a high weight for rare terms.</li>
 <li>inverse document frequency (idf): a measure of how much information the word provides, i.e., if it’s common or rare across all documents.</li>
-<li>We define idf of t:<ul>
+<li>We define idf of t:
+<ul>
 <li><img src="image-20181106135832617.png" alt="image-20181106135832617"></li>
-<li>with:<ul>
+<li>with:
+<ul>
 <li>dft: the document frequency of t: the number of documents that contain t</li>
 <li>N: total number of documents in the corpus N =|D|</li>
 </ul>
@@ -396,76 +424,94 @@
 </ul>
 </li>
 </ul>
-<h1 id="tf-idf"><a href="#tf-idf" class="headerlink" title="tf-idf"></a>tf-idf</h1><ul>
+<h1 id="tf-idf">tf-idf</h1>
+<ul>
 <li>The tf-idf weight of a term is the <strong>product of its tf weight and its idf weight.</strong></li>
 </ul>
 <p><img src="image-20181106142201238.png" alt="image-20181106142201238"></p>
 <ul>
-<li>Increases with the number of occurrences within a document </li>
+<li>Increases with the number of occurrences within a document</li>
 </ul>
 <ul>
-<li>Increases with the rarity of the term in the collection </li>
+<li>Increases with the rarity of the term in the collection</li>
 <li>Final ranking score:</li>
 </ul>
 <p><img src="image-20181106142405291.png" alt="image-20181106142405291"></p>
-<h2 id="tf-idf-weighting-has-many-variants"><a href="#tf-idf-weighting-has-many-variants" class="headerlink" title="tf-idf weighting has many variants"></a>tf-idf weighting has many variants</h2><p><img src="image-20181106185028036.png" alt="image-20181106185028036"></p>
+<h2 id="tf-idf-weighting-has-many-variants">tf-idf weighting has many variants</h2>
+<p><img src="image-20181106185028036.png" alt="image-20181106185028036"></p>
 <ul>
-<li>SMART Notation: denotes the combination in use in an engine, with the notation ddd.qqq, using the acronyms from the previous table </li>
+<li>SMART Notation: denotes the combination in use in an engine, with the notation ddd.qqq, using the acronyms from the previous table</li>
 </ul>
-<h2 id="lncltc"><a href="#lnc-ltc" class="headerlink" title="lnc.ltc"></a><strong>lnc.ltc</strong></h2><ul>
-<li><p><strong>Inc</strong> =&gt; <strong>documnet</strong> vector, <strong>I</strong> for <strong>l</strong>og tf, <strong>n</strong> for <strong>n</strong>o idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
+<h2 id="lncltc"><strong>lnc.ltc</strong></h2>
+<ul>
+<li>
+<p><strong>Inc</strong> =&gt; <strong>documnet</strong> vector, <strong>I</strong> for <strong>l</strong>og tf, <strong>n</strong> for <strong>n</strong>o idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
 </li>
-<li><p><strong>Itc</strong> =&gt; <strong>query</strong> vector,  <strong>I</strong> for <strong>l</strong>og tf, <strong>t</strong> for idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
+<li>
+<p><strong>Itc</strong> =&gt; <strong>query</strong> vector,  <strong>I</strong> for <strong>l</strong>og tf, <strong>t</strong> for idf and <strong>c</strong> for <strong>c</strong>osine normalization</p>
 </li>
-<li><p>E.g.,</p>
+<li>
+<p>E.g.,</p>
 <p><img src="image-20181109150208118.png" alt="image-20181109150208118"></p>
 <ul>
-<li><p>Query: </p>
-<p>​    N = 1,000,000</p>
+<li>
+<p>Query:</p>
+<p>​	N = 1,000,000</p>
 <p><img src="image-20181106142201238.png" alt="image-20181106142201238"></p>
-<p>​    For term “car”, wt(“car”) = (1+log1)*2 = 2</p>
+<p>​	For term “car”, wt(“car”) = (1+log1)*2 = 2</p>
 <p><img src="image-20181109151932579.png" alt="image-20181109151932579"></p>
 </li>
-<li><p>Document:</p>
+<li>
+<p>Document:</p>
 <p>For term “car”, wt(“car”)=(1+log1) = 1</p>
 <p><img src="image-20181109152210133.png" alt="image-20181109152210133"></p>
 </li>
-<li><p>Score:</p>
+<li>
+<p>Score:</p>
 <p><img src="image-20181106142405291.png" alt="image-20181106142405291"></p>
-<p> = <wq, wd=""> = 0 <em> 0.52 + 0.34  </em> 0 + 0.52 <em> 0.52 + 0.78 </em> 0.68 = 0.8</wq,></p>
+<p>= &lt;Wq, Wd&gt; = 0 * 0.52 + 0.34  * 0 + 0.52 * 0.52 + 0.78 * 0.68 = 0.8</p>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="vector-space-model"><a href="#Vector-Space-Model" class="headerlink" title="Vector Space Model"></a>Vector Space Model</h1><ul>
-<li><p>Binary -&gt; Count -&gt; Weight Matrix (tf-idf)</p>
+<h1 id="vector-space-model">Vector Space Model</h1>
+<ul>
+<li>
+<p>Binary -&gt; Count -&gt; Weight Matrix (tf-idf)</p>
 <p><img src="image-20181106142553307.png" alt="image-20181106142553307"></p>
 <p>Each document is now represented by a real-valued vector of <strong>tf-idf weights</strong> ∈ R^|V|^</p>
 </li>
 </ul>
-<h2 id="documents-as-vectors"><a href="#Documents-as-vectors" class="headerlink" title="Documents as vectors"></a>Documents as vectors</h2><ul>
-<li>|V|-dimensional vector space </li>
-<li>Very high-dimensional: tens of millions of dimensions when you apply this to a web search engine </li>
-<li>very sparse vectors  </li>
+<h2 id="documents-as-vectors">Documents as vectors</h2>
+<ul>
+<li>|V|-dimensional vector space</li>
+<li>Very high-dimensional: tens of millions of dimensions when you apply this to a web search engine</li>
+<li>very sparse vectors</li>
 </ul>
-<h2 id="queries-as-vectors"><a href="#Queries-as-vectors" class="headerlink" title="Queries as vectors"></a>Queries as vectors</h2><ul>
-<li><p>Represente the queries as  vectors in the space, same as the document</p>
+<h2 id="queries-as-vectors">Queries as vectors</h2>
+<ul>
+<li>
+<p>Represente the queries as  vectors in the space, same as the document</p>
 <p>How to  Rank documents according to their proximity to the query in this space?</p>
 </li>
 </ul>
-<h2 id="formalizing-vector-space-proximity"><a href="#Formalizing-vector-space-proximity" class="headerlink" title="Formalizing vector space proximity"></a>Formalizing vector space proximity</h2><ul>
-<li><p>Euclidean distance? —— NOT a good idea, cause it is sensitive to different lengths</p>
+<h2 id="formalizing-vector-space-proximity">Formalizing vector space proximity</h2>
+<ul>
+<li>
+<p>Euclidean distance? —— NOT a good idea, cause it is sensitive to different lengths</p>
 </li>
-<li><p>Angle:</p>
+<li>
+<p>Angle:</p>
 <ul>
 <li>Rank documents in decreasing order of the angle between query and document</li>
-<li>Rank documents in increasing order of <strong>cosine</strong>(query,document) </li>
+<li>Rank documents in increasing order of <strong>cosine</strong>(query,document)</li>
 </ul>
 </li>
-<li><p>A vector can be (length-) normalized by dividing each of its components by its length for this we use the L2 norm: <strong>L2 范数</strong></p>
+<li>
+<p>A vector can be (length-) normalized by dividing each of its components by its length for this we use the L2 norm: <strong>L2 范数</strong></p>
 <p><img src="image-20181106144743684.png" alt="image-20181106144743684"></p>
 <ul>
-<li>Dividing a vector by its L2 norm makes it a unit (length) vector (on surface of unit hypersphere) </li>
+<li>Dividing a vector by its L2 norm makes it a unit (length) vector (on surface of unit hypersphere)</li>
 <li>Long and short documents now have comparable weights 长文档和短文档之间的长度差异就不会影响相关性了</li>
 </ul>
 </li>
@@ -476,63 +522,78 @@
 <li>we only care about angle(cosine score) between d nd q, not size d (length of vector)</li>
 </ul>
 </blockquote>
-<h3 id="cosinequery-document"><a href="#Cosine-query-document" class="headerlink" title="Cosine(query, document)"></a>Cosine(query, document)</h3><p><img src="image-20181106145042867.png" alt="image-20181106145042867"></p>
+<h3 id="cosinequery-document">Cosine(query, document)</h3>
+<p><img src="image-20181106145042867.png" alt="image-20181106145042867"></p>
 <ul>
 <li>qi is the tf-idf weight of term i in the query</li>
 <li>di is the tf-idf weight of term i in the document</li>
 </ul>
-<h3 id="cosine-for-length-normalized-vectors"><a href="#Cosine-for-length-normalized-vectors" class="headerlink" title="Cosine for length-normalized vectors"></a>Cosine for length-normalized vectors</h3><ul>
+<h3 id="cosine-for-length-normalized-vectors">Cosine for length-normalized vectors</h3>
+<ul>
 <li>For length-normalized vectors, cosine similarity is simply the dot product (or scalar product):</li>
 </ul>
 <p><img src="image-20181106145208674.png" alt="image-20181106145208674"></p>
 <p>With q, d length-normalized.</p>
 <p><img src="image-20181106145258682.png" alt="image-20181106145258682"></p>
-<h3 id="computering-cosine-scores"><a href="#Computering-cosine-scores" class="headerlink" title="Computering cosine scores"></a>Computering cosine scores</h3><p><img src="image-20181106145358613.png" alt="image-20181106145358613"></p>
+<h3 id="computering-cosine-scores">Computering cosine scores</h3>
+<p><img src="image-20181106145358613.png" alt="image-20181106145358613"></p>
 <p><img src="image-20181106175518570.png" alt="image-20181106175518570"></p>
-<h3 id="3-algorithms-of-selecting-top-k"><a href="#3-Algorithms-of-selecting-top-K" class="headerlink" title="3 Algorithms of selecting top K"></a>3 Algorithms of selecting top K</h3><ol>
-<li><p><strong>Sort(s)</strong></p>
+<h3 id="3-algorithms-of-selecting-top-k">3 Algorithms of selecting top K</h3>
+<ol>
+<li>
+<p><strong>Sort(s)</strong></p>
 <p>Return s[1:3]</p>
-<p>time complexity: O(nlogn) </p>
+<p>time complexity: O(nlogn)</p>
 </li>
-<li><p><strong>Use Memory</strong>  </p>
+<li>
+<p><strong>Use Memory</strong></p>
 <ul>
-<li><p>类似于inserting sort</p>
+<li>
+<p>类似于inserting sort</p>
 </li>
-<li><p>go throngh each element, and update top k</p>
+<li>
+<p>go throngh each element, and update top k</p>
 </li>
-<li><p>in the worst case similar to queue</p>
+<li>
+<p>in the worst case similar to queue</p>
 <p><img src="image-20181106181458895.png" alt="image-20181106181458895"></p>
 </li>
-<li><p>worst time complexity: <strong>n*O(k)</strong>   with n docs, and k about 1000 for search engines,  so it’s not good enough</p>
+<li>
+<p>worst time complexity: <em><em>n</em>O(k)</em>*   with n docs, and k about 1000 for search engines,  so it’s not good enough</p>
 </li>
 </ul>
 </li>
 </ol>
-<p>   <strong>Optimize</strong>: using Heap (Priority queue)</p>
+<p><strong>Optimize</strong>: using Heap (Priority queue)</p>
 <blockquote>
 <ul>
-<li><p><strong>Priority queue</strong></p>
+<li>
+<p><strong>Priority queue</strong></p>
 <ul>
 <li>similart to a normal queue excpet that <strong>each element has a certain priority.</strong></li>
 </ul>
 </li>
-<li><p><strong>Heap</strong></p>
+<li>
+<p><strong>Heap</strong></p>
 <ul>
-<li>a <strong>heap</strong> is a specialized tree-based data structure that satisfies the <em>heap property:</em> if P is a parent node of C, then the <em>key</em> (the <em>value</em>) of P is either greater than or equal to (in a <em>max heap</em>) or less than or equal to (in a <em>min heap</em>) the key of C. </li>
+<li>a <strong>heap</strong> is a specialized tree-based data structure that satisfies the <em>heap property:</em> if P is a parent node of C, then the <em>key</em> (the <em>value</em>) of P is either greater than or equal to (in a <em>max heap</em>) or less than or equal to (in a <em>min heap</em>) the key of C.</li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181106183225385.png" alt="image-20181106183225385"></p>
 </blockquote>
 <ul>
-<li><p>We use a min-heap to find top k scores. H for heap</p>
+<li>
+<p>We use a min-heap to find top k scores. H for heap</p>
 <ol>
 <li>Generate min-heap for current k scores.</li>
-<li>when a new score(x) comes into heap, using <strong>H.push(x)</strong><ul>
+<li>when a new score(x) comes into heap, using <strong>H.push(x)</strong>
+<ul>
 <li>heap.push time complexiy is  O(logn), for this case is O(logk)</li>
 </ul>
 </li>
-<li>pop the smallest score. using <strong>H.pop()</strong><ul>
+<li>pop the smallest score. using <strong>H.pop()</strong>
+<ul>
 <li>heap.push time complexiy is  also O(logn), for this case is O(log(k+1))</li>
 </ul>
 </li>
@@ -544,16 +605,18 @@
 </ul>
 </li>
 </ul>
-<ol>
+<ol start="3">
 <li><strong>Quick Select</strong></li>
 </ol>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Quickselect" target="_blank" rel="noopener">QuickSelect</a> is similar to QuickSort to find the top-K elements from an array <ul>
+<li><a href="https://en.wikipedia.org/wiki/Quickselect" target="_blank" rel="noopener">QuickSelect</a> is similar to QuickSort to find the top-K elements from an array
+<ul>
 <li>Takes O(n) time</li>
 </ul>
 </li>
-<li>Sorting the top-K items takes O(k*log(k)) time <ul>
-<li>Total time is <strong>O(n + k*log(k))</strong> </li>
+<li>Sorting the top-K items takes O(k*log(k)) time
+<ul>
+<li>Total time is <strong>O(n + k*log(k))</strong></li>
 <li>space complexity is <strong>O(n)</strong></li>
 <li>less time but more space</li>
 </ul>

@@ -230,95 +230,122 @@
 <li>Binary Independence Model</li>
 </ul>
 </blockquote>
-<h1 id="why-probabilities-in-ir"><a href="#Why-probabilities-in-IR" class="headerlink" title="Why probabilities in IR?"></a>Why probabilities in IR?</h1><ul>
-<li><p>In traditional IR systems, matching between each document and query is attempted in a semantically imprecise space of index terms. </p>
+<h1 id="why-probabilities-in-ir">Why probabilities in IR?</h1>
+<ul>
+<li>
+<p>In traditional IR systems, matching between each document and query is attempted in a semantically imprecise space of index terms.</p>
 </li>
-<li><p>Probabilities provide a <strong>principled foundation for uncertain reasoning</strong> </p>
+<li>
+<p>Probabilities provide a <strong>principled foundation for uncertain reasoning</strong></p>
 </li>
-<li><strong>Idea</strong>: Rank by probability of relevance of the document w.r.t. information need<ul>
+<li>
+<p><strong>Idea</strong>: Rank by probability of relevance of the document w.r.t. information need</p>
+<ul>
 <li><strong>P(relevant|document<sub>i</sub>, query)</strong></li>
 </ul>
 </li>
 </ul>
-<h1 id="recall-a-few-probability-basics"><a href="#Recall-a-few-probability-basics" class="headerlink" title="Recall a few probability basics"></a>Recall a few probability basics</h1><p><img src="image-20181110112117234.png" alt="image-20181110112117234"></p>
-<h1 id="probability-ranking-principle"><a href="#Probability-Ranking-Principle" class="headerlink" title="Probability Ranking Principle"></a>Probability Ranking Principle</h1><p><img src="image-20181110112631028.png" alt="image-20181110112631028"></p>
+<h1 id="recall-a-few-probability-basics">Recall a few probability basics</h1>
+<p><img src="image-20181110112117234.png" alt="image-20181110112117234"></p>
+<h1 id="probability-ranking-principle">Probability Ranking Principle</h1>
+<p><img src="image-20181110112631028.png" alt="image-20181110112631028"></p>
 <ul>
-<li>Bayes’ Optimal Decision Rule:  <strong>x is relevant iff p(R|x) &gt; p(NR|x)</strong></li>
-<li><p>PRP in action: Rank all documents by p(R|x)</p>
+<li>
+<p>Bayes’ Optimal Decision Rule:  <strong>x is relevant iff p(R|x) &gt; p(NR|x)</strong></p>
 </li>
-<li><p>Theorem: </p>
+<li>
+<p>PRP in action: Rank all documents by p(R|x)</p>
+</li>
+<li>
+<p>Theorem:</p>
 <ul>
 <li>Using the PRP is optimal, in that it minimizes the loss (Bayes risk) under 1/ 0 loss</li>
-<li>Provable if all probabilities correct, etc.  </li>
+<li>Provable if all probabilities correct, etc.</li>
 </ul>
 </li>
-<li><p><strong>Probability Ranking Principle</strong>: if</p>
+<li>
+<p><strong>Probability Ranking Principle</strong>: if</p>
 <p><img src="image-20181110131556551.png" alt="image-20181110131556551"></p>
 <ul>
-<li>for all d’ not yet retrieved, then d is the next document to be retrieved,  </li>
-<li>d - document, </li>
-<li>C - cost of retrieval of relevant document, </li>
+<li>for all d’ not yet retrieved, then d is the next document to be retrieved,</li>
+<li>d - document,</li>
+<li>C - cost of retrieval of relevant document,</li>
 <li>C’ - cost of retrieval of non-relevant document</li>
 </ul>
 </li>
 </ul>
-<h2 id="questionable-assumptions"><a href="#Questionable-assumptions" class="headerlink" title="Questionable assumptions"></a>Questionable assumptions</h2><ul>
-<li>“Relevance” of each document is independent of relevance of other documents. <ul>
-<li>Really, it’s bad to keep on returning duplicates </li>
-</ul>
-</li>
-<li>Boolean model of relevance </li>
-<li>That one has a single step information need<ul>
-<li>Seeing a range of results might let user refine query </li>
-</ul>
-</li>
-</ul>
-<h1 id="binary-independence-model"><a href="#Binary-Independence-Model" class="headerlink" title="Binary Independence Model"></a>Binary Independence Model</h1><ul>
-<li><p>Traditionally used in conjunction with PRP </p>
-</li>
-<li><p><strong>“Binary”</strong> = Boolean: documents are represented as binary incidence vectors of terms (cf. lecture 1): </p>
+<h2 id="questionable-assumptions">Questionable assumptions</h2>
 <ul>
-<li>x=(x<sub>1</sub>,…,x<sub>n</sub> ) </li>
-<li>xi = 1 iff term i is present in document x. </li>
+<li>“Relevance” of each document is independent of relevance of other documents.
+<ul>
+<li>Really, it’s bad to keep on returning duplicates</li>
 </ul>
 </li>
-<li><p><strong>“Independence”</strong>: terms occur in documents independently </p>
+<li>Boolean model of relevance</li>
+<li>That one has a single step information need
+<ul>
+<li>Seeing a range of results might let user refine query</li>
+</ul>
 </li>
-<li><p>Different documents can be modeled as same vector </p>
+</ul>
+<h1 id="binary-independence-model">Binary Independence Model</h1>
+<ul>
+<li>
+<p>Traditionally used in conjunction with PRP</p>
 </li>
-<li><p>Bernoulli Naive Bayes model (cf. text categorization!) </p>
+<li>
+<p><strong>“Binary”</strong> = Boolean: documents are represented as binary incidence vectors of terms (cf. lecture 1):</p>
 </li>
-<li><p>Under the BIM, we model the probability P(R|d, q) that a document is relevant via the probability in terms of term incidence vectors P(R|x, q). Then, using Bayes rule, we have:</p>
+<li>
+<p>x=(x<sub>1</sub>,…,x<sub>n</sub> )</p>
+</li>
+<li>
+<p>xi = 1 iff term i is present in document x.</p>
+</li>
+<li>
+<p><strong>“Independence”</strong>: terms occur in documents independently</p>
+</li>
+<li>
+<p>Different documents can be modeled as same vector</p>
+</li>
+<li>
+<p>Bernoulli Naive Bayes model (cf. text categorization!)</p>
+</li>
+<li>
+<p>Under the BIM, we model the probability P(R|d, q) that a document is relevant via the probability in terms of term incidence vectors P(R|x, q). Then, using Bayes rule, we have:</p>
 <p><img src="image-20181110134352880.png" alt="image-20181110134352880"></p>
 <ul>
-<li>Here, P(x|R = 1,q) and P(x|R = 0, q) are the probability that if a relevant or nonrelevant, respectively, document is retrieved, then that document’s representation is x. </li>
+<li>Here, P(x|R = 1,q) and P(x|R = 0, q) are the probability that if a relevant or nonrelevant, respectively, document is retrieved, then that document’s representation is x.</li>
 </ul>
 </li>
 </ul>
-<h2 id="deriving-a-ranking-function-for-query-terms"><a href="#Deriving-a-ranking-function-for-query-terms" class="headerlink" title="Deriving a ranking function for query terms"></a>Deriving a ranking function for query terms</h2><ul>
-<li><p>Queries: binary term incidence vectors </p>
-</li>
-<li><p>Given query q, </p>
+<h2 id="deriving-a-ranking-function-for-query-terms">Deriving a ranking function for query terms</h2>
 <ul>
-<li>for each document d need to compute <strong>p(R|q,d)</strong>. </li>
-<li>replace with computing <strong>p(R|q,x)</strong> where x is binary term incidence vector representing d <strong>Interested only in ranking</strong> </li>
+<li>
+<p>Queries: binary term incidence vectors</p>
+</li>
+<li>
+<p>Given query q,</p>
+<ul>
+<li>for each document d need to compute <strong>p(R|q,d)</strong>.</li>
+<li>replace with computing <strong>p(R|q,x)</strong> where x is binary term incidence vector representing d <strong>Interested only in ranking</strong></li>
 </ul>
 </li>
 </ul>
 <p><img src="image-20181110150644830.png" alt="image-20181110150644830"></p>
 <p><img src="image-20181110151101540.png" alt="image-20181110151101540"></p>
 <ul>
-<li><p>Retrieval Status Value:</p>
+<li>
+<p>Retrieval Status Value:</p>
 <p><img src="image-20181110151253328.png" alt="image-20181110151253328"></p>
 </li>
 </ul>
 <p><img src="image-20181110171427619.png" alt="image-20181110171427619"></p>
-<h2 id="probability-estimates-in-theory"><a href="#Probability-estimates-in-theory" class="headerlink" title="Probability estimates in theory"></a>Probability estimates in theory</h2><ul>
-<li>For each term i look at this table of document counts:<ul>
+<h2 id="probability-estimates-in-theory">Probability estimates in theory</h2>
+<ul>
+<li>For each term i look at this table of document counts:</li>
 <li>n = df<sub>t</sub> : number of documents which contains t</li>
 <li>log (1– ri)/ri = log (N– n)/n ≈ log N/n = <strong>IDF</strong>!</li>
-</ul>
-</li>
 </ul>
 <p><img src="image-20181110151654123.png" alt="image-20181110151654123"></p>
 <p><img src="image-20181110151751264.png" alt="image-20181110151751264"></p>
@@ -326,7 +353,8 @@
 <li>This estimate could be 0, so <strong>add 1⁄2 Smoothing</strong></li>
 </ul>
 <p><img src="image-20181110151907220.png" alt="image-20181110151907220"></p>
-<h2 id="okapi-bm25"><a href="#Okapi-BM25" class="headerlink" title="Okapi BM25"></a>Okapi BM25</h2><ul>
+<h2 id="okapi-bm25">Okapi BM25</h2>
+<ul>
 <li>Heuristically extend the BIR to include information of term frequencies, document length, etc.</li>
 </ul>
 <p><img src="image-20181110155205451.png" alt="image-20181110155205451"></p>

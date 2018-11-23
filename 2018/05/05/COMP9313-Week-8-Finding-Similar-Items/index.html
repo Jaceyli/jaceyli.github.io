@@ -229,46 +229,63 @@
 <li>Locality-Sensitive Hashing(LSH)</li>
 </ul>
 </blockquote>
-<h1 id="what-is-finding-similar-items"><a href="#What-is-finding-similar-items" class="headerlink" title="What is finding similar items?"></a>What is finding similar items?</h1><ul>
-<li><p>Problems of Finding Similar Items</p>
+<h1 id="what-is-finding-similar-items">What is finding similar items?</h1>
 <ul>
-<li>Pages with similar words<ul>
+<li>
+<p>Problems of Finding Similar Items</p>
+<ul>
+<li>Pages with similar words
+<ul>
 <li>For duplicate detection, classification by topic</li>
 </ul>
 </li>
-<li>Customers who purchased similar products<ul>
+<li>Customers who purchased similar products
+<ul>
 <li>Products with similar customer sets</li>
 </ul>
 </li>
-<li>Images with similar features<ul>
+<li>Images with similar features
+<ul>
 <li>Google image search</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Problem we’re going to talk about…</p>
+<li>
+<p>Problem we’re going to talk about…</p>
 <ul>
-<li>Given: High dimensional data point x<sub>1</sub>, x<sub>2</sub>,…</li>
-<li><p>And some distance function d(x<sub>1</sub>, x<sub>2</sub>)</p>
+<li>
+<p>Given: High dimensional data point x<sub>1</sub>, x<sub>2</sub>,…</p>
+</li>
+<li>
+<p>And some distance function d(x<sub>1</sub>, x<sub>2</sub>)</p>
 <ul>
 <li>which quantities the “distance” between x<sub>1</sub> and x<sub>2</sub></li>
 </ul>
 </li>
-<li><p>Goal: Find all pairs of data point(x<sub>i</sub>, x<sub>j</sub>) that are within some distance threshold d(x<sub>i</sub>, x<sub>2=j</sub>) ≤ s</p>
+<li>
+<p>Goal: Find all pairs of data point(x<sub>i</sub>, x<sub>j</sub>) that are within some distance threshold d(x<sub>i</sub>, x<sub>2=j</sub>) ≤ s</p>
 </li>
-<li>Note: Naïve solution would take O(N<sup>2</sup>)</li>
-<li><strong>We are going to optimise it to O(N)</strong></li>
+<li>
+<p>Note: Naïve solution would take O(N<sup>2</sup>)</p>
+</li>
+<li>
+<p><strong>We are going to optimise it to O(N)</strong></p>
+</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>Distance Measures<ul>
-<li><strong>Jaccard similarity</strong>: The Jaccard similarity of two sets is the size of their intersection divided by the size of their union<br><strong>sim(C1, C2) = |C1 ∩ C2|/|C1 ∪ C2|</strong></li>
+<li>Distance Measures
+<ul>
+<li><strong>Jaccard similarity</strong>: The Jaccard similarity of two sets is the size of their intersection divided by the size of their union<br>
+<strong>sim(C1, C2) = |C1 ∩ C2|/|C1 ∪ C2|</strong></li>
 <li>Jaccard distance: d(C1,C2) = 1 - sim(C1, C2)</li>
 </ul>
 </li>
 </ul>
-<h1 id="how-to-find-similar-items"><a href="#How-to-find-similar-items" class="headerlink" title="How to find similar items?"></a>How to find similar items?</h1><p>Goal: Given a large number (N in the millions or billions) of documents, find “near duplicate” pairs</p>
+<h1 id="how-to-find-similar-items">How to find similar items?</h1>
+<p>Goal: Given a large number (N in the millions or billions) of documents, find “near duplicate” pairs</p>
 <p>Solution: 3 essential steps for similar docs:</p>
 <ul>
 <li><strong>Shingling</strong>: Convert documents to sets</li>
@@ -276,52 +293,68 @@
 <li><strong>Locality-Sensitive Hashing</strong>: Focus on pairs of signatures likely to be from similar documents. <strong>Candidate pairs!</strong></li>
 </ul>
 <p><img src="1.png" alt=""></p>
-<h2 id="shingling-convert-documents-to-sets"><a href="#Shingling-Convert-documents-to-sets" class="headerlink" title="Shingling: Convert documents to sets"></a>Shingling: Convert documents to sets</h2><ul>
-<li><p><strong>k-shingle</strong>(or k-gram):<br>A k-shingle for a document is <strong>a sequence of k tokens</strong> that appears in the doc</p>
+<h2 id="shingling-convert-documents-to-sets">Shingling: Convert documents to sets</h2>
+<ul>
+<li>
+<p><strong>k-shingle</strong>(or k-gram):<br>
+A k-shingle for a document is <strong>a sequence of k tokens</strong> that appears in the doc</p>
 <ul>
 <li>Tokens can be characters, words or something else, depending on the application</li>
 <li>Assume tokens = characters for example</li>
-<li>Example: k = 2, doc D1 = abcab<br>  <strong>set of 2-shingles</strong>:S(D1)={ab,ba,ca}  <strong>remove duplicate</strong><br>  （<strong>shingles as a bag</strong> is another option: do not remove duplicate，contain frequency information）</li>
+<li>Example: k = 2, doc D1 = abcab<br>
+<strong>set of 2-shingles</strong>:S(D1)={ab,ba,ca}  <strong>remove duplicate</strong><br>
+（<strong>shingles as a bag</strong> is another option: do not remove duplicate，contain frequency information）</li>
 </ul>
 </li>
-<li><p><strong>Shingles and Similarity</strong></p>
+<li>
+<p><strong>Shingles and Similarity</strong></p>
 <ul>
-<li>Documents that are intuitively(凭直觉地) similar <strong>have many shingles in common</strong>. </li>
+<li>Documents that are intuitively(凭直觉地) similar <strong>have many shingles in common</strong>.</li>
 <li>Changing a word only affects k-shingles within distance k-1 from the word.</li>
 <li>Re-ordering paragraphs only affects the 2k shingles that cross paragraph boundaries.</li>
-<li>Example: k = 3<br> “The dog <strong>which</strong> chased the cat” and “The dog <strong>that</strong> chased the cat”<br> Only 3-shingles replaced are g<em>w, _wh, whi, hic, ich, ch</em> and h_c<br> (两句话很像，shingles相似度也很高)</li>
+<li>Example: k = 3<br>
+“The dog <strong>which</strong> chased the cat” and &quot;The dog <strong>that</strong> chased the cat&quot;<br>
+Only 3-shingles replaced are g_w, _wh, whi, hic, ich, ch_ and h_c<br>
+(两句话很像，shingles相似度也很高)</li>
 </ul>
 </li>
-<li><p><strong>Compressing Shingles</strong></p>
+<li>
+<p><strong>Compressing Shingles</strong></p>
 <ul>
 <li>To compress long shingles, we can hash them to 4 bytes.</li>
-<li><strong>Represent a document by the set of hash values of its k-shingles.</strong><ul>
+<li><strong>Represent a document by the set of hash values of its k-shingles.</strong>
+<ul>
 <li>Two documents could (rarely) appear to have shingles in common, when in fact only the hash-values were shared</li>
 </ul>
 </li>
-<li>Example: k=2; document D1= abcab<br>Set of 2-shingles: S(D1) = {ab, bc, ca}<br>Hash the singles: h(D1) = {1, 5, 7} </li>
+<li>Example: k=2; document D1= abcab<br>
+Set of 2-shingles: S(D1) = {ab, bc, ca}<br>
+Hash the singles: h(D1) = {1, 5, 7}</li>
 </ul>
 </li>
-<li><p><strong>Similarity Metric for Shingles</strong></p>
+<li>
+<p><strong>Similarity Metric for Shingles</strong></p>
 <ul>
 <li>k-shingles C1 = S(D1)</li>
-<li>Equivalently, each document is a 0/1 vector in space of k-shingles <ul>
-<li>each unique shingle is a dimension</li>
-<li>vectors are very sparse<ul>
-<li>A natural similarity measure is the Jaccard similarity    </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>About k</strong></p>
+<li>Equivalently, each document is a 0/1 vector in space of k-shingles
 <ul>
-<li>If k is too small, then we would expect most sequences of k characters to appear in most documents<ul>
-<li>when k = 1(26个字母), almost all Web pages will have high similarity. </li>
+<li>each unique shingle is a dimension</li>
+<li>vectors are very sparse</li>
 </ul>
 </li>
-<li>So, pick k large enough, or most documents will have most shingles.<ul>
+<li>A natural similarity measure is the Jaccard similarity</li>
+</ul>
+</li>
+<li>
+<p><strong>About k</strong></p>
+<ul>
+<li>If k is too small, then we would expect most sequences of k characters to appear in most documents
+<ul>
+<li>when k = 1(26个字母), almost all Web pages will have high similarity.</li>
+</ul>
+</li>
+<li>So, pick k large enough, or most documents will have most shingles.
+<ul>
 <li>k = 5 is OK for short documents</li>
 <li>k =10 is better for long documents</li>
 </ul>
@@ -329,38 +362,58 @@
 </ul>
 </li>
 </ul>
-<h2 id="min-hashing"><a href="#Min-Hashing" class="headerlink" title="Min-Hashing"></a>Min-Hashing</h2><p><strong>Min-Hasing: Convert large sets to short signatures, while preserving similarity</strong></p>
+<h2 id="min-hashing">Min-Hashing</h2>
+<p><strong>Min-Hasing: Convert large sets to short signatures, while preserving similarity</strong></p>
 <ul>
 <li>Suppose we need to find near-duplicate documents among N = 1 million documents</li>
 <li>Naïvely, we would have to compute pairwise Jaccard similarities for every pair of docs, it still take a lot of time.</li>
 </ul>
 <p>So we need next step: min-hashing.</p>
-<h3 id="convert-to-boolean-matrices"><a href="#Convert-to-Boolean-Matrices" class="headerlink" title="Convert to Boolean Matrices"></a>Convert to Boolean Matrices</h3><ul>
-<li>Encoding Sets as Bit Vectors<ul>
+<h3 id="convert-to-boolean-matrices">Convert to Boolean Matrices</h3>
+<ul>
+<li>Encoding Sets as Bit Vectors
+<ul>
 <li>Many similarity problems can be formalized as <strong>finding subsets that have significant intersection</strong></li>
 <li>Encode sets using 0/1 (bit, boolean) vetors</li>
 <li><strong>set intersection</strong> -&gt; <strong>bitwise AND</strong>, and <strong>set union</strong> -&gt; <strong>bitwise OR</strong></li>
-<li>Example: C1 = 10111; C2 = 10011<br>  Size of intersection = 3; size of union = 4,<br>  Jaccard similarity = 3 / 4, Jaccard Distance = 1/ 4</li>
+<li>Example: C1 = 10111; C2 = 10011<br>
+Size of intersection = 3; size of union = 4,<br>
+Jaccard similarity = 3 / 4, Jaccard Distance = 1/ 4</li>
 </ul>
 </li>
-<li>Sets to Boolean Matrices<ul>
+<li>Sets to Boolean Matrices
+<ul>
 <li>Rows = elements(shingles)</li>
-<li>Columns = sets(documents) </li>
-<li>Example:S1 ={a,d}, S2 ={c}, S3 ={b,d,e}, S4 ={a,c,d}<br>sim(S1, S3) = 1 / 4<br><img src="2.png" alt=""></li>
+<li>Columns = sets(documents)</li>
+<li>Example:S1 ={a,d}, S2 ={c}, S3 ={b,d,e}, S4 ={a,c,d}<br>
+sim(S1, S3) = 1 / 4<br>
+<img src="2.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h3 id="min-hash-signatures"><a href="#Min-Hash-Signatures" class="headerlink" title="Min-Hash Signatures"></a>Min-Hash Signatures</h3><p>Goal: Finding Similar Columns<br>Naïve approach: compare all pairs take too much time.<br>Solution: Hashing Columns(Signatures)</p>
-<p>We try to find a hash function h(*) s.t.<br>if sim(C1,C2) is high, then with high prob. h(C1) = h(C2)<br>if sim(C1,C2) is LOW, then with high prob. h(C1) ≠ h(C2)</p>
+<h3 id="min-hash-signatures">Min-Hash Signatures</h3>
+<p>Goal: Finding Similar Columns<br>
+Naïve approach: compare all pairs take too much time.<br>
+Solution: Hashing Columns(Signatures)</p>
+<p>We try to find a hash function h(*) s.t.<br>
+if sim(C1,C2) is high, then with high prob. h(C1) = h(C2)<br>
+if sim(C1,C2) is LOW, then with high prob. h(C1) ≠ h(C2)</p>
 <p>There is a suitable hash function for Jaccard similarity: <strong>Min-Hashing</strong></p>
 <ul>
 <li>Imagine the rows of the boolean matrix permuted under <strong>random permutation</strong> π</li>
 <li>Define a <strong>“hash” function h<sub>π</sub>( C )</strong> =  the index of the <strong>first</strong> (in the permuted order π) row in which column C has value 1: <strong>h<sub>π</sub>( C )= min<sub>π</sub> π( C )</strong></li>
 </ul>
-<p>Example:<br>Signature matrix is the element of the permutation(left one) is the first to map to a 1<br>比如:先看红色的permutation从1-7，1是倒数第三行，对应S1是0，所以继续看2，2是第一行，对应S1是1，所以2就是第一个map to 1的值，填到signature S1第一个位置。以此类推。<br><img src="3.png" alt=""></p>
+<p>Example:<br>
+Signature matrix is the element of the permutation(left one) is the first to map to a 1<br>
+比如:先看红色的permutation从1-7，1是倒数第三行，对应S1是0，所以继续看2，2是第一行，对应S1是1，所以2就是第一个map to 1的值，填到signature S1第一个位置。以此类推。<br>
+<img src="3.png" alt=""></p>
 <ul>
-<li>Pr[min(π(C1)) = min(π(C2))] = sim(C1, C2)<br><strong>Similarity of two columns has the hash value is exactly to the Jaccard similarity.</strong><ul>
-<li>Type X rows have 1 in both columns,<br>Type Y rows have 1 in one of the columns and 0 in the other,<br>Type Z rows have 0 in both columns.</li>
+<li>Pr[min(π(C1)) = min(π(C2))] = sim(C1, C2)<br>
+<strong>Similarity of two columns has the hash value is exactly to the Jaccard similarity.</strong>
+<ul>
+<li>Type X rows have 1 in both columns,<br>
+Type Y rows have 1 in one of the columns and 0 in the other,<br>
+Type Z rows have 0 in both columns.</li>
 <li>Since the matrix is sparse, most rows are of type Z.</li>
 <li>The ratio of the numbers of type X and type Y rows    determine both SIM(C1, C2) and the probability that mh(C1) = mh(C2).</li>
 <li>Let there be x rows of type X and y rows of type Y .</li>
@@ -370,64 +423,85 @@
 </li>
 </ul>
 <ul>
-<li><p>sig( C )[i] = according to the i-th permutation, the index of the first row that has a 1 in column C<br><strong>sig( C )[i] = min (π<sub>i</sub>( C ))</strong></p>
+<li>
+<p>sig( C )[i] = according to the i-th permutation, the index of the first row that has a 1 in column C<br>
+<strong>sig( C )[i] = min (π<sub>i</sub>( C ))</strong></p>
 <ul>
 <li>Note: The sketch (signature) of document C is small!</li>
 </ul>
 </li>
-<li><p>Row hashing</p>
+<li>
+<p>Row hashing</p>
 <ul>
 <li>Pick K = 100 hash functions ki</li>
 <li>Ordering under ki gives a random row permutation!</li>
-<li>h<sub>a,b</sub>(x)=((a·x+b) mod p) mod N<br>where: a,b: random integers, p: prime number (p &gt; N)</li>
+<li>h<sub>a,b</sub>(x)=((a·x+b) mod p) mod N<br>
+where: a,b: random integers, p: prime number (p &gt; N)</li>
 </ul>
 </li>
-<li><strong>One-pass implementation</strong><ul>
+<li>
+<p><strong>One-pass implementation</strong></p>
+<ul>
 <li>For each column C and hash-func. ki keep a “slot” for the min-hash value</li>
 <li>Initialize all sig( C )[i] = ∞</li>
-<li>Scan rows looking for 1s<ul>
-<li>Suppose row j has 1 in column C  <ul>
+<li>Scan rows looking for 1s
+<ul>
+<li>Suppose row j has 1 in column C</li>
 <li>Then for each ki :  If ki( j ) &lt; sig( C )[i], then sig( C )[i] &lt;- ki( j )</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p>Example:<br> <img src="4.png" alt=""></p>
+<p>Example:<br>
+<img src="4.png" alt=""></p>
 <p>We can estimate the Jaccard similarities of the underlying sets from this signature matrix.</p>
 <ul>
 <li>Signature matrix: SIM(S1, S4) = 1.0</li>
 <li>Jaccard Similarity: SIM(S1, S4) = 2/3</li>
 </ul>
-<h2 id="lsh"><a href="#LSH" class="headerlink" title="LSH"></a>LSH</h2><p><strong>Focus on pairs of signatures likely to be from similar documents</strong></p>
+<h2 id="lsh">LSH</h2>
+<p><strong>Focus on pairs of signatures likely to be from similar documents</strong></p>
 <ul>
-<li>Goal: <strong>Find documents with Jaccard similarity at least s</strong> (for some similarity threshold, e.g., s=0.8)</li>
-<li><p>LSH:<br><strong>General idea</strong>: Use a function f(x,y) that tells whether x and y is a <strong>candidate pair</strong>: a pair of elements whose similarity must be evaluated</p>
+<li>
+<p>Goal: <strong>Find documents with Jaccard similarity at least s</strong> (for some similarity threshold, e.g., s=0.8)</p>
 </li>
-<li><p>For Min-Hash matrices:</p>
+<li>
+<p>LSH:<br>
+<strong>General idea</strong>: Use a function f(x,y) that tells whether x and y is a <strong>candidate pair</strong>: a pair of elements whose similarity must be evaluated</p>
+</li>
+<li>
+<p>For Min-Hash matrices:</p>
 <ul>
 <li>Hash columns of <strong>signature matrix M</strong> to many buckets</li>
 <li>Each pair of documents that hashes into the same bucket is a <strong>candidate pair</strong></li>
 </ul>
 </li>
-<li><p>Pick a similarity threshold s (0 &lt; s &lt; 1)</p>
+<li>
+<p>Pick a similarity threshold s (0 &lt; s &lt; 1)</p>
 </li>
-<li><p>Columns x and y of M are a <strong>candidate pair</strong> if their signatures agree on <strong>at least fraction s of their rows:<br>M (i, x) = M (i, y) for at least frac. s values of i</strong></p>
+<li>
+<p>Columns x and y of M are a <strong>candidate pair</strong> if their signatures agree on <strong>at least fraction s of their rows:<br>
+M (i, x) = M (i, y) for at least frac. s values of i</strong></p>
 <ul>
 <li>We expect documents x and y to have the same (Jaccard) similarity as their signatures</li>
 </ul>
 </li>
-<li><p><strong>Big idea: Hash columns of signature matrix M several times</strong></p>
+<li>
+<p><strong>Big idea: Hash columns of signature matrix M several times</strong></p>
 </li>
-<li>Arrange that (only) <strong>similar columns</strong> are likely to <strong>hash to the same bucket</strong>, with high probability</li>
-<li>Candidate pairs are those that hash to the same bucket</li>
+<li>
+<p>Arrange that (only) <strong>similar columns</strong> are likely to <strong>hash to the same bucket</strong>, with high probability</p>
+</li>
+<li>
+<p>Candidate pairs are those that hash to the same bucket</p>
+</li>
 </ul>
 <p><img src="5.png" alt=""></p>
 <ul>
 <li>Divide matrix M into b bands of r rows</li>
-<li>For each band, hash its portion of each column to a hash table with k buckets<ul>
+<li>For each band, hash its portion of each column to a hash table with k buckets
+<ul>
 <li>Make k as large as possible</li>
 </ul>
 </li>
@@ -436,7 +510,8 @@
 </ul>
 <p><img src="6.png" alt=""></p>
 <ul>
-<li>Simplifying Assumption<ul>
+<li>Simplifying Assumption
+<ul>
 <li>There are enough buckets that columns are unlikely to hash to the same bucket unless they are identical in a particular band</li>
 <li>Hereafter, we assume that “same bucket” means “identical in that band”</li>
 <li>Assumption needed only to simplify analysis, not for correctness of algorithm</li>
@@ -457,19 +532,27 @@
 <li>Assume: sim(C1, C2) = 0.8</li>
 <li>Since sim(C1, C2) ≥ s, we want C1, C2 to be a <strong>candidate pair</strong>: We want them to hash to at least 1 common bucket (at least one band is identical)</li>
 <li>Probability C1, C2 identical in <strong>one particular band</strong>: (0.8)<sup>5</sup> = 0.328</li>
-<li>Probability C1, C2 are <strong>not similar</strong> in all of the 20 bands: (1-0.328)<sup>20</sup> =0.00035<ul>
+<li>Probability C1, C2 are <strong>not similar</strong> in all of the 20 bands: (1-0.328)<sup>20</sup> =0.00035
+<ul>
 <li>i.e., about 1/3000th of the 80%-similar column pairs are false negatives</li>
 <li>We would find <strong>99.965% pairs of truly similar documents</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="analysis-of-lsh"><a href="#Analysis-of-LSH" class="headerlink" title="Analysis of LSH"></a>Analysis of LSH</h2><ul>
-<li>What we want <img src="7.png" alt=""></li>
-<li>What 1 Band of 1 Row Gives You<img src="8.png" alt=""></li>
-<li><p>What b Bands of r Rows Gives You<img src="9.png" alt=""></p>
+<h2 id="analysis-of-lsh">Analysis of LSH</h2>
+<ul>
+<li>
+<p>What we want <img src="7.png" alt=""></p>
+</li>
+<li>
+<p>What 1 Band of 1 Row Gives You<img src="8.png" alt=""></p>
+</li>
+<li>
+<p>What b Bands of r Rows Gives You<img src="9.png" alt=""></p>
 <ul>
 <li>The probability that the minhash signatures for the documents agree in any one particular row of the signature matrix is t (sim(C1, C2) )</li>
-<li>Pick any band (r rows)<ul>
+<li>Pick any band (r rows)
+<ul>
 <li>Prob. that all rows in band equal = t<sup>r</sup></li>
 <li>Prob. that some row in band unequal = 1 - t<sup>r</sup></li>
 </ul>
@@ -479,36 +562,45 @@
 </ul>
 </li>
 </ul>
-<h2 id="distance-measures"><a href="#Distance-Measures" class="headerlink" title="Distance Measures"></a>Distance Measures</h2><p>Generalized LSH is based on some kind of “distance” between points.<br>d is a distance measure if it is a function from pairs of points to real numbers such that:</p>
+<h2 id="distance-measures">Distance Measures</h2>
+<p>Generalized LSH is based on some kind of “distance” between points.<br>
+d is a distance measure if it is a function from pairs of points to real numbers such that:</p>
 <ol>
 <li>d(x,y) &gt; 0.</li>
 <li>d(x,y) = 0 iff x = y.</li>
 <li>d(x,y) = d(y,x).</li>
 <li>d(x,y) &lt; d(x,z) + d(z,y) (triangle inequality).</li>
 </ol>
-<h3 id="some-euclidean欧几里得-distances"><a href="#Some-Euclidean-欧几里得-Distances" class="headerlink" title="Some Euclidean(欧几里得) Distances"></a>Some Euclidean(欧几里得) Distances</h3><ul>
-<li><p><strong>L1 norm: sum of the differences in each dimension.</strong></p>
+<h3 id="some-euclidean欧几里得-distances">Some Euclidean(欧几里得) Distances</h3>
+<ul>
+<li>
+<p><strong>L1 norm: sum of the differences in each dimension.</strong></p>
 <ul>
 <li><strong>Manhattan(曼哈顿) distance</strong> = distance if you had to travel along coordinates only.</li>
 </ul>
 </li>
-<li><p><strong>L2 norm: d(x,y) = square root of the sum of the squares of the differences between x and y in each dimension.</strong></p>
+<li>
+<p><strong>L2 norm: d(x,y) = square root of the sum of the squares of the differences between x and y in each dimension.</strong></p>
 <ul>
 <li>The most common notion of “distance.”</li>
 </ul>
 </li>
 </ul>
 <p><img src="10.png" alt=""></p>
-<h3 id="some-non-euclidean-distances"><a href="#Some-Non-Euclidean-Distances" class="headerlink" title="Some Non-Euclidean Distances"></a>Some Non-Euclidean Distances</h3><ul>
+<h3 id="some-non-euclidean-distances">Some Non-Euclidean Distances</h3>
+<ul>
 <li><strong>Jaccard distance</strong> for sets = 1 - Jaccard Similarity</li>
 <li><strong>Cosine distance</strong> for vectors = angle between the vectors<img src="11.png" alt=""></li>
-<li><strong>Edit distance</strong> for strings = number of inserts and deletes to change one string into another<ul>
+<li><strong>Edit distance</strong> for strings = number of inserts and deletes to change one string into another
+<ul>
 <li>or equivalent definition: d(x,y) = |x| + |y| - 2|LCS(x,y)|.</li>
-<li>LCS = longest common subsequence = any longest string<br>obtained both by deleting from x and deleting from y.</li>
+<li>LCS = longest common subsequence = any longest string<br>
+obtained both by deleting from x and deleting from y.</li>
 </ul>
 </li>
 </ul>
-<p>Example:<br>x=abcde; y=bcduve.</p>
+<p>Example:<br>
+x=abcde; y=bcduve.</p>
 <ul>
 <li>Turn x into y by deleting a, then inserting u and v after d. Edit distance = 3.</li>
 <li>Or, computing edit distance through the LCS, note that LCS(x,y) = bcde.</li>

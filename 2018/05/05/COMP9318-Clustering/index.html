@@ -225,14 +225,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p><style><br>img{<br>max-width:80%!important<br>}
-</style></p>
+                <style>
+img{
+max-width:80%!important 
+}
+</style>
 <blockquote>
 <p>Abstract:</p>
 <ul>
 <li>What is Cluster Analysis?</li>
 <li>Types of Data in Cluster Analysis</li>
-<li>A Categorization of Major Clustering Methods<ul>
+<li>A Categorization of Major Clustering Methods
+<ul>
 <li>Partitioning MethodsSpectral clustering</li>
 <li>Hierarchical Methods</li>
 <li>Spectral clustering</li>
@@ -240,42 +244,56 @@
 </li>
 </ul>
 </blockquote>
-<h1 id="what-is-cluster-analysis"><a href="#What-is-Cluster-Analysis" class="headerlink" title="What is Cluster Analysis?"></a>What is Cluster Analysis?</h1><hr>
+<h1 id="what-is-cluster-analysis">What is Cluster Analysis?</h1>
+<hr>
 <ul>
-<li>Cluster: a collection of data objects<ul>
-<li>Similar to one another within the same cluster </li>
+<li>
+<p>Cluster: a collection of data objects</p>
+<ul>
+<li>Similar to one another within the same cluster</li>
 <li>Dissimilar to the objects in other clusters</li>
 </ul>
 </li>
-<li>Cluster analysis<ul>
+<li>
+<p>Cluster analysis</p>
+<ul>
 <li>Grouping a set of data objects into clusters</li>
 </ul>
 </li>
-<li><p>Clustering belongs to <strong>unsupervised classification</strong>: no predefined classes</p>
+<li>
+<p>Clustering belongs to <strong>unsupervised classification</strong>: no predefined classes</p>
 </li>
-<li><p>Typical applications</p>
+<li>
+<p>Typical applications</p>
 <ul>
-<li>As a <strong>stand-alone tool</strong> to get insight into data<br>distribution</li>
+<li>As a <strong>stand-alone tool</strong> to get insight into data<br>
+distribution</li>
 <li>As a <strong>preprocessing step</strong> for other algorithms. E.g., K-means algorithm is widely used for preprocessing</li>
 </ul>
 </li>
 </ul>
-<h2 id="general-applications-of-clustering"><a href="#General-Applications-of-Clustering" class="headerlink" title="General Applications of Clustering:"></a>General Applications of Clustering:</h2><ul>
-<li>Pattern Recognition n Spatial Data Analysis<ul>
+<h2 id="general-applications-of-clustering">General Applications of Clustering:</h2>
+<ul>
+<li>Pattern Recognition n Spatial Data Analysis
+<ul>
 <li>create thematic maps in GIS by clustering feature spaces</li>
 <li>detect spatial clusters and explain them in spatial data mining</li>
 </ul>
 </li>
 <li>Image Processing</li>
-<li>Economic Science (especially market research) </li>
-<li>WWW<ul>
+<li>Economic Science (especially market research)</li>
+<li>WWW
+<ul>
 <li>Document classification</li>
-<li>Cluster Weblog data to discover groups of similar<br>access patterns</li>
+<li>Cluster Weblog data to discover groups of similar<br>
+access patterns</li>
 </ul>
 </li>
 </ul>
-<h2 id="requirements-of-clustering-in-data-mining"><a href="#Requirements-of-Clustering-in-Data-Mining" class="headerlink" title="Requirements of Clustering in Data Mining"></a>Requirements of Clustering in Data Mining</h2><ul>
-<li><strong>Scalability</strong><br>对于大数据来说这非常重要，例如，k-means虽然有很多缺点，但是它很常用就是因为它快，并且running time可控，随时停下都会有结果。</li>
+<h2 id="requirements-of-clustering-in-data-mining">Requirements of Clustering in Data Mining</h2>
+<ul>
+<li><strong>Scalability</strong><br>
+对于大数据来说这非常重要，例如，k-means虽然有很多缺点，但是它很常用就是因为它快，并且running time可控，随时停下都会有结果。</li>
 <li>Ability to deal with different types of attributes</li>
 <li>Discovery of clusters with arbitrary shape</li>
 <li>Minimal requirements for domain knowledge to determine input parameters</li>
@@ -284,26 +302,40 @@
 <li>High dimensionality</li>
 <li>Incorporation of user-specified constraints n Interpretability and usability</li>
 </ul>
-<h1 id="preliminaries"><a href="#Preliminaries" class="headerlink" title="Preliminaries"></a>Preliminaries</h1><hr>
-<h2 id="typical-inputs"><a href="#Typical-Inputs" class="headerlink" title="Typical Inputs"></a>Typical Inputs</h2><ul>
-<li>Data matrix: N objects, each represented by a m- dimensional feature vector<br><img src="1.png" alt=""></li>
-<li>Dissimilarity(针对于distance) matrix or similarity matrix<ul>
+<h1 id="preliminaries">Preliminaries</h1>
+<hr>
+<h2 id="typical-inputs">Typical Inputs</h2>
+<ul>
+<li>Data matrix: N objects, each represented by a m- dimensional feature vector<br>
+<img src="1.png" alt=""></li>
+<li>Dissimilarity(针对于distance) matrix or similarity matrix
+<ul>
 <li>A square matrix giving distances between all pairs of objects.</li>
-<li>If similarity functions are used -&gt; similarity matrix<br><img src="2.png" alt=""></li>
+<li>If similarity functions are used -&gt; similarity matrix<br>
+<img src="2.png" alt=""></li>
 </ul>
 </li>
 </ul>
-<h2 id="types-of-data"><a href="#Types-of-data" class="headerlink" title="Types of data"></a>Types of data</h2><h3 id="interval-valued-variables"><a href="#Interval-valued-variables" class="headerlink" title="Interval-valued variables"></a>Interval-valued variables</h3><ul>
-<li><p>Standardize data<br><img src="3.png" alt=""></p>
+<h2 id="types-of-data">Types of data</h2>
+<h3 id="interval-valued-variables">Interval-valued variables</h3>
+<ul>
+<li>
+<p>Standardize data<br>
+<img src="3.png" alt=""></p>
 </li>
-<li><p>Using mean absolute deviation is more <strong>robust</strong> than using standard deviation</p>
+<li>
+<p>Using mean absolute deviation is more <strong>robust</strong> than using standard deviation</p>
 </li>
-<li><p>Similarity and Dissimilarity Between Objects:</p>
+<li>
+<p>Similarity and Dissimilarity Between Objects:</p>
 <ul>
 <li>Distances are normally used to measure the similarity or dissimilarity between two data objects</li>
-<li><strong>Minkowski distance, or the Lp norm of difference vector</strong>(a popular choice)<br><img src="4.png" alt=""><ul>
-<li>Special cases:<ul>
-<li>if p = 1, d is the Manhattan distance </li>
+<li><strong>Minkowski distance, or the Lp norm of difference vector</strong>(a popular choice)<br>
+<img src="4.png" alt="">
+<ul>
+<li>Special cases:
+<ul>
+<li>if p = 1, d is the Manhattan distance</li>
 <li>if p = 2, d is the Euclidean distance</li>
 <li>if p = ∞, <img src="5.png" alt=""></li>
 </ul>
@@ -311,11 +343,13 @@
 </ul>
 </li>
 <li>Mahalanobis distance</li>
-<li>Jaccard(交集大小/并集大小), Dice, cosine similarity, Pearson correlation coefficient       </li>
+<li>Jaccard(交集大小/并集大小), Dice, cosine similarity, Pearson correlation coefficient</li>
 <li>Metric distance</li>
 </ul>
 </li>
-<li>common to all distance functions:<ul>
+<li>
+<p>common to all distance functions:</p>
+<ul>
 <li>d(i,j) ≥ 0 -&gt; positiveness</li>
 <li>d(i,i) = 0 -&gt; reflexivity 到自己的距离为0</li>
 <li>d(i,j) = d(j,i) -&gt; symmetry 对称</li>
@@ -323,46 +357,69 @@
 </ul>
 </li>
 </ul>
-<h3 id="binary-variables"><a href="#Binary-Variables" class="headerlink" title="Binary Variables"></a>Binary Variables</h3><blockquote>
+<h3 id="binary-variables">Binary Variables</h3>
+<blockquote>
 <ul>
 <li>Symmetric: if both of its state are <strong>equally variable</strong>, that is, there is no preference on which outcome should be coded as 1.</li>
 <li>Asymmetric: if the outcome of its state are <strong>not equally important</strong>, such as positive or negative outcomes of a disease test.</li>
-<li>A contingency table for binary data<br><img src="6.png" alt=""><br>feature vector table:<br><img src="7.png" alt=""></li>
-<li>Simple matching coefficient (invariant, if the binary variable is symmetric): </li>
 </ul>
 </blockquote>
-<p><img src="8.png" alt=""><br>E.g., in this case = 4 / 8</p>
 <ul>
-<li>Jaccard coefficient (noninvariant if the binary variable is<br>asymmetric):<br><img src="9.png" alt=""><br>E.g., in this case = 4 / 5</li>
-<li>feature vector &lt;=&gt; set:<br>E.g. ABCDEFGH分别对应上面的feature<br>i : {B,D,G}, j : {E,G,H}<br>Jaccard coefficient = 1 - 1/5 = 4/5</li>
+<li>A contingency table for binary data<br>
+<img src="6.png" alt=""><br>
+feature vector table:<br>
+<img src="7.png" alt=""></li>
+<li>Simple matching coefficient (invariant, if the binary variable is symmetric):</li>
 </ul>
-<p>Another Example:<br><img src="10.png" alt=""></p>
-<h3 id="nominal-variables"><a href="#Nominal-Variables" class="headerlink" title="Nominal Variables"></a>Nominal Variables</h3><ul>
+<p><img src="8.png" alt=""><br>
+E.g., in this case = 4 / 8</p>
+<ul>
+<li>Jaccard coefficient (noninvariant if the binary variable is<br>
+asymmetric):<br>
+<img src="9.png" alt=""><br>
+E.g., in this case = 4 / 5</li>
+<li>feature vector &lt;=&gt; set:<br>
+E.g. ABCDEFGH分别对应上面的feature<br>
+i : {B,D,G}, j : {E,G,H}<br>
+Jaccard coefficient = 1 - 1/5 = 4/5</li>
+</ul>
+<p>Another Example:<br>
+<img src="10.png" alt=""></p>
+<h3 id="nominal-variables">Nominal Variables</h3>
+<ul>
 <li>A generalization of the binary variable in that it can take more than 2 states, e.g., red, yellow, blue, green</li>
-<li>Method 1: Simple matching<br>   m: # of matches, p: total # of variables<br><img src="11.png" alt=""></li>
-<li>Method 2: One-hot encoding<ul>
+<li>Method 1: Simple matching<br>
+m: # of matches, p: total # of variables<br>
+<img src="11.png" alt=""></li>
+<li>Method 2: One-hot encoding
+<ul>
 <li>creating a new binary variable for each of the M nominal states</li>
 </ul>
 </li>
 </ul>
-<h3 id="ordinal顺序的-variables"><a href="#Ordinal-顺序的-Variables" class="headerlink" title="Ordinal(顺序的) Variables"></a>Ordinal(顺序的) Variables</h3><ul>
-<li>An ordinal variable can be discrete or continuous </li>
+<h3 id="ordinal顺序的-variables">Ordinal(顺序的) Variables</h3>
+<ul>
+<li>An ordinal variable can be discrete or continuous</li>
 <li>Order is important, e.g., rank</li>
-<li>Can be treated like interval-scaled<ul>
+<li>Can be treated like interval-scaled
+<ul>
 <li>replace X<sub>if</sub> by their rank</li>
 <li>map the range of each variable onto [0, 1] by replacing i-th object in the f-th variable by <img src="12.png" alt=""></li>
 <li>compute the dissimilarity using method for interval-scaled variables</li>
 </ul>
 </li>
 </ul>
-<h3 id="ratio-scaled-variables"><a href="#Ratio-Scaled-Variables" class="headerlink" title="Ratio-Scaled Variables"></a>Ratio-Scaled Variables</h3><ul>
+<h3 id="ratio-scaled-variables">Ratio-Scaled Variables</h3>
+<ul>
 <li>Ratio-scaled variable: a positive measurement on a nonlinear scale, approximately at exponential scale, such as Ae<sup>Bt</sup> or Ae<sup>-Bt</sup></li>
-<li>methods:<ul>
+<li>methods:
+<ul>
 <li>apply logarithmic transformation: y<sub>if</sub> = log(x<sub>if</sub>)</li>
-<li>treat them as continuous ordinal data treat their rank as interval-scaled<h1 id="major-clustering-approaches"><a href="#Major-Clustering-Approaches" class="headerlink" title="Major Clustering Approaches"></a>Major Clustering Approaches</h1></li>
+<li>treat them as continuous ordinal data treat their rank as interval-scaled</li>
 </ul>
 </li>
 </ul>
+<h1 id="major-clustering-approaches">Major Clustering Approaches</h1>
 <hr>
 <ul>
 <li><strong>Partitioning algorithms</strong>: Construct various partitions and then evaluate them by some criterion</li>
@@ -372,15 +429,22 @@
 <li>Grid-based: based on a multiple-level granularity structure</li>
 <li>Model-based: A model is hypothesized for each of the clusters and the idea is to find the best fit of that model to each other</li>
 </ul>
-<h2 id="partitioning-algorithms"><a href="#Partitioning-Algorithms" class="headerlink" title="Partitioning Algorithms"></a>Partitioning Algorithms</h2><ul>
-<li>Partitioning method: Construct a “good” partition of a database of n objects into a set of k clusters<ul>
+<h2 id="partitioning-algorithms">Partitioning Algorithms</h2>
+<ul>
+<li>Partitioning method: Construct a “good” partition of a database of n objects into a set of k clusters
+<ul>
 <li>Input: a n x m data matrix</li>
 </ul>
 </li>
-<li>How to measure the “goodness” of a given partitioning<br>scheme? <strong>COST</strong><ul>
-<li>Cost of a cluster<img src="13.png" alt=""><br>Cost表示cluster中每个x到center的距离，Cost越小越好<ul>
-<li>L2 distance used </li>
-<li>How to choose the center of a cluster?<ul>
+<li>How to measure the “goodness” of a given partitioning<br>
+scheme? <strong>COST</strong>
+<ul>
+<li>Cost of a cluster<img src="13.png" alt=""><br>
+Cost表示cluster中每个x到center的距离，Cost越小越好
+<ul>
+<li>L2 distance used</li>
+<li>How to choose the center of a cluster?
+<ul>
 <li>Centroid (i.e., Avg) of X<sub>j</sub> -&gt; <strong>Minimizes cost</strong>(C<sub>i</sub> )</li>
 </ul>
 </li>
@@ -390,43 +454,65 @@
 </ul>
 </li>
 <li>Global optimal: exhaustively enumerate all partitions</li>
-<li>Heuristic methods: k‐means and k‐medoids algorithms<h3 id="k-means"><a href="#K-Means" class="headerlink" title="K-Means"></a>K-Means</h3><strong>Lloyds Algorithm:</strong></li>
+<li>Heuristic methods: k‐means and k‐medoids algorithms</li>
+</ul>
+<h3 id="k-means">K-Means</h3>
+<p><strong>Lloyds Algorithm:</strong></p>
+<ul>
 <li>Initialize k centers <strong>randomly</strong></li>
-<li>While stopping condition is not met<ul>
+<li>While stopping condition is not met
+<ul>
 <li>Assign each object to the cluster with the nearest center</li>
 <li>Compute the new center for each cluster.</li>
 </ul>
 </li>
-<li>Stop when no more new assignment<br>Example<br><img src="14.png" alt=""><br><strong>Special Matrix Factorization</strong>(因数分解)</li>
-<li>X<sup>n*d</sup> ≈  U<sup>n*d</sup> <em> V<sup>n</sup></em>d&lt;/sup&gt;</li>
+<li>Stop when no more new assignment<br>
+Example<br>
+<img src="14.png" alt=""><br>
+<strong>Special Matrix Factorization</strong>(因数分解)</li>
+<li>X<sup>n*d</sup> ≈  U<sup>n*d</sup> * V<sup>n*d</sup></li>
 <li>Loss function: || X - UV ||<sub>F</sub><sup>2</sup></li>
-<li>Constraints: Row of U must be a one-hot encoding.( 0 or 1 )<br><img src="15.png" alt=""><br><strong>Expectation Maximization Alogrithm</strong></li>
+<li>Constraints: Row of U must be a one-hot encoding.( 0 or 1 )<br>
+<img src="15.png" alt=""><br>
+<strong>Expectation Maximization Alogrithm</strong></li>
 <li>Finding the best U and V simutaneously is hard, but</li>
-<li>Expectation step:<ul>
+<li>Expectation step:
+<ul>
 <li>Given V, find the best U</li>
 </ul>
 </li>
-<li>Maximization step:<ul>
+<li>Maximization step:
+<ul>
 <li>Given U, find the best V</li>
 </ul>
 </li>
-<li>Iterate until converging at a local minimum.<br><img src="16.png" alt="">  <h4 id="comments"><a href="#Comments" class="headerlink" title="Comments"></a>Comments</h4></li>
-<li>Comment:<ul>
+<li>Iterate until converging at a local minimum.<br>
+<img src="16.png" alt=""></li>
+</ul>
+<h4 id="comments">Comments</h4>
+<ul>
+<li>Comment:
+<ul>
 <li>Often terminates at a local optimum. The global optimum may be found using techniques such as: deterministic annealing and genetic algorithms</li>
 <li>No guarantee on the quality. Use k-means++.</li>
 </ul>
 </li>
-<li>Strength: Relatively efficient: O(tkn), where n is # objects, k is # clusters, and t is # iterations. Normally, k, t &lt;&lt; n.<ul>
+<li>Strength: Relatively efficient: O(tkn), where n is # objects, k is # clusters, and t is # iterations. Normally, k, t &lt;&lt; n.
+<ul>
 <li>Comparing: PAM:O(k(n-k)2),CLARA:O(ks2+k(n-k))</li>
 </ul>
 </li>
-<li>Weakness:<ul>
+<li>Weakness:
+<ul>
 <li>Applicable only when mean is defined, then what about categorical data?</li>
 <li>Need to <strong>specify k</strong>, the number of clusters, in advance</li>
 <li>Unable to handle <strong>noisy data and outliers</strong> -&gt; need data cleaning</li>
-<li>Not suitable to discover clusters with <strong>non-convex shapes</strong>(凹状)<h3 id="k-means"><a href="#K-Means-1" class="headerlink" title="K-Means++"></a>K-Means++</h3></li>
+<li>Not suitable to discover clusters with <strong>non-convex shapes</strong>(凹状)</li>
 </ul>
 </li>
+</ul>
+<h3 id="k-means">K-Means++</h3>
+<ul>
 <li>A simple initialization routine that guarantees to find a solution that is O(log k) competitive to the optimal k-means solution.</li>
 <li>Algorithm:</li>
 </ul>
@@ -435,15 +521,22 @@
 <li>For each data point x, compute D(x) as the distance to its nearest center</li>
 <li>Randomly sample one point as the new center, with probabilities proportional to D<sup>2</sup>(x)</li>
 <li>Goto 2 if less than k centers</li>
-<li>Run the normal k-means with the k centers<br>随机选择center，计算其他点到center的距离的平方，大的是center的概率就高   <h3 id="k-medoidspam"><a href="#K-Medoids-PAM" class="headerlink" title="K-Medoids(PAM)"></a>K-Medoids(PAM)</h3></li>
+<li>Run the normal k-means with the k centers<br>
+随机选择center，计算其他点到center的距离的平方，大的是center的概率就高</li>
 </ol>
+<h3 id="k-medoidspam">K-Medoids(PAM)</h3>
 <ul>
 <li>K-Medoids: Each cluster is represented by one of the objects in the cluster</li>
-<li>Use real object to represent the cluster<ul>
+<li>Use real object to represent the cluster
+<ul>
 <li>Select k representative objects arbitrarily</li>
-<li>For each pair of non-selected object h and selected<br>object i, calculate the total swapping cost TC<sub>ih</sub></li>
-<li>For each pair of i and h,<br>  *If TC<sub>ih</sub> &lt;0,i is replaced by h<ul>
-<li>Then assign each non-selected object to the most<br>similar representative object</li>
+<li>For each pair of non-selected object h and selected<br>
+object i, calculate the total swapping cost TC<sub>ih</sub></li>
+<li>For each pair of i and h,<br>
+*If TC<sub>ih</sub> &lt;0,i is replaced by h
+<ul>
+<li>Then assign each non-selected object to the most<br>
+similar representative object</li>
 </ul>
 </li>
 <li>repeat steps 2-3 until there is no change</li>
@@ -453,103 +546,148 @@
 <li>PAM works efficiently for small data sets but does not scale well for large data sets.</li>
 <li>O(k(n-k)<sub>2</sub>) for each iteration, where n is # of data, k is # of clusters</li>
 </ul>
-<h2 id="hierarchy-algorithms"><a href="#Hierarchy-algorithms" class="headerlink" title="Hierarchy algorithms"></a>Hierarchy algorithms</h2><ul>
-<li>Produces a set of nested clusters organized as a hierarchical tree </li>
-<li>Can be visualized as a dendrogram(系统树图)<ul>
+<h2 id="hierarchy-algorithms">Hierarchy algorithms</h2>
+<ul>
+<li>Produces a set of nested clusters organized as a hierarchical tree</li>
+<li>Can be visualized as a dendrogram(系统树图)
+<ul>
 <li>A tree like diagram that records the sequences of merges or splits</li>
-<li>A clustering of the data objects is obtained by cutting the dendrogram at the desired level, then each connected component forms a cluster.<br><img src="17.png" alt="">   </li>
+<li>A clustering of the data objects is obtained by cutting the dendrogram at the desired level, then each connected component forms a cluster.<br>
+<img src="17.png" alt=""></li>
 </ul>
 </li>
 <li>Two main types of hierarchical clustering</li>
-<li><strong>Agglomerative</strong>:<ul>
+<li><strong>Agglomerative</strong>:
+<ul>
 <li>Start with the points as individual clusters</li>
 <li>At each step, <strong>merge the closest pair of clusters</strong> until only one cluster (or k clusters) left</li>
 </ul>
 </li>
-<li>Divisive:<ul>
+<li>Divisive:
+<ul>
 <li>Start with one, all-inclusive cluster</li>
-<li>At each step, split a cluster until each cluster contains a point (or there are k clusters)    </li>
+<li>At each step, split a cluster until each cluster contains a point (or there are k clusters)</li>
 </ul>
 </li>
-<li>Traditional hierarchical algorithms use a similarity or distance matrix<ul>
-<li>Merge or split one cluster at a time   </li>
+<li>Traditional hierarchical algorithms use a similarity or distance matrix
+<ul>
+<li>Merge or split one cluster at a time</li>
 </ul>
 </li>
 </ul>
-<h3 id="agglomerative-clustering-algorithm"><a href="#Agglomerative-Clustering-Algorithm" class="headerlink" title="Agglomerative Clustering Algorithm"></a>Agglomerative Clustering Algorithm</h3><ul>
-<li>Compute the proximity matrix (i.e., matrix of pair-wise distances) </li>
-<li>Let each data point be a cluster</li>
-<li>Repeat<ul>
-<li>Merge the two clusters </li>
+<h3 id="agglomerative-clustering-algorithm">Agglomerative Clustering Algorithm</h3>
+<ul>
+<li>
+<p>Compute the proximity matrix (i.e., matrix of pair-wise distances)</p>
+</li>
+<li>
+<p>Let each data point be a cluster</p>
+</li>
+<li>
+<p>Repeat</p>
+<ul>
+<li>Merge the two clusters</li>
 <li>Update the proximity matrix</li>
 </ul>
 </li>
-<li><p>Until only a single cluster remains<br></p>
+<li>
+<p>Until only a single cluster remains<br></p>
 </li>
-<li><p><strong>Key Operation</strong> : compute the proximity of two clusters &lt;- different from that of two points</p>
+<li>
+<p><strong>Key Operation</strong> : compute the proximity of two clusters &lt;- different from that of two points</p>
 <ul>
 <li>Different approaches to defining the distance between clusters distinguish the different algorithms</li>
 </ul>
 </li>
-<li>How to Define Inter-Cluster Distance:<ul>
+<li>
+<p>How to Define Inter-Cluster Distance:</p>
+<ul>
 <li>MIN</li>
 <li>MAX</li>
 <li>Centroid-based</li>
 <li>Group Average</li>
-<li>Other methods driven by an objective </li>
+<li>Other methods driven by an objective</li>
 </ul>
 </li>
 </ul>
-<h4 id="cluster-similarity-min-or-single-linklink"><a href="#Cluster-Similarity-MIN-or-Single-Link-LINK" class="headerlink" title="Cluster Similarity: MIN or Single Link/LINK"></a>Cluster Similarity: MIN or Single Link/LINK</h4><p><strong>MIN: Min distance = Max similarity</strong>  </p>
+<h4 id="cluster-similarity-min-or-single-linklink">Cluster Similarity: MIN or Single Link/LINK</h4>
+<p><strong>MIN: Min distance = Max similarity</strong></p>
 <ul>
-<li>Similarity of two clusters is based on the two most similar (closest) points in the different clusters </li>
-<li><strong>sim(Ci, Cj) = max(sim(px, py))</strong><br>Ci,Cj 合并以后, 其他cluster与其的相似度 = 与原Ci，Cj相似大的那个相似度<br><img src="18.png" alt=""></li>
+<li>Similarity of two clusters is based on the two most similar (closest) points in the different clusters</li>
+<li><strong>sim(Ci, Cj) = max(sim(px, py))</strong><br>
+Ci,Cj 合并以后, 其他cluster与其的相似度 = 与原Ci，Cj相似大的那个相似度<br>
+<img src="18.png" alt=""></li>
 <li>Strength : can handle non-elliptical(不是椭圆的) shapes</li>
-<li><p>Limitations: Sensitive to noise and outliers</p>
-<h4 id="cluster-similarity-max-or-complete-link-clink"><a href="#Cluster-Similarity-MAX-or-Complete-Link-CLINK" class="headerlink" title="Cluster Similarity: MAX or Complete Link (CLINK)"></a>Cluster Similarity: MAX or Complete Link (CLINK)</h4><p><strong>MAX: Max distance = Min similarity</strong>  </p>
-</li>
-<li><p>Similarity of two clusters is based on the two least similar (most distant) points in the different clusters</p>
-</li>
-<li><strong>sim(Ci, Cj) = min(sim(px, py))</strong><br><img src="19.png" alt=""></li>
+<li>Limitations: Sensitive to noise and outliers</li>
+</ul>
+<h4 id="cluster-similarity-max-or-complete-link-clink">Cluster Similarity: MAX or Complete Link (CLINK)</h4>
+<p><strong>MAX: Max distance = Min similarity</strong></p>
+<ul>
+<li>Similarity of two clusters is based on the two least similar (most distant) points in the different clusters</li>
+<li><strong>sim(Ci, Cj) = min(sim(px, py))</strong><br>
+<img src="19.png" alt=""></li>
 <li>Strength : Less susceptible to noise and outliers</li>
-<li>Limitations:<ul>
-<li>Tends to break large clusters </li>
+<li>Limitations:
+<ul>
+<li>Tends to break large clusters</li>
 <li>Biased towards globular clusters</li>
 </ul>
 </li>
 </ul>
-<h4 id="cluster-similarity-group-average"><a href="#Cluster-Similarity-Group-Average" class="headerlink" title="Cluster Similarity: Group Average"></a>Cluster Similarity: Group Average</h4><ul>
+<h4 id="cluster-similarity-group-average">Cluster Similarity: Group Average</h4>
+<ul>
 <li>GAAC (Group Average Agglomerative Clustering)</li>
-<li>Similarity of two clusters is the average of pair-wise similarity between points in the two clusters.<br><img src="21.png" alt=""></li>
-<li><strong>sim(Ci, Cj) = avg(sim(pi, pj))</strong><br><img src="19.png" alt=""></li>
+<li>Similarity of two clusters is the average of pair-wise similarity between points in the two clusters.<br>
+<img src="21.png" alt=""></li>
+<li><strong>sim(Ci, Cj) = avg(sim(pi, pj))</strong><br>
+<img src="19.png" alt=""></li>
 <li>Strengths: Less susceptible to noise and outliers</li>
 <li>Limitations: Biased towards globular clusters</li>
 </ul>
-<h2 id="spectral-clustering"><a href="#Spectral-clustering" class="headerlink" title="Spectral clustering"></a>Spectral clustering</h2><p><a href="https://www.cs.cmu.edu/~aarti/Class/10701/readings/Luxburg06_TR.pdf" target="_blank" rel="noopener">A Tutorial on Spectral Clustering (CMU)</a><br>谱聚类要做的事情就是完成对图的分割，它想要找到最好的分割方式，来将图分割开来。</p>
+<h2 id="spectral-clustering">Spectral clustering</h2>
+<p><a href="https://www.cs.cmu.edu/~aarti/Class/10701/readings/Luxburg06_TR.pdf" target="_blank" rel="noopener">A Tutorial on Spectral Clustering (CMU)</a><br>
+谱聚类要做的事情就是完成对图的分割，它想要找到最好的分割方式，来将图分割开来。</p>
 <ul>
-<li>A — adjacency matrix<ul>
-<li>Let A is the adjacency matrix of a “normal” (unweighted) undirected graph G. </li>
+<li>A — adjacency matrix
+<ul>
+<li>Let A is the adjacency matrix of a “normal” (unweighted) undirected graph G.</li>
 <li>An edge between vi and vj is modelled as (i, j) and (j, i), i.e., Aij=Aji=1.</li>
 <li>Aii= 0</li>
 </ul>
 </li>
-<li>D — degree matrix <ul>
-<li>D = diag(d1, . . . dn) </li>
-<li>Dii = di &gt; 0, Dij = 0, j ≠ i </li>
-</ul>
-</li>
-<li>L — Laplacian matrix<ul>
-<li><strong>L = D - A</strong><br><img src="22.png" alt=""><br>证明过程:<img src="23.png" alt=""></li>
-</ul>
-</li>
-</ul>
-<p>x<sup>T</sup>Lx: f(all of the cut edges weighted)<br><img src="24.png" alt=""></p>
+<li>D — degree matrix
 <ul>
-<li><strong>One edge which 2 nodes have the same value should be in one cluster, and does not contribute to the cut value!</strong>  </li>
-<li><strong>Cut edges: Edges which nodes have different values</strong><br>在这个例子中,<br>edge24 cut value: 1/2 * (1-(-1))^2 = 2, same as edge42.<br>x<sup>T</sup>Lx = 4 + 4 = 8<h3 id="min-cut"><a href="#Min-cut" class="headerlink" title="Min cut"></a>Min cut</h3></li>
-<li>Biased towards cutting small sets of isolated nodes.<br><img src="25.png" alt=""><br><img src="28.png" alt=""><br>如图，min-cut可能很偏，得到的不是balanced cluster</li>
+<li>D = diag(d1, . . . dn)</li>
+<li>Dii = di &gt; 0, Dij = 0, j ≠ i</li>
 </ul>
-<h3 id="normalized-cut"><a href="#Normalized-cut" class="headerlink" title="Normalized cut"></a>Normalized cut</h3><p><img src="26.png" alt=""><br><img src="27.png" alt=""></p>
+</li>
+<li>L — Laplacian matrix
+<ul>
+<li><strong>L = D - A</strong><br>
+<img src="22.png" alt=""><br>
+证明过程:<img src="23.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<p>x<sup>T</sup>Lx: f(all of the cut edges weighted)<br>
+<img src="24.png" alt=""></p>
+<ul>
+<li><strong>One edge which 2 nodes have the same value should be in one cluster, and does not contribute to the cut value!</strong></li>
+<li><strong>Cut edges: Edges which nodes have different values</strong><br>
+在这个例子中,<br>
+edge24 cut value: 1/2 * (1-(-1))^2 = 2, same as edge42.<br>
+x<sup>T</sup>Lx = 4 + 4 = 8</li>
+</ul>
+<h3 id="min-cut">Min cut</h3>
+<ul>
+<li>Biased towards cutting small sets of isolated nodes.<br>
+<img src="25.png" alt=""><br>
+<img src="28.png" alt=""><br>
+如图，min-cut可能很偏，得到的不是balanced cluster</li>
+</ul>
+<h3 id="normalized-cut">Normalized cut</h3>
+<p><img src="26.png" alt=""><br>
+<img src="27.png" alt=""></p>
 
                 
 
