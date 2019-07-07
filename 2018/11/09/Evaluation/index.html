@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -226,22 +226,19 @@
                 <blockquote>
 <p>Abstract:</p>
 <ul>
-<li>Precision</li>
+<li>Precision </li>
 <li>Recall</li>
 <li>MAP</li>
 <li>R-presicion</li>
 </ul>
 </blockquote>
-<h2 id="precision-and-recall">Precision and Recall</h2>
-<ul>
+<h2 id="precision-and-recall"><a href="#Precision-and-Recall" class="headerlink" title="Precision and Recall"></a>Precision and Recall</h2><ul>
 <li>Unranked retrieval evaluation</li>
-<li><strong>Precision</strong>: fraction of retrieved docs that are relevant = P(relevant|retrieved)
-<ul>
+<li><strong>Precision</strong>: fraction of retrieved docs that are relevant = P(relevant|retrieved) <ul>
 <li>How accuray the result is?</li>
 </ul>
 </li>
-<li><strong>Recall</strong>: fraction of relevant docs that are retrieved = P(retrieved|relevant)
-<ul>
+<li><strong>Recall</strong>: fraction of relevant docs that are retrieved = P(retrieved|relevant) <ul>
 <li>Are u returning most of the correct answer?</li>
 </ul>
 </li>
@@ -252,9 +249,8 @@
 <p><strong>Positive/Negative</strong>: return or not.</p>
 <p>Precision and recall 都在不同程度(角度)描述了准确率.</p>
 <p>How to combine those two measures to one measure?</p>
-<h2 id="a-combined-measure-f">A combined measure: F</h2>
-<ul>
-<li>Combined measure that assesses precision/recall tradeoff is F measure (weighted harmonic mean)</li>
+<h2 id="a-combined-measure-f"><a href="#A-combined-measure-F" class="headerlink" title="A combined measure: F"></a>A combined measure: F</h2><ul>
+<li>Combined measure that assesses precision/recall tradeoff is F measure (weighted harmonic mean) </li>
 </ul>
 <p><img src="image-20181109195922446.png" alt="image-20181109195922446"></p>
 <blockquote>
@@ -263,116 +259,50 @@
 <ul>
 <li>People usually use balanced F1 measure, with β=1or α=1/ 2</li>
 </ul>
-<h2 id="map">MAP</h2>
-<ul>
-<li>
-<p>MAP: <strong>M</strong>ean <strong>A</strong>verage <strong>P</strong>recision</p>
+<h2 id="map"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h2><ul>
+<li>MAP: <strong>M</strong>ean <strong>A</strong>verage <strong>P</strong>recision</li>
+<li>Vector space model</li>
+<li><p><img src="image-20181109204008543.png" alt="image-20181109204008543"></p>
 </li>
-<li>
-<p>Vector space model</p>
+<li><p>Example: If G.T = 5</p>
+<p>|      |   Sys1    |   Sys1   |   Sys2    |   Sys2   |<br>| :—: | :———-: | :———: | :———-: | :———: |<br>|  k   | Precision | Relevant | Precision | Relevant |<br>|  1   |    1/1    |    R     |     0     |    N     |<br>|  2   |    1/2    |    N     |    1/2    |    R     |<br>|  3   |    1/3    |    N     |    2/3    |    R     |<br>|  4   |    1/2    |    R     |    3/4    |    R     |</p>
+<p>when k = 4, AP1 = (P1 + P4) /G.T. = (1 + 1/2) / 5 </p>
+<p><strong>N.B.</strong>  <del>not (P1 + P2 + P3 + P4 ) / G.T.</del></p>
 </li>
-<li>
-<p><img src="image-20181109204008543.png" alt="image-20181109204008543"></p>
+<li><p>AP = 1 Only when returns all docs are relevant</p>
 </li>
-<li>
-<p>Example: If G.T = 5</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">Sys1</th>
-<th style="text-align:center">Sys1</th>
-<th style="text-align:center">Sys2</th>
-<th style="text-align:center">Sys2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">k</td>
-<td style="text-align:center">Precision</td>
-<td style="text-align:center">Relevant</td>
-<td style="text-align:center">Precision</td>
-<td style="text-align:center">Relevant</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1/1</td>
-<td style="text-align:center">R</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">N</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">N</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">R</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">1/3</td>
-<td style="text-align:center">N</td>
-<td style="text-align:center">2/3</td>
-<td style="text-align:center">R</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">1/2</td>
-<td style="text-align:center">R</td>
-<td style="text-align:center">3/4</td>
-<td style="text-align:center">R</td>
-</tr>
-</tbody>
-</table>
-<p>when k = 4, AP1 = (P1 + P4) /G.T. = (1 + 1/2) / 5</p>
-<p><strong>N.B.</strong>  <s>not (P1 + P2 + P3 + P4 ) / G.T.</s></p>
+<li><p><img src="image-20181109204955885.png" alt="image-20181109204955885"></p>
 </li>
-<li>
-<p>AP = 1 Only when returns all docs are relevant</p>
-</li>
-<li>
-<p><img src="image-20181109204955885.png" alt="image-20181109204955885"></p>
-</li>
-<li>
-<p>So, MAP considers both precision and recall.</p>
+<li><p>So, MAP considers both precision and recall.</p>
 </li>
 </ul>
-<h2 id="r-precision">R-precision</h2>
-<ul>
-<li>
-<p>also Vector space model</p>
+<h2 id="r-precision"><a href="#R-precision" class="headerlink" title="R-precision"></a>R-precision</h2><ul>
+<li><p>also Vector space model</p>
 </li>
-<li>
-<p>Why need R-precision?</p>
+<li><p>Why need R-precision? </p>
 <ul>
 <li>For the table above, if we choose k=1, AP1 is better than AP2, but actually sys1 is better sys2.</li>
 </ul>
 </li>
-<li>
-<p>How to choose k objectively?<br>
-<strong>k = |G.T.|</strong></p>
-<ul>
-<li><strong>R</strong>-precision, R for recall</li>
+<li>How to choose k objectively?<br><strong>k = |G.T.|</strong><ul>
+<li><strong>R</strong>-precision, R for recall </li>
 <li>Minimun test to make sure the it’s ideal system.(return all relevant docs.)</li>
 </ul>
 </li>
 </ul>
-<p>MAP and R-precision only give a final score, there is no more information for the system. – use graph!</p>
-<h2 id="precison-recall-graph">Precison-recall graph</h2>
-<p><img src="image-20181109210639961.png" alt="image-20181109210639961"></p>
+<p>MAP and R-precision only give a final score, there is no more information for the system. — use graph!</p>
+<h2 id="precison-recall-graph"><a href="#Precison-recall-graph" class="headerlink" title="Precison-recall graph"></a>Precison-recall graph</h2><p><img src="image-20181109210639961.png" alt="image-20181109210639961"></p>
 <p><img src="image-20181109210651876.png" alt="image-20181109210651876"></p>
-<p>​	Precision = Max of precision for r greater than current recall.</p>
+<p>​    Precision = Max of precision for r greater than current recall.</p>
 <p>​        相当于从后面的高点往回画水平线</p>
 <p><img src="image-20181109211545547.png" alt="image-20181109211545547"></p>
-<h3 id="11-point-precisions">11 point precisions</h3>
-<ul>
-<li>The standard measure in the early TREC compe*<em>ons: you take the precision at 11 levels of recall varying from 0 to 1 by tenths of the documents, using interpola</em>on (the value for 0 is always interpolated!), and average them</li>
-<li>Evaluates performance at all recall levels</li>
+<h3 id="11-point-precisions"><a href="#11-point-precisions" class="headerlink" title="11 point precisions"></a>11 point precisions</h3><ul>
+<li>The standard measure in the early TREC competions: you take the precision at 11 levels of recall varying from 0 to 1 by tenths of the documents, using interpolation (the value for 0 is always interpolated!), and average them </li>
+<li>Evaluates performance at all recall levels </li>
 </ul>
 <p><img src="image-20181109212220359.png" alt="image-20181109212220359"></p>
 <ul>
-<li>
-<p>Exercise</p>
+<li><p>Exercise</p>
 <p><img src="image-20181109212557193.png" alt="image-20181109212557193"></p>
 </li>
 </ul>
@@ -560,7 +490,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Jingxuan 2018 
+                    Copyright &copy; Jingxuan 2019 
                     <br>
                     Powered by <a href="https://hexo.io/">Hexo</a>
                     <span style="display: inline-block; margin: 0 5px;">

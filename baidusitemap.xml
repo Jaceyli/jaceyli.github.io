@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
+    <lastmod>2019-07-07T08:02:36.408Z</lastmod>
+  </url>  <url>
+    <loc>https://jingxuan.li/2018/11/09/Evaluation/</loc>
+    <lastmod>2019-07-07T05:13:36.927Z</lastmod>
+  </url>  <url>
     <loc>https://jingxuan.li/2018/11/10/Language-Model/</loc>
     <lastmod>2018-11-11T10:02:54.456Z</lastmod>
   </url>  <url>
@@ -9,9 +15,6 @@
   </url>  <url>
     <loc>https://jingxuan.li/2018/11/10/Probabilistic-Model/</loc>
     <lastmod>2018-11-10T09:29:41.530Z</lastmod>
-  </url>  <url>
-    <loc>https://jingxuan.li/2018/11/09/Evaluation/</loc>
-    <lastmod>2018-11-09T10:28:02.911Z</lastmod>
   </url>  <url>
     <loc>https://jingxuan.li/2018/11/06/Vector-SpaceModel-II-Scoring/</loc>
     <lastmod>2018-11-09T08:14:30.690Z</lastmod>
@@ -43,9 +46,6 @@
     <loc>https://jingxuan.li/2018/06/23/Mining-Data-Streams/</loc>
     <lastmod>2018-07-12T06:56:35.318Z</lastmod>
   </url>  <url>
-    <loc>https://jingxuan.li/2018/06/08/Decision-Tree-Classifier/</loc>
-    <lastmod>2018-07-12T06:55:33.207Z</lastmod>
-  </url>  <url>
     <loc>https://jingxuan.li/2018/03/18/COMP9318-Week-3/</loc>
     <lastmod>2018-07-12T06:55:24.470Z</lastmod>
   </url>  <url>
@@ -63,9 +63,6 @@
   </url>  <url>
     <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-8-Finding-Similar-Items/</loc>
     <lastmod>2018-07-12T06:54:41.274Z</lastmod>
-  </url>  <url>
-    <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-7-Spark-II/</loc>
-    <lastmod>2018-07-12T06:54:33.032Z</lastmod>
   </url>  <url>
     <loc>https://jingxuan.li/2018/05/05/COMP9313-Week-6-Spark-I/</loc>
     <lastmod>2018-07-12T06:54:24.852Z</lastmod>
