@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jingxuan.li/2018/11/06/Vector-SpaceModel-II-Scoring/</loc>
+    
+    <lastmod>2019-07-07T09:00:05.628Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jingxuan.li/2018/11/06/Term-Weighting-and-the-Vector-SpaceModel/</loc>
     
     <lastmod>2019-07-07T08:59:45.803Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://jingxuan.li/2018/11/10/Probabilistic-Model/</loc>
     
     <lastmod>2018-11-10T09:29:41.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jingxuan.li/2018/11/06/Vector-SpaceModel-II-Scoring/</loc>
-    
-    <lastmod>2018-11-09T08:14:30.690Z</lastmod>
     
   </url>
   
